@@ -39,7 +39,37 @@ class AntecedentType1Table {
 	
 	
 
-	
+    public function updateAntecedentType1($donnees) {
+    	$result = $this->tableGateway->select(array('id_patient'=> $donnees['id_patient']));
+    	$this->tableGateway->delete ( array (
+    			'id_cons' => $donnees ['id_cons']
+    	) );
+    
+    	$datadonnee = array (
+    			'id_cons' => $donnees ['id_cons'],
+    			'id_patient' => $donnees ['id_patient'],
+    			'enf_viv' => $donnees ['enf_viv'],
+    			'parite' => $donnees ['parite'],
+    			'geste' => $donnees ['geste'],
+    			'note_enf' => $donnees ['note_enf'],
+    			'note_parite' => $donnees ['note_parite'],
+    			'note_geste' => $donnees ['note_geste'],
+    			'mort_ne' => $donnees ['mort_ne'],
+    			'note_mort_ne' => $donnees ['note_mort_ne'],
+    			'cesar' => $donnees ['cesar'],
+    			'note_cesar' => $donnees ['note_cesar'],
+    
+    	);
+    
+    	if(!$result->current()){
+    		$this->tableGateway->insert($datadonnee);
+    	}else{
+    		$this->tableGateway->update($datadonnee, array('id_patient'=> $donnees['id_patient']));
+    	}
+    	//var_dump($datadonnee); exit();
+    	//$this->tableGateway->insert ( $datadonnee );
+    }
+    
 	
 	
 	

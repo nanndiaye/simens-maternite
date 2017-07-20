@@ -16,6 +16,17 @@ class DonneesExamensPhysiques {
 	public $heure_rupt_pde;
 	public $presentation;
 	public $bassin;
+	public $note_tv;
+	public $note_hu;
+	public $note_bdc;
+	public $note_la;
+	public $note_pde;
+	public $note_presentation;
+	public $note_bassin;
+
+	
+	
+	
 	public function exchangeArray($data) {
 		$this->code_examen = (! empty ( $data ['code_examen'] )) ? $data ['code_examen'] : null;
 		$this->id_cons = (! empty ( $data ['id_cons'] )) ? $data ['id_cons'] : null;
@@ -31,5 +42,15 @@ class DonneesExamensPhysiques {
 		$this->heure_rupt_pde = (! empty ( $data ['heure_rupt_pde'] )) ? $data ['heure_rupt_pde'] : null;
 		$this->presentation = (! empty ( $data ['presentation'] )) ? $data ['presentation'] : null;
 		$this->bassin = (! empty ( $data ['bassin'] )) ? $data ['bassin'] : null;
+		$this->note_tv = (! empty ( $data ['note_tv'] )) ? $data ['note_tv'] : null;
+		$this->note_hu = (! empty ( $data ['note_hu'] )) ? $data ['note_hu'] : null;
+		$this->note_bdc = (! empty ( $data ['note_bdc'] )) ? $data ['note_bdc'] : null;
+		$this->note_la = (! empty ( $data ['note_la'] )) ? $data ['note_la'] : null;
+		$this->note_pde = (! empty ( $data ['note_pde'] )) ? $data ['note_pde'] : null;
+		$this->note_presentation = (! empty ( $data ['note_presentation'] )) ? $data ['note_presentation'] : null;
+		$this->note_bassin = (! empty ( $data ['note_bassin'] )) ? $data ['note_bassin'] : null;
+		
+		
+		
 	}
 }

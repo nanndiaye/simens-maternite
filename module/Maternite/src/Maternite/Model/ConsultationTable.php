@@ -402,7 +402,7 @@ class ConsultationTable {
 				'p' => 'patient' 
 				
 		) );
-		$select->columns ( array ('Numero_Dossier'=>'NUMERO_DOSSIER') );
+		$select->columns ( array ('numero_dossier'=>'NUMERO_DOSSIER') );
 		
 		$select->join ( array (
 				
@@ -412,16 +412,13 @@ class ConsultationTable {
 				'Nom' => 'NOM',
 				'Prenom' => 'PRENOM',
 				'Age' => 'AGE',
+				'Datenaissance'=>'DATE_NAISSANCE',
 				'Sexe' => 'SEXE',
 				'Adresse' => 'ADRESSE',
 				'Nationalite' => 'NATIONALITE_ACTUELLE',
 				'Id' => 'ID_PERSONNE' 
 		) );
-		
-		
-		
-		
-		
+				
 		$select->join ( array (
 				'c' => 'consultation' 
 		), 'p.ID_PERSONNE = c.ID_PATIENT', array (
@@ -555,10 +552,6 @@ class ConsultationTable {
 				'ad' => 'admission' 
 		), 'ad.id_patient = pat.id_personne', array (
 				'*' 
-		) )->join ( array (
-				'gro' => 'grossesse' 
-		), 'ad.id_grossesse = gro.id_grossesse', array (
-				'*'
 		) )->where ( array (
 				'pat.ID_PERSONNE' => $id_personne 
 		) );

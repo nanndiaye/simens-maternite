@@ -55,12 +55,52 @@ class AdmissionForm extends Form{
 		) );
 				
 		
-		
+		$this->add ( array (
+				'name' => 'motif_ad',
+				'type' => 'Select',
+				'options' => array (
+						'label' => iconv('ISO-8859-1', 'UTF-8','Motif d\'admission'),
+						'value_options' => array (
+								'Normal' => 'Normal',
+								'Evacuation' => 'Evacuation',
+								'Reference' => 'Reference',
+						)
+				),
+				'attributes' => array (
+						'registerInArrrayValidator' => true,
+						'onchange'=>'getMotif(this.value)',
+						'id' =>'motif_ad',
+						'required' => false,
+				)
+		) );
 
 		
 		
 		
+		/* Note evacuation */
+		$this->add ( array (
+				'name' => 'motif',
+				'type' => 'Text',
+				'options' => array (
+						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Motif d\'evacuation ou de reference' )
+				),
+				'attributes' => array (
+						//'readonly' => 'readonly',
+						'id' => 'motif'
+				)
+		) );
 		
+		$this->add ( array (
+				'name' => 'service_origine',
+				'type' => 'Text',
+				'options' => array (
+						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Service d\'origine' )
+				),
+				'attributes' => array (
+						//'readonly' => 'readonly',
+						'id' => 'service_origine'
+				)
+		) );
 		
 		
 	

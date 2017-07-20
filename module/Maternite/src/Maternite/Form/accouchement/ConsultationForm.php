@@ -143,7 +143,7 @@ class ConsultationForm extends Form {
 		$this->add ( array (
 				'name' => 'examen_maternite_donnee1',
 				'options' => array (
-						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Toucher vaginale' ) 
+						//'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Toucher vaginale' ) 
 				),
 				'attributes' => array (
 						'readonly' => 'readonly',
@@ -154,7 +154,7 @@ class ConsultationForm extends Form {
 				'name' => 'examen_maternite_donnee2',
 				'type' => 'Text',
 				'options' => array (
-						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Hauteur uterine' ) 
+						//'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Hauteur uterine' ) 
 				),
 				'attributes' => array (
 						'readonly' => 'readonly',
@@ -186,7 +186,7 @@ class ConsultationForm extends Form {
 				'name' => 'examen_maternite_donnee10',
 				'type' => 'Text',
 				'options' => array (
-						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Nombre de BDC' )
+						//'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Nombre de BDC' )
 				),
 				'attributes' => array (
 						'readonly' => 'readonly',
@@ -197,7 +197,7 @@ class ConsultationForm extends Form {
 				'name' => 'examen_maternite_donnee4',
 				'type' => 'Text',
 				'options' => array (
-						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'LA' )
+						//'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'LA' )
 				),
 				'attributes' => array (
 						'readonly' => 'readonly',
@@ -226,7 +226,7 @@ class ConsultationForm extends Form {
 				'name' => 'examen_maternite_donnee6',
 				'type' => 'Text',
 				'options' => array (
-						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Date Rupture PDE' ) 
+						//'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Date Rupture PDE' ) 
 				),
 				'attributes' => array (
 						'readonly' => 'readonly',
@@ -237,7 +237,7 @@ class ConsultationForm extends Form {
 				'name' => 'examen_maternite_donnee7',
 				'type' => 'Time',
 				'options' => array (
-						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Heure Rupture PDE' ) 
+						//'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Heure Rupture PDE' ) 
 				),
 				'attributes' => array (
 						'readonly' => 'readonly',
@@ -268,9 +268,103 @@ class ConsultationForm extends Form {
 		) );
 		
 
+	$this->add ( array (
+			'name' => 'note_tv',
+			'type' => 'Text',
+			'options' => array (
+	
+			),
+			'attributes' => array (
+					//'readonly' => 'readonly',
+					'id' => 'note_tv'
+			)
+	) );
+	
+	$this->add ( array (
+			'name' => 'note_hu',
+			'type' => 'Text',
+			'options' => array (
+	
+			),
+			'attributes' => array (
+					//'readonly' => 'readonly',
+					'id' => 'note_hu'
+			)
+	) );
 	
 	
-		
+	$this->add ( array (
+			'name' => 'note_bdc',
+			'type' => 'Text',
+			'options' => array (
+	
+			),
+			'attributes' => array (
+					//'readonly' => 'readonly',
+					'id' => 'note_bdc'
+			)
+	) );
+	
+	$this->add ( array (
+			'name' => 'note_la',
+			'type' => 'Text',
+			'options' => array (
+	
+			),
+			'attributes' => array (
+					//'readonly' => 'readonly',
+					'id' => 'note_la'
+			)
+	) );
+	
+	
+	$this->add ( array (
+			'name' => 'note_pde',
+			'type' => 'Text',
+			'options' => array (
+	
+			),
+			'attributes' => array (
+					//'readonly' => 'readonly',
+					'id' => 'note_pde'
+			)
+	) );
+	
+	
+	
+	$this->add ( array (
+			'name' => 'note_presentation',
+			'type' => 'Text',
+			'options' => array (
+	
+			),
+			'attributes' => array (
+					//'readonly' => 'readonly',
+					'id' => 'note_presentation'
+			)
+	) );
+	$this->add ( array (
+			'name' => 'note_bassin',
+			'type' => 'Text',
+			'options' => array (
+	
+			),
+			'attributes' => array (
+					//'readonly' => 'readonly',
+					'id' => 'note_bassin'
+			)
+	) );
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 		/**
 		 * ********** EXAMENS COMPLEMENTAIRES (EXAMENS ET ANALYSE) *************
 		 */
@@ -1121,6 +1215,17 @@ $this->add(array(
 				) 
 		) );
 		$this->add ( array (
+				'name' => 'decision',
+				'type' => 'Textarea',
+				'options' => array (
+						//'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Decision :' )
+				),
+				'attributes' => array (
+						'readonly' => 'readonly',
+						'id' => 'decision'
+				)
+		) );
+		$this->add ( array (
 				'name' => 'note_compte_rendu_operatoire',
 				'type' => 'Textarea',
 				'options' => array (
@@ -1647,23 +1752,37 @@ $this->add(array(
 		
 		/* Cycle */
 		$this->add ( array (
-				'name' => 'CycleGO',
+				'name' => 'cycle',
 				'type' => 'checkbox',
 				'attributes' => array (
-						'id' => 'CycleGO' 
+						'id' => 'cycle' 
 				) 
 		) );
+		
+		$this->add(array(
+				'name' => 'note_cycle',
+				'type' => 'Text',
+				'options' => array (
+		
+				),
+				'attributes' => array(
+						'id' => 'note_cycle',
+						'required' => true,
+				),
+		));
 		/* Duree Cycle */
 		$this->add ( array (
-				'name' => 'DureeCycleGO',
+				'name' => 'duree_cycle',
 				'type' => 'text',
 				'attributes' => array (
-						'id' => 'DureeCycleGO' 
+						'id' => 'duree_cycle' 
 				) 
 		) );
+		
+		
 		/* Regularite cycle */
 		$this->add ( array (
-				'name' => 'RegulariteCycleGO',
+				'name' => 'regularite',
 				'type' => 'Zend\Form\Element\Select',
 				'options' => array (
 						'value_options' => array (
@@ -1673,7 +1792,7 @@ $this->add(array(
 						) 
 				),
 				'attributes' => array (
-						'id' => 'RegulariteCycleGO' 
+						'id' => 'regularite' 
 				) 
 		) );
 		/* Dysmenorrhee cycle */
@@ -1694,18 +1813,18 @@ $this->add(array(
 		
 		/* Autres */
 		$this->add ( array (
-				'name' => 'AutresGO',
+				'name' => 'autre_go',
 				'type' => 'checkbox',
 				'attributes' => array (
-						'id' => 'AutresGO' 
+						'id' => 'autre_go' 
 				) 
 		) );
 		/* Note Autres */
 		$this->add ( array (
-				'name' => 'NoteAutresGO',
+				'name' => 'note_autre_go',
 				'type' => 'text',
 				'attributes' => array (
-						'id' => 'NoteAutresGO' 
+						'id' => 'note_autre_go' 
 				) 
 		) );
 		/**
@@ -2351,6 +2470,426 @@ $this->add(array(
 					'id' => 'refere_de'
 			)
 	) );
+	
+	
+	
+
+	$this->add ( array (
+			'name' => 'motif_ad',
+			'type' => 'Select',
+			'options' => array (
+					//'label' => iconv('ISO-8859-1', 'UTF-8','Motif d\'admission'),
+					'value_options' => array (
+							'Normal' => 'Normal',
+							'Evacuation' => 'Evacuation',
+							'Reference' => 'Reference',
+					)
+			),
+			'attributes' => array (
+					'registerInArrrayValidator' => true,
+					'onchange'=>'getMotif(this.value)',
+					'id' =>'motif_ad',
+					'required' => false,
+			)
+	) );
+	
+	
+	
+	
+	/* Note evacuation */
+	$this->add ( array (
+			'name' => 'motif',
+			'type' => 'Text',
+			'options' => array (
+					//'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Motif d\'evacuation ou de reference' )
+			),
+			'attributes' => array (
+					//'readonly' => 'readonly',
+					'id' => 'motif'
+			)
+	) );
+	
+	$this->add ( array (
+			'name' => 'service_origine',
+			'type' => 'Text',
+			'options' => array (
+					//'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Service d\'origine' )
+			),
+			'attributes' => array (
+					//'readonly' => 'readonly',
+					'id' => 'service_origine'
+			)
+	) );
+	
+
+	$this->add ( array (
+			'name' => 'enf_viv',
+			'type' => 'Text',
+			'options' => array (
+					//'label' => iconv('ISO-8859-1', 'UTF-8','ENF_VIV')
+			),
+			'attributes' => array (
+					'id' => 'enf_viv',
+					//'required' => true,
+			)
+	) );
+	
+	
+	
+	$this->add ( array (
+			'name' => 'geste',
+			'type' => 'Text',
+			
+			'options' => array (
+					//'label' => iconv('ISO-8859-1', 'UTF-8','GESTE')
+			),
+			'attributes' => array (
+					'id' => 'geste',
+					'required' => true,
+			)
+	) );
+	
+	
+	$this->add ( array (
+			'name' => 'note_geste',
+			'type' => 'Text',
+				
+			'options' => array (
+					//'label' => iconv('ISO-8859-1', 'UTF-8','GESTE')
+			),
+			'attributes' => array (
+					'id' => 'note_geste',
+					'required' => true,
+			)
+	) );
+	
+	
+	
+	$this->add ( array (
+			'name' => 'note_parite',
+			'type' => 'Text',
+	
+			'options' => array (
+					//'label' => iconv('ISO-8859-1', 'UTF-8','GESTE')
+			),
+			'attributes' => array (
+					'id' => 'note_parite',
+					'required' => true,
+			)
+	) );
+	
+	
+	$this->add ( array (
+			'name' => 'note_enf',
+			'type' => 'Text',
+	
+			'options' => array (
+					//'label' => iconv('ISO-8859-1', 'UTF-8','GESTE')
+			),
+			'attributes' => array (
+					'id' => 'note_enf',
+					'required' => true,
+			)
+	) );
+	$this->add ( array (
+			'name' => 'parite',
+			'type' => 'Text',
+			'options' => array (
+					//'label' => iconv('ISO-8859-1', 'UTF-8','PARITE')
+			),
+			'attributes' => array (
+					'id' => 'parite',
+					'required' => true,
+			)
+	) );
+	
+	
+	
+	
+	
+	
+	
+
+	$this->add(array(
+			'name' => 'mort_ne',
+			'type' => 'Text',
+			'options' => array (
+					
+			),
+			'attributes' => array(
+					'id' => 'mort_ne',
+					'required' => true,
+			),
+	));
+	
+	$this->add(array(
+			'name' => 'note_mort_ne',
+			'type' => 'Text',
+			'options' => array (
+						
+			),
+			'attributes' => array(
+					'id' => 'note_mort_ne',
+					'required' => true,
+			),
+	));
+	
+	
+	$this->add(array(
+			'name' => 'cesar',
+			'type' => 'Text',
+			'options' => array (
+					
+			),
+			'attributes' => array(
+					'id' => 'cesar',
+					'required' => true,
+			),
+	));
+	
+	$this->add(array(
+			'name' => 'note_cesar',
+			'type' => 'Text',
+			'options' => array (
+	
+			),
+			'attributes' => array(
+					'id' => 'note_cesar',
+					'required' => true,
+			),
+	));
+	
+
+	$this->add(array(
+			'name' => 'dystocie',
+			'type' => 'Zend\Form\Element\radio',
+			'options' => array (
+					'value_options' => array(
+							0 => 'Non',
+							1 => 'Oui' ,
+					),
+			),
+			'attributes' => array(
+					'id' => 'dystocie',
+					'required' => true,
+			),
+	));
+	
+	
+
+	$this->add(array(
+			'name' => 'note',
+			'type' => 'Text',
+			'options' => array (
+	
+			),
+			'attributes' => array(
+					'id' => 'note',
+					'required' => true,
+			),
+	));
+	
+	$this->add(array(
+			'name' => 'note_dystocie',
+			'type' => 'Text',
+			'options' => array (
+	
+			),
+			'attributes' => array(
+					'id' => 'note_dystocie',
+					'required' => true,
+			),
+	));
+	$this->add(array(
+			'name' => 'eclampsie',
+			'type' => 'Zend\Form\Element\radio',
+			'options' => array (
+					'value_options' => array(
+							0 => 'Non',
+							1 => 'Oui' ,
+					),
+			),
+			'attributes' => array(
+					'id' => 'eclampsie',
+					'required' => true,
+			),
+	));
+	
+	
+	$this->add(array(
+			'name' => 'note_eclampsie',
+			'type' => 'Text',
+			'options' => array (
+	
+			),
+			'attributes' => array(
+					'id' => 'note_eclampsie',
+					'required' => true,
+			),
+	));
+	$this->add(array(
+			'name' => 'bb_attendu',
+			'type' => 'Select',
+			'options' => array (
+					//'label' => iconv('ISO-8859-1', 'UTF-8','Nombre de bébé attendu'),
+					'value_options' => array(
+							'Simple' => 'Simple',
+							'Gemellaire'  => 'Gemellaire',
+							'Triple' => 'Triple',
+	
+					),
+			),
+			'attributes' => array(
+					'registerInArrrayValidator' => true,
+						
+					'id' => 'bb_attendu',
+					'required' => true,
+			),
+	));
+
+	$this->add ( array (
+			'name' => 'ddr',
+			'type' => 'Text',
+			'options' => array (
+					//'label' => iconv('ISO-8859-1', 'UTF-8','DDR:')
+			),
+			'attributes' => array (
+					'id' => 'ddr',
+					'required' => true,
+			)
+	) );
+	
+	
+	
+	$this->add ( array (
+			'name' => 'note_ddr',
+			'type' => 'Text',
+			'options' => array (
+					//'label' => iconv('ISO-8859-1', 'UTF-8','Duree Grossesse en semaine:')
+			),
+			'attributes' => array (
+					'id' => 'note_ddr',
+	
+					'required' => true,
+			)
+	) );
+	
+	$this->add ( array (
+			'name' => 'duree_grossesse',
+			'type' => 'Text',
+			'options' => array (
+					//'label' => iconv('ISO-8859-1', 'UTF-8','Duree Grossesse en semaine:')
+			),
+			'attributes' => array (
+					'id' => 'duree_grossesse',
+	
+					'required' => true,
+			)
+	) );
+	
+	
+	$this->add ( array (
+			'name' => 'nb_cpn',
+			'type' => 'Text',
+			'options' => array (
+					//'label' => iconv('ISO-8859-1', 'UTF-8','Nombre CPN:')
+			),
+			'attributes' => array (
+					'id' => 'nb_cpn',
+					'required' => true,
+			)
+	) );
+	
+	$this->add ( array (
+			'name' => 'note_cpn',
+			'type' => 'Text',
+			'options' => array (
+					//'label' => iconv('ISO-8859-1', 'UTF-8','Duree Grossesse en semaine:')
+			),
+			'attributes' => array (
+					'id' => 'note_cpn',
+	
+					'required' => true,
+			)
+	) );
+	
+	$this->add ( array (
+			'name' => 'vat_1',
+			'type' => 'checkbox',
+			'options' => array (
+					//'label' => iconv('ISO-8859-1', 'UTF-8','VAT 1:')
+			),
+			'attributes' => array (
+					'id' => 'vat_1',
+					'required' => false,
+			)
+	) );
+		
+		
+	$this->add ( array (
+			'name' => 'vat_2',
+			'type' => 'checkbox',
+			'options' => array (
+					//'label' => iconv('ISO-8859-1', 'UTF-8','VAT 2:')
+			),
+			'attributes' => array (
+					'id' => 'vat_3',
+					'required' => false,
+			)
+	) );
+	$this->add ( array (
+			'name' => 'vat_3',
+			'type' => 'checkbox',
+			'options' => array (
+					//'label' => iconv('ISO-8859-1', 'UTF-8','VAT 3:')
+			),
+			'attributes' => array (
+					'id' => 'vat_3',
+					'required' => false,
+						
+			)
+	) );
+	$this->add ( array (
+			'name' => 'note_vat',
+			'type' => 'Text',
+			'options' => array (
+					//'label' => iconv('ISO-8859-1', 'UTF-8','Duree Grossesse en semaine:')
+			),
+			'attributes' => array (
+					'id' => 'note_vat',
+	
+					'required' => true,
+			)
+	) );
+	
+	$this->add ( array (
+			'name' => 'nombre_bb',
+			'type' => 'Text',
+			'options' => array (
+					//'label' => iconv('ISO-8859-1', 'UTF-8','Nombre de bb:')
+			),
+			'attributes' => array (
+					'id' => 'nombre_bb',
+					//'required' => true,
+			)
+	) );
+	
+	
+	
+	$this->add ( array (
+			'name' => 'note_bb',
+			'type' => 'Text',
+			'options' => array (
+					//'label' => iconv('ISO-8859-1', 'UTF-8','Duree Grossesse en semaine:')
+			),
+			'attributes' => array (
+					'id' => 'note_bb',
+	
+					'required' => true,
+			)
+	) );
+	
+	
 	
 	
 	

@@ -226,8 +226,22 @@ function declarer(id){
 }
 
 
+//motif d'admission
 
 
+$('.Motif').toggle(false);
+function getMotif(val){ 
+	
+	if(val=='Normal'){
+		$("#motif").html("Motif d\'admission");
+		$('.Motif').fadeIn();
+	}else{
+		$("#motif span span").html("");
+		$('.Motif').fadeOut();
+	}	
+}
+
+getMotif($('#motif_ad').val());
 
 
 

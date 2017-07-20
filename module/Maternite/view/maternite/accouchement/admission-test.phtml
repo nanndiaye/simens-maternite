@@ -11,7 +11,7 @@ echo  $this->headScript()->appendFile($this->basePath().'/js/plugins/pikachoose/
 
 <?php echo $this->headLink()->appendStylesheet($this->basePath().'/js/plugins/fancybox/source/jquery.fancybox.css');?>
 <?php
-echo $this->headScript()->appendFile($this->basePath().'/js/mesjs/accouchement/complementcons_accordeon_controle.js');
+//echo $this->headScript()->appendFile($this->basePath().'/js/mesjs/accouchement/complementcons_accordeon_controle.js');
 
 echo $this->headLink()->appendStylesheet($this->basePath().'/css/mescss/bloquerDate.css'); //DatePicker
 echo $this->headScript()->appendFile($this->basePath().'/js/mesjs/bloquerDate.js'); //Pour bloquer certaines dates?>
@@ -21,7 +21,9 @@ echo $this->headScript()->appendFile($this->basePath().'/js/mesjs/bloquerDate.js
 <?php echo $this->headLink()->appendStylesheet($this->basePath().'/css/mescss/bloquerDate.css'); //DatePicker;?>
 <!-- MES JS -->
 <?php echo $this->headScript()->appendFile($this->basePath().'/js/maternite/accouchement/jsAdmissionTest.js');
-echo $this->headScript ()->appendFile ( $this->basePath () . '/js/maternite/accouchement/jsMaternite.js' );?>
+echo $this->headScript ()->appendFile ( $this->basePath () . '/js/maternite/accouchement/jsMaternite.js' );
+
+?>
 
 <?php use  Maternite\View\Helpers\DateHelper;
 $Control = new DateHelper();?>
@@ -138,62 +140,40 @@ initialisation();
 		       </div>
 		       
 		     
-		       <div  style='width: 77%; float:left;'>
+		         <div  style='width: 77%; float:left;'>
 		        
 		         <table id="form_patient" style="width:100%;">
 		              
-		       <div  style='font-family: police2;  height: 30px; padding-top: 16px; border-radius: unset;  background-color:#eeeeee; font-size: 17px; font-weight: bold;' >Antecedents </div> 
+		    <!--    <div  style='font-family: police2;  height: 30px; padding-top: 16px; border-radius: unset;  background-color:#eeeeee; font-size: 17px; font-weight: bold;' >Antecedents </div> --> 
+
+		          <tr></tr>
+		               <!--  <div id='motifsAdmissionConstanteClick' class='tabTitle'>TYPE D'
+			ADMISSION </div> -->
+		                  
 		                <tr>
-	                         <td class="nombre" style='width: 33%;'><?php echo $this->formRow($form->get('enf_viv'));?></td>
-		                 
-		                       <td class="nombre" style='width: 33%;'><?php echo $this->formRow($form->get('geste'));?></td>
-		                   <td class="nombre" style='width: 33%;'><?php echo $this->formRow($form->get('parite'));?></td>
+
+	                       <td class=""  style="width: 33%; height:50px;" >
+		                   <div  id= "BUcheckbox" style= "width:33%;" >
+		                   <span style="margin-right: 10%;"><span style="margin-right: 20%;"></span>
+		                   </span></div> 
+		                  
+		                   <div ><?php echo $this->formRow($form->get('motif_ad'));?></div>
+		              </td >
+		               
+		                   <td   class=" Motif"  style='width: 33%;'><?php echo $this->formRow($form->get('motif'));?></td>
+		                   <td class=" Motif" style='width: 33%;'><?php echo $this->formRow($form->get('service_origine'));?></td>
 		                             
 		              </tr> 
 		      
-		                <tr>
-		                  <td style='width: 33%;'>
-                           <div class="comment-form-patient" ><label style='top: 5px;'>MORT-NE </label></div>
-                           <div class="comment-form-patient_radio" ><?php echo $this->formRow($form->get('mort_ne'));?></div>
-		                 </td>
-		                  <td style='width: 33%;'>
-		                   <div class="comment-form-patient" ><label style='top: 5px;'>CESAR</label></div> 
-		                   <div class="comment-form-patient_radio" ><?php echo $this->formRow($form->get('cesar'));?></div>
-		                 </td>
-		                    <td style='width: 33%;'>
-		                   <div class="comment-form-patient" ><label style='top: 5px;'>DYSTOCIE</label></div> 
-		                   <div class="comment-form-patient_radio" ><?php echo $this->formRow($form->get('dystocie'));?></div>
-		                 </td>
-		                  <td >
-		                   <div class="comment-form-patient" ><label style='top: 5px;'>ECLAMPSIE</label></div> 
-		                   <div class="comment-form-patient_radio" ><?php echo $this->formRow($form->get('eclampsie'));?></div>
-		              </td>
-		              </tr>
+		               
 		             
 		          
 		              </table>
 		              <br />
 		              <table id="form_patient" style="width:100%;">
-		           	       <div style='font-family: police2;  height: 30px; padding-top: 16px; border-radius: unset;  background-color:#eeeeee; font-size: 17px; font-weight: bold;'> Grossesse </div>
-		              <tr  class="comment-form-patient">
-		                <td class="comment-form-patient" style='width: 33%;'><?php echo $this->formRow($form->get('ddr'));?></td>
-		                <td class="comment-form-author" style='width: 37%; /*25px;'><?php echo $this->formRow($form->get('duree_grossesse'));?></td>
-		                 <td style="width: 33%; height:50px;" >
-		                   <div id= "BUcheckbox" style= 'width:35%; /*25px;'><label id="bb_attend" style=" margin-right: 11%; height: 30px; font-family: time new romans; font-size:18px;">
-		                   Bb attendu
-		                   </label></div> 
-		                   <div class="comment-form-author" ><?php echo $this->formRow($form->get('bb_attendu'));?></div>
-		              </td >
-		             		 <td class="BbAttendu comment-form-author" style='width: 33%;'><?php echo $this->formRow($form->get('nombre_bb'));?></td>
-		              </tr>
-		              <tr>
-		                <td class="comment-form-patient" style='width: 33%;'><?php echo $this->formRow($form->get('vat_1'));?></td>
-		                <td class="comment-form-patient" style='width: 33%;'><?php echo $this->formRow($form->get('vat_2'));?></td>
-		                <td class="comment-form-patient" style='width: 33%;'><?php echo $this->formRow($form->get('vat_3'));?></td>
-		                   
-                     <td class="comment-form-patient" style='width: 33%;'><?php echo $this->formRow($form->get('nb_cpn'));?></td>
-
-		              </tr>
+		           	      <!--  <div style='font-family: police2;  height: 30px; padding-top: 16px; border-radius: unset;  background-color:#eeeeee; font-size: 17px; font-weight: bold;'> Grossesse </div> -->
+		             
+		             
 		              </table>
 		      
 		      

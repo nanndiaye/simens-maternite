@@ -69,7 +69,8 @@ use Maternite\Model\Naissance;
 use Maternite\Model\NaissanceTable;
 use Maternite\Model\Evacuation;
 use Maternite\Model\EvacuationTable;
-
+use Maternite\Model\Reference;
+use Maternite\Model\ReferenceTable;
 use Maternite\Model\Grossesse;
 use Maternite\Model\GrossesseTable;
 
@@ -116,7 +117,7 @@ class Module implements AutoloaderProviderInterface {
 							$dbAdapter = $sm->get ( 'Zend\Db\Adapter\Adapter' );
 							$resultSetPrototype = new ResultSet ();
 							$resultSetPrototype->setArrayObjectPrototype ( new Evacuation () );
-							return new TableGateway ( 'evacuation_reference', $dbAdapter, null, $resultSetPrototype );
+							return new TableGateway ( 'evacuation', $dbAdapter, null, $resultSetPrototype );
 						},
 						
 						'Maternite\Model\EvacuationTable' => function ($sm) {
@@ -125,6 +126,24 @@ class Module implements AutoloaderProviderInterface {
 							return $table;
 						},
 
+						
+						
+						'ReferenceTableGateway' => function ($sm) {
+							$dbAdapter = $sm->get ( 'Zend\Db\Adapter\Adapter' );
+							$resultSetPrototype = new ResultSet ();
+							$resultSetPrototype->setArrayObjectPrototype ( new Reference () );
+							return new TableGateway ( 'reference', $dbAdapter, null, $resultSetPrototype );
+						},
+						
+						'Maternite\Model\ReferenceTable' => function ($sm) {
+							$tableGateway = $sm->get ( 'ReferenceTableGateway' );
+							$table = new ReferenceTable ( $tableGateway );
+							return $table;
+						},
+						
+						
+						
+						
 						'PatientTable1Gateway' => function ($sm) {
 							$dbAdapter = $sm->get ( 'Zend\Db\Adapter\Adapter' );
 							$resultSetPrototype = new ResultSet ();

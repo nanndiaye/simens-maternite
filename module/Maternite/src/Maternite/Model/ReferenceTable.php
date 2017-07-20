@@ -8,15 +8,16 @@ use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Where;
 use Maternite\View\Helpers\DateHelper;
 
-class EvacuationTable {
+class ReferenceTable {
 	
 	protected $tableGateway ; 
 	public function __construct(TableGateway $tableGateway) {
 		$this->tableGateway = $tableGateway;
+	//	var_dump('test');exit();
 		
 		//var_dump('test');exit();
 	}
-// public function getEvacuation($id_cons) {
+// public function getReference($id_patient) {
 // 		$adapter = $this->tableGateway->getAdapter ();
 // 		$sql = new Sql ( $adapter );
 // 		$select = $sql->select ();
@@ -24,12 +25,12 @@ class EvacuationTable {
 // 				'*' 
 // 		) );
 // 		$select->from ( array (
-// 				'eva' => 'evacuation' 
+// 				'ref' => 'reference' 
 // 		) );
 // 		$select->where ( array (
-// 				'eva.id_' => $id_cons 
+// 				'ref.id_patient' => $id_patient 
 // 		) );
-// 		$select->order ( 'eva.id_evac_ref ASC' );
+// 		$select->order ( 'ref.id_reference ASC' );
 // 		$stat = $sql->prepareStatementForSqlObject ( $select );
 // 		$result = $stat->execute ()->current();
 		
@@ -37,20 +38,25 @@ class EvacuationTable {
 // 	}
 	
 
-	public function addEvacuation($donnees) {
+	public function addReference($donnees) {
+		
 		$Control = new DateHelper();
 // 		$this->tableGateway->delete ( array (
-// 				'id_cons' => $donnees ['id_cons']
+// 				'id_patient' => $donnees ['id_patient']
 // 		) );
 		
-			$datadonnee = array (
+		$datadonnee = array (
 				//'id_patient' => $donnees ['id_patient'],
-				'motif_evacuation' => $donnees ['motif'],
-				'service_origine_ev' => $donnees ['service_origine'],			
+				'motif_reference' => $donnees ['motif'],
+				'service_origine_ref' => $donnees ['service_origine'],
+		
+				
 		);
+	
 		
 		//var_dump($datadonnee); exit();
-		return $this->tableGateway->getLastInsertValue($this->tableGateway->insert($datadonnee));
+		return $this->tableGateway->getLastInsertValue($this->tableGateway->insert($datadonnee ));
+		//$this->tableGateway->insert ( $datadonnee );
 	}
 	public function saveEvacuation($infoEvacuation)
 	{
@@ -105,3 +111,4 @@ class EvacuationTable {
 	
 
 }
+

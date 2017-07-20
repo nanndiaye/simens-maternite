@@ -67,6 +67,18 @@ class DonneesExamensPhysiquesTable {
 						'presentation' => $donnees ['examen_maternite_donnee8'],
 						'bassin' => $donnees ['examen_maternite_donnee9'],
 						'nb_bdc' => $donnees ['examen_maternite_donnee10'],
+						'note_tv' => $donnees ['note_tv'],
+						'note_hu' => $donnees ['note_hu'],
+						'note_bdc' => $donnees ['note_bdc'],
+						'note_la' => $donnees ['note_la'],
+						'note_pde' => $donnees ['note_pde'],
+						'note_presentation' => $donnees ['note_presentation'],
+						'note_bassin' => $donnees ['note_bassin'],
+						
+						
+						
+						
+						
 				);
 				
 				

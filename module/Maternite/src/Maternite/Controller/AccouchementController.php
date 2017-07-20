@@ -41,6 +41,7 @@ class AccouchementController extends AbstractActionController
 	protected $controlDate;
     protected $patientTable;
     protected $evacuationTable;
+    protected $referenceTable;
      protected $formPatient;
      protected $formAdmission;
     protected $batimentTable;
@@ -215,7 +216,14 @@ class AccouchementController extends AbstractActionController
 		return $this->evacuationTable;
 	}
 	
-	
+	public function getReferenceTable()
+	{
+		if (!$this->referenceTable) {
+			$sm = $this->getServiceLocator();
+			$this->referenceTable = $sm->get('Maternite\Model\ReferenceTable');
+		}
+		return $this->referenceTable;
+	}
 	
 	public function getMotifAdmissionTable()
 	{
@@ -584,7 +592,7 @@ class AccouchementController extends AbstractActionController
 		return array (
 				'lesdetails' => $unPatient,
 				'image' => $patient->getPhoto ( $id_pat ),
-				'id_patient' => $unPatient['ID_PERSONNE'],
+				//'id_patient' => $unPatient['ID_PERSONNE'],
 				'date_enregistrement' => $unPatient['DATE_ENREGISTREMENT']
 		);
 	}
@@ -1984,93 +1992,158 @@ class AccouchementController extends AbstractActionController
 		$date_enregistrement = $today->format ( 'Y-m-d H:i:s' );
 		
 		$id_patient = ( int ) $this->params ()->fromPost ( 'id_patient', 0 );
-		//$id_grossesse = ( int ) $this->params ()->fromPost ( 'id_grossesse', 0 );
-		//$id_admission = (int)$this->params ()->fromPost ( 'id_admission',0);
+		
+		
+		
+		
 		//var_dump($id_admission);exit();
 		//pour antecedent de type 1
-		$enf_viv = $this->params ()->fromPost ( 'enf_viv' );
-		$parite = $this->params ()->fromPost ( 'parite' );
-		$geste = $this->params ()->fromPost ( 'geste' );
+// 		$enf_viv = $this->params ()->fromPost ( 'enf_viv' );
+// 		$parite = $this->params ()->fromPost ( 'parite' );
+// 		$geste = $this->params ()->fromPost ( 'geste' );
 		//var_dump($user); exit();
 		//pour antecedent de type 2
-		$mort_ne = $this->params ()->fromPost ( 'mort_ne' );
-		$cesar = $this->params ()->fromPost ( 'cesar' );
-		$dystocie = $this->params ()->fromPost ( 'dystocie' );
-		$eclampsie = $this->params ()->fromPost ( 'eclampsie' );
+// 		$mort_ne = $this->params ()->fromPost ( 'mort_ne' );
+// 		$cesar = $this->params ()->fromPost ( 'cesar' );
+// 		$dystocie = $this->params ()->fromPost ( 'dystocie' );
+// 		$eclampsie = $this->params ()->fromPost ( 'eclampsie' );
 
 		//pour grossesse
-		$bb_attendu = $this->params ()->fromPost ( 'bb_attendu' );
-		$nombre_bb = $this->params ()->fromPost ( 'nombre_bb' );
-		$vat_1 = $this->params ()->fromPost ( 'vat_1' );
-		$vat_2 = $this->params ()->fromPost ( 'vat_2' );
-		$vat_3 = $this->params ()->fromPost ( 'vat_3' );
-		$nb_cpn = $this->params ()->fromPost ( 'nb_cpn' );
+// 		$bb_attendu = $this->params ()->fromPost ( 'bb_attendu' );
+// 		$nombre_bb = $this->params ()->fromPost ( 'nombre_bb' );
+// 		$vat_1 = $this->params ()->fromPost ( 'vat_1' );
+// 		$vat_2 = $this->params ()->fromPost ( 'vat_2' );
+// 		$vat_3 = $this->params ()->fromPost ( 'vat_3' );
+// 		$nb_cpn = $this->params ()->fromPost ( 'nb_cpn' );
 		
 		
 		//pour ANTECEDENTS DE TYPE 1
-		$donnees_antecedent_type1 = array (
-				'id_patient' => $id_patient,
-				'enf_viv'    => $enf_viv,
-				'parite'     => $parite,
-				'geste'      => $geste,
+// 		$donnees_antecedent_type1 = array (
+// 				'id_patient' => $id_patient,
+// 				'enf_viv'    => $enf_viv,
+// 				'parite'     => $parite,
+// 				'geste'      => $geste,
+// 		);
+// 		$this->getAntecedentType1Table ()->addAntecedentType1($donnees_antecedent_type1);
+		
+		//pour ANTECEDENTS DE TYPE 2
+// 		$donnees_antecedent_type2 = array (
+// 				'mort_ne'=>$mort_ne,
+// 				'cesar'=>$cesar,
+// 				'dystocie'=>$dystocie,
+// 				'eclampsie'=>$eclampsie,
+// 		);
+		//$this->getAntecedentType1Table ()->addAntecedentType1($donnees_antecedent_type1);
+// 		$id_antecedent = $this->getAntecedentType2Table ()-> addAntecedentType2($donnees_antecedent_type2);
+		
+
+		//pour  evacuation reference
+		$motif_ad = $this->params ()->fromPost('motif_ad');
+		$motif = $this->params ()->fromPost ( 'motif' );
+		$service_origine = $this->params ()->fromPost ( 'service_origine' );
+		
+		$donnees_admission= array(
+			    //'id_patient'=>$id_patient,
+				'motif'=>$motif,
+				'service_origine'=>$service_origine,
 		);
-		$this->getAntecedentType1Table ()->addAntecedentType1($donnees_antecedent_type1);
+	
+		//donnee pour admission
 		
-		//pour ANTECEDENTS DE TYPE
-		$donnees_antecedent_type2 = array (
-				'mort_ne'=>$mort_ne,
-				'cesar'=>$cesar,
-				'dystocie'=>$dystocie,
-				'eclampsie'=>$eclampsie,
+		
+	if($motif_ad=="Reference"){
+	
+		$id_reference = $this->getReferenceTable ()-> addReference($donnees_admission);
+
+		$donnees = array (
+				'motif_ad'=>$motif_ad,
+				'id_patient' => $id_patient,				
+				'id_reference'=>$id_reference,
+				//'id_evacuation'=>$id_evacuation,
+				'id_service' => $idService,
+				'date_cons' => $date_cons,
+				'id_employe' => $id_employe,
+				'date_enregistrement' => $date_enregistrement,
+				
 		);
-		$id_antecedent = $this->getAntecedentType2Table ()-> addAntecedentType2($donnees_antecedent_type2);
+	//var_dump($donnees);exit();
+			$this->getAdmissionTable ()->addAdmissionRef($donnees);
 		
 		
+	}
+	
+	elseif ($motif_ad=="Evacuation"){
 		
-		//Pour Grossesse
-		$ddr = $this->params ()->fromPost ( 'ddr' );
-		if($ddr){ $ddr = $Control->convertDateInAnglais($this->params ()->fromPost ( 'ddr' )); }else{ $ddr = null;}
-		$duree_grossesse = $this->params ()->fromPost ( 'duree_grossesse' );
-		$donnees_grossesse = array (
-				'id_patient' => $id_patient,
-				'nb_cpn'=>$nb_cpn,
-				'ddr'=>$ddr,
-				'duree_grossesse'=>$duree_grossesse,
-				'bb_attendu'=>'Triple',
-				'vat_1'=>$vat_1,
-				'vat_2'=>$vat_2,
-				'vat_3'=>$vat_3,
-		);
-		
-		$id_grossesse= $this->getGrossesseTable ()->addGrossesse($donnees_grossesse);
-		
-		//Pour Admission
+		$id_evacuation = $this->getEvacuationTable ()-> addEvacuation($donnees_admission);
 		$donnees = array (
 				'id_patient' => $id_patient,
-				'id_ant_t2'=>$id_antecedent,
-				'id_grossesse'=>$id_grossesse,
+				'motif_ad'=>$motif_ad,
+				//'id_reference'=>$id_reference,
+				'id_evacuation'=>$id_evacuation,
+				'id_service' => $idService,
+				'date_cons' => $date_cons,
+				'id_employe' => $id_employe,
+				'date_enregistrement' => $date_enregistrement,
+				
+		);
+		
+		$this->getAdmissionTable ()->addAdmissionEv($donnees);
+		//$this->getAdmissionTable ()->addAdmission($donnees,$date_enregistrement,$id_employe);
+		//$id_admi=$this->getAdmissionTable ()->addAdmissionAccouchement($id_evacuation);
+	
+		
+	}	
+	else{
+	
+	$donnees = array (
+				
+				'id_patient' => $id_patient,
+				'motif_ad'=>$motif_ad,
+				//'id_reference'=>$id_reference,
+				//'id_evacuation'=>$id_evacuation,
 				'id_service' => $idService,
 				'date_cons' => $date_cons,
 				'date_enregistrement' => $date_enregistrement,
 				'id_employe' => $id_employe,
 		);
+			$this->getAdmissionTable ()->addAdmissionNormal($donnees);//var_dump($donnees);exit();
+	}
+		//Pour Grossesse
+// 		$ddr = $this->params ()->fromPost ( 'ddr' );
+// 		if($ddr){ $ddr = $Control->convertDateInAnglais($this->params ()->fromPost ( 'ddr' )); }else{ $ddr = null;}
+// 		$duree_grossesse = $this->params ()->fromPost ( 'duree_grossesse' );
+// 		$donnees_grossesse = array (
+// 				'id_patient' => $id_patient,
+// 				'nb_cpn'=>$nb_cpn,
+// 				'ddr'=>$ddr,
+// 				'duree_grossesse'=>$duree_grossesse,
+// 				'bb_attendu'=>'Triple',
+// 				'vat_1'=>$vat_1,
+// 				'vat_2'=>$vat_2,
+// 				'vat_3'=>$vat_3,
+// 		);
+		
+// 		$id_grossesse= $this->getGrossesseTable ()->addGrossesse($donnees_grossesse);
+		
+		//Pour Admission
+		
 		//var_dump($donnees);exit;
-		$id_admi=$this->getAdmissionTable ()->addAdmissionAccouchement($donnees);
+	
 		//var_dump($id_admi);exit;
 		$form = new ConsultationForm ();
 		
 		$formData = $this->getRequest ()->getPost ();
 		$form->setData ( $formData );
-	
+		//var_dump($form);exit;
 		$this->getAdmissionTable ()-> addConsultation ( $form,$idService );
 		
 		$id_cons = $form->get ( "id_cons" )->getValue ();
 		
-		//$this->getAdmissionTable ()->addConsultationMaternite($id_cons);
+		$this->getAdmissionTable ()->addConsultationMaternite($id_cons);
 		//$this->getAdmissionTable ()->addAdmission($donnees, $date_enregistrement, $id_employe);
 		
 		
-		
+	
  		return $this->redirect()->toRoute('accouchement', array(
  				'action' =>'admission-test'));
 
@@ -2220,7 +2293,7 @@ public function declarerDecesAction() {
 	
 		// Recuperer les donnees sur les bandelettes urinaires
 		// Recuperer les donnees sur les bandelettes urinaires
-		/*$bandelettes = array(
+		$bandelettes = array(
 				'id_cons' => $id_cons,
 				'albumine' => $form->get("albumine")->getValue(),
 				'sucre' => $form->get("sucre")->getValue(),
@@ -2229,7 +2302,7 @@ public function declarerDecesAction() {
 				'croixsucre' => $form->get("croixsucre")->getValue(),
 				'croixcorpscetonique' => $form->get("croixcorpscetonique")->getValue()
 		);
-		$this->getConsultationTable()->addBandelette($bandelettes);*/
+		$this->getConsultationTable()->addBandelette($bandelettes);
 	
 		$this->getMotifAdmissionTable()->addMotifAdmission($form);
 	
@@ -2251,7 +2324,7 @@ public function declarerDecesAction() {
 	
 			//Recuperer les donnees sur les bandelettes urinaires
 			// Recuperer les donnees sur les bandelettes urinaires
-			/*$bandelettes = array(
+			$bandelettes = array(
 					'id_cons' => $form->get("id_cons")->getValue(),
 					'albumine' => $form->get("albumine")->getValue(),
 					'sucre' => $form->get("sucre")->getValue(),
@@ -2262,7 +2335,7 @@ public function declarerDecesAction() {
 			);
 			// mettre a jour les bandelettes urinaires
 			$this->getConsultationTable()->deleteBandelette($form->get("id_cons")->getValue());
-			$this->getConsultationTable()->addBandelette($bandelettes);*/
+			$this->getConsultationTable()->addBandelette($bandelettes);
 	
 			// mettre a jour les motifs d'admission
 			/*$this->getMotifAdmissionTable()->deleteMotifAdmission($form->get('id_cons')->getValue());
@@ -3185,16 +3258,19 @@ public function declarerDecesAction() {
         $this->getConsultationTable()->addBandelette($bandelettes);
         
        
-       $this->getDonneesExamensPhysiquesTable()->updateExamenPhysique($formData);
      
-
+      $id_antecedent1 = $this->getAntecedentType1Table ()-> updateAntecedentType1($formData); 
+       		$id_antecedent2 = $this->getAntecedentType2Table ()-> updateAntecedentType2($formData);
+       		
+       $this->getDonneesExamensPhysiquesTable()->updateExamenPhysique($formData);
+       var_dump('test');exit();
         $this->getAccouchementTable()->updateAccouchement($formData);
    
       
         //ENFANT
        $this->getNaissanceTable()->updateNaissance($formData);
     
-        $this->getEvacuationTable()->addEvacuation($formData);
+       // $this->getEvacuationTable()->addEvacuation($formData);
        // var_dump($formData);exit();
      
        
@@ -3460,7 +3536,7 @@ public function declarerDecesAction() {
                 'ID_MEDECIN' => $this->params()->fromPost('med_id_personne')
             );
             $this->getConsultationTable()->validerConsultation($valide);
-            $this->getAdmissionTable ()->addConsultationMaternite($id_cons,$id_grossesse);
+           
         }
 
         return $this->redirect()->toRoute('accouchement', array(

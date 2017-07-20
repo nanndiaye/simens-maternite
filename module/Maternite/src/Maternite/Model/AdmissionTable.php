@@ -74,9 +74,78 @@ class AdmissionTable {
 	}
 	
 
+	
+	public function addAdmissionRef($donnees) {
+		//$Control = new DateHelper();
+		// 		$this->tableGateway->delete ( array (
+		// 				'id_cons' => $donnees ['id_cons']
+		// 		) );
+	
+		$datadonnee = array (
+				'id_patient' => $donnees ['id_patient'],
+				'motif_admission' => $donnees ['motif_ad'],
+				'id_reference' => $donnees ['id_reference'],
+				'id_service' => $donnees ['id_service'],
+				'date_cons' => $donnees ['date_cons'],
+				'id_employe' => $donnees ['id_employe'],
+				'date_enregistrement' => $donnees ['date_enregistrement'],
+		);
+	
+		//var_dump($datadonnee); exit();
+		return $this->tableGateway->getLastInsertValue($this->tableGateway->insert($datadonnee));
+	}
+	
+	
+	
+	public function addAdmissionEv($donnees) {
+		//$Control = new DateHelper();
+		// 		$this->tableGateway->delete ( array (
+		// 				'id_cons' => $donnees ['id_cons']
+		// 		) );
+	
+		$datadonnee = array (
+				'id_patient' => $donnees ['id_patient'],
+				'motif_admission' => $donnees ['motif_ad'],
+				'id_evacuation' => $donnees ['id_evacuation'],
+				'id_service' => $donnees ['id_service'],
+				'date_cons' => $donnees ['date_cons'],
+				'id_employe' => $donnees ['id_employe'],
+				'date_enregistrement' => $donnees ['date_enregistrement'],
+		);
+	
+		//var_dump($datadonnee); exit();
+		return $this->tableGateway->getLastInsertValue($this->tableGateway->insert($datadonnee));
+	}
+	
+	
+	
+	public function addAdmissionNormal($donnees) {
+		//$Control = new DateHelper();
+		// 		$this->tableGateway->delete ( array (
+		// 				'id_cons' => $donnees ['id_cons']
+		// 		) );
+	
+		$datadonnee = array (
+				'id_patient' => $donnees ['id_patient'],
+				'motif_admission' => $donnees ['motif_ad'],
+				'id_service' => $donnees ['id_service'],
+				'date_cons' => $donnees ['date_cons'],
+				'id_employe' => $donnees ['id_employe'],
+				'date_enregistrement' => $donnees ['date_enregistrement'],
+		);
+	
+		//var_dump($datadonnee); exit();
+		return $this->tableGateway->getLastInsertValue($this->tableGateway->insert($datadonnee));
+	}
+	
+	
+	
 	public function addAdmissionAccouchement($donnees){
+		//var_dump($donnees);exit();
+		
 	return $this->tableGateway->getLastInsertValue($this->tableGateway->insert($donnees));
 	}
+	
 	public function addAdmission($donnees , $date_enregistrement , $id_employe){
 	
 		$date = new \DateTime();

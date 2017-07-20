@@ -888,6 +888,18 @@ $("#terminer2, #terminer3").click(function () {
     donnees['examen_maternite_donnee8'] = $("#examen_maternite_donnee8").val();
     donnees['examen_maternite_donnee9'] = $("#examen_maternite_donnee9").val();
     donnees['examen_maternite_donnee10'] = $("#examen_maternite_donnee10").val();
+    
+    donnees['note_tv'] = $("#note_tv").val();
+    donnees['note_hu'] = $("#note_hu").val();
+    donnees['note_bdc'] = $("#note_bdc").val();
+    donnees['note_la'] = $("#note_la").val();
+    donnees['note_pde'] = $("#note_pde").val();
+    donnees['note_presentation'] = $("#note_presentation").val();
+    donnees['note_bassin'] = $("#note_bassin").val();
+    
+    
+    
+    
     //**********-- ANALYSE BIOLOGIQUE --************
     //**********-- ANALYSE BIOLOGIQUE --************
     donnees['groupe_sanguin'] = $("#groupe_sanguin").val();
@@ -1007,6 +1019,51 @@ $("#terminer2, #terminer3").click(function () {
     //donnees['frequence_respiratoire'] = $("#frequence_respiratoire").val();
     donnees['glycemie_capillaire'] = $("#glycemie_capillaire").val();
    
+    
+    
+    //Antecedent type 1
+    
+    
+    donnees['enf_viv'] = $("#enf_viv").val();
+    donnees['note_enf'] = $("#note_enf").val();
+    donnees['geste'] = $("#geste").val();
+    donnees['note_geste'] = $("#note_geste").val();
+    donnees['parite'] = $("#parite").val();
+    donnees['note_parite'] = $("#note_parite").val();
+    donnees['mort_ne'] = $("#mort_ne").val();
+    donnees['note_mort_ne'] = $("#note_mort_ne").val();
+    donnees['cesar'] = $("#cesar").val();
+    donnees['note_cesar'] = $("#note_cesar").val();
+  
+    //Antecedent type 2
+    
+    donnees['dystocie'] = $("#dystocie").val();
+    donnees['note_dystocie'] = $("#note_dystocie").val();
+    donnees['eclampsie'] = $("#eclampsie").val();
+    donnees['note_eclampsie'] = $("#note_eclampsie").val();
+    donnees['cycle'] = $("#cycle").val();
+    donnees['note_cycle'] = $("#note_cycle").val();
+    donnees['duree_cycle'] = $("#duree_cycle").val();
+    donnees['regularite'] = $("#regularite").val();
+    donnees['autre'] = $("#autre_go").val();
+    donnees['note_autre'] = $("#note_autre_go").val();
+    
+    //grosseesse
+    
+    donnees['ddr'] = $("#ddr").val();
+    donnees['duree_grossesse'] = $("#duree_grossesse").val();
+    donnees['note_ddr'] = $("#note_ddr").val();
+    donnees['nb_cpn'] = $("#nb_cpn").val();
+    donnees['note_cpn'] = $("#note_cpn").val();
+    donnees['bb_attendu'] = $("#bb_attendu").val();
+    donnees['note_bb'] = $("#note_bb").val(); 
+    donnees['nombre_bb'] = $("#nombre_bb").val();
+    
+    
+    
+    
+    
+    
     //**********--ACCOUCHEMENT --********
     //Recuperer les valeurs des champs
     donnees['type_accouchement'] = $("#type_accouchement").val();
@@ -2745,6 +2802,8 @@ getExamenMaterniteDonnee5($('#examen_maternite_donnee5').val());
 
 
 
+
+
 //evacuation
 
 $('.EvacueDe').toggle(false);
@@ -2801,11 +2860,6 @@ getReference($('#reference').val());
 
 
 
-
-
-
-
-
 $('.BbAttendu').toggle(false);
 function getBbAttendu(val){ 
 	
@@ -2819,6 +2873,11 @@ function getBbAttendu(val){
 }
 
 getBbAttendu($('#bb_attendu').val());
+
+
+
+
+
 
 
 //===================================================================================================================
