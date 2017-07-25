@@ -83,7 +83,7 @@ class AdmissionTable {
 	
 		$datadonnee = array (
 				'id_patient' => $donnees ['id_patient'],
-				'motif_admission' => $donnees ['motif_ad'],
+				'id_type_ad' => $donnees ['motif_ad'],
 				'id_reference' => $donnees ['id_reference'],
 				'id_service' => $donnees ['id_service'],
 				'date_cons' => $donnees ['date_cons'],
@@ -105,7 +105,7 @@ class AdmissionTable {
 	
 		$datadonnee = array (
 				'id_patient' => $donnees ['id_patient'],
-				'motif_admission' => $donnees ['motif_ad'],
+				'id_type_ad' => $donnees ['motif_ad'],
 				'id_evacuation' => $donnees ['id_evacuation'],
 				'id_service' => $donnees ['id_service'],
 				'date_cons' => $donnees ['date_cons'],
@@ -127,7 +127,7 @@ class AdmissionTable {
 	
 		$datadonnee = array (
 				'id_patient' => $donnees ['id_patient'],
-				'motif_admission' => $donnees ['motif_ad'],
+				'id_type_ad' => $donnees ['motif_ad'],
 				'id_service' => $donnees ['id_service'],
 				'date_cons' => $donnees ['date_cons'],
 				'id_employe' => $donnees ['id_employe'],
@@ -326,13 +326,13 @@ class AdmissionTable {
 		}
 	}
 	
-	public function addConsultationMaternite($id_cons,$id_grossesse){
+	public function addConsultationMaternite($id_cons){
 		$db = $this->tableGateway->getAdapter();
 		
 		$sql = new Sql($db);
 		$sQuery = $sql->insert()
 		->into('consultation_maternite')
-		->values(array('id_cons' => $id_cons, 'id_grossesse'=>$id_grossesse));
+		->values(array('id_cons' => $id_cons));
 	
 		$requete = $sql->prepareStatementForSqlObject($sQuery);
 		$requete->execute();

@@ -221,7 +221,22 @@ class ConsultationForm extends Form {
 						'required' => true,
 				),
 		));
-		
+			$this->add ( array (
+					'name' => 'examen_maternite_donnee11',
+					'type' => 'Zend\Form\Element\Select',
+					'options' => array (
+							
+							'value_options' => array (
+									'clair' => iconv ( 'ISO-8859-1', 'UTF-8', 'Clair' ),
+									'tente' => iconv ( 'ISO-8859-1', 'UTF-8', 'Tente(meconium)' ),
+									'ematique' => iconv ( 'ISO-8859-1', 'UTF-8', 'ematique' )
+							)
+					),
+					'attributes' => array (
+							'readonly' => 'readonly',
+							'id' => 'examen_maternite_donnee11'
+					)
+			) );
 		$this->add ( array (
 				'name' => 'examen_maternite_donnee6',
 				'type' => 'Text',
@@ -1166,6 +1181,17 @@ $this->add(array(
 				) 
 		) );
 		$this->add ( array (
+				'name' => 'text_chirur',
+				'type' => 'Textarea',
+				'options' => array (
+						'label' => 'Traitement :'
+				),
+				'attributes' => array (
+						'readonly' => 'readonly',
+						'id' => 'diagnostic_traitement_chirurgical'
+				)
+		) );
+		$this->add ( array (
 				'name' => 'type_anesthesie_demande',
 				'type' => 'Zend\Form\Element\Select',
 				'options' => array (
@@ -1751,13 +1777,13 @@ $this->add(array(
 		) );
 		
 		/* Cycle */
-		$this->add ( array (
-				'name' => 'cycle',
-				'type' => 'checkbox',
-				'attributes' => array (
-						'id' => 'cycle' 
-				) 
-		) );
+// 		$this->add ( array (
+// 				'name' => 'cycle',
+// 				'type' => 'checkbox',
+// 				'attributes' => array (
+// 						'id' => 'cycle' 
+// 				) 
+// 		) );
 		
 		$this->add(array(
 				'name' => 'note_cycle',
@@ -1786,15 +1812,48 @@ $this->add(array(
 				'type' => 'Zend\Form\Element\Select',
 				'options' => array (
 						'value_options' => array (
-								' ' => '',
-								'1' => 'Oui',
-								'0' => 'Non' 
+								'Regulier' => 'Regulier',
+								'Irregulier' => 'Irregulier',
+								
 						) 
 				),
 				'attributes' => array (
+						'registerInArrrayValidator' => true,
+						'onchange'=>' getCycle(this.value)',
 						'id' => 'regularite' 
 				) 
 		) );
+		
+		$this->add ( array (
+				'name' => 'quantite_regle',
+				'type' => 'Zend\Form\Element\Select',
+				'options' => array (
+						'value_options' => array (
+								'Non Abondante' => 'Non Abondante',
+								'Abondante' => 'Abondante',
+								
+						) 
+				),
+				'attributes' => array (
+						'registerInArrrayValidator' => true,
+						'onchange'=>' getQuantite(this.value)',
+						'id' => 'quantite_regle' 
+				) 
+		) );
+		$this->add ( array (
+				'name' => 'nb_garniture_jr',
+				'type' => 'Text',
+				'options' => array (
+		
+				),
+				'attributes' => array (
+						'id' => 'nb_garniture_jr'
+				)
+		) );
+		
+		
+		
+		
 		/* Dysmenorrhee cycle */
 		$this->add ( array (
 				'name' => 'DysmenorrheeCycleGO',
@@ -1826,6 +1885,94 @@ $this->add(array(
 				'attributes' => array (
 						'id' => 'note_autre_go' 
 				) 
+		) );
+		
+		
+	$this->add ( array (
+				'name' => 'groupe_sanguins',
+				'type' => 'Zend\Form\Element\Select',
+				'options' => array (
+						'value_options' => array (
+								'A' => 'A',
+								'B' => 'B', 
+								'AB' => 'AB',
+								'O' => 'O',
+						) 
+				),
+				'attributes' => array (
+						'id' => 'groupe_sanguins' 
+				) 
+		) );
+		$this->add ( array (
+				'name' => 'rhesus',
+				'type' => 'Zend\Form\Element\Select',
+				'options' => array (
+						'value_options' => array (
+								' -' => '-',
+								'+' => '+',
+						)
+				),
+				'attributes' => array (
+						'id' => 'rhesus'
+				)
+		) );
+		$this->add ( array (
+				'name' => 'note_gs',
+				'type' => 'text',
+				'attributes' => array (
+						'id' => 'note_gs'
+				)
+		) );
+		
+		
+		$this->add ( array (
+				'name' => 'test_emmel',
+				'type' => 'Zend\Form\Element\Select',
+				'options' => array (
+						'value_options' => array (
+								' -' => '-',
+								'+' => '+',
+						)
+				),
+				'attributes' => array (
+						'registerInArrrayValidator' => true,
+						'onchange'=>' getTest(this.value)',
+						'id' => 'test_emmel'
+				)
+		) );
+		
+		$this->add ( array (
+				'name' => 'profil_emmel',
+				'type' => 'Zend\Form\Element\Select',
+				'options' => array (
+						'value_options' => array (
+								' AS' => 'AS',
+								'SS' => 'SS',
+								'Autre' => 'Autre',
+						)
+				),
+				'attributes' => array (
+						'registerInArrrayValidator' => true,
+						'onchange'=>' getProfil(this.value)',
+						'id' => 'profil_emmel'
+				)
+		) );
+		
+		
+		$this->add ( array (
+				'name' => 'note_emmel',
+				'type' => 'text',
+				'attributs' => array (
+						'id' => 'note_emmel'
+				)
+		) );
+		
+		$this->add ( array (
+				'name' => 'note_autre_em',
+				'type' => 'text',
+				'attributes' => array (
+						'id' => 'note_autre_em'
+				)
 		) );
 		/**
 		 * ** ANTECEDENTS FAMILIAUX ***
@@ -2479,11 +2626,11 @@ $this->add(array(
 			'type' => 'Select',
 			'options' => array (
 					//'label' => iconv('ISO-8859-1', 'UTF-8','Motif d\'admission'),
-					'value_options' => array (
-							'Normal' => 'Normal',
-							'Evacuation' => 'Evacuation',
-							'Reference' => 'Reference',
-					)
+// 					'value_options' => array (
+// 							'Normal' => 'Normal',
+// 							'Evacuation' => 'Evacuation',
+// 							'Reference' => 'Reference',
+// 					)
 			),
 			'attributes' => array (
 					'registerInArrrayValidator' => true,
@@ -2509,6 +2656,22 @@ $this->add(array(
 			)
 	) );
 	
+	
+	
+	/* Note evacuation */
+	$this->add ( array (
+			'name' => 'motif_reference',
+			'type' => 'Text',
+			'options' => array (
+					//'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Motif d\'evacuation ou de reference' )
+			),
+			'attributes' => array (
+					//'readonly' => 'readonly',
+					'id' => 'motif_reference'
+			)
+	) );
+	
+	
 	$this->add ( array (
 			'name' => 'service_origine',
 			'type' => 'Text',
@@ -2524,12 +2687,15 @@ $this->add(array(
 
 	$this->add ( array (
 			'name' => 'enf_viv',
-			'type' => 'Text',
+			'type' => 'number',
+			
 			'options' => array (
 					//'label' => iconv('ISO-8859-1', 'UTF-8','ENF_VIV')
 			),
 			'attributes' => array (
 					'id' => 'enf_viv',
+					'max' => 20,
+					'min'=>0,
 					//'required' => true,
 			)
 	) );
@@ -2538,13 +2704,15 @@ $this->add(array(
 	
 	$this->add ( array (
 			'name' => 'geste',
-			'type' => 'Text',
+			'type' => 'number',
 			
 			'options' => array (
 					//'label' => iconv('ISO-8859-1', 'UTF-8','GESTE')
 			),
 			'attributes' => array (
 					'id' => 'geste',
+					'max' => 20,
+					'min'=>0,
 					'required' => true,
 			)
 	) );
@@ -2593,12 +2761,14 @@ $this->add(array(
 	) );
 	$this->add ( array (
 			'name' => 'parite',
-			'type' => 'Text',
+			'type' => 'number',
 			'options' => array (
 					//'label' => iconv('ISO-8859-1', 'UTF-8','PARITE')
 			),
 			'attributes' => array (
 					'id' => 'parite',
+					'max' => 20,
+					'min'=>0,
 					'required' => true,
 			)
 	) );
@@ -2612,12 +2782,15 @@ $this->add(array(
 
 	$this->add(array(
 			'name' => 'mort_ne',
-			'type' => 'Text',
+			'type' => 'number',
+			
 			'options' => array (
 					
 			),
 			'attributes' => array(
 					'id' => 'mort_ne',
+					'max' => 20,
+					'min'=>0,
 					'required' => true,
 			),
 	));
@@ -2637,12 +2810,15 @@ $this->add(array(
 	
 	$this->add(array(
 			'name' => 'cesar',
-			'type' => 'Text',
+			'type' => 'number',
+			
 			'options' => array (
 					
 			),
 			'attributes' => array(
 					'id' => 'cesar',
+					'max' => 20,
+					'min'=>0,
 					'required' => true,
 			),
 	));
@@ -2662,12 +2838,9 @@ $this->add(array(
 
 	$this->add(array(
 			'name' => 'dystocie',
-			'type' => 'Zend\Form\Element\radio',
+			'type' => 'checkbox',
 			'options' => array (
-					'value_options' => array(
-							0 => 'Non',
-							1 => 'Oui' ,
-					),
+				
 			),
 			'attributes' => array(
 					'id' => 'dystocie',
@@ -2702,12 +2875,9 @@ $this->add(array(
 	));
 	$this->add(array(
 			'name' => 'eclampsie',
-			'type' => 'Zend\Form\Element\radio',
+			'type' => 'checkbox',
 			'options' => array (
-					'value_options' => array(
-							0 => 'Non',
-							1 => 'Oui' ,
-					),
+					
 			),
 			'attributes' => array(
 					'id' => 'eclampsie',
@@ -2736,12 +2906,13 @@ $this->add(array(
 							'Simple' => 'Simple',
 							'Gemellaire'  => 'Gemellaire',
 							'Triple' => 'Triple',
+							'Multiple' => 'Multiple',
 	
 					),
 			),
 			'attributes' => array(
 					'registerInArrrayValidator' => true,
-						
+					'onchange'=>' getBbAttendu(this.value)',
 					'id' => 'bb_attendu',
 					'required' => true,
 			),

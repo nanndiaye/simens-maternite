@@ -17,27 +17,42 @@ class ReferenceTable {
 		
 		//var_dump('test');exit();
 	}
-// public function getReference($id_patient) {
-// 		$adapter = $this->tableGateway->getAdapter ();
-// 		$sql = new Sql ( $adapter );
-// 		$select = $sql->select ();
-// 		$select->columns ( array (
-// 				'*' 
-// 		) );
-// 		$select->from ( array (
-// 				'ref' => 'reference' 
-// 		) );
-// 		$select->where ( array (
-// 				'ref.id_patient' => $id_patient 
-// 		) );
-// 		$select->order ( 'ref.id_reference ASC' );
-// 		$stat = $sql->prepareStatementForSqlObject ( $select );
-// 		$result = $stat->execute ()->current();
-		
-// 		return $result;
-// 	}
+public function getReference($id_patient) {
+		$adapter = $this->tableGateway->getAdapter ();
+		$sql = new Sql ( $adapter );
+		$select = $sql->select ();
+		$select->columns ( array (
+				'*'
+		) );
+		$select->from ( array (
+				'ref' => 'reference'
+		) );
+		$select->where ( array (
+				'ref.id_patient' => $id_patient
+		) );
+		$select->order ( 'ref.id_reference ASC' );
+		$stat = $sql->prepareStatementForSqlObject ( $select );
+		$result = $stat->execute ()->current();
 	
-
+		return $result;
+	
+	}
+	
+	public function getRef($id_patient) {
+		$db = $this->tableGateway->getAdapter();
+		$sql = new Sql($db);
+		$sQuery = $sql->select()
+		->from(array('ref' => 'reference'))
+		->columns( array( '*' ))
+		->join(array('a' => 'admission'), 'a.id_reference = ref.id_reference' , array('*'))
+		//->join(array('a' => 'admission'), 'a.id_patient = pat.id_personne' , array('id_admission'))
+		//->join(array('ant' => 'antecedent_type_1'), 'ant.id_patient = pat.id_personne' , array('*'))
+		->where(array('ref.id_patient' => $id_patient));
+		$stat = $sql->prepareStatementForSqlObject($sQuery);
+		$resultat = $stat->execute()->current();
+		//var_dump($resultat);exit();
+		return $resultat;
+	}
 	public function addReference($donnees) {
 		
 		$Control = new DateHelper();
@@ -46,9 +61,9 @@ class ReferenceTable {
 // 		) );
 		
 		$datadonnee = array (
-				//'id_patient' => $donnees ['id_patient'],
-				'motif_reference' => $donnees ['motif'],
-				'service_origine_ref' => $donnees ['service_origine'],
+				'id_patient' => $donnees ['id_patient'],
+				'motif_reference' => $donnees ['motif_reference'],
+				'service_origine_ref' => $donnees ['service_origine_ref'],
 		
 				
 		);
