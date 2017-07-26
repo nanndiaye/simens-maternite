@@ -4563,13 +4563,15 @@ div .dataTables_paginate {
 
 
 .antecedent_go input{
-    width: 130px;
+    width: 160px;
 
     margin-top: 0px;
     padding-left: 10px;
     font-family: time new romans;
     font-size: 18px;
 }
+
+
 
 .antecedent_go input[ type='number']{
     width: 50px;

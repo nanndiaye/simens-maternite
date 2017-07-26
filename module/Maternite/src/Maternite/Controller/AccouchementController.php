@@ -2019,79 +2019,58 @@ class AccouchementController extends AbstractActionController
 		$service_origine = $this->params ()->fromPost ( 'service_origine' );
 		$motif_reference = $this->params ()->fromPost ( 'motif_reference' );
 		$service_origine_ref = $this->params ()->fromPost ( 'service_origine_ref' );
+		//donnee pour admission
+			$donnees = array (
 		
+				'id_patient' => $id_patient,
+				'motif_ad'=>$motif_ad,
+				'id_service' => $idService,
+				'date_cons' => $date_cons,
+				'date_enregistrement' => $date_enregistrement,
+				'id_employe' => $id_employe,
+		);
+	
+		$id_admission=	$this->getAdmissionTable ()->addAdmissio($donnees);
+		
+		//pour reference
 		$donnees_admission_ref= array(
 			    'id_patient'=>$id_patient,
+				'id_admission'=>$id_admission,
 				'motif_reference'=>$motif_reference,
 				'service_origine_ref'=>$service_origine_ref,
 		);
+		//pour evacuation
 		$donnees_admission_ev= array(
 				'id_patient'=>$id_patient,
 				'motif'=>$motif,
+				'id_admission'=>$id_admission,
 				'service_origine'=>$service_origine,
 				
 		);
-		//donnee pour admission
 		
-		
-	if($motif_ad=="Reference"){
 	
-		$id_reference = $this->getReferenceTable ()-> addReference($donnees_admission_ref);
-
-		$donnees = array (
-				'motif_ad'=>$motif_ad,
-				'id_patient' => $id_patient,				
-				'id_reference'=>$id_reference,
-				//'id_evacuation'=>$id_evacuation,
-				'id_service' => $idService,
-				'date_cons' => $date_cons,
-				'id_employe' => $id_employe,
-				'date_enregistrement' => $date_enregistrement,
-				
-		);
-	//var_dump($donnees);exit();
-			$this->getAdmissionTable ()->addAdmissionRef($donnees);
-		
-		
-	}
-	
-	elseif ($motif_ad=="Evacuation"){
+		//var_dump($id_admission);exit();
+	 if ($motif_ad==2){
 		
 		$id_evacuation = $this->getEvacuationTable ()-> addEvacuation($donnees_admission_ev);
-		$donnees = array (
-				'id_patient' => $id_patient,
-				'motif_ad'=>$motif_ad,
-				//'id_reference'=>$id_reference,
-				'id_evacuation'=>$id_evacuation,
-				'id_service' => $idService,
-				'date_cons' => $date_cons,
-				'id_employe' => $id_employe,
-				'date_enregistrement' => $date_enregistrement,
-				
-		);
 		
+
 		$this->getAdmissionTable ()->addAdmissionEv($donnees);
 		//$this->getAdmissionTable ()->addAdmission($donnees,$date_enregistrement,$id_employe);
 		//$id_admi=$this->getAdmissionTable ()->addAdmissionAccouchement($id_evacuation);
 	
 		
 	}	
-	else{
 	
-	$donnees = array (
-				
-				'id_patient' => $id_patient,
-				'motif_ad'=>$motif_ad,
-				//'id_reference'=>$id_reference,
-				//'id_evacuation'=>$id_evacuation,
-				'id_service' => $idService,
-				'date_cons' => $date_cons,
-				'date_enregistrement' => $date_enregistrement,
-				'id_employe' => $id_employe,
-		);
-			$this->getAdmissionTable ()->addAdmissionNormal($donnees);//var_dump($donnees);exit();
-	}
-		
+	else if ($motif_ad==3){
+	
+		$id_reference = $this->getReferenceTable ()-> addReference($donnees_admission_ref);
+	
+		//var_dump($donnees);exit();
+		$this->getAdmissionTable ()->addAdmissionRef($donnees);
+	
+	
+	}	
 		$form = new ConsultationForm ();
 		
 		$formData = $this->getRequest ()->getPost ();
@@ -2345,29 +2324,38 @@ public function declarerDecesAction() {
 		
 		$form = new ConsultationForm ();
 		
-//Afficher les infos de l'evacuation
-		$evacuation = $this->getEvacuationTable()->getEva($id_pat);
-		//var_dump($evacuation);exit();
-		//$motif_ad=$evacuation['id_type_admi'];
-		$motif=$evacuation['motif_evacuation'];
-		$service_origine=$evacuation['service_origine_ev'];
-		//var_dump($donne_eva);exit();
 		
-		//Afficher les infos de  reference
+		$type_admissin=$this->getTypeAdmissionTable()->getTypeAdmi($id_pat);
+	
+		$id_type_ad=$type_admissin['id_type_ad'];
+		$type_admi=$type_admissin['type_admi'];
 		
-	$reference = $this->getReferenceTable()->getRef($id_pat);
-	//var_dump($reference);exit();
+		
+		if($id_type_ad==1){
+			$form->get('type_ad')->setValue($type_admi);
+			
+		}
+		else if($id_type_ad==2){
+			$evacuation = $this->getEvacuationTable()->getEva($id_pat);
+			$form->get('type_ad')->setValue($type_admi);
+			$form->get('motif')->setValue($evacuation['motif_evacuation']);
+			$form->get('service_origine')->setValue($evacuation['service_origine_ev']);
+		}
+		
+		
+		else{
+			$reference = $this->getReferenceTable()->getRefer($id_pat);
+			$form->get('type_ad')->setValue($type_admi);
+			$form->get('motif')->setValue($reference['motif_reference']);
+			$form->get('service_origine')->setValue($reference['service_origine_ref']);
+		}
 
 	
 	
-	
-	//$form->get('motif_ad')->setValue($motif_ad);
-	$form->get('motif')->setValue($motif);
-	$form->get('service_origine')->setValue($service_origine);
 	
 
 		//var_dump($form);exit();
-		$liste_type = $this->getTypeAccouchementTable ()->listeTypeAccouchement ();
+	$liste_type = $this->getTypeAccouchementTable ()->listeTypeAccouchement ();
 		$afficheTous = array ("" => 'Selectionnez un Type');
 		
 		$tab_type = array_merge ( $afficheTous, $liste_type );

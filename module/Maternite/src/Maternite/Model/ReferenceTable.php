@@ -62,6 +62,7 @@ public function getReference($id_patient) {
 		
 		$datadonnee = array (
 				'id_patient' => $donnees ['id_patient'],
+				'id_admission' => $donnees ['id_admission'],
 				'motif_reference' => $donnees ['motif_reference'],
 				'service_origine_ref' => $donnees ['service_origine_ref'],
 		
@@ -75,20 +76,7 @@ public function getReference($id_patient) {
 	}
 	public function saveEvacuation($infoEvacuation)
 	{
-		//if(!$this->getEvacuation($infoEvacuation)){
-			if($infoEvacuation['evacue_de'] && $infoEvacuation['motif_evac']
-			&& $infoEvacuation['service_origine']
-			&& $infoEvacuation['evacue_vers']
-			&& $infoEvacuation['motif_ev_vers']
-			&& $infoEvacuation['service_acceuil']
-			&& $infoEvacuation['reference']
-			&& $infoEvacuation['motif_ref']
-			&& $infoEvacuation['refere_de']
-
-){
-				
-				$this->tableGateway->insert($infoEvacuation);
-			}
+	
 		//}
 	}
 
@@ -122,6 +110,21 @@ public function getReference($id_patient) {
 			//var_dump("test"); exit();
 			//var_dump($dataac);exit();
 			//var_dump($dataaccouchement);exit();
+	}
+	public function getRefer($id_patient) {
+		$db = $this->tableGateway->getAdapter();
+		$sql = new Sql($db);
+		$sQuery = $sql->select()
+		->from(array('ref' => 'reference'))
+		->columns( array( '*' ))
+		//->join(array('a' => 'admission'), 'a.id_evacuation = eva.id_evacuation' , array('*'))
+		->join(array('a' => 'admission'), 'a.id_admission = ref.id_admission' , array('id_admission'))
+		//->join(array('ant' => 'antecedent_type_1'), 'ant.id_patient = pat.id_personne' , array('*'))
+		->where(array('a.id_patient' => $id_patient));
+		$stat = $sql->prepareStatementForSqlObject($sQuery);
+		$resultat = $stat->execute()->current();
+		//var_dump($resultat);exit();
+		return $resultat;
 	}
 	
 

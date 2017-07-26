@@ -1114,6 +1114,7 @@ $("#terminer2, #terminer3").click(function () {
     //**********--EVACUATION et REFERENCE-********
 
     donnees['motif_ad'] = $("#motif_ad").val();
+    donnees['type_ad'] = $("#type_ad").val();
     donnees['motif'] = $("#motif").val();
     donnees['service_origine'] = $("#service_origine").val();
 //    donnees['evacue_vers'] = $("#evacue_vers").val();
@@ -2887,6 +2888,39 @@ function getCycle(val){
 		$('.Quantite').fadeOut();
 	}	
 }
+
+
+
+
+
+
+
+
+$('.MotifAdmission').toggle(false);
+function getTypeAd(val){ 
+	alert(val);
+	if(val=='Normal'){
+		$("#motif").html("Motif d\'admission");
+		$('.MotifAdmission').fadeOut();
+		
+	}else {
+		$("#motif span span").html("");
+		$('.MotifAdmission').fadeIn();
+
+	}	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
 //===================================================================================================================
 //===================================================================================================================
 //===================================================================================================================

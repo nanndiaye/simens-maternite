@@ -72,6 +72,7 @@ class EvacuationTable {
 // 		) );
 		
 			$datadonnee = array (
+					'id_admission' => $donnees ['id_admission'],
 				'id_patient' => $donnees ['id_patient'],
 				'motif_evacuation' => $donnees ['motif'],
 				'service_origine_ev' => $donnees ['service_origine'],			
@@ -87,10 +88,10 @@ class EvacuationTable {
 		$sQuery = $sql->select()
 		->from(array('eva' => 'evacuation'))
 		->columns( array( '*' ))
-		->join(array('a' => 'admission'), 'a.id_evacuation = eva.id_evacuation' , array('*'))
-		//->join(array('a' => 'admission'), 'a.id_patient = pat.id_personne' , array('id_admission'))
+		//->join(array('a' => 'admission'), 'a.id_evacuation = eva.id_evacuation' , array('*'))
+		->join(array('a' => 'admission'), 'a.id_admission = eva.id_admission' , array('id_admission'))
 		//->join(array('ant' => 'antecedent_type_1'), 'ant.id_patient = pat.id_personne' , array('*'))
-		->where(array('eva.id_patient' => $id_patient));
+		->where(array('a.id_patient' => $id_patient));
 		$stat = $sql->prepareStatementForSqlObject($sQuery);
 		$resultat = $stat->execute()->current();
 		//var_dump($resultat);exit();

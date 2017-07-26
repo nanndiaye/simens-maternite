@@ -867,7 +867,7 @@ class ConsultationForm extends Form {
 
 $this->add(array(
 				'name' => 'paleur',
-				'type' => 'Zend\Form\Element\radio',
+				'type' => 'select',
 				'options' => array (
 						'value_options' => array(
 								0 => 'Non',
@@ -2640,8 +2640,20 @@ $this->add(array(
 			)
 	) );
 	
-	
-	
+	$this->add ( array (
+			'name' => 'type_ad',
+			'type' => 'Text',
+			'options' => array (
+			
+			),
+			'attributes' => array (
+					'registerInArrrayValidator' => true,
+					'onchange'=>'getTypeAd(this.value)',
+					'id' =>'type_ad',
+					'required' => false,
+			)
+	) );
+
 	
 	/* Note evacuation */
 	$this->add ( array (
@@ -2961,12 +2973,14 @@ $this->add(array(
 	
 	$this->add ( array (
 			'name' => 'nb_cpn',
-			'type' => 'Text',
+			'type' => 'number',
 			'options' => array (
 					//'label' => iconv('ISO-8859-1', 'UTF-8','Nombre CPN:')
 			),
 			'attributes' => array (
 					'id' => 'nb_cpn',
+					'max' => 5,
+					'min'=>0,
 					'required' => true,
 			)
 	) );
@@ -3035,12 +3049,14 @@ $this->add(array(
 	
 	$this->add ( array (
 			'name' => 'nombre_bb',
-			'type' => 'Text',
+			'type' => 'number',
 			'options' => array (
 					//'label' => iconv('ISO-8859-1', 'UTF-8','Nombre de bb:')
 			),
 			'attributes' => array (
 					'id' => 'nombre_bb',
+					'max' => 20,
+					'min'=>0,
 					//'required' => true,
 			)
 	) );
