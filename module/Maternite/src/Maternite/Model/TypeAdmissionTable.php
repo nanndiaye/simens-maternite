@@ -30,13 +30,39 @@ class TypeAdmissionTable{
 		$sql = new Sql($db);
 		$sQuery = $sql->select()
 		->from(array('t' => 'type_admission'))
-		->columns( array( 'type_admi' ))
+		->columns( array( '*' ))
+		//->join(array('a' => 'admission'), 'a.id_evacuation = eva.id_evacuation' , array('*'))
+		->join(array('a' => 'admission'), 'a.id_type_ad = t.id_type_ad' , array('id_type_ad'))
+		//->join(array('ant' => 'antecedent_type_1'), 'ant.id_patient = pat.id_personne' , array('*'))
+		->where(array('a.id_patient' => $id_patient));
+		$stat = $sql->prepareStatementForSqlObject($sQuery);
+		$resultat = $stat->execute();
+		foreach ($resultat as $data) {
+			$options[$data['id_type_ad']] = $data['type_admi'];
+		}
+		return $options;
+		return $resultat;
+	}
+	
+	
+	
+	
+	public function getTypeAdmis($id_patient) {
+		$db = $this->tableGateway->getAdapter();
+		$sql = new Sql($db);
+		$sQuery = $sql->select()
+		->from(array('t' => 'type_admission'))
+		->columns( array( '*' ))
 		//->join(array('a' => 'admission'), 'a.id_evacuation = eva.id_evacuation' , array('*'))
 		->join(array('a' => 'admission'), 'a.id_type_ad = t.id_type_ad' , array('id_type_ad'))
 		//->join(array('ant' => 'antecedent_type_1'), 'ant.id_patient = pat.id_personne' , array('*'))
 		->where(array('a.id_patient' => $id_patient));
 		$stat = $sql->prepareStatementForSqlObject($sQuery);
 		$resultat = $stat->execute()->current();
+// 		foreach ($resultat as $data) {
+			//$options[$data['id_type_ad']] = $data['type_admi'];
+		//}
+		//return $options;
 		//var_dump($resultat);exit();
 		return $resultat;
 	}

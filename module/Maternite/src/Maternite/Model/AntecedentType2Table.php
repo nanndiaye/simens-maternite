@@ -47,12 +47,14 @@ class AntecedentType2Table {
         			'quantite_regle' => $donnees ['quantite_regle'],
         			'nb_garniture_jr' => $donnees ['nb_garniture_jr'],
         			'note_dystocie' => $donnees ['note_dystocie'],
-        			'note_eclampsie' => $donnees ['note_eclampsie'],
-        			
+        			'note_eclampsie' => $donnees ['note_eclampsie'], 			
         			'note_cycle' => $donnees ['note_cycle'],
         			'autre' => $donnees ['autre'],
         			'note_autre' => $donnees ['note_autre'],
-        
+        			'contraception' => $donnees ['contraception'],
+        			'type_contraception' => $donnees ['type_contraception'],
+        			'duree_contraception' => $donnees ['duree_contraception'],
+        			'note_contraception' => $donnees ['note_contraception'],
         	);
         
         	

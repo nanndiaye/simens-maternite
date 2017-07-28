@@ -2055,7 +2055,7 @@ class AccouchementController extends AbstractActionController
 		$id_evacuation = $this->getEvacuationTable ()-> addEvacuation($donnees_admission_ev);
 		
 
-		$this->getAdmissionTable ()->addAdmissionEv($donnees);
+		//$this->getAdmissionTable ()->addAdmissionEv($donnees);
 		//$this->getAdmissionTable ()->addAdmission($donnees,$date_enregistrement,$id_employe);
 		//$id_admi=$this->getAdmissionTable ()->addAdmissionAccouchement($id_evacuation);
 	
@@ -2067,7 +2067,7 @@ class AccouchementController extends AbstractActionController
 		$id_reference = $this->getReferenceTable ()-> addReference($donnees_admission_ref);
 	
 		//var_dump($donnees);exit();
-		$this->getAdmissionTable ()->addAdmissionRef($donnees);
+		//$this->getAdmissionTable ()->addAdmissionRef($donnees);
 	
 	
 	}	
@@ -2324,28 +2324,29 @@ public function declarerDecesAction() {
 		
 		$form = new ConsultationForm ();
 		
-		
-		$type_admissin=$this->getTypeAdmissionTable()->getTypeAdmi($id_pat);
-	
-		$id_type_ad=$type_admissin['id_type_ad'];
-		$type_admi=$type_admissin['type_admi'];
-		
-		
-		if($id_type_ad==1){
-			$form->get('type_ad')->setValue($type_admi);
+		$type=$this->getTypeAdmissionTable()->getTypeAdmis($id_pat);
+		$id_type_ad=$type['id_type_ad'];
+		//var_dump($type);exit();
+		$type_admissin=$this->getTypeAdmissionTable()->getTypeAdmi($id_pat);			
+	   $form->get('motif_ad')->setValueOptions($type_admissin);
+
+//  		if($type_admissin==1){
+// 			$form->get('motif_ad')->setValueOptions($type_admissin);
 			
-		}
-		else if($id_type_ad==2){
-			$evacuation = $this->getEvacuationTable()->getEva($id_pat);
-			$form->get('type_ad')->setValue($type_admi);
+//  		}
+		 if($id_type_ad==2){
+			//var_dump($type_admi);exit();
+			$evacuation = $this->getEvacuationTable()->getEva($id_pat);		
+			//$form->get('motif_ad')->setValueOptions($type_admissin);
 			$form->get('motif')->setValue($evacuation['motif_evacuation']);
 			$form->get('service_origine')->setValue($evacuation['service_origine_ev']);
+			
 		}
 		
 		
-		else{
+		else if($id_type_ad==3){
 			$reference = $this->getReferenceTable()->getRefer($id_pat);
-			$form->get('type_ad')->setValue($type_admi);
+		//$form->get('motif_ad')->setValueOptions($type_admissin);
 			$form->get('motif')->setValue($reference['motif_reference']);
 			$form->get('service_origine')->setValue($reference['service_origine_ref']);
 		}
@@ -2357,8 +2358,8 @@ public function declarerDecesAction() {
 		//var_dump($form);exit();
 	$liste_type = $this->getTypeAccouchementTable ()->listeTypeAccouchement ();
 		$afficheTous = array ("" => 'Selectionnez un Type');
-		
-		$tab_type = array_merge ( $afficheTous, $liste_type );
+	//	var_dump($liste_type);exit();
+		$tab_type = $liste_type ;
 		$form->get('type_accouchement')->setValueOptions($tab_type);
 		
 		// instancier la consultation et r�cup�rer l'enregistrement
@@ -3194,7 +3195,7 @@ public function declarerDecesAction() {
         $formData = $this->getRequest()->getPost();
         $form->setData($formData);
         $id_admission = $this->params()->fromPost('id_admission');
-        $id_grossesse = $this->params()->fromPost('id_grossesse');
+       // $id_grossesse = $this->params()->fromPost('id_grossesse');
        //  var_dump($formData);exit();
         $user = $this->layout()->user;
         $IdDuService = $user ['IdService'];
@@ -3244,9 +3245,9 @@ public function declarerDecesAction() {
        		$id_antecedent2 = $this->getAntecedentType2Table ()-> updateAntecedentType2($formData);
        		//var_dump($formData);exit();
        $this->getDonneesExamensPhysiquesTable()->updateExamenPhysique($formData);
-       var_dump('test');exit();
+
         $this->getAccouchementTable()->updateAccouchement($formData);
-   
+        var_dump($formData);exit();
       
         //ENFANT
        $this->getNaissanceTable()->updateNaissance($formData);
