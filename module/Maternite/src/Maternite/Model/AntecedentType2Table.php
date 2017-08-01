@@ -65,7 +65,37 @@ class AntecedentType2Table {
         }
         
 
-	
+        public function getAntecedentType2($id_pat) {
+        
+        	//$adapter = $this->tableGateway->getAdapter ();
+        	$db = $this->tableGateway->getAdapter ();
+        	$sql = new Sql ( $db );
+        	$sQuery = $sql->select ();
+        
+        	$sQuery->columns ( array (
+        			'*'
+        	) );
+        
+        	$sQuery->from( array (
+        			'ant' => 'antecedent_type_2'
+        	) )->join ( array (
+        			'p' => 'patient'
+        	), 'ant.id_patient = p.ID_PERSONNE', array (
+        
+        	));
+        	$sQuery->where ( array (
+        			'ant.id_patient' => $id_pat
+        
+        	) );
+        
+        	$sQuery->order ( 'ant.id_ant_t2 ASC' );
+        
+        	$stat = $sql->prepareStatementForSqlObject ( $sQuery );
+        
+        	$resultat = $stat->execute ()->current();
+        	//var_dump($resultat);exit();
+        	return $resultat;
+        }
 	
 	
 	

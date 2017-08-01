@@ -2321,34 +2321,82 @@ public function declarerDecesAction() {
 		if (array_key_exists($id_pat, $tabPatientRV)) {
 			$resultRV = $tabPatientRV [$id_pat];
 		}
-		
+		$donne_ante=$this->getAntecedentType1Table()->getAntecedentType1($id_pat);
+		$donne_ante2=$this->getAntecedentType2Table()->getAntecedentType2($id_pat);
+		//var_dump($donne_ante2);exit();
 		$form = new ConsultationForm ();
 		
-		$type=$this->getTypeAdmissionTable()->getTypeAdmis($id_pat);
-		$id_type_ad=$type['id_type_ad'];
-		//var_dump($type);exit();
-		$type_admissin=$this->getTypeAdmissionTable()->getTypeAdmi($id_pat);			
-	   $form->get('motif_ad')->setValueOptions($type_admissin);
-
-//  		if($type_admissin==1){
-// 			$form->get('motif_ad')->setValueOptions($type_admissin);
+		 //var_dump($cycle);exit();
+		$donne_ant=array(
 			
-//  		}
-		 if($id_type_ad==2){
+				'enf_viv'=>$donne_ante['enf_viv'],
+				'geste'=>$donne_ante['geste'],
+				'parite'=>$donne_ante['parite'],
+				'note_enf'=>$donne_ante['note_enf'],
+				'note_geste'=>$donne_ante['note_geste'],
+				'note_parite'=>$donne_ante['note_parite'],
+				'mort_ne'=>$donne_ante['mort_ne'],
+				'note_mort_ne'=>$donne_ante['note_mort_ne'],
+				'cesar'=>$donne_ante['cesar'],
+				'note_cesar'=>$donne_ante['note_cesar'],
+				'groupe_sanguins'=>$donne_ante['groupe_sanguin'],
+				'rhesus'=>$donne_ante['rhesus'],
+				'note_gs'=>$donne_ante['note_gs'],
+				'test_emmel'=>$donne_ante['test_emmel'],
+				'profil_emmel'=>$donne_ante['profil_emmel'],
+				'note_emmel'=>$donne_ante['note_emmel'],
+				'note_autre_em'=>$donne_ante['note_autre_em'],
+				'dystocie'=>$donne_ante2['dystocie'],
+				'eclampsie'=>$donne_ante2['eclampsie'],
+				'cycle'=>$donne_ante2['cycle'],
+				'duree_cycle'=>$donne_ante2['duree_cycle'],
+				'note_dystocie'=>$donne_ante2['note_dystocie'],
+				'note_eclampsie'=>$donne_ante2['note_eclampsie'],
+				'note_cycle'=>$donne_ante2['note_cycle'],
+				'autre'=>$donne_ante2['autre'],
+				'note_autre'=>$donne_ante2['note_autre'],
+				'quantite_regle'=>$donne_ante2['quantite_regle'],
+				'nb_garniture_jr'=>$donne_ante2['nb_garniture_jr'],
+				'contraception'=>$donne_ante2['contraception'],
+				'type_contraception'=>$donne_ante2['type_contraception'],
+				'duree_contraception'=>$donne_ante2['duree_contraception'],
+				'note_contraception'=>$donne_ante2['note_contraception'],
+		);
+       // var_dump($donne_ant);exit();
+        
+        //$form->populateValues($donne_ante);
+		
+	
+		//$form->populateValues($data_enf);
+		//var_dump($id_admission);exit();
+		$type=$this->getTypeAdmissionTable()->getTypeAdmis($id_admission);
+		//var_dump($type);exit();
+		$id_type_ad=$type['id_type_ad'];
+		//var_dump($id_type_ad);exit();
+		$type_admission=$this->getTypeAdmissionTable()->getTypeAdmi($id_admission);			
+	  // $form->get('motif_ad')->setValueOptions($type_admission);
+	   //
+  		if($id_type_ad==1){
+ 			$form->get('motif_ad')->setValueOptions($type_admission);
+ 			//var_dump($type_admission);exit();
+  		}
+	   
+		elseif($id_type_ad==2){
 			//var_dump($type_admi);exit();
-			$evacuation = $this->getEvacuationTable()->getEva($id_pat);		
-			//$form->get('motif_ad')->setValueOptions($type_admissin);
+			$evacuation = $this->getEvacuationTable()->getEva($id_admission);		
+			  $form->get('motif_ad')->setValueOptions($type_admission);
 			$form->get('motif')->setValue($evacuation['motif_evacuation']);
 			$form->get('service_origine')->setValue($evacuation['service_origine_ev']);
 			
 		}
 		
 		
-		else if($id_type_ad==3){
-			$reference = $this->getReferenceTable()->getRefer($id_pat);
-		//$form->get('motif_ad')->setValueOptions($type_admissin);
+		else {
+			$reference = $this->getReferenceTable()->getRefer($id_admission);
+		  $form->get('motif_ad')->setValueOptions($type_admission);
 			$form->get('motif')->setValue($reference['motif_reference']);
 			$form->get('service_origine')->setValue($reference['service_origine_ref']);
+			//var_dump($reference);exit();
 		}
 
 	
@@ -3238,22 +3286,23 @@ public function declarerDecesAction() {
         $this->getConsultationTable()->deleteBandelette($id_cons);
         $this->getConsultationTable()->addBandelette($bandelettes);
         
-       
-     
+       $id_grossesse= $this->getGrossesseTable()->updateGrossesse($formData);
+       // var_dump($id_grossesse);exit();
       $id_antecedent1 = $this->getAntecedentType1Table ()-> updateAntecedentType1($formData); 
     
        		$id_antecedent2 = $this->getAntecedentType2Table ()-> updateAntecedentType2($formData);
        		//var_dump($formData);exit();
        $this->getDonneesExamensPhysiquesTable()->updateExamenPhysique($formData);
-
-        $this->getAccouchementTable()->updateAccouchement($formData);
-        var_dump($formData);exit();
+	
+        $this->getAccouchementTable()->updateAccouchement($formData,$id_grossesse);
+       // var_dump('test');exit();
       
         //ENFANT
+        
+        
        $this->getNaissanceTable()->updateNaissance($formData);
-    
-       // $this->getEvacuationTable()->addEvacuation($formData);
-       // var_dump($formData);exit();
+       //var_dump($formData);exit();
+
      
        
         // POUR LES ANTECEDENTS ANTECEDENTS ANTECEDENTS

@@ -837,6 +837,17 @@ class ConsultationForm extends Form {
 						'id' => 'diagnostic4' 
 				) 
 		) );
+		$this->add ( array (
+				'name' => 'decisions',
+				'type' => 'Text',
+				'options' => array (
+						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Decisions: ' )
+				),
+				'attributes' => array (
+						//'readonly' => 'readonly',
+						'id' => 'decisions'
+				)
+		) );
 		/**
 		 * ************************* CONSTANTES *****************************************************
 		 */
@@ -1238,24 +1249,14 @@ $this->add(array(
 				'name' => 'observations',
 				'type' => 'Textarea',
 				'options' => array (
-						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Observation :' ) 
+						//'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Observation :' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
+						//'readonly' => 'readonly',
 						'id' => 'observations' 
 				) 
 		) );
-		$this->add ( array (
-				'name' => 'decision',
-				'type' => 'Textarea',
-				'options' => array (
-						//'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Decision :' )
-				),
-				'attributes' => array (
-						'readonly' => 'readonly',
-						'id' => 'decision'
-				)
-		) );
+		
 		$this->add ( array (
 				'name' => 'note_compte_rendu_operatoire',
 				'type' => 'Textarea',
@@ -3252,7 +3253,18 @@ $this->add(array(
 			)
 	) );
 	
+	$this->add ( array (
+			'name' => 'note_observation',
+			'type' => 'Text',
+			'options' => array (
+					//'label' => iconv('ISO-8859-1', 'UTF-8','Duree Grossesse en semaine:')
+			),
+			'attributes' => array (
+					'id' => 'note_observation',
 	
+					//'required' => true,
+			)
+	) );
 	
 	$this->add ( array (
 			'name' => 'note_bb',
@@ -3268,6 +3280,253 @@ $this->add(array(
 	) );
 	
 	
+
+	
+	
+	$this->add(array(
+			'name' => 'vpo',
+			'type' => 'Select',
+			'options' => array (
+					'value_options' => array(
+							0 => 'Non',
+							1=> 'Oui' ,
+					),
+			),
+			'attributes' => array(
+					//'readonly' => 'readonly',
+					'id' => 'vpo',
+	
+			),
+	));
+	$this->add(array(
+			'name' => 'anti_hepatique',
+			'type' => 'Select',
+			'options' => array (
+					'value_options' => array(
+							0 => 'Non',
+							1=> 'Oui' ,
+					),
+			),
+			'attributes' => array(
+					//'readonly' => 'readonly',
+					'id' => 'anti_heppatique',
+	
+			),
+	));
+	
+	$this->add(array(
+			'name' => 'anti_tuberculeux',
+			'type' => 'Select',
+			'options' => array (
+					'value_options' => array(
+							0 => 'Non',
+							1=> 'Oui' ,
+					),
+			),
+			'attributes' => array(
+					//'readonly' => 'readonly',
+					'id' => 'anti_tuberculeux',
+	
+			),
+	));
+	$this->add(array(
+			'name' => 'note_vacc',
+			'type' => 'text',
+			'attributes' => array(
+					//'readonly' => 'readonly',
+					'id' => 'note_vacc',
+	
+			),
+	));
+	
+	$this->add(array(
+			'name' => 'hepa_vacc',
+			'type' => 'Select',
+			'options' => array (
+					'value_options' => array(
+							0 => 'Non',
+							1=> 'Oui' ,
+					),
+			),
+			'attributes' => array(
+					//'readonly' => 'readonly',
+					'id' => 'hepa_vacc',
+	
+			),
+	));
+	
+	
+	
+	
+	
+	
+	$this->add(array(
+			'name' => 'note_hepa',
+			'type' => 'Text',
+			
+			'attributes' => array(
+					//'readonly' => 'readonly',
+					'id' => 'note_hepa',
+	
+			),
+	));
+	
+	
+	$this->add(array(
+			'name' => 'bcg',
+			'type' => 'Select',
+			'options' => array (
+					'value_options' => array(
+							0 => 'Non',
+							1=> 'Oui' ,
+					),
+			),
+			'attributes' => array(
+					//'readonly' => 'readonly',
+					'id' => 'bcg',
+	
+			),
+	));
+	
+	
+	$this->add(array(
+			'name' => 'note_bcg',
+			'type' => 'Text',
+			
+			'attributes' => array(
+					//'readonly' => 'readonly',
+					'id' => 'note_bcg',
+	
+			),
+	));
+	
+	$this->add(array(
+			'name' => 'autre_vacc',
+			'type' => 'Select',
+			'options' => array (
+					'value_options' => array(
+							0 => 'Non',
+							1=> 'Oui' ,
+					),
+			),
+			'attributes' => array(
+					//'readonly' => 'readonly',
+					'id' => 'autre_vacc',
+	
+			),
+	));
+	$this->add(array(
+			'name' => 'note_autre_vacc',
+			'type' => 'Text',
+			
+			'attributes' => array(
+					//'readonly' => 'readonly',
+					'id' => 'note_autre_vacc',
+	
+			),
+	));
+	
+	$this->add(array(
+			'name' => 'type_autre_vacc',
+			'type' => 'Text',
+				
+			'attributes' => array(
+					//'readonly' => 'readonly',
+					'id' => 'type_autre_vacc',
+	
+			),
+	));
+	
+	
+	$this->add ( array (
+			'name' => 'perim_cranien',
+			'type' => 'number',
+				
+			'options' => array (
+					//'label' => iconv('ISO-8859-1', 'UTF-8','GESTE')
+			),
+			'attributes' => array (
+					'id' => 'perim_cranien',
+					'max' => 20,
+					'min'=>0,
+					'required' => true,
+			)
+	) );
+	
+	
+	
+	$this->add ( array (
+			'name' => 'perim_brachial',
+			'type' => 'number',
+	
+			'options' => array (
+					//'label' => iconv('ISO-8859-1', 'UTF-8','GESTE')
+			),
+			'attributes' => array (
+					'id' => 'perim_brachial',
+					'max' => 20,
+					'min'=>0,
+					'required' => true,
+			)
+	) );
+	
+	$this->add ( array (
+			'name' => 'perim_cephalique',
+			'type' => 'number',
+	
+			'options' => array (
+					//'label' => iconv('ISO-8859-1', 'UTF-8','GESTE')
+			),
+			'attributes' => array (
+					'id' => 'perim_cephalique',
+					'max' => 20,
+					'min'=>0,
+					'required' => true,
+			)
+	) );
+	
+	
+	
+	
+	
+	$this->add ( array (
+			'name' => 'taille_enf',
+			'type' => 'number',
+	
+			'options' => array (
+					//'label' => iconv('ISO-8859-1', 'UTF-8','GESTE')
+			),
+			'attributes' => array (
+					'id' => 'taille_enf',
+					//'max' => 20,
+					'min'=>0,
+					'required' => true,
+			)
+	) );
+	
+	
+	
+	$this->add(array(
+			'name' => 'note_perim',
+			'type' => 'Text',
+	
+			'attributes' => array(
+					//'readonly' => 'readonly',
+					'id' => 'note_perim',
+	
+			),
+	));	
+	
+	$this->add(array(
+			'name' => 'note_taille_enf',
+			'type' => 'Text',
+	
+			'attributes' => array(
+					//'readonly' => 'readonly',
+					'id' => 'note_taille_enf',
+	
+			),
+	));
 	
 	
 	

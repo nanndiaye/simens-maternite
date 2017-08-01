@@ -923,7 +923,7 @@ $("#terminer2, #terminer3").click(function () {
     donnees['diagnostic2'] = $("#diagnostic2").val();
     donnees['diagnostic3'] = $("#diagnostic3").val();
     donnees['diagnostic4'] = $("#diagnostic4").val();
-
+    donnees['decisions'] = $("#decisions").val();
     //*********** ORDONNACE (M�dical) ************
     //*********** ORDONNACE (M�dical) ************
     donnees['duree_traitement_ord'] = $("#duree_traitement_ord").val();
@@ -1069,7 +1069,10 @@ $("#terminer2, #terminer3").click(function () {
     donnees['bb_attendu'] = $("#bb_attendu").val();
     donnees['note_bb'] = $("#note_bb").val(); 
     donnees['nombre_bb'] = $("#nombre_bb").val();
-    
+    donnees['vat_1'] = $("#vat_1").val();
+    donnees['vat_2'] = $("#vat_2").val();
+    donnees['vat_3'] = $("#vat_3").val();
+    donnees['note_vat'] = $("#note_vat").val();
     
     
     
@@ -1118,9 +1121,11 @@ $("#terminer2, #terminer3").click(function () {
     donnees['vit_k'] = $("#vit_k").val();
     donnees['collyre'] = $("#collyre").val();
     donnees['consult_j1_j2'] = $("#consult_j1_j2").val();
-    
-    
-    
+    donnees['perim_cranien'] = $("#perim_cranien").val();
+    donnees['perim_brachial'] = $("#perim_brachial").val();
+    donnees['perim_cephalique'] = $("#perim_cephalique").val();
+    donnees['note_perim'] = $("#note_perim").val();
+    donnees['taille_enf'] = $("#taille_enf").val();
     //Evacuation et Reference
     //**********--EVACUATION et REFERENCE-********
 
@@ -2943,15 +2948,21 @@ function getMotif(val){
 
 
 
-var dystocie=$("#dystocie");
-if (dystocie.checked)
-{
-	$('.Dystocie').toggle(true);
+
+$('.Dystocie').toggle(false);
+function getDystocie(val){ 
+	//alert(val);
+	if(val==1){
+		$("#dystocie").html("DYstocie");
+		$('.Dystocie').fadeOut();	
 	}
-else 
-	{
-	$('.Dystocie').toggle(false);
-	}
+		else {
+		$("#dystocie span span").html("");
+		$('.Dystocie').fadeIn();
+		
+	
+}
+}
 //alert(dystocie);
 
 var eclampsie=$("#eclampsie");
