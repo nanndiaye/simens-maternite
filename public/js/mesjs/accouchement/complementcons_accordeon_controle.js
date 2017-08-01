@@ -2931,15 +2931,15 @@ function getContraception(val){
 
 
 
-$('.MotifAdmission').toggle(false);
+//$('.MotifAdmission').toggle(false);
 function getMotif(val){ 
 	//alert(val);
 	if(val==1){
-		$("#motif_ad").html("Motif d\'admission");
+		$("#motifad").html("Motif d\'admission");
 		$('.MotifAdmission').fadeOut();	
 	}
 		else {
-		$("#motif_ad span span").html("");
+		$("#motifad span span").html("");
 		$('.MotifAdmission').fadeIn();
 		
 	
@@ -2980,7 +2980,7 @@ else
 $('.Accouchement').toggle(false);
 function getAccouchement(val){ 
 	//alert(val);
-	if(val=='1'){
+	if(val==1){
 		$("#accouchement").html("Accouchement");
 		$('.Accouchement').fadeOut();
 	}else{

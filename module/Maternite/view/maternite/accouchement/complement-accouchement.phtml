@@ -505,10 +505,10 @@ echo $this->form ()->openTag ( $form );
 									<label style="width: 100%; height: 30px;font-family: time new romans; text-align: left;">Type d'admission <?php echo $this->formRow($form->get('motif_ad'));?></label>
 								</div>
 								<div style="float: left" id="rh">
-									<label class="" style="width: 220px; height: 30px;font-family: time new romans; text-align: left;">Motif <?php echo $this->formRow($form->get('motif'));?> </label>
+									<label class="MotifAdmission" style="width: 220px; height: 30px;font-family: time new romans; text-align: left;">Motif <?php echo $this->formRow($form->get('motif'));?> </label>
 								</div>
 							  <div style="float: left;">
-				             <label class=" " style="width: 100%; height: 30px; text-align: right; font-family: time new romans; font-size: 18px;">Service d'origine
+				             <label class="MotifAdmission " style="width: 100%; height: 30px; text-align: right; font-family: time new romans; font-size: 18px;">Service d'origine
                              <?php echo $this->formRow($form->get('service_origine'));?>
                                </label>
 			                 </div>
@@ -660,11 +660,11 @@ echo $this->form ()->openTag ( $form );
 		</td>
 		</tr>
 	<tr style="width: 100%; ">
-		<td class=" Profil antecedent_go">
+		<!--  <td class=" Profil antecedent_go">
 							<div style="float: left" id="note_gss">
-									<label style="width: 100%; height: 30px; text-align: right;">Note<?php echo $this->formRow($form->get('note_autre_em'));?></label>
+									<label style="width: 100%; height: 30px; text-align: right;"><?php //echo $this->formRow($form->get('note_autre_em'));?></label>
 								</div>
-								</td>
+								</td>-->
 		</tr>
 		
 		
@@ -674,7 +674,7 @@ echo $this->form ()->openTag ( $form );
 									<label style="width: 220px; height: 30px; text-align: right;">Cycle<?php echo $this->formRow($form->get('regularite'));?></label>
 								</div>
 								<div style="float: left" id="rh">
-									<label class="Cycle" style="width: 100%; height: 30px; text-align: left;">Dur&eacute;e Cycle <?php echo $this->formRow($form->get('duree_cycle'));?> </label>
+									<label class="" style="width: 100%; height: 30px; text-align: left;">Dur&eacute;e Cycle <?php echo $this->formRow($form->get('duree_cycle'));?> </label>
 								</div>
 							
 							<div>
@@ -689,10 +689,10 @@ echo $this->form ()->openTag ( $form );
 	<tr style="width: 100%; ">
 	<td class="antecedent_go" style="">
 								<div style="float: left;">
-									<label  class="Cycle" style="width: 220px; height: 30px; text-align: right;">Quantit&eacute;e<?php echo $this->formRow($form->get('quantite_regle'));?></label>
+									<label  class="" style="width: 220px; height: 30px; text-align: right;">Quantit&eacute;e<?php echo $this->formRow($form->get('quantite_regle'));?></label>
 								</div>
 								<div style="float: left" id="rh">
-									<label class="Quantite" style="width: 100%; height: 30px; text-align: right;">nb garniture/jr <?php echo $this->formRow($form->get('nb_garniture_jr'));?> </label>
+									<label class="" style="width: 100%; height: 30px; text-align: right;">nb garniture/jr <?php echo $this->formRow($form->get('nb_garniture_jr'));?> </label>
 								</div>
 							
 								
@@ -705,16 +705,16 @@ echo $this->form ()->openTag ( $form );
 									<label style="width: 220px; height: 30px; text-align: right;">Contraception anterieur<?php echo $this->formRow($form->get('contraception'));?></label>
 								</div>
 								<div style="float: left" id="rh">
-									<label class="Contraception" style="width: 100%; height: 30px; text-align: left;">Type de contraception <?php echo $this->formRow($form->get('type_contraception'));?> </label>
+									<label class="" style="width: 100%; height: 30px; text-align: left;">Type de contraception <?php echo $this->formRow($form->get('type_contraception'));?> </label>
 								</div>
 							
 							<div>
-				 <label class=" Contraception" style="width: 220px; height: 30px; text-align: right; font-family: time new romans; font-size: 18px;">Duree
+				 <label class=" " style="width: 220px; height: 30px; text-align: right; font-family: time new romans; font-size: 18px;">Duree
                     <?php echo $this->formRow($form->get('duree_contraception'));?>
                  </label>
 			</div>
 							<div>
-				 <label class="Contraception " style="width: 220px; height: 30px; text-align: right; font-family: time new romans; font-size: 18px;">Note
+				 <label class=" " style="width: 220px; height: 30px; text-align: right; font-family: time new romans; font-size: 18px;">Note
                     <?php echo $this->formRow($form->get('note_contraception'));?>
                  </label>
 			</div>
@@ -3546,7 +3546,7 @@ echo $this->form ()->openTag ( $form );
 jsPagination();
 
 getMotif($('#motif_ad').val());
-getContraception('#contraception');
+//getContraception('#contraception');
 getAccouchement('#type_accouchement');
 getDystocie($('#dystocie').val());
 </script>

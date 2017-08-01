@@ -2315,20 +2315,13 @@ public function declarerDecesAction() {
 		$image = $this->getConsultationTable()->getPhoto($id_pat);
 		//$id_grossesse= $this->getGrossesseTable ()->addGrossesse();
 	
-		// RECUPERER TOUS LES PATIENTS AYANT UN RV aujourd'hui
-		$tabPatientRV = $this->getConsultationTable()->getPatientsRV($IdDuService);
-		$resultRV = null;
-		if (array_key_exists($id_pat, $tabPatientRV)) {
-			$resultRV = $tabPatientRV [$id_pat];
-		}
+		
 		$donne_ante=$this->getAntecedentType1Table()->getAntecedentType1($id_pat);
 		$donne_ante2=$this->getAntecedentType2Table()->getAntecedentType2($id_pat);
 		//var_dump($donne_ante2);exit();
 		$form = new ConsultationForm ();
-		
-		 //var_dump($cycle);exit();
-		$donne_ant=array(
-			
+		$donne_ant1=array(
+					
 				'enf_viv'=>$donne_ante['enf_viv'],
 				'geste'=>$donne_ante['geste'],
 				'parite'=>$donne_ante['parite'],
@@ -2346,28 +2339,44 @@ public function declarerDecesAction() {
 				'profil_emmel'=>$donne_ante['profil_emmel'],
 				'note_emmel'=>$donne_ante['note_emmel'],
 				'note_autre_em'=>$donne_ante['note_autre_em'],
+					
+		);	$form->populateValues($donne_ant1);
+		// var_dump($donne_ante2);exit();
+		$quantite=array(
+				'quantite'=>$donne_ante2['quantite_regle']
+		);
+		$regularite_iregu=array(
+				'option'=>$donne_ante2['cycle'],
+		
+		);
+		$form->get('quantite_regle')->setValueOptions($quantite);
+		$form->get('regularite')->setValueOptions($regularite_iregu);
+		$donne_antecedent2=array(
 				'dystocie'=>$donne_ante2['dystocie'],
 				'eclampsie'=>$donne_ante2['eclampsie'],
-				'cycle'=>$donne_ante2['cycle'],
+		
 				'duree_cycle'=>$donne_ante2['duree_cycle'],
 				'note_dystocie'=>$donne_ante2['note_dystocie'],
 				'note_eclampsie'=>$donne_ante2['note_eclampsie'],
 				'note_cycle'=>$donne_ante2['note_cycle'],
-				'autre'=>$donne_ante2['autre'],
-				'note_autre'=>$donne_ante2['note_autre'],
+				'autre_go'=>$donne_ante2['autre'],
+				'note_autre_go'=>$donne_ante2['note_autre'],
 				'quantite_regle'=>$donne_ante2['quantite_regle'],
 				'nb_garniture_jr'=>$donne_ante2['nb_garniture_jr'],
 				'contraception'=>$donne_ante2['contraception'],
 				'type_contraception'=>$donne_ante2['type_contraception'],
 				'duree_contraception'=>$donne_ante2['duree_contraception'],
 				'note_contraception'=>$donne_ante2['note_contraception'],
-		);
-       // var_dump($donne_ant);exit();
-        
-        //$form->populateValues($donne_ante);
+		);//var_dump($donne_antecedent2);exit();
+		$form->populateValues($donne_antecedent2);
+		//var_dump($cycle);exit();
 		
-	
-		//$form->populateValues($data_enf);
+		// RECUPERER TOUS LES PATIENTS AYANT UN RV aujourd'hui
+		$tabPatientRV = $this->getConsultationTable()->getPatientsRV($IdDuService);
+		$resultRV = null;
+		if (array_key_exists($id_pat, $tabPatientRV)) {
+			$resultRV = $tabPatientRV [$id_pat];
+		}
 		//var_dump($id_admission);exit();
 		$type=$this->getTypeAdmissionTable()->getTypeAdmis($id_admission);
 		//var_dump($type);exit();
@@ -2375,10 +2384,11 @@ public function declarerDecesAction() {
 		//var_dump($id_type_ad);exit();
 		$type_admission=$this->getTypeAdmissionTable()->getTypeAdmi($id_admission);			
 	  // $form->get('motif_ad')->setValueOptions($type_admission);
-	   //
+	  // var_dump($type_admission);exit();
   		if($id_type_ad==1){
+  			//var_dump($type_admission);exit();
  			$form->get('motif_ad')->setValueOptions($type_admission);
- 			//var_dump($type_admission);exit();
+ 			
   		}
 	   
 		elseif($id_type_ad==2){
@@ -2473,6 +2483,7 @@ public function declarerDecesAction() {
 		);
 		
 	    //var_dump($dat);exit();
+	
 		// Pour recuper les bandelettes
 		$bandelettes = $this->getConsultationTable()->getBandelette($id);
 		
