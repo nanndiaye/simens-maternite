@@ -2949,7 +2949,7 @@ function getMotif(val){
 
 
 
-$('.Dystocie').toggle(false);
+//$('.Dystocie').toggle(false);
 function getDystocie(val){ 
 	//alert(val);
 	if(val==1){
