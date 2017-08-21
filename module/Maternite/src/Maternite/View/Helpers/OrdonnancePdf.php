@@ -6,7 +6,7 @@ use ZendPdf;
 use ZendPdf\Page;
 use ZendPdf\Font;
 use Maternite\Model\Consultation;
-use Facturation\View\Helper\DateHelper;
+use Maternite\View\Helpers\DateHelper;
 
 class OrdonnancePdf {
 	protected $_page;
@@ -114,7 +114,7 @@ class OrdonnancePdf {
 		return ( int ) ($diff / $nbSecondes);
 	}
 	protected function getNoteMedicaments() {
-		$Control = new DateHelper ();
+		$Control = new DateHelper();
 		
 		$this->_yPosition -= 35;
 		$this->_page->setFont ( $this->_newTime, 15 );

@@ -446,12 +446,12 @@ class AccouchementController extends AbstractActionController
 	
 	public function getDevenirNouveauNeTable()
 	{
-		if (!$this->$devenir_nouveau_neTable) {
+		if (!$this->devenir_nouveau_neTable) {
 			$sm = $this->getServiceLocator();
-			$this->$devenir_nouveau_neTable = $sm->get('Maternite\Model\$DevenirNouveauNeTable');
+			$this->devenir_nouveau_neTable = $sm->get('Maternite\Model\DevenirNouveauNeTable');
 		}
 		//var_dump($$this->accouchementTable);exit();
-		return $this->$devenir_nouveau_neTable;
+		return $this->devenir_nouveau_neTable;
 	}
 	public function admissionGrossesseNormalAction()
 	{
@@ -2319,7 +2319,7 @@ public function declarerDecesAction() {
 		$liste = $this->getConsultationTable()->getInfoPatient($id_pat);
 		$id_admission=$liste['id_admission'];
 		$id_grossesse=$liste['id_grossesse'];
-		//var_dump($id_grossesse);exit();
+		//var_dump($id_admission);exit();
 		$image = $this->getConsultationTable()->getPhoto($id_pat);
 		//$id_grossesse= $this->getGrossesseTable ()->addGrossesse();
 	
@@ -2388,11 +2388,11 @@ public function declarerDecesAction() {
 			$resultRV = $tabPatientRV [$id_pat];
 		}
 		//var_dump($id_admission);exit();
-		$type=$this->getTypeAdmissionTable()->getTypeAdmis($id_admission);
+		$type=$this->getTypeAdmissionTable()->getTypeAdmis($id_pat);
 		//var_dump($type);exit();
 		$id_type_ad=$type['id_type_ad'];
 		//var_dump($id_type_ad);exit();
-		$type_admission=$this->getTypeAdmissionTable()->getTypeAdmi($id_admission);			
+		$type_admission=$this->getTypeAdmissionTable()->getTypeAdmi($id_pat);			
 	  // $form->get('motif_ad')->setValueOptions($type_admission);
 	  // var_dump($type_admission);exit();
   		if($id_type_ad==1){
@@ -2403,7 +2403,7 @@ public function declarerDecesAction() {
 	   
 		elseif($id_type_ad==2){
 			//var_dump($type_admi);exit();
-			$evacuation = $this->getEvacuationTable()->getEvacuationDuJour();		
+			$evacuation = $this->getEvacuationTable()->getEvacuationDuJour($id_pat);		
 			  $form->get('motif_ad')->setValueOptions($type_admission);
 			$form->get('motif')->setValue($evacuation['motif_evacuation']);
 			$form->get('service_origine')->setValue($evacuation['service_origine_ev']);
@@ -2527,7 +2527,7 @@ public function declarerDecesAction() {
 				'form' => $form,
 				'heure_cons' => $consult->heurecons,
 				'dateonly' => $consult->dateonly,
-				//'liste_med' => $listeMedicament,
+				'liste_med' => $listeMedicament,
 				'temoin' => $bandelettes ['temoin'],
 				// 'temoinMotifAdmission' => $motif_admission['temoinMotifAdmission'],
 				'listeForme' => $listeForme,
@@ -3265,7 +3265,7 @@ public function declarerDecesAction() {
         $form->setData($formData);
         $id_admission = $this->params()->fromPost('id_admission');
        // $id_grossesse = $this->params()->fromPost('id_grossesse');
-       //  var_dump($formData);exit();
+        //var_dump($id_admission);exit();
         $user = $this->layout()->user;
         $IdDuService = $user ['IdService'];
         $id_medecin = $user ['id_personne'];
@@ -3309,20 +3309,23 @@ public function declarerDecesAction() {
         
        $id_grossesse= $this->getGrossesseTable()->updateGrossesse($formData);
        // var_dump($id_grossesse);exit();
+     
       $id_antecedent1 = $this->getAntecedentType1Table ()-> updateAntecedentType1($formData); 
-    
+     // var_dump("test");exit();
        		$id_antecedent2 = $this->getAntecedentType2Table ()-> updateAntecedentType2($formData);
        		//var_dump($formData);exit();
        $this->getDonneesExamensPhysiquesTable()->updateExamenPhysique($formData);
-	
+     
         $this->getAccouchementTable()->updateAccouchement($formData,$id_grossesse);
        // var_dump('test');exit();
       
         //ENFANT      
        $this->getNaissanceTable()->updateNaissance($formData);
-       //var_dump($formData);exit();
+       //var_dump("test");exit();
 //Nouveau ne
+      
        $this->getDevenirNouveauNeTable()->updateNouveauNe($formData);
+      // var_dump($formData);exit();
         // POUR LES ANTECEDENTS ANTECEDENTS ANTECEDENTS
         // POUR LES ANTECEDENTS ANTECEDENTS ANTECEDENTS
         // POUR LES ANTECEDENTS ANTECEDENTS ANTECEDENTS
@@ -3420,7 +3423,8 @@ public function declarerDecesAction() {
             'diagnostic1' => $this->params()->fromPost('diagnostic1'),
             'diagnostic2' => $this->params()->fromPost('diagnostic2'),
             'diagnostic3' => $this->params()->fromPost('diagnostic3'),
-            'diagnostic4' => $this->params()->fromPost('diagnostic4')
+            'diagnostic4' => $this->params()->fromPost('diagnostic4'),
+        	'decision' => $this->params()->fromPost('decisions'),
         );
 
         $this->getDiagnosticsTable()->updateDiagnostics($info_diagnostics);
@@ -3601,314 +3605,342 @@ public function declarerDecesAction() {
     	return $this->path;
     }
 
-    public function impressionPdfAction(){
-    	
-    	$user = $this->layout()->user;
-    	$serviceMedecin = $user['NomService'];
-    
-    	$nomMedecin = $user['Nom'];
-    	$prenomMedecin = $user['Prenom'];
-    	$donneesMedecin = array('nomMedecin' => $nomMedecin, 'prenomMedecin' => $prenomMedecin);
+ public function impressionPdfAction()
+    {
+        $user = $this->layout()->user;
+        $serviceMedecin = $user ['NomService'];
 
-    
-    	//*************************************
-    	//*************************************
-    	//***DONNEES COMMUNES A TOUS LES PDF***
-    	//*************************************
-    	//*************************************
-    	$id_patient = $this->params ()->fromPost ( 'id_patient', 0 );
-    	$id_cons = $this->params ()->fromPost ( 'id_cons', 0 );
-    
-    	//*************************************
-    	$donneesPatientOR = $this->getConsultationTable()->getInfoPatient($id_patient);
-    	//var_dump($donneesPatientOR); exit();
-    	//**********ORDONNANCE*****************
-    	//**********ORDONNANCE*****************
-    	//**********ORDONNANCE*****************
-    	
-    	if(isset($_POST['ordonnance'])){
-    		//var_dump("test");exit();
-    		//récupération de la liste des médicaments
-    		$medicaments = $this->getConsultationTable()->fetchConsommable();
-    			
-    		$tab = array();
-    		$j = 1;
-    		
-    		//NOUVEAU CODE AVEC AUTOCOMPLETION
-    		for($i = 1 ; $i < 10 ; $i++ ){
-    			$nomMedicament = $this->params()->fromPost("medicament_0".$i);
-    			if($nomMedicament == true){
-    				$tab[$j++] = $this->params()->fromPost("medicament_0".$i);
-    				$tab[$j++] = $this->params()->fromPost("forme_".$i);
-    				$tab[$j++] = $this->params()->fromPost("nb_medicament_".$i);
-    				$tab[$j++] = $this->params()->fromPost("quantite_".$i);
-    			}
-    		}
-    		
-    		//-***************************************************************
-    		//Création du fichier pdf
-    		//*************************
-    		//Créer le document
-    		$DocPdf = new DocumentPdf();
-    		//Créer la page
-    		$page = new OrdonnancePdf();
-    
-    		//Envoyer l'id_cons
-    		$page->setIdCons($id_cons);
-    		$page->setService($serviceMedecin);
-    		//Envoyer les données sur le partient
-    		$page->setDonneesPatient($donneesPatientOR);
-    		//Envoyer les médicaments
-    		$page->setMedicaments($tab);
-    			
-    		//Ajouter une note à la page
-    		$page->addNote();
-    		//Ajouter la page au document
-    		$DocPdf->addPage($page->getPage());
-    
-    		//Afficher le document contenant la page
-    		$DocPdf->getDocument();
-    	}
-    	else
-    	//**********TRAITEMENT CHIRURGICAL*****************
-    	//**********TRAITEMENT CHIRURGICAL*****************
-    	//**********TRAITEMENT CHIRURGICAL*****************
-    	if(isset($_POST['traitement_chirurgical'])){
-    		//Récupération des données
-    		$donneesDemande['diagnostic'] = $this->params ()->fromPost ( 'diagnostic_traitement_chirurgical' );
-    		$donneesDemande['intervention_prevue'] = $this->params ()->fromPost (  'intervention_prevue' );
-    		$donneesDemande['observation'] = $this->params()->fromPost('observation');
-    			
-    		//CREATION DU DOCUMENT PDF
-    		//Créer le document
-    		$DocPdf = new DocumentPdf();
-    		//Créer la page
-    		$page = new TraitementChirurgicalPdf();
-    			
-    		//Envoi Id de la consultation
-    		$page->setIdConsTC($id_cons);
-    		$page->setService($serviceMedecin);
-    		//Envoi des données du patient
-    		$page->setDonneesPatientTC($donneesPatientOR);
-    		//Envoi des données du medecin
-    		$page->setDonneesMedecinTC($donneesMedecin);
-    		//Envoi les données de la demande
-    		$page->setDonneesDemandeTC($donneesDemande);
-    			
-    		//Ajouter les donnees a la page
-    		$page->addNoteTC();
-    		//Ajouter la page au document
-    		$DocPdf->addPage($page->getPage());
-    			
-    		//Afficher le document contenant la page
-    		$DocPdf->getDocument();
-    			
-    	}
-    	else
-    	//**********TRANSFERT DU PATIENT*****************
-    	//**********TRANSFERT DU PATIENT*****************
-    	//**********TRANSFERT DU PATIENT*****************
-    	if (isset ($_POST['transfert']))
-    	{
-    		$id_hopital = $this->params()->fromPost('hopital_accueil');
-    		$id_service = $this->params()->fromPost('service_accueil');
-    		$motif_transfert = $this->params()->fromPost('motif_transfert');
-    
-    		//Récupérer le nom du service d'accueil
-    		$service = $this->getServiceTable();
-    		$infoService = $service->getServiceparId($id_service);
-    		//Récupérer le nom de l'hopital d'accueil
-    		$hopital = $this->getHopitalTable();
-    		$infoHopital = $hopital->getHopitalParId($id_hopital);
-    			
-    		$donneesDemandeT['NomService'] = $infoService['NOM'];
-    		$donneesDemandeT['NomHopital'] = $infoHopital['NOM_HOPITAL'];
-    		$donneesDemandeT['MotifTransfert'] = $motif_transfert;
-    
-    		//-***************************************************************
-    		//Création du fichier pdf
-    		//-***************************************************************
-    		//Créer le document
-    		$DocPdf = new DocumentPdf();
-    		//Créer la page
-    		$page = new TransfertPdf();
-    
-    		//Envoi Id de la consultation
-    		$page->setIdConsT($id_cons);
-    		$page->setService($serviceMedecin);
-    		//Envoi des données du patient
-    		$page->setDonneesPatientT($donneesPatientOR);
-    		//Envoi des données du medecin
-    		$page->setDonneesMedecinT($donneesMedecin);
-    		//Envoi les données de la demande
-    		$page->setDonneesDemandeT($donneesDemandeT);
-    
-    		//Ajouter les donnees a la page
-    		$page->addNoteT();
-    		//Ajouter la page au document
-    		$DocPdf->addPage($page->getPage());
-    
-    		//Afficher le document contenant la page
-    		$DocPdf->getDocument();
-    	}
-    	else
-    	//**********RENDEZ VOUS ****************
-    	//**********RENDEZ VOUS ****************
-    	//**********RENDEZ VOUS ****************
-    	if(isset ($_POST['rendezvous'])){
-    			
-    		$donneesDemandeRv['dateRv'] = $this->params()->fromPost('date_rv_tampon');
-    		$donneesDemandeRv['heureRV'] = $this->params()->fromPost('heure_rv_tampon');
-    		$donneesDemandeRv['MotifRV'] = $this->params()->fromPost('motif_rv');
-    
-    		//Création du fichier pdf
-    		//Créer le document
-    		$DocPdf = new DocumentPdf();
-    		//Créer la page
-    		$page = new RendezVousPdf();
-    
-    		//Envoi Id de la consultation
-    		$page->setIdConsR($id_cons);
-    		$page->setService($serviceMedecin);
-    		//Envoi des données du patient
-    		$page->setDonneesPatientR($donneesPatientOR);
-    		//Envoi des données du medecin
-    		$page->setDonneesMedecinR($donneesMedecin);
-    		//Envoi les données du redez vous
-    		$page->setDonneesDemandeR($donneesDemandeRv);
-    
-    		//Ajouter les donnees a la page
-    		$page->addNoteR();
-    		//Ajouter la page au document
-    		$DocPdf->addPage($page->getPage());
-    
-    		//Afficher le document contenant la page
-    		$DocPdf->getDocument();
-    			
-    	}
-    	else
-    	//**********TRAITEMENT INSTRUMENTAL ****************
-    	//**********TRAITEMENT INSTRUMENTAL ****************
-    	//**********TRAITEMENT INSTRUMENTAL ****************
-    	if(isset ($_POST['traitement_instrumental'])){
-    		//Récupération des données
-    		$donneesTraitementChirurgical['endoscopieInterventionnelle'] = $this->params ()->fromPost ( 'endoscopieInterventionnelle' );
-    		$donneesTraitementChirurgical['radiologieInterventionnelle'] = $this->params ()->fromPost (  'radiologieInterventionnelle' );
-    		$donneesTraitementChirurgical['cardiologieInterventionnelle'] = $this->params()->fromPost('cardiologieInterventionnelle');
-    		$donneesTraitementChirurgical['autresIntervention'] = $this->params()->fromPost('autresIntervention');
-    			
-    		//CREATION DU DOCUMENT PDF
-    		//Créer le document
-    		$DocPdf = new DocumentPdf();
-    		//Créer la page
-    		$page = new TraitementInstrumentalPdf();
-    			
-    		//Envoi Id de la consultation
-    		$page->setIdConsTC($id_cons);
-    		$page->setService($serviceMedecin);
-    		//Envoi des données du patient
-    		$page->setDonneesPatientTC($donneesPatientOR);
-    		//Envoi des données du medecin
-    		$page->setDonneesMedecinTC($donneesMedecin);
-    		//Envoi les données de la demande
-    		$page->setDonneesDemandeTC($donneesTraitementChirurgical);
-    			
-    		//Ajouter les donnees a la page
-    		$page->addNoteTC();
-    		//Ajouter la page au document
-    		$DocPdf->addPage($page->getPage());
-    			
-    		//Afficher le document contenant la page
-    		$DocPdf->getDocument();
-    	}
-    	else
-    	//**********HOSPITALISATION ****************
-    	//**********HOSPITALISATION ****************
-    	//**********HOSPITALISATION ****************
-    	if(isset ($_POST['hospitalisation'])){
-    		//Récupération des données
-    		$donneesHospitalisation['motif_hospitalisation'] = $this->params ()->fromPost ( 'motif_hospitalisation' );
-    		$donneesHospitalisation['date_fin_hospitalisation_prevue'] = $this->params ()->fromPost (  'date_fin_hospitalisation_prevue' );
-    
-    		//CREATION DU DOCUMENT PDF
-    		//Créer le document
-    		$DocPdf = new DocumentPdf();
-    		//Créer la page
-    		$page = new HospitalisationPdf();
-    		//Envoi Id de la consultation
-    		$page->setIdConsH($id_cons);
-    		$page->setService($serviceMedecin);
-    		//Envoi des données du patient
-    		$page->setDonneesPatientH($donneesPatientOR);
-    		//Envoi des données du medecin
-    		$page->setDonneesMedecinH($donneesMedecin);
-    		//Envoi les données de la demande
-    		$page->setDonneesDemandeH($donneesHospitalisation);
-    
-    		//Ajouter les donnees a la page
-    		$page->addNoteH();
-    		//Ajouter la page au document
-    		$DocPdf->addPage($page->getPage());
-    
-    		//Afficher le document contenant la page
-    		$DocPdf->getDocument();
-    	}
-    	else
-    	//**********DEMANDES D'EXAMENS****************
-    	//**********DEMANDES D'EXAMENS****************
-    	//**********DEMANDES D'EXAMENS****************
-    	if(isset ($_POST['demandeExamenBioMorpho'])){
-    		$i = 1; $j = 1;
-    		$donneesExamensBio = array();
-    		$notesExamensBio = array();
-    		//Récupération des données examens biologiques
-    		for( ; $i <= 6; $i++){
-    			if($this->params ()->fromPost ( 'examenBio_name_'.$i )){
-    				$donneesExamensBio[$j] = $this->params ()->fromPost ( 'examenBio_name_'.$i );
-    				$notesExamensBio[$j++ ] = $this->params ()->fromPost ( 'noteExamenBio_'.$i  );
-    			}
-    		}
-    
-    		$k = 1; $l = $j;
-    		$donneesExamensMorph = array();
-    		$notesExamensMorph = array();
-    		//Récupération des données examens morphologiques
-    		for( ; $k <= 11; $k++){
-    			if($this->params ()->fromPost ( 'element_name_'.$k )){
-    				$donneesExamensMorph[$l] = $this->params ()->fromPost ( 'element_name_'.$k );
-    				$notesExamensMorph[$l++ ] = $this->params ()->fromPost ( 'note_'.$k  );
-    			}
-    		}
-    
-    
-    		//CREATION DU DOCUMENT PDF
-    		//Créer le document
-    		$DocPdf = new DocumentPdf();
-    		//Créer la page
-    		$page = new DemandeExamenPdf();
-    		//Envoi Id de la consultation
-    		$page->setIdConsBio($id_cons);
-    		$page->setService($serviceMedecin);
-    		//Envoi des données du patient
-    		$page->setDonneesPatientBio($donneesPatientOR);
-    		//Envoi des données du medecin
-    		$page->setDonneesMedecinBio($donneesMedecin);
-    		//Envoi les données de la demande
-    		$page->setDonneesDemandeBio($donneesExamensBio);
-    		$page->setNotesDemandeBio($notesExamensBio);
-    		$page->setDonneesDemandeMorph($donneesExamensMorph);
-    		$page->setNotesDemandeMorph($notesExamensMorph);
-    
-    			
-    		//Ajouter les donnees a la page
-    		$page->addNoteBio();
-    		//Ajouter la page au document
-    		$DocPdf->addPage($page->getPage());
-    			
-    		//Afficher le document contenant la page
-    		$DocPdf->getDocument();
-    	}
-    		
+        $nomMedecin = $user ['Nom'];
+        $prenomMedecin = $user ['Prenom'];
+        $donneesMedecin = array(
+            'nomMedecin' => $nomMedecin,
+            'prenomMedecin' => $prenomMedecin
+        );
+
+        // *************************************
+        // *************************************
+        // ***DONNEES COMMUNES A TOUS LES PDF***
+        // *************************************
+        // *************************************
+        $id_patient = $this->params()->fromPost('id_patient', 0);
+        $id_cons = $this->params()->fromPost('id_cons', 0);
+
+        // *************************************
+        $donneesPatientOR = $this->getConsultationTable()->getInfoPatient($id_patient);
+        // var_dump($donneesPatientOR); exit();
+        // **********ORDONNANCE*****************
+        // **********ORDONNANCE*****************
+        // **********ORDONNANCE*****************
+        if (isset ($_POST ['ordonnance'])) {
+            // rï¿½cupï¿½ration de la liste des mï¿½dicaments
+            $medicaments = $this->getConsultationTable()->fetchConsommable();
+
+            $tab = array();
+            $j = 1;
+
+            // NOUVEAU CODE AVEC AUTOCOMPLETION
+            for ($i = 1; $i < 10; $i++) {
+                $nomMedicament = $this->params()->fromPost("medicament_0" . $i);
+                if ($nomMedicament == true) {
+                    $tab [$j++] = $this->params()->fromPost("medicament_0" . $i);
+                    $tab [$j++] = $this->params()->fromPost("forme_" . $i);
+                    $tab [$j++] = $this->params()->fromPost("nb_medicament_" . $i);
+                    $tab [$j++] = $this->params()->fromPost("quantite_" . $i);
+                }
+            }
+
+            // -***************************************************************
+            // Crï¿½ation du fichier pdf
+            // *************************
+            // Crï¿½er le document
+            $DocPdf = new DocumentPdf ();
+            // Crï¿½er la page
+            $page = new OrdonnancePdf ();
+
+            // Envoyer l'id_cons
+            $page->setIdCons($id_cons);
+            $page->setService($serviceMedecin);
+            // Envoyer les donnï¿½es sur le partient
+            $page->setDonneesPatient($donneesPatientOR);
+            // Envoyer les mï¿½dicaments
+            $page->setMedicaments($tab);
+
+            // Ajouter une note ï¿½ la page
+            $page->addNote();
+            // Ajouter la page au document
+            $DocPdf->addPage($page->getPage());
+
+            // Afficher le document contenant la page
+            $DocPdf->getDocument();
+        } else
+            //**********TRAITEMENT CHIRURGICAL*****************
+            //**********TRAITEMENT CHIRURGICAL*****************
+            //**********TRAITEMENT CHIRURGICAL*****************
+            if (isset ($_POST['traitement_chirurgical'])) {
+                // Rï¿½cupï¿½ration des donnï¿½es
+                $donneesDemande ['diagnostic'] = $this->params()->fromPost('diagnostic_traitement_chirurgical');
+                $donneesDemande ['intervention_prevue'] = $this->params()->fromPost('intervention_prevue');
+                $donneesDemande ['observation'] = $this->params()->fromPost('observation');
+
+                // CREATION DU DOCUMENT PDF
+                // Crï¿½er le document
+                $DocPdf = new DocumentPdf ();
+                // Crï¿½er la page
+                $page = new TraitementChirurgicalPdf ();
+
+                // Envoi Id de la consultation
+                $page->setIdConsTC($id_cons);
+                $page->setService($serviceMedecin);
+                // Envoi des donnï¿½es du patient
+                $page->setDonneesPatientTC($donneesPatientOR);
+                // Envoi des donnï¿½es du medecin
+                $page->setDonneesMedecinTC($donneesMedecin);
+                // Envoi les donnï¿½es de la demande
+                $page->setDonneesDemandeTC($donneesDemande);
+
+                // Ajouter les donnees a la page
+                $page->addNoteTC();
+                // Ajouter la page au document
+                $DocPdf->addPage($page->getPage());
+
+                // Afficher le document contenant la page
+                $DocPdf->getDocument();
+            } else
+                //********** PROTOCOLE OPERATOIRE *****************
+                //********** PROTOCOLE OPERATOIRE *****************
+                //********** PROTOCOLE OPERATOIRE *****************
+                if (isset ($_POST ['protocole_operatoire'])) {
+                    // Rï¿½cupï¿½ration des donnï¿½es
+                    $donneesDemande ['diagnostic'] = $this->params()->fromPost('diagnostic_traitement_chirurgical');
+                    $donneesDemande ['intervention_prevue'] = $this->params()->fromPost('intervention_prevue');
+                    $donneesDemande ['observation'] = $this->params()->fromPost('observation');
+                    $donneesDemande ['note_compte_rendu_operatoire'] = $this->params()->fromPost('note_compte_rendu_operatoire');
+                    $donneesDemande ['resultatNumeroVPA'] = $this->params()->fromPost('resultatNumeroVPA');
+                    $donneesDemande ['resultatTypeIntervention'] = $this->params()->fromPost('resultatTypeIntervention');
+
+                    // CREATION DU DOCUMENT PDF
+                    // Crï¿½er le document
+                    $DocPdf = new DocumentPdf ();
+                    // Crï¿½er la page
+                    $page = new ProtocoleOperatoirePdf ();
+
+                    // var_dump($donneesDemande); exit();
+
+                    // Envoi Id de la consultation
+                    $page->setIdConsTC($id_cons);
+                    $page->setService($serviceMedecin);
+                    // Envoi des donnï¿½es du patient
+                    $page->setDonneesPatientTC($donneesPatientOR);
+                    // Envoi des donnï¿½es du medecin
+                    $page->setDonneesMedecinTC($donneesMedecin);
+                    // Envoi les donnï¿½es de la demande
+                    $page->setDonneesDemandeTC($donneesDemande);
+
+                    // Ajouter les donnees a la page
+                    $page->addNoteTC();
+                    // Ajouter la page au document
+                    $DocPdf->addPage($page->getPage());
+
+                    // Afficher le document contenant la page
+                    $DocPdf->getDocument();
+                } else
+                    //**********TRANSFERT DU PATIENT*****************
+                    //**********TRANSFERT DU PATIENT*****************
+                    //**********TRANSFERT DU PATIENT*****************
+                    if (isset ($_POST ['transfert'])) {
+                        $id_hopital = $this->params()->fromPost('hopital_accueil');
+                        $id_service = $this->params()->fromPost('service_accueil');
+                        $motif_transfert = $this->params()->fromPost('motif_transfert');
+
+                        // Rï¿½cupï¿½rer le nom du service d'accueil
+                        $service = $this->getServiceTable();
+                        $infoService = $service->getServiceparId($id_service);
+                        // Rï¿½cupï¿½rer le nom de l'hopital d'accueil
+                        $hopital = $this->getHopitalTable();
+                        $infoHopital = $hopital->getHopitalParId($id_hopital);
+
+                        $donneesDemandeT ['NomService'] = $infoService ['NOM'];
+                        $donneesDemandeT ['NomHopital'] = $infoHopital ['NOM_HOPITAL'];
+                        $donneesDemandeT ['MotifTransfert'] = $motif_transfert;
+
+                        // -***************************************************************
+                        // Crï¿½ation du fichier pdf
+                        // -***************************************************************
+                        // Crï¿½er le document
+                        $DocPdf = new DocumentPdf ();
+                        // Crï¿½er la page
+                        $page = new TransfertPdf ();
+
+                        // Envoi Id de la consultation
+                        $page->setIdConsT($id_cons);
+                        $page->setService($serviceMedecin);
+                        // Envoi des donnï¿½es du patient
+                        $page->setDonneesPatientT($donneesPatientOR);
+                        // Envoi des donnï¿½es du medecin
+                        $page->setDonneesMedecinT($donneesMedecin);
+                        // Envoi les donnï¿½es de la demande
+                        $page->setDonneesDemandeT($donneesDemandeT);
+
+                        // Ajouter les donnees a la page
+                        $page->addNoteT();
+                        // Ajouter la page au document
+                        $DocPdf->addPage($page->getPage());
+
+                        // Afficher le document contenant la page
+                        $DocPdf->getDocument();
+                    } else
+                        //**********RENDEZ VOUS ****************
+                        //**********RENDEZ VOUS ****************
+                        //**********RENDEZ VOUS ****************
+                        if (isset ($_POST ['rendezvous'])) {
+
+                            $donneesDemandeRv ['dateRv'] = $this->params()->fromPost('date_rv_tampon');
+                            $donneesDemandeRv ['heureRV'] = $this->params()->fromPost('heure_rv_tampon');
+                            $donneesDemandeRv ['MotifRV'] = $this->params()->fromPost('motif_rv');
+
+                            // Crï¿½ation du fichier pdf
+                            // Crï¿½er le document
+                            $DocPdf = new DocumentPdf ();
+                            // Crï¿½er la page
+                            $page = new RendezVousPdf ();
+
+                            // Envoi Id de la consultation
+                            $page->setIdConsR($id_cons);
+                            $page->setService($serviceMedecin);
+                            // Envoi des donnï¿½es du patient
+                            $page->setDonneesPatientR($donneesPatientOR);
+                            // Envoi des donnï¿½es du medecin
+                            $page->setDonneesMedecinR($donneesMedecin);
+                            // Envoi les donnï¿½es du redez vous
+                            $page->setDonneesDemandeR($donneesDemandeRv);
+
+                            // Ajouter les donnees a la page
+                            $page->addNoteR();
+                            // Ajouter la page au document
+                            $DocPdf->addPage($page->getPage());
+
+                            // Afficher le document contenant la page
+                            $DocPdf->getDocument();
+                        } else
+                            //**********TRAITEMENT INSTRUMENTAL ****************
+                            //**********TRAITEMENT INSTRUMENTAL ****************
+                            //**********TRAITEMENT INSTRUMENTAL ****************
+                            if (isset ($_POST ['traitement_instrumental'])) {
+                                // Rï¿½cupï¿½ration des donnï¿½es
+                                $donneesTraitementChirurgical ['endoscopieInterventionnelle'] = $this->params()->fromPost('endoscopieInterventionnelle');
+                                $donneesTraitementChirurgical ['radiologieInterventionnelle'] = $this->params()->fromPost('radiologieInterventionnelle');
+                                $donneesTraitementChirurgical ['cardiologieInterventionnelle'] = $this->params()->fromPost('cardiologieInterventionnelle');
+                                $donneesTraitementChirurgical ['autresIntervention'] = $this->params()->fromPost('autresIntervention');
+
+                                // CREATION DU DOCUMENT PDF
+                                // Crï¿½er le document
+                                $DocPdf = new DocumentPdf ();
+                                // Crï¿½er la page
+                                $page = new TraitementInstrumentalPdf ();
+
+                                // Envoi Id de la consultation
+                                $page->setIdConsTC($id_cons);
+                                $page->setService($serviceMedecin);
+                                // Envoi des donnï¿½es du patient
+                                $page->setDonneesPatientTC($donneesPatientOR);
+                                // Envoi des donnï¿½es du medecin
+                                $page->setDonneesMedecinTC($donneesMedecin);
+                                // Envoi les donnï¿½es de la demande
+                                $page->setDonneesDemandeTC($donneesTraitementChirurgical);
+
+                                // Ajouter les donnees a la page
+                                $page->addNoteTC();
+                                // Ajouter la page au document
+                                $DocPdf->addPage($page->getPage());
+
+                                // Afficher le document contenant la page
+                                $DocPdf->getDocument();
+                            } else
+                                //**********HOSPITALISATION ****************
+                                //**********HOSPITALISATION ****************
+                                //**********HOSPITALISATION ****************
+                                if (isset ($_POST ['hospitalisation'])) {
+                                    // Rï¿½cupï¿½ration des donnï¿½es
+                                    $donneesHospitalisation ['motif_hospitalisation'] = $this->params()->fromPost('motif_hospitalisation');
+                                    $donneesHospitalisation ['date_fin_hospitalisation_prevue'] = $this->params()->fromPost('date_fin_hospitalisation_prevue');
+
+                                    // CREATION DU DOCUMENT PDF
+                                    // Crï¿½er le document
+                                    $DocPdf = new DocumentPdf ();
+                                    // Crï¿½er la page
+                                    $page = new HospitalisationPdf ();
+                                    // Envoi Id de la consultation
+                                    $page->setIdConsH($id_cons);
+                                    $page->setService($serviceMedecin);
+                                    // Envoi des donnï¿½es du patient
+                                    $page->setDonneesPatientH($donneesPatientOR);
+                                    // Envoi des donnï¿½es du medecin
+                                    $page->setDonneesMedecinH($donneesMedecin);
+                                    // Envoi les donnï¿½es de la demande
+                                    $page->setDonneesDemandeH($donneesHospitalisation);
+
+                                    // Ajouter les donnees a la page
+                                    $page->addNoteH();
+                                    // Ajouter la page au document
+                                    $DocPdf->addPage($page->getPage());
+
+                                    // Afficher le document contenant la page
+                                    $DocPdf->getDocument();
+                                } else
+                                    //**********DEMANDES D'EXAMENS****************
+                                    //**********DEMANDES D'EXAMENS****************
+                                    //**********DEMANDES D'EXAMENS****************
+                                    if (isset ($_POST ['demandeExamenBioMorpho'])) {
+                                        $i = 1;
+                                        $j = 1;
+                                        $donneesExamensBio = array();
+                                        $notesExamensBio = array();
+                                        // Rï¿½cupï¿½ration des donnï¿½es examens biologiques
+                                        for (; $i <= 6; $i++) {
+                                            if ($this->params()->fromPost('examenBio_name_' . $i)) {
+                                                $donneesExamensBio [$j] = $this->params()->fromPost('examenBio_name_' . $i);
+                                                $notesExamensBio [$j++] = $this->params()->fromPost('noteExamenBio_' . $i);
+                                            }
+                                        }
+
+                                        $k = 1;
+                                        $l = $j;
+                                        $donneesExamensMorph = array();
+                                        $notesExamensMorph = array();
+                                        // Rï¿½cupï¿½ration des donnï¿½es examens morphologiques
+                                        for (; $k <= 11; $k++) {
+                                            if ($this->params()->fromPost('element_name_' . $k)) {
+                                                $donneesExamensMorph [$l] = $this->params()->fromPost('element_name_' . $k);
+                                                $notesExamensMorph [$l++] = $this->params()->fromPost('note_' . $k);
+                                            }
+                                        }
+
+                                        // CREATION DU DOCUMENT PDF
+                                        // Crï¿½er le document
+                                        $DocPdf = new DocumentPdf ();
+                                        // Crï¿½er la page
+                                        $page = new DemandeExamenPdf ();
+                                        // Envoi Id de la consultation
+                                        $page->setIdConsBio($id_cons);
+                                        $page->setService($serviceMedecin);
+                                        // Envoi des donnï¿½es du patient
+                                        $page->setDonneesPatientBio($donneesPatientOR);
+                                        // Envoi des donnï¿½es du medecin
+                                        $page->setDonneesMedecinBio($donneesMedecin);
+                                        // Envoi les donnï¿½es de la demande
+                                        $page->setDonneesDemandeBio($donneesExamensBio);
+                                        $page->setNotesDemandeBio($notesExamensBio);
+                                        $page->setDonneesDemandeMorph($donneesExamensMorph);
+                                        $page->setNotesDemandeMorph($notesExamensMorph);
+
+                                        // Ajouter les donnees a la page
+                                        $page->addNoteBio();
+                                        // Ajouter la page au document
+                                        $DocPdf->addPage($page->getPage());
+
+                                        // Afficher le document contenant la page
+                                        $DocPdf->getDocument();
+                                    }
     }
     
     

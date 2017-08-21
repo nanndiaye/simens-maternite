@@ -35,7 +35,8 @@ class DiagnosticsTable {
 			if ($donnees ['diagnostic' . $i]) {
 				$donneeDiagnostic = array (
 						'libelle_diagnostics' => $donnees ['diagnostic' . $i],
-						'id_cons' => $donnees ['id_cons'] 
+						'id_cons' => $donnees ['id_cons'],
+						'decision' => $donnees ['decision']
 				);
 				$this->tableGateway->insert ( $donneeDiagnostic );
 			}

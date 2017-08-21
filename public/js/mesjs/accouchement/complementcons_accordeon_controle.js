@@ -24,7 +24,9 @@ $(function () {
 $(function () {
     $("#accordions").accordion();
 });
-
+$(function () {
+    $("#accordi_enf").accordion();
+});
 
 function supprimer_dernier_caractere(elm) {
     var val = $(elm).val();
@@ -1091,6 +1093,7 @@ $("#terminer2, #terminer3").click(function () {
     donnees['delivrance'] = $("#delivrance").val();
     donnees['ru'] = $("#ru").val();
     donnees['hemoragie'] = $("#hemoragie").val();
+    donnees['quantite_hemo'] = $("#quantite_hemo").val();
     donnees['ocytocique_per'] = $("#ocytocique_per").val();
     donnees['ocytocique_post'] = $("#ocytocique_post").val();
     donnees['antibiotique'] = $("#antibiotique").val();
@@ -1129,6 +1132,9 @@ $("#terminer2, #terminer3").click(function () {
     donnees['note_perim'] = $("#note_perim").val();
     donnees['taille_enf'] = $("#taille_enf").val();
     
+    
+    //suite d ecouches
+    donnees['suite_de_couches'] = $("#suite_de_couches").val(); 
     
   //**********--DEVENU DU NOUVEAU NE-********
 
@@ -2933,11 +2939,11 @@ function getCycle(val){
 //$('.Contraception').toggle(false);
 function getContraception(val){ 
 	
-	if(val=='1'){
-		$("#contracetion").html("Contraception");
+	if(val==1){
+		$("#contraceptn").html("Contraception");
 		$('.Contraception').fadeIn();
 	}else{
-		$("#contraception span span").html("");
+		$("#contraceptn  span span").html("");
 		$('.Contraception').fadeOut();
 		
 	}	
@@ -3008,7 +3014,11 @@ function getAccouchement(val){
 
 
 
-
+function toggletexte(nom){
+	
+	//(document.write("<input type='Textarea'/>")); 
+	//document.getElementById("note_bassin").innerHTML="kghhlgl";
+	}
 
 
 

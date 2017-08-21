@@ -48,10 +48,11 @@ class DevenirNouveauNeTable {
 	
 
 public function updateNouveauNe($values) {
+	var_dump("test");exit();
 		$this->tableGateway->delete ( array (
 				'id_cons' => $values ['id_cons'] 
 		) );
-			$datanaissance = array (
+			$nv = array (
 					'id_cons' => $values ['id_cons'],
 					//'id_maman' => $values ['id_patient'],
 					'viv_bien_portant' => $values['viv_bien_portant'],
@@ -66,8 +67,8 @@ public function updateNouveauNe($values) {
 					'note_malade' => $values['note_malade'],
 					
 					
-			);	//var_dump($datanaissance);exit();
-		$this->tableGateway->insert ( $datanaissance );
+			);	var_dump($nv);exit();
+		$this->tableGateway->insert ( $nv );
 		//var_dump("test");exit();
 	
 

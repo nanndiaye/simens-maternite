@@ -405,7 +405,7 @@ class ConsultationMaterniteTable {
             ->columns( array( '*' ))
             ->join(array('pers' => 'personne'), 'pers.id_personne = pat.id_personne' , array('*'))
             ->where(array('pat.ID_PERSONNE' => $id_personne));
-
+           
         $stat = $sql->prepareStatementForSqlObject($sQuery);
         $resultat = $stat->execute()->current();
 

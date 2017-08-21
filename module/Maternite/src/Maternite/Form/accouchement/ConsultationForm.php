@@ -233,8 +233,8 @@ class ConsultationForm extends Form {
 							
 							'value_options' => array (
 									'clair' => iconv ( 'ISO-8859-1', 'UTF-8', 'Clair' ),
-									'tente' => iconv ( 'ISO-8859-1', 'UTF-8', 'Tente(meconium)' ),
-									'hematique' => iconv ( 'ISO-8859-1', 'UTF-8', 'hematique' )
+									'tente' => iconv ( 'ISO-8859-1', 'UTF-8', 'Ténté(méconium)' ),
+									'hematique' => iconv ( 'ISO-8859-1', 'UTF-8', 'hématique' )
 							)
 					),
 					'attributes' => array (
@@ -278,11 +278,14 @@ class ConsultationForm extends Form {
 	$this->add ( array (
 				'name' => 'examen_maternite_donnee9',
 				'type' => 'Textarea',
+			
 				'options' => array (
 						
 				),
 				'attributes' => array (
 						'readonly' => 'readonly',
+						'registerInArrrayValidator' => false,
+						'onclick' => 'toggletexte(this.value)',
 						'id' => 'examen_maternite_donnee9' 
 				) 
 		) );
@@ -628,7 +631,7 @@ class ConsultationForm extends Form {
 						'label' => 'Groupe Sanguin: ' 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
+						//'readonly' => 'readonly',
 						'id' => 'groupe_sanguin' 
 				) 
 		) );
@@ -639,7 +642,7 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Hemogramme sanguin' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
+						//'readonly' => 'readonly',
 						'id' => 'hemogramme_sanguin' 
 				) 
 		) );
@@ -650,7 +653,7 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Bilan de l\'hï¿½mostase:' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
+						//'readonly' => 'readonly',
 						'id' => 'bilan_hemolyse' 
 				) 
 		) );
@@ -661,7 +664,7 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Bilan hï¿½patique:' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
+						//'readonly' => 'readonly',
 						'id' => 'bilan_hepatique' 
 				) 
 		) );
@@ -672,7 +675,7 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Bilan rï¿½nal:' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
+						//'readonly' => 'readonly',
 						'id' => 'bilan_renal' 
 				) 
 		) );
@@ -683,7 +686,7 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Bilan inflammatoire:' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
+						//'readonly' => 'readonly',
 						'id' => 'bilan_inflammatoire' 
 				) 
 		) );
@@ -1200,7 +1203,7 @@ $this->add(array(
 				'name' => 'text_chirur',
 				'type' => 'Textarea',
 				'options' => array (
-						'label' => 'CHirurgie :'
+						//'label' => 'CHirurgie :'
 				),
 				'attributes' => array (
 						//'readonly' => 'readonly',
@@ -2120,6 +2123,17 @@ $this->add(array(
 		/**
 		 * ** TRAITEMENTS CHIRURCICAUX ***
 		 */
+		$this->add ( array (
+				'name' => 'traitement_chirur',
+				'type' => 'Textarea',
+				'options' => array (
+						//'label' => 'CHirurgie :'
+				),
+				'attributes' => array (
+						//'readonly' => 'readonly',
+						'id' => 'traitement_chirur'
+				)
+		) );
 		$this->add ( array (
 				'name' => 'endoscopieInterventionnelle',
 				'type' => 'Text',

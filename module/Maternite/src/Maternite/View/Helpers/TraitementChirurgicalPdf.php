@@ -6,7 +6,7 @@ use ZendPdf;
 use ZendPdf\Page;
 use ZendPdf\Font;
 use Maternite\Model\Consultation;
-use Facturation\View\Helper\DateHelper;
+use Maternite\View\Helpers\DateHelper;
 
 class TraitementChirurgicalPdf {
 	protected $_page;

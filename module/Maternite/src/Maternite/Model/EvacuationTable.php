@@ -33,7 +33,7 @@ class EvacuationTable {
 		$select->where ( array (
 				'ev.id_patient' => $id_patient
 		) );
-		$select->order ( 'ev.id_evacuation ASC' );
+		$select->order ( 'ev.id_evacuation DESC' );
 		$stat = $sql->prepareStatementForSqlObject ( $select );
 		$result = $stat->execute ()->current();
 	
@@ -99,7 +99,7 @@ class EvacuationTable {
 		return $resultat;
 	}
 	
-	public function getEvacuationDuJour() {
+	public function getEvacuationDuJour($id_patient) {
 		$today = (new \DateTime ())->format ( 'Y-m-d' );
 		$adapter = $this->tableGateway->getAdapter ();
 		$sql = new Sql ( $adapter );
@@ -108,7 +108,8 @@ class EvacuationTable {
 				'eva' => 'evacuation'
 		) )->columns( array( '*' ))
 		->join(array('a' => 'admission'), 'a.id_admission = eva.id_admission' , array('id_patient'))
-		->where(array('a.date_cons' => $today)); //var_dump($today);exit();
+		->where(array('eva.id_patient' => $id_patient)); //var_dump($today);exit();
+		$select->order ( 'eva.id_evacuation DESC' );
 		return $sql->prepareStatementForSqlObject ( $select )->execute ()->current ();
 	}
     
