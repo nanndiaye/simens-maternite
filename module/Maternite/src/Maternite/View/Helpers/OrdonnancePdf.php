@@ -5,7 +5,7 @@ namespace Maternite\View\Helpers;
 use ZendPdf;
 use ZendPdf\Page;
 use ZendPdf\Font;
-use Maternite\Model\Consultation;
+//use Maternite\Model\Consultation;
 use Maternite\View\Helpers\DateHelper;
 
 class OrdonnancePdf {
@@ -71,9 +71,9 @@ class OrdonnancePdf {
 		787 ); // +y
 		
 		$this->_page->setFont ( $this->_newTime, 10 );
-		$this->_page->drawText ( 'RÃ©publique du SÃ©nÃ©gal', $this->_leftMargin, $this->_pageHeight - 50 );
+		$this->_page->drawText ( 'République du Sénégal', $this->_leftMargin, $this->_pageHeight - 50 );
 		$this->_page->setFont ( $this->_newTime, 10 );
-		$this->_page->drawText ( 'MinistÃ¨re de la santÃ© et de l\'action sociale', $this->_leftMargin, $this->_pageHeight - 65 );
+		$this->_page->drawText ( 'Ministère de la santé et de l\'action sociale', $this->_leftMargin, $this->_pageHeight - 65 );
 		$this->_page->setFont ( $this->_newTime, 10 );
 		$this->_page->drawText ( 'Polyclinique de l\'UGB de Saint-Louis', $this->_leftMargin, $this->_pageHeight - 80 );
 		$this->_page->setFont ( $this->_newTime, 10 );

@@ -6,7 +6,7 @@ use ZendPdf;
 use ZendPdf\Page;
 use ZendPdf\Font;
 use Maternite\Model\Consultation;
-use Facturation\View\Helper\DateHelper;
+use Maternite\View\Helpers\DateHelper;
 
 class TransfertPdf {
 	protected $_page;
@@ -38,7 +38,7 @@ class TransfertPdf {
 		$this->_page = new Page ( 650, 700 );
 		
 		$this->_yPosition = 610;
-		$this->_leftMargin = 50;
+		$this->_leftMarg = 50;
 		$this->_pageHeight = $this->_page->getHeight ();
 		$this->_pageWidth = $this->_page->getWidth ();
 		/**
@@ -57,11 +57,11 @@ class TransfertPdf {
 	public function getPage() {
 		return $this->_page;
 	}
-	public function addNoteT() {
+public function addNoteT() {
 		$this->_page->saveGS ();
-		
+		var_dump('test');exit();
 		$this->setEnTete ();
-		$this->getNoteT ();
+		$this->getNoteR ();
 		$this->getPiedPage ();
 		
 		$this->_page->restoreGS ();
@@ -76,9 +76,9 @@ class TransfertPdf {
 		650 ); // +y
 		
 		$this->_page->setFont ( $this->_newTime, 10 );
-		$this->_page->drawText ( 'Rï¿½publique du Sï¿½nï¿½gal', $this->_leftMargin, $this->_pageHeight - 50 );
+		$this->_page->drawText ( 'République du Sénégal', $this->_leftMargin, $this->_pageHeight - 50 );
 		$this->_page->setFont ( $this->_newTime, 10 );
-		$this->_page->drawText ( 'Ministï¿½re de la santï¿½ et de l\'action sociale', $this->_leftMargin, $this->_pageHeight - 65 );
+		$this->_page->drawText ( 'Ministère de la santé et de l\'action sociale', $this->_leftMargin, $this->_pageHeight - 65 );
 		$this->_page->setFont ( $this->_newTime, 10 );
 		$this->_page->drawText ( 'Polyclinique de l\'UGB de Saint-Louis', $this->_leftMargin, $this->_pageHeight - 80 );
 		$this->_page->setFont ( $this->_newTime, 10 );

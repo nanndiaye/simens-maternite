@@ -556,7 +556,7 @@ class ConsultationMaterniteTable {
         $i=1;
         foreach ($liste as $list){
             if($i == $idLigne){
-                unlink('C:\wamp\www\simens\public\audios\\'.$list['nom']);
+                unlink('C:\wamp\www\simens-maternite\public\audios\\'.$list['nom']);
 
                 $db = $this->tableGateway->getAdapter();
                 $sql = new Sql($db);
@@ -618,7 +618,7 @@ class ConsultationMaterniteTable {
     public function supprimerVideo($id){
 
         $laVideo = $this->getVideoWithId($id);
-        $result = unlink('C:\wamp\www\simens\public\videos\\'.$laVideo['nom']);
+        $result = unlink('C:\wamp\www\simens-maternite\public\videos\\'.$laVideo['nom']);
 
         $db = $this->tableGateway->getAdapter();
         $sql = new Sql($db);

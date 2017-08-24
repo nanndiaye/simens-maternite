@@ -183,7 +183,7 @@ class ConsultationForm extends Form {
 						'id' => 'examen_maternite_donnee3',
 						'registerInArrayValidator'=>true,
 					   'onchange'=>' getExamenMaterniteDonnee3(this.value)',
-						'required' => true,
+						//'required' => true,
 				),
 		));
 		
@@ -223,7 +223,7 @@ class ConsultationForm extends Form {
 						'id' => 'examen_maternite_donnee5',
 						'registerInArrayValidator'=>true,
 					   'onchange'=>'getExamenMaterniteDonnee5(this.value)',
-						'required' => true,
+						//'required' => true,
 				),
 		));
 			$this->add ( array (
@@ -895,7 +895,7 @@ $this->add(array(
 				),
 				'attributes' => array(
 						'id' => 'paleur',
-						'required' => true,
+						//'required' => true,
 				),
 		));
 		
@@ -1813,7 +1813,7 @@ $this->add(array(
 				),
 				'attributes' => array(
 						'id' => 'note_cycle',
-						'required' => true,
+						//'required' => true,
 				),
 		));
 		/* Duree Cycle */
@@ -1889,7 +1889,7 @@ $this->add(array(
 						'registerInArrrayValidator' => true,
 						'onchange'=>' getContraception(this.value)',
 						'id' => 'contraception',
-						'required' => true,
+						//'required' => true,
 				),
 		));
 		$this->add ( array (
@@ -2264,7 +2264,7 @@ $this->add(array(
 						'readonly' => 'readonly',
 						'id' => 'ru',
 						'readonly' => 'readonly',
-						'required' => true,
+						//'required' => true,
 				),
 		));
 		
@@ -2280,7 +2280,7 @@ $this->add(array(
 				'attributes' => array(
 						'id' => 'hemoragie',
 						
-						'required' => true,
+						//'required' => true,
 				),
 		));
 		$this->add(array(
@@ -2290,7 +2290,7 @@ $this->add(array(
 							
 						'id' => 'quantite_hemo',
 						//'readonly' => 'readonly',
-						'required' => true,
+						//'required' => true,
 				),
 		));
 		$this->add(array(
@@ -2300,7 +2300,7 @@ $this->add(array(
 					
 						'id' => 'note_accouchement',
 						//'readonly' => 'readonly',
-						'required' => true,
+						//'required' => true,
 				),
 		));
 		
@@ -2311,7 +2311,7 @@ $this->add(array(
 						
 						'id' => 'note_delivrance',
 						//'readonly' => 'readonly',
-						'required' => true,
+						//'required' => true,
 				),
 		));
 		$this->add(array(
@@ -2321,7 +2321,7 @@ $this->add(array(
 						//'readonly' => 'readonly',
 						'id' => 'note_hemorragie',
 					
-						'required' => true,
+						//'required' => true,
 				),
 		));
 		
@@ -2332,7 +2332,7 @@ $this->add(array(
 					
 						'id' => 'note_ocytocique',
 						//'readonly' => 'readonly',
-						'required' => true,
+						//'required' => true,
 				),
 		));
 		
@@ -2344,7 +2344,7 @@ $this->add(array(
 						
 						'id' => 'note_antibiotique',
 						//'readonly' => 'readonly',
-						'required' => true,
+						//'required' => true,
 				),
 		));
 		
@@ -2356,7 +2356,7 @@ $this->add(array(
 						
 						'id' => 'note_anticonv',
 						//'readonly' => 'readonly',
-						'required' => true,
+						//'required' => true,
 				),
 		));
 		
@@ -2368,7 +2368,7 @@ $this->add(array(
 						
 						'id' => 'note_transfusion',
 						//'readonly' => 'readonly',
-						'required' => true,
+						//'required' => true,
 				),
 		));
 	$this->add(array(
@@ -2383,7 +2383,7 @@ $this->add(array(
 				'attributes' => array(
 						'id' => 'ocytocique_per',
 						
-						'required' => true,
+						//'required' => true,
 				),
 		));
 		
@@ -2780,7 +2780,7 @@ $this->add(array(
 						//'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Consultation entre J1 et J2' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
+						//'readonly' => 'readonly',
 						'id' => 'consult_j1_j2' 
 				) 
 		) );
@@ -2811,7 +2811,7 @@ $this->add(array(
 						'registerInArrayValidator'=>true,
 					   'onchange'=>'getEvacueDe(this.value)',
 						'readonly' => 'readonly',
-						'required' => true,
+						//'required' => true,
 				),
 		));
 	/* Note evacuation */
@@ -2855,7 +2855,7 @@ $this->add(array(
 						'registerInArrayValidator'=>true,
 					   'onchange'=>'getReference(this.value)',
 						'readonly' => 'readonly',
-						'required' => true,
+						//'required' => true,
 				),
 		));
 	/* Note reference */
@@ -2901,7 +2901,7 @@ $this->add(array(
 					'registerInArrrayValidator' => true,
 					'onchange'=>'getMotif(this.value)',
 					'id' =>'motif_ad',
-					'required' => false,
+					//'required' => false,
 			)
 	) );
 	
@@ -2915,7 +2915,7 @@ $this->add(array(
 					'registerInArrrayValidator' => true,
 					'onchange'=>'getTypeAd(this.value)',
 					'id' =>'type_ad',
-					'required' => false,
+					//'required' => false,
 			)
 	) );
 
@@ -2990,7 +2990,7 @@ $this->add(array(
 					'id' => 'geste',
 					'max' => 20,
 					'min'=>0,
-					'required' => true,
+				//	'required' => true,
 			)
 	) );
 	
@@ -3004,7 +3004,7 @@ $this->add(array(
 			),
 			'attributes' => array (
 					'id' => 'note_geste',
-					'required' => true,
+					//'required' => true,
 			)
 	) );
 	
@@ -3019,7 +3019,7 @@ $this->add(array(
 			),
 			'attributes' => array (
 					'id' => 'note_parite',
-					'required' => true,
+					//'required' => true,
 			)
 	) );
 	
@@ -3033,7 +3033,7 @@ $this->add(array(
 			),
 			'attributes' => array (
 					'id' => 'note_enf',
-					'required' => true,
+					//'required' => true,
 			)
 	) );
 	$this->add ( array (
@@ -3046,7 +3046,7 @@ $this->add(array(
 					'id' => 'parite',
 					'max' => 20,
 					'min'=>0,
-					'required' => true,
+					//'required' => true,
 			)
 	) );
 	
@@ -3068,7 +3068,7 @@ $this->add(array(
 					'id' => 'mort_ne',
 					'max' => 20,
 					'min'=>0,
-					'required' => true,
+					//'required' => true,
 			),
 	));
 	
@@ -3080,7 +3080,7 @@ $this->add(array(
 			),
 			'attributes' => array(
 					'id' => 'note_mort_ne',
-					'required' => true,
+					//'required' => true,
 			),
 	));
 	
@@ -3096,7 +3096,7 @@ $this->add(array(
 					'id' => 'cesar',
 					'max' => 20,
 					'min'=>0,
-					'required' => true,
+					//'required' => true,
 			),
 	));
 	
@@ -3108,7 +3108,7 @@ $this->add(array(
 			),
 			'attributes' => array(
 					'id' => 'note_cesar',
-					'required' => true,
+					//'required' => true,
 			),
 	));
 	
@@ -3193,7 +3193,7 @@ $this->add(array(
 					'registerInArrrayValidator' => true,
 					'onchange'=>' getBbAttendu(this.value)',
 					'id' => 'bb_attendu',
-					'required' => true,
+					//'required' => true,
 			),
 	));
 
@@ -3205,7 +3205,7 @@ $this->add(array(
 			),
 			'attributes' => array (
 					'id' => 'ddr',
-					'required' => true,
+					//'required' => true,
 			)
 	) );
 	
@@ -3220,7 +3220,7 @@ $this->add(array(
 			'attributes' => array (
 					'id' => 'note_ddr',
 	
-					'required' => true,
+					//'required' => true,
 			)
 	) );
 	
@@ -3233,7 +3233,7 @@ $this->add(array(
 			'attributes' => array (
 					'id' => 'duree_grossesse',
 	
-					'required' => true,
+					//'required' => true,
 			)
 	) );
 	
@@ -3248,7 +3248,7 @@ $this->add(array(
 					'id' => 'nb_cpn',
 					'max' => 5,
 					'min'=>0,
-					'required' => true,
+					//'required' => true,
 			)
 	) );
 	
@@ -3261,7 +3261,7 @@ $this->add(array(
 			'attributes' => array (
 					'id' => 'note_cpn',
 	
-					'required' => true,
+					//'required' => true,
 			)
 	) );
 	
@@ -3273,7 +3273,7 @@ $this->add(array(
 			),
 			'attributes' => array (
 					'id' => 'vat_1',
-					'required' => false,
+					//'required' => false,
 			)
 	) );
 		
@@ -3286,7 +3286,7 @@ $this->add(array(
 			),
 			'attributes' => array (
 					'id' => 'vat_3',
-					'required' => false,
+					//'required' => false,
 			)
 	) );
 	$this->add ( array (
@@ -3297,7 +3297,7 @@ $this->add(array(
 			),
 			'attributes' => array (
 					'id' => 'vat_3',
-					'required' => false,
+					//'required' => false,
 						
 			)
 	) );
@@ -3310,7 +3310,7 @@ $this->add(array(
 			'attributes' => array (
 					'id' => 'note_vat',
 	
-					'required' => true,
+					//'required' => true,
 			)
 	) );
 	
@@ -3350,7 +3350,7 @@ $this->add(array(
 			'attributes' => array (
 					'id' => 'note_bb',
 	
-					'required' => true,
+					//'required' => true,
 			)
 	) );
 	
@@ -3524,7 +3524,7 @@ $this->add(array(
 					'id' => 'perim_cranien',
 					'max' => 100,
 					'min'=>0,
-					'required' => true,
+					//'required' => true,
 			)
 	) );
 	
@@ -3541,7 +3541,7 @@ $this->add(array(
 					'id' => 'perim_brachial',
 					'max' => 20,
 					'min'=>0,
-					'required' => true,
+					//'required' => true,
 			)
 	) );
 	
@@ -3556,7 +3556,7 @@ $this->add(array(
 					'id' => 'perim_cephalique',
 					'max' => 20,
 					'min'=>0,
-					'required' => true,
+					//'required' => true,
 			)
 	) );
 	
@@ -3575,7 +3575,7 @@ $this->add(array(
 					'id' => 'taille_enf',
 					//'max' => 20,
 					'min'=>0,
-					'required' => true,
+					//'required' => true,
 			)
 	) );
 	
@@ -3903,7 +3903,7 @@ $this->add(array(
 					//'readonly' => 'readonly',
 					'id' => 'dece_hemoragie_ant',
 					//'readonly' => 'readonly',
-					'required' => true,
+					//'required' => true,
 			),
 	));	
 	
@@ -3923,7 +3923,7 @@ $this->add(array(
 					//'readonly' => 'readonly',
 					'id' => 'dece_hemoragie_post',
 					//'readonly' => 'readonly',
-					'required' => true,
+					//'required' => true,
 			),
 	));
 	$this->add ( array (
@@ -3941,7 +3941,7 @@ $this->add(array(
 					//'readonly' => 'readonly',
 					'id' => 'hypertation',
 					//'readonly' => 'readonly',
-					'required' => true,
+					//'required' => true,
 			),
 	));
 	$this->add ( array (
@@ -3959,7 +3959,7 @@ $this->add(array(
 					//'readonly' => 'readonly',
 					'id' => 'infection',
 					//'readonly' => 'readonly',
-					'required' => true,
+					//'required' => true,
 			),
 	));
 	
@@ -3977,7 +3977,7 @@ $this->add(array(
 					//'readonly' => 'readonly',
 					'id' => 'autre_cause_directe',
 					//'readonly' => 'readonly',
-					'required' => true,
+					//'required' => true,
 			),
 	));
 	
@@ -3988,7 +3988,7 @@ $this->add(array(
 					//'readonly' => 'readonly',
 					'id' => 'note_autre_cause_dir',
 					//'readonly' => 'readonly',
-					'required' => true,
+					//'required' => true,
 			),
 	));
 	$this->add(array(
@@ -3998,7 +3998,7 @@ $this->add(array(
 					//'readonly' => 'readonly',
 					'id' => 'autre_cause_indirecte',
 					//'readonly' => 'readonly',
-					'required' => true,
+					//'required' => true,
 			),
 	));
 	
@@ -4009,7 +4009,7 @@ $this->add(array(
 					//'readonly' => 'readonly',
 					'id' => 'note_autre_cause_indir',
 					//'readonly' => 'readonly',
-					'required' => true,
+					//'required' => true,
 			),
 	));
 	$this->add(array(
@@ -4019,7 +4019,7 @@ $this->add(array(
 					//'readonly' => 'readonly',
 					'id' => 'indetermine',
 					//'readonly' => 'readonly',
-					'required' => true,
+					//'required' => true,
 			),
 	));
 
@@ -4030,7 +4030,7 @@ $this->add(array(
 					//'readonly' => 'readonly',
 					'id' => 'note_indetermine',
 					//'readonly' => 'readonly',
-					'required' => true,
+					//'required' => true,
 			),
 	));
 	
@@ -4061,7 +4061,7 @@ $this->add(array(
 					//'readonly' => 'readonly',
 					'id' => 'note_viv_bien_portant',
 					//'readonly' => 'readonly',
-					'required' => true,
+					//'required' => true,
 			),
 	));
 	$this->add(array(
@@ -4086,7 +4086,7 @@ $this->add(array(
 					//'readonly' => 'readonly',
 					'id' => 'note_viv_mal_form',
 					//'readonly' => 'readonly',
-					'required' => true,
+				//	'required' => true,
 			),
 	));
 	$this->add(array(
@@ -4110,7 +4110,7 @@ $this->add(array(
 					//'readonly' => 'readonly',
 					'id' => 'note_decede',
 					//'readonly' => 'readonly',
-					'required' => true,
+					//'required' => true,
 			),
 	));
 	$this->add(array(
@@ -4120,7 +4120,7 @@ $this->add(array(
 					//'readonly' => 'readonly',
 					'id' => 'date_dece',
 					//'readonly' => 'readonly',
-					'required' => true,
+					//'required' => true,
 			),
 	));
 	$this->add(array(
@@ -4130,7 +4130,7 @@ $this->add(array(
 					//'readonly' => 'readonly',
 					'id' => 'heure_dece',
 					//'readonly' => 'readonly',
-					'required' => true,
+					//'required' => true,
 			),
 	));
 	$this->add(array(
@@ -4140,7 +4140,7 @@ $this->add(array(
 					//'readonly' => 'readonly',
 					'id' => 'cause_dece',
 					//'readonly' => 'readonly',
-					'required' => true,
+					//'required' => true,
 			),
 	));
 	$this->add(array(
@@ -4164,7 +4164,7 @@ $this->add(array(
 					//'readonly' => 'readonly',
 					'id' => 'note_malade',
 					//'readonly' => 'readonly',
-					'required' => true,
+					//'required' => true,
 			),
 	));
 	}

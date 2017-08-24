@@ -59,6 +59,7 @@ use Maternite\Model\Patient;
 use Maternite\Form\PatientForm;
 use Maternite\Model\AdmissionTable;
 use Maternite\Model\Service;
+use Maternite\Model\ServiceTable;
 use Maternite\Model\TarifConsultation;
 use Maternite\Model\Admission;
 use Maternite\Model\Accouchement;
@@ -216,16 +217,20 @@ class Module implements AutoloaderProviderInterface {
 							return $table;
 						},
 						
+							
+						
 						'Maternite\Model\ServiceTable' => function ($sm) {
-							$tableGateway = $sm->get('ServiceTableFactGateway');
-							$table = new Service($tableGateway);
+							$tableGateway = $sm->get( 'ServiceTableGateway' );
+							$table = new ServiceTable($tableGateway);
 							return $table;
+						
 						},
-						'ServiceTableFactGateway' => function($sm) {
-							$dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-							$resultSetPrototype = new ResultSet();
-							$resultSetPrototype->setArrayObjectPrototype(new Service());
-							return new TableGateway('service', $dbAdapter, null, $resultSetPrototype);
+						'ServiceTableGateway' => function ($sm) {
+							$dbAdapter = $sm->get ( 'Zend\Db\Adapter\Adapter' );
+							$resultSetPrototype = new ResultSet ();
+							$resultSetPrototype->setArrayObjectPrototype (new Service());
+							return new TableGateway ( 'service', $dbAdapter, null, $resultSetPrototype );
+						
 						},
 						
 						

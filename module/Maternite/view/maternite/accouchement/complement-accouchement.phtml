@@ -1,6 +1,7 @@
 
 <?php use Maternite\View\Helpers\DateHelper; ?>
 
+
 <!-- SCRIPT DU NOUVEAU CODE POUR LA GESTION DES IMAGES  -->
 <!-- SCRIPT DU NOUVEAU CODE POUR LA GESTION DES IMAGES  -->
 <!-- SCRIPT DU NOUVEAU CODE POUR LA GESTION DES IMAGES  -->
@@ -304,11 +305,12 @@ $(window).load(function () {
 <?php echo $this->headLink()->appendStylesheet($this->basePath().'/css/maternite/monstyle.css');?>
 
 
+
 <?php
 $form = $this->form;
 $form->setName ( 'AVIS' );
-$form->setAttribute ( 'action', $this->url ( 'maternite', array (
-		'action' => 'impression-pdf' 
+$form->setAttribute ( 'action', $this->url ( 'accouchement', array (
+		'action' => 'impression-Pdf' 
 ) ) );
 $form->setAttribute ( 'target', '_blank' );
 $form->setAttribute ( 'method', 'post' );
@@ -711,7 +713,7 @@ echo $this->form ()->openTag ( $form );
 		    
 		       <td class="antecedent_go" style="width: 50%; ">
 	           <div style="float: left; width: 10%; ">
-			       <label class="Cycle" style="width: 90%; height: 30px; text-align: left;"title="l'abondance">Qte </label>
+			       <label class="Cycle" style="width: 90%; height: 30px; text-align: left;"title="l'abondance des regles">Qte </label>
 		       </div>
 		       <div style="float: left; width: 20%; ">
 			       <label class="Cycle" style="width: 90%; height: 30px; text-align: left;"> <?php echo $this->formRow($form->get('quantite_regle'));?></label>
@@ -1725,7 +1727,7 @@ echo $this->form ()->openTag ( $form );
 				   <label class="" style="width: 90%; height: 50px; text-align: left;"title=""> <?php echo $this->formRow($form->get('examen_maternite_donnee9'));?> </label>
 			   </div>
 	              <div style="float: right; width: 60%; " id="rh">
-				   <label class="" style="width: 90%; height: 50px; text-align: left;">Note&nbsp;&nbsp;&nbsp; <?php //echo $this->formRow($form->get('note_bassin'));?> </label>
+				   <label class="" style="width: 90%; height: 50px; text-align: left;">Note&nbsp;&nbsp;&nbsp; <?php echo $this->formRow($form->get('note_bassin'));?> </label>
 			   </div>  
 			   
 			  </td>
@@ -1925,6 +1927,9 @@ echo $this->form ()->openTag ( $form );
 	            <div style="float: left; width: 10%; " >
 				   <label class="obs" style="width: 90%; height: 50px; text-align: left;"title="Observations">Observ </label>
 			   </div>
+			   
+			  
+			   
 	            <div style="float: left; width: 25%; " id="">
 				   <label class="antecedent_go" style="width: 90%; height: 50px; text-align: left;"title=""> <?php echo $this->formRow($form->get('observations'));?> </label>
 			   </div>
@@ -1955,48 +1960,10 @@ echo $this->form ()->openTag ( $form );
 
 
 		
-			<div style='font-family: police2;font-size: 17px; font-weight: bold;'>les enfants</div>
-		
-		
-		 <div style="max-height: 600px;">
-
-
-        <!--  **************** NOUVELLE ACCORDEON *********************  -->
-        <!--  **************** NOUVELLE ACCORDEON *********************  -->
-        <div id="accordi_enf">
-        
-        
-                    <div style='font-family: police2;font-size: 17px; font-weight: bold;'>  enfant1 </div>
-	          <div>
-<table style="width: 100%;"> 
-</table>
-</div>
-	            <div style='font-family: police2;font-size: 17px; font-weight: bold;'> enfant2 </div>
-	            	          <div>
-                 <table style="width: 100%;"> 
-                </table>
-               </div>
-                <div style='font-family: police2;font-size: 17px; font-weight: bold;'> enfant3 </div>
-	            	          <div>
-                 <table style="width: 100%;"> 
-                </table>
-               </div>
-                <div style='font-family: police2;font-size: 17px; font-weight: bold;'> enfant4 </div>
-	            	          <div>
-                 <table style="width: 100%;"> 
-                </table>
-               </div>
-                <div style='font-family: police2;font-size: 17px; font-weight: bold;'> enfant5 </div>
-	            	          <div>
-                 <table style="width: 100%;"> 
-                </table>
-               </div>
-	           </div>
-	      </div>
 		<!-- ********************ENFANT******************-->
 		
 			<div style='font-family: police2;font-size: 17px; font-weight: bold;'>Enfant</div>
-		<div style='max-height: 1300px;'>
+		<div style='max-height: 800px;'>
 
            <?php echo $this->formHidden($form->get('id_patient'));?>
            <?php echo $this->formHidden($form->get('id_medecin'));?>
@@ -2012,16 +1979,16 @@ echo $this->form ()->openTag ( $form );
 				
 				<!-- **2** -->
 				
-				<div style="max-height: 1600px;">
+				<div >
 						<table style="width: 100%;">
 						   <tr style="width: 100%; ">
 						   <td class="antecedent_go" style="width:50%;">
-								<div style="float: left;width: 10%;">
-									<label style="width: 90%; height: 30px; text-align: left;" title="">TYPE</label>
+								<!--<div style="float: left;width: 10%;">
+									  <label style="width: 90%; height: 30px; text-align: left;" title="">TYPE</label>
 									</div>
 									<div style="float: left; width: 20%; ">
-									<label style="width: 90%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('bb_attendu'));?></label>
-								</div>
+									<label style="width: 90%; height: 30px; text-align: left;"><?php //echo $this->formRow($form->get('bb_attendu'));?></label>
+								</div>-->
 								</td>
 								</tr>
                  <tr style="width: 100%; ">
@@ -2308,8 +2275,12 @@ echo $this->form ()->openTag ( $form );
 		
 		<div style='font-family: police2;font-size: 17px; font-weight: bold;'>Observations</div>
 	
-			
+		
 		<div id="divEtatcivil" style='max-height: 400px;'>
+			<div style=" padding-bottom:0px; margin-bottom: 5px; border-bottom: 2px solid green; margin-left: 0px;"></div>
+		<div class="rendezvous">
+                    <hass><input type="submit"  title="Imprimer" name="observation_go" id="observation_go"> </hass>
+                </div> 
 		  <?php echo $this->formHidden($form->get('id_patient'));?>
            <?php echo $this->formHidden($form->get('id_medecin'));?>
            <?php echo $this->formHidden($form->get('id_cons'));?>
@@ -3414,7 +3385,7 @@ echo $this->form ()->openTag ( $form );
                 <div style=" padding-bottom:0px; margin-bottom: 5px; border-bottom: 2px solid green; margin-left: 0px;"></div>
                 <!-- LE PDF POUR IMPRESSION-->
                 <div class="ordonnance">
-                    <hass ><input type="submit" alt="Constantes" title="Imprimer" name="ordonnance" id="ordonnance"></hass>
+                    <hass><input type="submit" alt="Constantes" title="Imprimer" name="ordonnance" id="ordonnance"></hass>
                 </div>
 
                 <!-- LE CHAMP POUR LA DUREE DU TRAITEMENT DE L'ORDONNANCE-->
@@ -3437,7 +3408,7 @@ echo $this->form ()->openTag ( $form );
                  *=============================================================================================
                  *=============================================================================================
                  **/
-                echo  $this->headScript()->appendFile($this->basePath().'/js/maternite/ajouterMedicaments.js');
+                echo  $this->headScript()->appendFile($this->basePath().'/js/Consultation/ajouterMedicaments.js');
                         ?>
 
                 <div id="listeMedicaments" style="float:left; width: 100%;">
@@ -3475,7 +3446,7 @@ echo $this->form ()->openTag ( $form );
                     <!--********************* BOUTON VALIDER OU MODIFIER ************************-->
                     <!--********************* BOUTON VALIDER OU MODIFIER ************************-->
                   
-    <table style="width: 90%; float:right; position: relative; right: 0;">
+     <table style="width: 90%; float:right; position: relative; right: 0;">
                         <tr style="width: 100%;">
                             <th style="height:15px;">
                                 <div id='bouton_Medicament_modifier_demande' style="float:right;">

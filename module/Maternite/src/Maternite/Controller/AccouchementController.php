@@ -3,14 +3,14 @@
 namespace Maternite\Controller;
 //use Maternite\Form\ConsultationForm;
 use Zend\Json\Json;
-use Zend\Form\Form;
+//use Zend\Form\Form;
 use Zend\Form\View\Helper\FormRow;
-use Zend\Form\View\Helper\FormInput;
+//use Zend\Form\View\Helper\FormInput;
 use Maternite\View\Helpers\DateHelper;
 use Zend\Mvc\Controller\AbstractActionController;
 use Maternite\Form\PatientForm;
 use Zend\View\Model\ViewModel;
-use Zend\Db\Sql\Sql;
+//use Zend\Db\Sql\Sql;
 use Maternite\Form\AjoutDecesForm;
 use Maternite\Form\accouchement\AdmissionForm;
 use Maternite\Form\accouchement\ConsultationForm;
@@ -24,13 +24,14 @@ use Zend\Form\View\Helper\FormSelect;
 use Maternite\View\Helpers\DocumentPdf;
 use Maternite\View\Helpers\DemandeExamenPdf;
 use Maternite\View\Helpers\OrdonnancePdf;
+use Maternite\View\Helpers\ProtocoleOperatoirePdf;
 use Maternite\View\Helpers\TraitementChirurgicalPdf;
 use Maternite\View\Helpers\TraitementInstrumentalPdf;
 use Maternite\View\Helpers\RendezVousPdf;
 use Maternite\View\Helpers\TransfertPdf;
 use Maternite\View\Helpers\HospitalisationPdf;
-
-
+use Maternite\View\Helpers\SuiteDeCouchePdf;
+use Maternite\View\Helpers\ObservationPdf;
 //use Maternite\Model\ServiceTable;
 //use Maternite\Model\Service;
 //use Maternite\Model\TarifConsultationTable;
@@ -3605,7 +3606,7 @@ public function declarerDecesAction() {
     	return $this->path;
     }
 
- public function impressionPdfAction()
+  public function impressionPdfAction()
     {
         $user = $this->layout()->user;
         $serviceMedecin = $user ['NomService'];
@@ -3631,6 +3632,67 @@ public function declarerDecesAction() {
         // **********ORDONNANCE*****************
         // **********ORDONNANCE*****************
         // **********ORDONNANCE*****************
+        if (isset ($_POST ['suitedecouche'])) {
+        	// R�cup�ration des donn�es
+        	$donneesDemande ['suite_de_couches'] = $this->params()->fromPost('suite_de_couches');
+         	// CREATION DU DOCUMENT PDF
+        	// Cr�er le document
+        	$DocPdf = new DocumentPdf ();
+        	// Cr�er la page
+        	$page = new SuiteDeCouchePdf();
+        
+        	// var_dump($donneesDemande); exit();
+        
+        	// Envoi Id de la consultation
+        	$page->setIdConsTC($id_cons);
+        	$page->setService($serviceMedecin);
+        	// Envoi des donn�es du patient
+        	$page->setDonneesPatientTC($donneesPatientOR);
+        	// Envoi des donn�es du medecin
+        	$page->setDonneesMedecinTC($donneesMedecin);
+        	// Envoi les donn�es de la demande
+        	$page->setDonneesDemandeTC($donneesDemande);
+        
+        	// Ajouter les donnees a la page
+        	$page->addNoteTC();
+        	// Ajouter la page au document
+        	$DocPdf->addPage($page->getPage());
+        
+        	// Afficher le document contenant la page
+        	$DocPdf->getDocument();
+        }else 
+        
+        if (isset ($_POST ['observation_go'])) {
+        	// R�cup�ration des donn�es
+        	$donneesDemande ['text_observation'] = $this->params()->fromPost('text_observation');
+        	// CREATION DU DOCUMENT PDF
+        	// Cr�er le document
+        	$DocPdf = new DocumentPdf ();
+        	// Cr�er la page
+        	$page = new ObservationPdf();
+        
+        	// var_dump($donneesDemande); exit();
+        
+        	// Envoi Id de la consultation
+        	$page->setIdConsTC($id_cons);
+        	$page->setService($serviceMedecin);
+        	// Envoi des donn�es du patient
+        	$page->setDonneesPatientTC($donneesPatientOR);
+        	// Envoi des donn�es du medecin
+        	$page->setDonneesMedecinTC($donneesMedecin);
+        	// Envoi les donn�es de la demande
+        	$page->setDonneesDemandeTC($donneesDemande);
+        
+        	// Ajouter les donnees a la page
+        	$page->addNoteTC();
+        	// Ajouter la page au document
+        	$DocPdf->addPage($page->getPage());
+        
+        	// Afficher le document contenant la page
+        	$DocPdf->getDocument();
+        }
+        
+        else
         if (isset ($_POST ['ordonnance'])) {
             // r�cup�ration de la liste des m�dicaments
             $medicaments = $this->getConsultationTable()->fetchConsommable();
@@ -3754,12 +3816,16 @@ public function declarerDecesAction() {
 
                         // R�cup�rer le nom du service d'accueil
                         $service = $this->getServiceTable();
-                        $infoService = $service->getServiceparId($id_service);
+                        
+                        $infoService =$service->getServiceparId($id_service);
+                      
                         // R�cup�rer le nom de l'hopital d'accueil
                         $hopital = $this->getHopitalTable();
+                       
                         $infoHopital = $hopital->getHopitalParId($id_hopital);
 
                         $donneesDemandeT ['NomService'] = $infoService ['NOM'];
+                      
                         $donneesDemandeT ['NomHopital'] = $infoHopital ['NOM_HOPITAL'];
                         $donneesDemandeT ['MotifTransfert'] = $motif_transfert;
 
@@ -3770,7 +3836,7 @@ public function declarerDecesAction() {
                         $DocPdf = new DocumentPdf ();
                         // Cr�er la page
                         $page = new TransfertPdf ();
-
+                       
                         // Envoi Id de la consultation
                         $page->setIdConsT($id_cons);
                         $page->setService($serviceMedecin);
@@ -3780,13 +3846,15 @@ public function declarerDecesAction() {
                         $page->setDonneesMedecinT($donneesMedecin);
                         // Envoi les donn�es de la demande
                         $page->setDonneesDemandeT($donneesDemandeT);
-
+                        
                         // Ajouter les donnees a la page
                         $page->addNoteT();
+                       
                         // Ajouter la page au document
                         $DocPdf->addPage($page->getPage());
-
+                      
                         // Afficher le document contenant la page
+                       
                         $DocPdf->getDocument();
                     } else
                         //**********RENDEZ VOUS ****************

@@ -18,6 +18,7 @@ class Accouchement {
 	public $antibiotique;
 	public $anticonvulsant;
 	public $transfusion;
+	public $text_observation;
 	public $observations;
 	public $note_accouchement;
 	public $note_delivrance;
@@ -26,7 +27,7 @@ class Accouchement {
 	public $note_antibiotique;
 	public $note_anticonv;
 	public $note_transfusion;
-	
+	public $suite_de_couches;
 	public function exchangeArray($data) {
 		//$this->id_grossesse = (! empty ( $data ['id_grossesse'] )) ? $data ['id_grossesse'] : null;
 		$this->id_admission = (! empty ( $data ['id_admission'] )) ? $data ['id_admission'] : null;
@@ -43,6 +44,7 @@ class Accouchement {
 		$this->antibiotique = (! empty ( $data ['antibiotique'] )) ? $data ['antibiotique'] : null;
 		$this->anticonvulsant = (! empty ( $data ['anticonvulsant'] )) ? $data ['anticonvulsant'] : null;
 		$this->transfusion = (! empty ( $data ['transfusion'] )) ? $data ['transfusion'] : null;
+		$this->text_observation = (! empty ( $data ['text_observation'] )) ? $data ['text_observation'] : null;
 		$this->observations = (! empty ( $data ['observations'] )) ? $data ['observations'] : null;
 		$this->note_accouchement = (! empty ( $data ['note_accouchement'] )) ? $data ['note_accouchement'] : null;
 		$this->note_delivrance = (! empty ( $data ['note_delivrance'] )) ? $data ['note_delivrance'] : null;
@@ -51,7 +53,7 @@ class Accouchement {
 		$this->note_antibiotique = (! empty ( $data ['note_antibiotique'] )) ? $data ['note_antibiotique'] : null;
 		$this->note_anticonv = (! empty ( $data ['note_anticonv'] )) ? $data ['note_anticonv'] : null;
 		$this->note_transfusion = (! empty ( $data ['note_transfusion'] )) ? $data ['note_transfusion'] : null;
-		
+		$this->suite_de_couches = (! empty ( $data ['suite_de_couches'] )) ? $data ['suite_de_couches'] : null;
 		
 		
 		

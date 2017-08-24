@@ -283,7 +283,7 @@ return array(
     								'maj-accouchement'=>array('gynecologue','infirmier'),
     								'maj-complement-accouchement'=>array('gynecologue','infirmier'),
     								'update-complement-accouchement'=>array('gynecologue','infirmier'),
-    								'impression-pdf'=>array('gynecologue','infirmier'),
+    								'impression-Pdf'=>array('gynecologue','infirmier'),
     								'en-cours'=>array('gynecologue','infirmier'),
     								'liste-patient-encours-ajax'=>array('gynecologue','infirmier'),
     								'liste-soins-prescrits'=>array('gynecologue','infirmier'),

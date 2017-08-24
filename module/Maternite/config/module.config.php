@@ -62,7 +62,8 @@ return array (
 						'layout/piedpagecons' => __DIR__ . '/../view/layout/piedpagecons.phtml' 
 				),
 				'template_path_stack' => array (
-						'maternite' => __DIR__ . '/../view' 
+						'maternite' => __DIR__ . '/../view',
+						'accouchement' => __DIR__ . '/../view'
 				),
 				'strategies' => array (
 						'ViewJsonStrategy' 

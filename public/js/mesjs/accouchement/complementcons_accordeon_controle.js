@@ -25,7 +25,7 @@ $(function () {
     $("#accordions").accordion();
 });
 $(function () {
-    $("#accordi_enf").accordion();
+    $("#accordions_enf").accordion();
 });
 
 function supprimer_dernier_caractere(elm) {
@@ -1100,6 +1100,8 @@ $("#terminer2, #terminer3").click(function () {
     donnees['anticonvulsant'] = $("#anticonvulsant").val();
     donnees['transfusion'] = $("#transfusion").val();
     donnees['observations'] = $("#observations").val();
+    donnees['text_observation'] = $("#text_observation").val();
+    donnees['suite_de_couches'] = $("#suite_de_couches").val(); 
     donnees['note_accouchement'] = $("#note_accouchement").val();
     donnees['note_delivrance'] = $("#note_delivrance").val();
     donnees['note_hemorragie'] = $("#note_hemoragie").val();
@@ -1133,9 +1135,8 @@ $("#terminer2, #terminer3").click(function () {
     donnees['taille_enf'] = $("#taille_enf").val();
     
     
-    //suite d ecouches
-    donnees['suite_de_couches'] = $("#suite_de_couches").val(); 
-    
+  
+
   //**********--DEVENU DU NOUVEAU NE-********
 
     donnees['viv_bien_portant'] = $("#viv_bien_portant").val();
