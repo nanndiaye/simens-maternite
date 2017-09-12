@@ -5,7 +5,7 @@ $(function () {
     $("#accordionsssss").accordion();
 });
 $(function () {
-    $("#accordionssssssssss").accordion();
+    $(".accordionssssssssss").accordion();
 });
 $(function () {
     $("#accordionssss").accordion();
@@ -24,9 +24,7 @@ $(function () {
 $(function () {
     $("#accordions").accordion();
 });
-$(function () {
-    $("#accordions_enf").accordion();
-});
+
 
 function supprimer_dernier_caractere(elm) {
     var val = $(elm).val();

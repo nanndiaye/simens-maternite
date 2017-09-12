@@ -1070,7 +1070,7 @@ $this->add(array(
 		) );
 		$this->add ( array (
 				'name' => 'temperature',
-				'type' => 'Text',
+				'type' => 'Number',
 				'options' => array (),
 				// 'label' => iconv ( 'UTF-8','ISO-8859-1', 'Température (°C)' )
 				'attributes' => array (

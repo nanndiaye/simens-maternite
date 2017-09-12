@@ -499,7 +499,7 @@ echo $this->form ()->openTag ( $form );
            <?php echo $this->formHidden($form->get('id_medecin'));?>
            <?php echo $this->formHidden($form->get('id_cons'));?>
            <?php echo $this->formHidden($form->get('id_grossesse'));?>
-		<table style=" width: 100%;">
+		<table id="" style=" width: 100%;">
 		
 		
 			<tr style="width: 100%; ">
@@ -531,7 +531,7 @@ echo $this->form ()->openTag ( $form );
            <?php echo $this->formHidden($form->get('id_cons'));?>
            <?php echo $this->formHidden($form->get('id_grossesse'));?>
             <?php echo $this->formHidden($form->get('id_admission'));?>
-		<table style="width: 100%;"> 
+		<table id="" style="width: 100%;"> 
 		  <tr style="width: 100%;">
 		    <td class="antecedent_go" style="width: 50%; ">
 	           
@@ -779,7 +779,7 @@ echo $this->form ()->openTag ( $form );
            <?php echo $this->formHidden($form->get('id_medecin'));?>
            <?php echo $this->formHidden($form->get('id_cons'));?>
            <?php echo $this->formHidden($form->get('id_grossesse'));?>
-	<table style="width: 100%;"> 
+	<table id =""style="width: 100%;"> 
 		 
 		 	 <tr style="width: 100%; ">
 		    <td class="antecedent_go" style="width: 60%;">	           
@@ -797,9 +797,9 @@ echo $this->form ()->openTag ( $form );
 			   </td>
 			 <td class="antecedent_go" style="width: 40%; ">
 			  
-			   <div style="float: left; width: 60%; " id="rh">
-				   <label class="" style="width: 100%; height: 30px; text-align: left;">Note <?php echo $this->formRow($form->get('note_ddr'));?> </label>
-			   </div>  					
+			     <div style="float: left;width:60%;">
+									<label style="width: 100%; height: 30px; text-align: left;">Note<?php echo $this->formRow($form->get('note_ddr'));?></label>
+								</div>						
 		    </td>	   
 	 	  </tr>	
 		
@@ -873,7 +873,7 @@ echo $this->form ()->openTag ( $form );
 
 		<!--*2*-->
 		<div id='motifsAdmissionConstanteClick' style='font-family: police2;font-size: 17px; font-weight: bold;'>Constantes</div>
-		<div style='max-height: 460px;'>
+		<div style='max-height: 260px;'>
 
            <?php echo $this->formHidden($form->get('id_patient'));?>
            <?php echo $this->formHidden($form->get('id_medecin'));?>
@@ -890,26 +890,46 @@ echo $this->form ()->openTag ( $form );
 				<!-- **2** -->
 				
 				<div style="max-height: 500px;">
-					<table id="respond" style="width: 100%;">
+					<table id="" style="width: 100%;">
 
-						<tr class="comment-form-author">
-							<td style="width: 25%;"><label> Température </label><?php echo $this->formRow($form->get('temperature'));?></td>
-						
-							<td style="width: 25%;"><label> Pression art&eacute;rielle (mmHg)
-							</label>
-								<div style="width: 35%; float: left;"><?php echo $this->formRow($form->get('tensionmaximale'));?></div>
-								<div
-									style="width: 5%; float: left; text-align: center; font-size: 20px; padding-top: 3px; padding-right: 3px;">
-									/</div>
-								<div style="width: 35%; float: left;"><?php echo $this->formRow($form->get('tensionminimale'));?></div>
-								</td>
-								<td style="width: 25%;"><div style="width: 35%; float: left;"><label> Paleur</label><?php echo $this->formRow($form->get('paleur'));?></div></td>
+						<tr class="constante_go">
+						<td class="constante_go" style="width:30%; ">
+	           
+	           <div style="float: left; width: 30%; ">
+			       <label style="width: 90%; height: 30px; text-align: left;"> Temperature </label>
+		       </div>
+		       <div style="float: left; width: 25%; ">
+			       <label style="width: 90%; height: 30px; text-align: left;margin-left:10%;"> <?php echo $this->formRow($form->get('temperature'));?></label>
+		       </div>							
+		    </td>
 							
+								<td class="constante_go" style="width: 30%; ">
+	           
+	           <div style="float: left; width: 28%; ">
+			       <label style="width: 90%; height: 30px; text-align: left;"title="Pression arterielle"> PA(mmHg) </label>
+		       </div>
+		       <div style="float: left; width: 20%; ">
+			       <label style="width: 90%; height: 30px; text-align: left;"> <?php echo $this->formRow($form->get('tensionmaximale'));?>/</label>      	       
+		       </div>
+		        <div style="float: left; width: 20%; ">
+		<label style="width: 90%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('tensionminimale'));?></label>
+		       </div>									
+		    </td>
 						
-						</tr>
+										<td class="constante_go" style="width:30%;">
+	           
+	           <div style="float: left; width: 15%; ">
+			       <label style="width: 90%; height: 30px; text-align: left;"> Paleur </label>
+		       </div>
+		       <div style="float: left; width: 20%; ">
+			       <label style="width: 90%; height: 30px; text-align: left;margin-left:18%;"> <?php echo $this->formRow($form->get('paleur'));?></label>
+		       </div>								
+		    </td>
+				</tr>
+			
 						<!-- GESTION DES ERREURS -->
-						<tr>
-							<td>
+							<tr class="">
+							<td style="width: 30%;">
 								<div id="erreur_temperature"></div>
 							</td>
 							
@@ -922,35 +942,45 @@ echo $this->form ()->openTag ( $form );
 							
 						</tr>
 
-
-						<tr class="comment-form-author">
+<tr><td></td></tr>
+								<tr class="constante_go">
+						<td class="constante_go" style="width:30%; ">
+	           
+	           <div style="float: left; width: 30%; ">
+			       <label style="width: 90%; height: 30px; text-align: left;"title="glycemie capillaire"> Glycémie C </label>
+		       </div>
+		       <div style="float: left; width: 25%; ">
+			       <label style="width: 90%; height: 30px; text-align: left;margin-left:10%;"> <?php echo $this->formRow($form->get('glycemie_capillaire'));?></label>
+		       </div>							
+		    </td>
 						
 							
-							<td><label> Glycémie capillaire </label><?php echo $this->formRow($form->get('glycemie_capillaire'));?></td>
-							<td></td>
+							
+							
 						</tr>
 						<!-- GESTION DES ERREURS -->
-						<tr>
+							<tr class="constante_go">
 							<td>
 								<div id="erreur_temperature"></div>
 							</td>
-							<td>
+							<!--  <td>
 								<div id="erreur_poids"></div>
-							</td>
+							</td>-->
 							<td>
 								<div style="width: 35%; float: left;"
 									id="erreur_tensionmaximale"></div>
 								<div style="width: 35%; float: left;"
 									id="erreur_tensionminimale"></div>
 							</td>
-							<td>
+							<!--  <td>
 								<div id="erreur_taille"></div>
-							</td>
+							</td>-->
 						</tr>
-
+<tr style="background: red;">
+</tr>
 					</table>
 
-					<table id="respond" style="width: 100%">
+					<table id="" style="width: 100%">
 
 						<tr style="width: 100%;">
 							<td style="vertical-align: top; width: 50%;">
@@ -970,7 +1000,7 @@ echo $this->form ()->openTag ( $form );
 										<tr style="width: 100%;">
 											<td style="width: 100%;">
 												<div style="float: left;">
-													<label style="width: 125px; text-align: right;"> Albumine :
+													<label style="width: 92px; text-align: left;"> Albumine :
 													</label><?php echo $this->formRow($form->get('albumine'));?></div>
 												<div id="labelAlbumine" style="float: left;">
 													<div id="fleche" style="float: left;">
@@ -987,7 +1017,7 @@ echo $this->form ()->openTag ( $form );
 										<tr style="width: 100%;">
 											<td style="width: 100%;">
 												<div style="float: left;">
-													<label style="width: 125px; text-align: right;"> Sucre : </label><?php echo $this->formRow($form->get('sucre'));?></div>
+													<label style="width: 92px; text-align: left;"> Sucre : </label><?php echo $this->formRow($form->get('sucre'));?></div>
 												<div id="labelSucre" style="float: left;">
 													<div id="fleche2" style="float: left;">
 														<label style="width: 15px; text-align: center;"> » </label>
@@ -1003,8 +1033,8 @@ echo $this->form ()->openTag ( $form );
 										<tr style="width: 100%;">
 											<td style="width: 100%;">
 												<div style="float: left;">
-													<label style="width: 125px; text-align: right;"> Corps
-														cétoniques : </label><?php echo $this->formRow($form->get('corpscetonique'));?></div>
+													<label style="width: 92px; text-align: left;"title="corps cetonique"> Corps
+														céton : </label><?php echo $this->formRow($form->get('corpscetonique'));?></div>
 												<div id="labelCorpscetonique" style="float: left;">
 													<div id="fleche3" style="float: left;">
 														<label style="width: 15px; text-align: center;"> » </label>
@@ -1607,7 +1637,7 @@ echo $this->form ()->openTag ( $form );
                 <?php echo  $this->headScript()->appendFile($this->basePath().'/js/maternite/accouchement/ajouterDonnees.js');?>
                <?php echo  $this->headScript()->appendFile($this->basePath().'/js/maternite/accouchement/jsMaternite.js');?>
               
-      	<table style="width: 100%;"> 
+      	<table id="" style="width: 100%;"> 
       	<tr style="width: 100%;">
 		    <td class="antecedent_go" style="width: 50%; ">
 	           
@@ -1777,7 +1807,7 @@ echo $this->form ()->openTag ( $form );
 				
 				<div style="max-height: 300px;">
 				 <?php echo  $this->headScript()->appendFile($this->basePath().'/js/maternite/accouchement/jsMaternite.js');?>
-						<table style="width: 100%;">
+						<table id="" style="width: 100%;">
               			<tr style="width: 100%; ">
 		<td class="antecedent_go" style="width:50%">
 								<div style="float: left;width: 10%;">
@@ -1960,6 +1990,830 @@ echo $this->form ()->openTag ( $form );
 
 
 		
+			<div style='font-family: police2;font-size: 17px; font-weight: bold;'>les enfants</div>
+		
+		
+		<div style='max-height: 800px;'>
+<div class="accordionssssssssss" >
+
+        <!--  **************** NOUVELLE ACCORDEON *********************  -->
+        <!--  **************** NOUVELLE ACCORDEON *********************  -->
+        
+        
+        
+                    <div  style='font-family: police2;font-size: 17px; font-weight: bold;'>  enfant1 </div>
+	         	<div >
+		<table style="width: 100%;">
+						
+                 <tr style="width: 100%; ">
+		               <td class="antecedent_go" style="width:50%;">
+								<div style="float: left;width: 10%;">
+									<label style="width: 90%; height: 30px; text-align: left;" title="">Sexe</label>
+									</div>
+									<div style="float: left; width: 20%; ">
+									<label style="width: 90%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('sexe'));?></label>
+								</div>		
+								<div style="float: left;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: left;margin-left:5%">Note<?php echo $this->formRow($form->get('note_sexe'));?></label>
+								</div>																								
+							</td>
+			<td class="antecedent_go" style="width:50%;">
+							<div style="float: left;width: 10%;">
+									<label style="width: 95%; height: 30px; text-align: left;" title="">Poids</label>
+									</div>
+									<div style="float: left; width: 25%; ">
+									<label style="width: 95%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('poids'));?></label>
+								</div>		
+								<div style="float: right;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: right;">Note<?php echo $this->formRow($form->get('note_poids'));?></label>
+								</div>																								
+							</td>
+		          </tr>
+		           
+		             <tr style="width: 100%; ">
+		            <td class="antecedent_go" style="width:50%;">
+								<div style="float: left;width: 10%;">
+									<label style="width: 90%; height: 30px; text-align: left;" title="">Cri</label>
+									</div>
+									<div style="float: left; width: 20%; ">
+									<label style="width: 90%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('cri'));?></label>
+								</div>		
+								<div style="float: left;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: left;margin-left:5%">Note<?php echo $this->formRow($form->get('note_cri'));?></label>
+								</div>																								
+							</td>
+			<td class="antecedent_go" style="width:50%;">
+							<div style="float: left;width: 10%;">
+									<label style="width: 95%; height: 30px; text-align: left;" title="">Taille</label>
+									</div>
+									<div style="float: left; width: 25%; ">
+									<label style="width: 95%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('taille_enf'));?></label>
+								</div>		
+								<div style="float: right;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: right;">Note<?php echo $this->formRow($form->get('note_taille_enf'));?></label>
+								</div>																								
+							</td>
+		          </tr>
+		           <tr style="width: 100%; ">
+		                <td class="antecedent_go" style="width:50%;">
+								<div style="float: left;width:31%">
+									<label style="width: 89%; height: 30px; text-align: left;">p&eacute;rim&eacute;tres</label>
+								</div>	
+								
+								<div style="float: left;width: 15%;">
+									<label style="width: 95%; height: 30px; text-align: left;margin-left:12%" title="Perimetre cranien">Cranien</label>
+									</div>
+									<div style="float: left; width: 8%; ">
+									<label style="width: 95%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('perim_cranien'));?></label>
+								</div>
+								
+									<div style="float: left;width: 21%;">
+									<label style="width: 95%; height: 30px; text-align: left;margin-left:40%;" title="Perimetre brachal">brachial</label>
+									</div>
+									<div style="float: left; width: 15%; ">
+									<label style="width: 100%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('perim_brachial'));?></label>
+								</div>
+																																				
+							</td>
+							 <td class="antecedent_go" style="width:50%;">
+									<div style="float: left;width: 10%;">
+									<label style="width: 95%; height: 30px; text-align: left;" title="Perimetre cephalique">Ceph</label>
+									</div>
+									<div style="float: left; width: 25%; ">
+									<label style="width: 95%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('perim_cephalique'));?></label>
+								</div>
+									
+								<div style="float: right;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: right;">Note<?php echo $this->formRow($form->get('note_perim'));?></label>
+								</div>																							
+							</td>			
+		          </tr>
+		           <tr style="width: 100%; ">
+		              <td class="antecedent_go" style="width:50%;">
+								<div style="float: left;width: 10%;">
+									<label style="width: 90%; height: 30px; text-align: left;" title="">Sat</label>
+									</div>
+									<div style="float: left; width: 20%; ">
+									<label style="width: 90%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('sat'));?></label>
+								</div>		
+								<div style="float: left;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: left;margin-left:5%">Note<?php echo $this->formRow($form->get('note_sat'));?></label>
+								</div>																								
+							</td>
+			<td class="antecedent_go" style="width:50%;">
+							<div style="float: left;width: 10%;">
+									<label style="width: 95%; height: 30px; text-align: left;" title="Vitamine K">Vit K</label>
+									</div>
+									<div style="float: left; width: 25%; ">
+									<label style="width: 95%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('vit_k'));?></label>
+								</div>		
+								<div style="float: right;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: right;">Note<?php echo $this->formRow($form->get('note_vit_k'));?></label>
+								</div>																								
+							</td>
+		          </tr>
+		          <tr style="width: 100%; ">
+		             	
+									
+		          </tr>
+		            <tr style="width: 100%; ">
+		              	 <td class="antecedent_go" style="width:50%;">
+								<div style="float: left;width: 10%;">
+									<label style="width: 90%; height: 30px; text-align: left;" title="Mal Formation">Malf</label>
+									</div>
+									<div style="float: left; width: 20%; ">
+									<label style="width: 90%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('malf'));?></label>
+								</div>		
+								<div style="float: left;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: left;margin-left:5%">Note<?php echo $this->formRow($form->get('note_malf'));?></label>
+								</div>																								
+							</td>	
+										<td class="antecedent_go" style="width:50%;">
+							<div style="float: left;width: 10%;">
+									<label style="width: 95%; height: 30px; text-align: left;" title="Maintien de la temp&eacute;rature">MT</label>
+									</div>
+									<div style="float: left; width: 25%; ">
+									<label style="width: 95%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('maintien_temp'));?></label>
+								</div>		
+								<div style="float: right;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: right;">Note<?php echo $this->formRow($form->get('note_temp'));?></label>
+								</div>																								
+							</td>
+		          </tr>
+		            <tr style="width: 100%; ">
+		               <td class="antecedent_go" style="width:50%;">
+								<div style="float: left;width: 10%;">
+									<label style="width: 90%; height: 30px; text-align: left;" title="Mise Au soin precoce">MSP</label>
+									</div>
+									<div style="float: left; width: 20%; ">
+									<label style="width: 90%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('mise_soin_precoce'));?></label>
+								</div>		
+								<div style="float: left;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: left;margin-left:5%">Note<?php echo $this->formRow($form->get('note_precoce'));?></label>
+								</div>																								
+							</td>
+											<td class="antecedent_go" style="width:50%;">
+							<div style="float: left;width: 10%;">
+									<label style="width: 95%; height: 30px; text-align: left;" title="Soin du cordon">SC</label>
+									</div>
+									<div style="float: left; width: 25%; ">
+									<label style="width: 95%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('soin_cordon'));?></label>
+								</div>		
+								<div style="float: right;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: right;">Note<?php echo $this->formRow($form->get('note_cordon'));?></label>
+								</div>																								
+							</td>	
+		          </tr>
+		               	     <tr style="width: 100%; ">
+		              	 <td class="antecedent_go" style="width:50%;">
+								<div style="float: left;width: 10%;">
+									<label style="width: 90%; height: 30px; text-align: left;" title="Reanimation">reanim</label>
+									</div>
+									<div style="float: left; width: 20%; ">
+									<label style="width: 90%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('reanimation'));?></label>
+								</div>		
+								<div style="float: left;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: left;margin-left:5%">Note<?php echo $this->formRow($form->get('note_reanimation'));?></label>
+								</div>																								
+							</td>	
+											<td class="antecedent_go" style="width:50%;">
+							<div style="float: left;width: 10%;">
+									<label style="width: 95%; height: 30px; text-align: left;" title="Collyre">Collyr</label>
+									</div>
+									<div style="float: left; width: 25%; ">
+									<label style="width: 95%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('collyre'));?></label>
+								</div>		
+								<div style="float: right;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: right;">Note<?php echo $this->formRow($form->get('note_collyre'));?></label>
+								</div>																								
+							</td>	
+		          </tr>
+							      <tr style="width: 100%; ">
+		               <td class="antecedent_go" style="width:50%;">
+								
+							<div style="float: left;width: 10%;">
+									<label style="width: 90%; height: 30px; text-align: left;" title="">VPO</label>
+									</div>
+									<div style="float: left; width: 20%; ">
+									<label style="width: 90%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('vpo'));?></label>
+								</div>	
+								<div style="float: left;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: left;margin-left:5%"title="Anti hepatique">antiH<?php echo $this->formRow($form->get('anti_hepatique'));?></label>
+								</div>																													
+							</td>
+							 <td class="antecedent_go" style="width:50%;">
+								<div style="float: left;width: 10%;">
+									<label style="width: 95%; height: 30px; text-align: left;" title="Anti Tubercleux">antiT</label>
+									</div>
+									<div style="float: left; width: 25%; ">
+									<label style="width: 95%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('anti_tuberculeux'));?></label>
+								</div>			
+								<div style="float: right;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: right;">Note<?php echo $this->formRow($form->get('note_vacc'));?></label>
+								</div>																								
+							</td>			
+		          </tr>		
+		       	  <tr style="width: 100%; ">
+		                  <td class="antecedent_go" style="width:50%;">
+								<div style="float: left;width: 10%;">
+									<label style="width: 90%; height: 30px; text-align: left;" title="Autres VAccins">Autre</label>
+									</div>
+									<div style="float: left; width: 20%; ">
+									<label style="width: 90%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('autre_vacc'));?></label>
+								</div>			
+								<div style="float: left;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: left;margin-left:5%">Type<?php echo $this->formRow($form->get('type_autre_vacc'));?></label>
+								</div>																								
+							</td>
+				<td class="antecedent_go" style="width:50%">
+							
+		     <div style="float: right;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: right;">Note<?php echo $this->formRow($form->get('note_autre_vacc'));?></label>
+								</div>				
+					</td>
+							
+		         </tr>	
+		              
+   <tr style="width: 100%; ">
+		               <td class="antecedent_go" style="width:50%;">
+								<div style="float: left;width:8%">
+									<label style="width: 90%; height: 30px; text-align: left;">apgar</label>
+								</div>	
+								<div style="float: left;width:22%;">
+									<label style="width: 90%; height: 30px; text-align: left;">1<?php echo $this->formRow($form->get('apgar_1'));?></label>
+								</div>	
+								<div style="float: left;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: left;margin-left:5%">5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $this->formRow($form->get('apgar_5'));?></label>
+								</div>																													
+							</td>
+							 <td class="antecedent_go" style="width:50%;">
+								<div style="float: right;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: right;">Note<?php echo $this->formRow($form->get('note_apgar'));?></label>
+								</div>			
+																																
+							</td>			
+		          </tr>
+		         	<tr style="width: 100%;">
+	 <td class="antecedent_go" style="width: 50%; ">
+	           
+	            <div style="float: left; width: 10%; " id="rh">
+				   <label class="" style="width: 90%; height: 50px; text-align: left;"title="consultation J1 J2">CJ1J2 </label>
+			   </div>
+	            <div style="float: left; width: 20%; " id="rh">
+				   <label class="" style="width: 90%; height: 50px; text-align: left;"title=""> <?php echo $this->formRow($form->get('consult_j1_j2'));?> </label>
+			   </div>
+	            <div style="float: left;width:60%;">
+									<label style="width: 95%; height: 50px; text-align: left;margin-left:5%">Note<?php echo $this->formRow($form->get('note_cons_j1_j2'));?></label>
+								</div>    
+			  </td>
+			 
+             </tr>
+             </table>
+</div>
+	            <div style='font-family: police2;font-size: 17px; font-weight: bold;'> enfant2 </div>
+	            	         <div >
+                 		<table style="width: 100%;">
+						  
+                 <tr style="width: 100%; ">
+		               <td class="antecedent_go" style="width:50%;">
+								<div style="float: left;width: 10%;">
+									<label style="width: 90%; height: 30px; text-align: left;" title="">Sexe</label>
+									</div>
+									<div style="float: left; width: 20%; ">
+									<label style="width: 90%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('sexe'));?></label>
+								</div>		
+								<div style="float: left;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: left;margin-left:5%">Note<?php echo $this->formRow($form->get('note_sexe'));?></label>
+								</div>																								
+							</td>
+			<td class="antecedent_go" style="width:50%;">
+							<div style="float: left;width: 10%;">
+									<label style="width: 95%; height: 30px; text-align: left;" title="">Poids</label>
+									</div>
+									<div style="float: left; width: 25%; ">
+									<label style="width: 95%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('poids'));?></label>
+								</div>		
+								<div style="float: right;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: right;">Note<?php echo $this->formRow($form->get('note_poids'));?></label>
+								</div>																								
+							</td>
+		          </tr>
+		             <tr style="width: 100%; ">
+		            <td class="antecedent_go" style="width:50%;">
+								<div style="float: left;width: 10%;">
+									<label style="width: 90%; height: 30px; text-align: left;" title="">Cri</label>
+									</div>
+									<div style="float: left; width: 20%; ">
+									<label style="width: 90%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('cri'));?></label>
+								</div>		
+								<div style="float: left;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: left;margin-left:5%">Note<?php echo $this->formRow($form->get('note_cri'));?></label>
+								</div>																								
+							</td>
+			<td class="antecedent_go" style="width:50%;">
+							<div style="float: left;width: 10%;">
+									<label style="width: 95%; height: 30px; text-align: left;" title="">Taille</label>
+									</div>
+									<div style="float: left; width: 25%; ">
+									<label style="width: 95%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('taille_enf'));?></label>
+								</div>		
+								<div style="float: right;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: right;">Note<?php echo $this->formRow($form->get('note_taille_enf'));?></label>
+								</div>																								
+							</td>
+		          </tr>
+		           <tr style="width: 100%; ">
+		                <td class="antecedent_go" style="width:50%;">
+								<div style="float: left;width:31%">
+									<label style="width: 89%; height: 30px; text-align: left;">p&eacute;rim&eacute;tres</label>
+								</div>	
+								
+								<div style="float: left;width: 15%;">
+									<label style="width: 95%; height: 30px; text-align: left;margin-left:12%" title="Perimetre cranien">Cranien</label>
+									</div>
+									<div style="float: left; width: 8%; ">
+									<label style="width: 95%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('perim_cranien'));?></label>
+								</div>
+								
+									<div style="float: left;width: 21%;">
+									<label style="width: 95%; height: 30px; text-align: left;margin-left:40%;" title="Perimetre brachal">brachial</label>
+									</div>
+									<div style="float: left; width: 15%; ">
+									<label style="width: 100%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('perim_brachial'));?></label>
+								</div>
+																																				
+							</td>
+							 <td class="antecedent_go" style="width:50%;">
+									<div style="float: left;width: 10%;">
+									<label style="width: 95%; height: 30px; text-align: left;" title="Perimetre cephalique">Ceph</label>
+									</div>
+									<div style="float: left; width: 25%; ">
+									<label style="width: 95%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('perim_cephalique'));?></label>
+								</div>
+									
+								<div style="float: right;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: right;">Note<?php echo $this->formRow($form->get('note_perim'));?></label>
+								</div>																							
+							</td>			
+		          </tr>
+		           <tr style="width: 100%; ">
+		              <td class="antecedent_go" style="width:50%;">
+								<div style="float: left;width: 10%;">
+									<label style="width: 90%; height: 30px; text-align: left;" title="">Sat</label>
+									</div>
+									<div style="float: left; width: 20%; ">
+									<label style="width: 90%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('sat'));?></label>
+								</div>		
+								<div style="float: left;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: left;margin-left:5%">Note<?php echo $this->formRow($form->get('note_sat'));?></label>
+								</div>																								
+							</td>
+			<td class="antecedent_go" style="width:50%;">
+							<div style="float: left;width: 10%;">
+									<label style="width: 95%; height: 30px; text-align: left;" title="Vitamine K">Vit K</label>
+									</div>
+									<div style="float: left; width: 25%; ">
+									<label style="width: 95%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('vit_k'));?></label>
+								</div>		
+								<div style="float: right;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: right;">Note<?php echo $this->formRow($form->get('note_vit_k'));?></label>
+								</div>																								
+							</td>
+		          </tr>
+		          <tr style="width: 100%; ">
+		             	
+									
+		          </tr>
+		            <tr style="width: 100%; ">
+		              	 <td class="antecedent_go" style="width:50%;">
+								<div style="float: left;width: 10%;">
+									<label style="width: 90%; height: 30px; text-align: left;" title="Mal Formation">Malf</label>
+									</div>
+									<div style="float: left; width: 20%; ">
+									<label style="width: 90%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('malf'));?></label>
+								</div>		
+								<div style="float: left;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: left;margin-left:5%">Note<?php echo $this->formRow($form->get('note_malf'));?></label>
+								</div>																								
+							</td>	
+										<td class="antecedent_go" style="width:50%;">
+							<div style="float: left;width: 10%;">
+									<label style="width: 95%; height: 30px; text-align: left;" title="Maintien de la temp&eacute;rature">MT</label>
+									</div>
+									<div style="float: left; width: 25%; ">
+									<label style="width: 95%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('maintien_temp'));?></label>
+								</div>		
+								<div style="float: right;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: right;">Note<?php echo $this->formRow($form->get('note_temp'));?></label>
+								</div>																								
+							</td>
+		          </tr>
+		            <tr style="width: 100%; ">
+		               <td class="antecedent_go" style="width:50%;">
+								<div style="float: left;width: 10%;">
+									<label style="width: 90%; height: 30px; text-align: left;" title="Mise Au soin precoce">MSP</label>
+									</div>
+									<div style="float: left; width: 20%; ">
+									<label style="width: 90%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('mise_soin_precoce'));?></label>
+								</div>		
+								<div style="float: left;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: left;margin-left:5%">Note<?php echo $this->formRow($form->get('note_precoce'));?></label>
+								</div>																								
+							</td>
+											<td class="antecedent_go" style="width:50%;">
+							<div style="float: left;width: 10%;">
+									<label style="width: 95%; height: 30px; text-align: left;" title="Soin du cordon">SC</label>
+									</div>
+									<div style="float: left; width: 25%; ">
+									<label style="width: 95%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('soin_cordon'));?></label>
+								</div>		
+								<div style="float: right;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: right;">Note<?php echo $this->formRow($form->get('note_cordon'));?></label>
+								</div>																								
+							</td>	
+		          </tr>
+		               	     <tr style="width: 100%; ">
+		              	 <td class="antecedent_go" style="width:50%;">
+								<div style="float: left;width: 10%;">
+									<label style="width: 90%; height: 30px; text-align: left;" title="Reanimation">reanim</label>
+									</div>
+									<div style="float: left; width: 20%; ">
+									<label style="width: 90%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('reanimation'));?></label>
+								</div>		
+								<div style="float: left;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: left;margin-left:5%">Note<?php echo $this->formRow($form->get('note_reanimation'));?></label>
+								</div>																								
+							</td>	
+											<td class="antecedent_go" style="width:50%;">
+							<div style="float: left;width: 10%;">
+									<label style="width: 95%; height: 30px; text-align: left;" title="Collyre">Collyr</label>
+									</div>
+									<div style="float: left; width: 25%; ">
+									<label style="width: 95%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('collyre'));?></label>
+								</div>		
+								<div style="float: right;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: right;">Note<?php echo $this->formRow($form->get('note_collyre'));?></label>
+								</div>																								
+							</td>	
+		          </tr>
+							      <tr style="width: 100%; ">
+		               <td class="antecedent_go" style="width:50%;">
+								
+							<div style="float: left;width: 10%;">
+									<label style="width: 90%; height: 30px; text-align: left;" title="">VPO</label>
+									</div>
+									<div style="float: left; width: 20%; ">
+									<label style="width: 90%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('vpo'));?></label>
+								</div>	
+								<div style="float: left;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: left;margin-left:5%"title="Anti hepatique">antiH<?php echo $this->formRow($form->get('anti_hepatique'));?></label>
+								</div>																													
+							</td>
+							 <td class="antecedent_go" style="width:50%;">
+								<div style="float: left;width: 10%;">
+									<label style="width: 95%; height: 30px; text-align: left;" title="Anti Tubercleux">antiT</label>
+									</div>
+									<div style="float: left; width: 25%; ">
+									<label style="width: 95%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('anti_tuberculeux'));?></label>
+								</div>			
+								<div style="float: right;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: right;">Note<?php echo $this->formRow($form->get('note_vacc'));?></label>
+								</div>																								
+							</td>			
+		          </tr>		
+		       	  <tr style="width: 100%; ">
+		                  <td class="antecedent_go" style="width:50%;">
+								<div style="float: left;width: 10%;">
+									<label style="width: 90%; height: 30px; text-align: left;" title="Autres VAccins">Autre</label>
+									</div>
+									<div style="float: left; width: 20%; ">
+									<label style="width: 90%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('autre_vacc'));?></label>
+								</div>			
+								<div style="float: left;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: left;margin-left:5%">Type<?php echo $this->formRow($form->get('type_autre_vacc'));?></label>
+								</div>																								
+							</td>
+				<td class="antecedent_go" style="width:50%">
+							
+		     <div style="float: right;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: right;">Note<?php echo $this->formRow($form->get('note_autre_vacc'));?></label>
+								</div>				
+					</td>
+							
+		         </tr>	
+		              
+   <tr style="width: 100%; ">
+		               <td class="antecedent_go" style="width:50%;">
+								<div style="float: left;width:8%">
+									<label style="width: 90%; height: 30px; text-align: left;">apgar</label>
+								</div>	
+								<div style="float: left;width:22%;">
+									<label style="width: 90%; height: 30px; text-align: left;">1<?php echo $this->formRow($form->get('apgar_1'));?></label>
+								</div>	
+								<div style="float: left;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: left;margin-left:5%">5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $this->formRow($form->get('apgar_5'));?></label>
+								</div>																													
+							</td>
+							 <td class="antecedent_go" style="width:50%;">
+								<div style="float: right;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: right;">Note<?php echo $this->formRow($form->get('note_apgar'));?></label>
+								</div>			
+																																
+							</td>			
+		          </tr>
+		         	<tr style="width: 100%;">
+	 <td class="antecedent_go" style="width: 50%; ">
+	           
+	            <div style="float: left; width: 10%; " id="rh">
+				   <label class="" style="width: 90%; height: 50px; text-align: left;"title="consultation J1 J2">CJ1J2 </label>
+			   </div>
+	            <div style="float: left; width: 20%; " id="rh">
+				   <label class="" style="width: 90%; height: 50px; text-align: left;"title=""> <?php echo $this->formRow($form->get('consult_j1_j2'));?> </label>
+			   </div>
+	            <div style="float: left;width:60%;">
+									<label style="width: 95%; height: 50px; text-align: left;margin-left:5%">Note<?php echo $this->formRow($form->get('note_cons_j1_j2'));?></label>
+								</div>    
+			  </td>
+			 
+             </tr>
+					</table>
+               </div>
+                <div style='font-family: police2;font-size: 17px; font-weight: bold;'> enfant3 </div>
+	            	         <div >
+                		<table style="width: 100%;">
+						 
+                 <tr style="width: 100%; ">
+		               <td class="antecedent_go" style="width:50%;">
+								<div style="float: left;width: 10%;">
+									<label style="width: 90%; height: 30px; text-align: left;" title="">Sexe</label>
+									</div>
+									<div style="float: left; width: 20%; ">
+									<label style="width: 90%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('sexe'));?></label>
+								</div>		
+								<div style="float: left;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: left;margin-left:5%">Note<?php echo $this->formRow($form->get('note_sexe'));?></label>
+								</div>																								
+							</td>
+			<td class="antecedent_go" style="width:50%;">
+							<div style="float: left;width: 10%;">
+									<label style="width: 95%; height: 30px; text-align: left;" title="">Poids</label>
+									</div>
+									<div style="float: left; width: 25%; ">
+									<label style="width: 95%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('poids'));?></label>
+								</div>		
+								<div style="float: right;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: right;">Note<?php echo $this->formRow($form->get('note_poids'));?></label>
+								</div>																								
+							</td>
+		          </tr>
+		             <tr style="width: 100%; ">
+		            <td class="antecedent_go" style="width:50%;">
+								<div style="float: left;width: 10%;">
+									<label style="width: 90%; height: 30px; text-align: left;" title="">Cri</label>
+									</div>
+									<div style="float: left; width: 20%; ">
+									<label style="width: 90%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('cri'));?></label>
+								</div>		
+								<div style="float: left;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: left;margin-left:5%">Note<?php echo $this->formRow($form->get('note_cri'));?></label>
+								</div>																								
+							</td>
+			<td class="antecedent_go" style="width:50%;">
+							<div style="float: left;width: 10%;">
+									<label style="width: 95%; height: 30px; text-align: left;" title="">Taille</label>
+									</div>
+									<div style="float: left; width: 25%; ">
+									<label style="width: 95%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('taille_enf'));?></label>
+								</div>		
+								<div style="float: right;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: right;">Note<?php echo $this->formRow($form->get('note_taille_enf'));?></label>
+								</div>																								
+							</td>
+		          </tr>
+		           <tr style="width: 100%; ">
+		                <td class="antecedent_go" style="width:50%;">
+								<div style="float: left;width:31%">
+									<label style="width: 89%; height: 30px; text-align: left;">p&eacute;rim&eacute;tres</label>
+								</div>	
+								
+								<div style="float: left;width: 15%;">
+									<label style="width: 95%; height: 30px; text-align: left;margin-left:12%" title="Perimetre cranien">Cranien</label>
+									</div>
+									<div style="float: left; width: 8%; ">
+									<label style="width: 95%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('perim_cranien'));?></label>
+								</div>
+								
+									<div style="float: left;width: 21%;">
+									<label style="width: 95%; height: 30px; text-align: left;margin-left:40%;" title="Perimetre brachal">brachial</label>
+									</div>
+									<div style="float: left; width: 15%; ">
+									<label style="width: 100%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('perim_brachial'));?></label>
+								</div>
+																																				
+							</td>
+							 <td class="antecedent_go" style="width:50%;">
+									<div style="float: left;width: 10%;">
+									<label style="width: 95%; height: 30px; text-align: left;" title="Perimetre cephalique">Ceph</label>
+									</div>
+									<div style="float: left; width: 25%; ">
+									<label style="width: 95%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('perim_cephalique'));?></label>
+								</div>
+									
+								<div style="float: right;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: right;">Note<?php echo $this->formRow($form->get('note_perim'));?></label>
+								</div>																							
+							</td>			
+		          </tr>
+		           <tr style="width: 100%; ">
+		              <td class="antecedent_go" style="width:50%;">
+								<div style="float: left;width: 10%;">
+									<label style="width: 90%; height: 30px; text-align: left;" title="">Sat</label>
+									</div>
+									<div style="float: left; width: 20%; ">
+									<label style="width: 90%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('sat'));?></label>
+								</div>		
+								<div style="float: left;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: left;margin-left:5%">Note<?php echo $this->formRow($form->get('note_sat'));?></label>
+								</div>																								
+							</td>
+			<td class="antecedent_go" style="width:50%;">
+							<div style="float: left;width: 10%;">
+									<label style="width: 95%; height: 30px; text-align: left;" title="Vitamine K">Vit K</label>
+									</div>
+									<div style="float: left; width: 25%; ">
+									<label style="width: 95%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('vit_k'));?></label>
+								</div>		
+								<div style="float: right;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: right;">Note<?php echo $this->formRow($form->get('note_vit_k'));?></label>
+								</div>																								
+							</td>
+		          </tr>
+		          <tr style="width: 100%; ">
+		             	
+									
+		          </tr>
+		            <tr style="width: 100%; ">
+		              	 <td class="antecedent_go" style="width:50%;">
+								<div style="float: left;width: 10%;">
+									<label style="width: 90%; height: 30px; text-align: left;" title="Mal Formation">Malf</label>
+									</div>
+									<div style="float: left; width: 20%; ">
+									<label style="width: 90%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('malf'));?></label>
+								</div>		
+								<div style="float: left;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: left;margin-left:5%">Note<?php echo $this->formRow($form->get('note_malf'));?></label>
+								</div>																								
+							</td>	
+										<td class="antecedent_go" style="width:50%;">
+							<div style="float: left;width: 10%;">
+									<label style="width: 95%; height: 30px; text-align: left;" title="Maintien de la temp&eacute;rature">MT</label>
+									</div>
+									<div style="float: left; width: 25%; ">
+									<label style="width: 95%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('maintien_temp'));?></label>
+								</div>		
+								<div style="float: right;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: right;">Note<?php echo $this->formRow($form->get('note_temp'));?></label>
+								</div>																								
+							</td>
+		          </tr>
+		            <tr style="width: 100%; ">
+		               <td class="antecedent_go" style="width:50%;">
+								<div style="float: left;width: 10%;">
+									<label style="width: 90%; height: 30px; text-align: left;" title="Mise Au soin precoce">MSP</label>
+									</div>
+									<div style="float: left; width: 20%; ">
+									<label style="width: 90%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('mise_soin_precoce'));?></label>
+								</div>		
+								<div style="float: left;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: left;margin-left:5%">Note<?php echo $this->formRow($form->get('note_precoce'));?></label>
+								</div>																								
+							</td>
+											<td class="antecedent_go" style="width:50%;">
+							<div style="float: left;width: 10%;">
+									<label style="width: 95%; height: 30px; text-align: left;" title="Soin du cordon">SC</label>
+									</div>
+									<div style="float: left; width: 25%; ">
+									<label style="width: 95%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('soin_cordon'));?></label>
+								</div>		
+								<div style="float: right;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: right;">Note<?php echo $this->formRow($form->get('note_cordon'));?></label>
+								</div>																								
+							</td>	
+		          </tr>
+		               	     <tr style="width: 100%; ">
+		              	 <td class="antecedent_go" style="width:50%;">
+								<div style="float: left;width: 10%;">
+									<label style="width: 90%; height: 30px; text-align: left;" title="Reanimation">reanim</label>
+									</div>
+									<div style="float: left; width: 20%; ">
+									<label style="width: 90%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('reanimation'));?></label>
+								</div>		
+								<div style="float: left;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: left;margin-left:5%">Note<?php echo $this->formRow($form->get('note_reanimation'));?></label>
+								</div>																								
+							</td>	
+											<td class="antecedent_go" style="width:50%;">
+							<div style="float: left;width: 10%;">
+									<label style="width: 95%; height: 30px; text-align: left;" title="Collyre">Collyr</label>
+									</div>
+									<div style="float: left; width: 25%; ">
+									<label style="width: 95%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('collyre'));?></label>
+								</div>		
+								<div style="float: right;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: right;">Note<?php echo $this->formRow($form->get('note_collyre'));?></label>
+								</div>																								
+							</td>	
+		          </tr>
+							      <tr style="width: 100%; ">
+		               <td class="antecedent_go" style="width:50%;">
+								
+							<div style="float: left;width: 10%;">
+									<label style="width: 90%; height: 30px; text-align: left;" title="">VPO</label>
+									</div>
+									<div style="float: left; width: 20%; ">
+									<label style="width: 90%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('vpo'));?></label>
+								</div>	
+								<div style="float: left;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: left;margin-left:5%"title="Anti hepatique">antiH<?php echo $this->formRow($form->get('anti_hepatique'));?></label>
+								</div>																													
+							</td>
+							 <td class="antecedent_go" style="width:50%;">
+								<div style="float: left;width: 10%;">
+									<label style="width: 95%; height: 30px; text-align: left;" title="Anti Tubercleux">antiT</label>
+									</div>
+									<div style="float: left; width: 25%; ">
+									<label style="width: 95%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('anti_tuberculeux'));?></label>
+								</div>			
+								<div style="float: right;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: right;">Note<?php echo $this->formRow($form->get('note_vacc'));?></label>
+								</div>																								
+							</td>			
+		          </tr>		
+		       	  <tr style="width: 100%; ">
+		                  <td class="antecedent_go" style="width:50%;">
+								<div style="float: left;width: 10%;">
+									<label style="width: 90%; height: 30px; text-align: left;" title="Autres VAccins">Autre</label>
+									</div>
+									<div style="float: left; width: 20%; ">
+									<label style="width: 90%; height: 30px; text-align: left;"><?php echo $this->formRow($form->get('autre_vacc'));?></label>
+								</div>			
+								<div style="float: left;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: left;margin-left:5%">Type<?php echo $this->formRow($form->get('type_autre_vacc'));?></label>
+								</div>																								
+							</td>
+				<td class="antecedent_go" style="width:50%">
+							
+		     <div style="float: right;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: right;">Note<?php echo $this->formRow($form->get('note_autre_vacc'));?></label>
+								</div>				
+					</td>
+							
+		         </tr>	
+		              
+   <tr style="width: 100%; ">
+		               <td class="antecedent_go" style="width:50%;">
+								<div style="float: left;width:8%">
+									<label style="width: 90%; height: 30px; text-align: left;">apgar</label>
+								</div>	
+								<div style="float: left;width:22%;">
+									<label style="width: 90%; height: 30px; text-align: left;">1<?php echo $this->formRow($form->get('apgar_1'));?></label>
+								</div>	
+								<div style="float: left;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: left;margin-left:5%">5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $this->formRow($form->get('apgar_5'));?></label>
+								</div>																													
+							</td>
+							 <td class="antecedent_go" style="width:50%;">
+								<div style="float: right;width:60%;">
+									<label style="width: 95%; height: 30px; text-align: right;">Note<?php echo $this->formRow($form->get('note_apgar'));?></label>
+								</div>			
+																																
+							</td>			
+		          </tr>
+		         	<tr style="width: 100%;">
+	 <td class="antecedent_go" style="width: 50%; ">
+	           
+	            <div style="float: left; width: 10%; " id="rh">
+				   <label class="" style="width: 90%; height: 50px; text-align: left;"title="consultation J1 J2">CJ1J2 </label>
+			   </div>
+	            <div style="float: left; width: 20%; " id="rh">
+				   <label class="" style="width: 90%; height: 50px; text-align: left;"title=""> <?php echo $this->formRow($form->get('consult_j1_j2'));?> </label>
+			   </div>
+	            <div style="float: left;width:60%;">
+									<label style="width: 95%; height: 50px; text-align: left;margin-left:5%">Note<?php echo $this->formRow($form->get('note_cons_j1_j2'));?></label>
+								</div>    
+			  </td>
+			 
+             </tr>
+
+
+			   
+	          
+					</table>
+               </div>
+               
+  
+	           </div>
+	      </div>
 		<!-- ********************ENFANT******************-->
 		
 			<div style='font-family: police2;font-size: 17px; font-weight: bold;'>Enfant</div>
@@ -1980,7 +2834,7 @@ echo $this->form ()->openTag ( $form );
 				<!-- **2** -->
 				
 				<div >
-						<table style="width: 100%;">
+						<table id="" style="width: 100%;">
 						   <tr style="width: 100%; ">
 						   <td class="antecedent_go" style="width:50%;">
 								<!--<div style="float: left;width: 10%;">
@@ -2319,7 +3173,7 @@ echo $this->form ()->openTag ( $form );
 
         <!--  **************** NOUVELLE ACCORDEON *********************  -->
         <!--  **************** NOUVELLE ACCORDEON *********************  -->
-        <div id="accordionssssssssss">
+        <div class="accordionssssssssss">
 
             <!-- ************** Tranfert **************** -->
             <!-- **1** -->
