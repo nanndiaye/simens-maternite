@@ -33,9 +33,9 @@ class AdmissionTable {
 				'Nom' => 'NOM',
 				'Prenom' => 'PRENOM',
 				'Age' => 'AGE',
-				'Sexe' => 'SEXE',
+				//'Sexe' => 'SEXE',
 				'Adresse' => 'ADRESSE',
-				'Nationalite' => 'NATIONALITE_ACTUELLE',
+				//'Nationalite' => 'NATIONALITE_ACTUELLE',
 				'Id' => 'ID_PERSONNE'
 		));
 		$select->join ( array (

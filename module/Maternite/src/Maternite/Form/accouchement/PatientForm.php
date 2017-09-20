@@ -51,7 +51,7 @@ class PatientForm extends Form {
 				'attributes' => array (
 						'id' => 'SEXE',
 						'required' => true,
-						'tabindex' => 1,
+						//'tabindex' => 1,
 				)
 		) );
 		

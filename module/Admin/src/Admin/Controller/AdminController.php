@@ -175,7 +175,7 @@ class AdminController extends AbstractActionController
     	{
     		//return $this->redirect()->toRoute('hospitalisation', array('action' => 'suivi-patient'));
     	   // return $this->redirect()->toRoute('maternite', array('action' => 'test'));
-    		return $this->redirect()->toRoute('accouchement', array('action' => 'creer-dossier-patiente'));
+    		return $this->redirect()->toRoute('accouchement', array('action' => 'liste-patient'));
     	}
     	else if($user['role'] == "laborantin")
     	{

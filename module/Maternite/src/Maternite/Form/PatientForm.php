@@ -3,11 +3,25 @@
 namespace Maternite\Form;
 
 use Zend\Form\Form;
+use Doctrine\Common\Collections\Expr\Value;
 
 class PatientForm extends Form {
 	public function __construct($name = null) {
 		parent::__construct ();
-
+		$this->add ( array (
+				'name' => 'id_patient',
+				'type' => 'Hidden',
+				'attributes' => array(
+						'id' => 'id_patient'
+				)
+		) );
+		$this->add ( array (
+				'name' => 'id_admission',
+				'type' => 'Hidden',
+				'attributes' => array(
+						'id' => 'id_admission'
+				)
+		) );
 		$this->add ( array (
 				'name' => 'ID_PERSONNE',
 				'type' => 'Hidden',
@@ -30,24 +44,22 @@ class PatientForm extends Form {
 						'value' => 'M',
 				)
 		) );
-
 		$this->add ( array (
 				'name' => 'SEXE',
-				'type' => 'Zend\Form\Element\Select',
+				'type' => 'Text',
 				'options' => array (
 						'label' => 'Sexe',
-						'value_options' => array (
-								'' => '',
-								
-								iconv ( 'ISO-8859-1', 'UTF-8','Féminin') => iconv ( 'ISO-8859-1', 'UTF-8','Féminin')
-						)
+						
 				),
 				'attributes' => array (
 						'id' => 'SEXE',
 						'required' => true,
 						'tabindex' => 1,
+						'Value'=>"Feminin",
+						'readonly' => 'readonly',
 				)
 		) );
+		
 		
 		$this->add ( array (
 				'name' => 'NOM',
@@ -192,7 +204,78 @@ class PatientForm extends Form {
 				)
 		
 		) );
+		$this->add ( array (
+				'name' => 'motif_ad',
+				'type' => 'Select',
+				'options' => array (
+						'label' => iconv('ISO-8859-1', 'UTF-8','Type d\'admission'),
+						// 						'value_options' => array (
+								// 								'Normal' => 'Normal',
+								// 								'Evacuation' => 'Evacuation',
+								// 								'Reference' => 'Reference',
 		
+								// 						)
+				),
+				'attributes' => array (
+						'registerInArrrayValidator' => true,
+						'onchange'=>'getMotif(this.value)',
+						'id' =>'motif_ad',
+						'required' => true,
+				)
+		) );
+		
+		
+		
+		
+		/* Note evacuation */
+		$this->add ( array (
+				'name' => 'motif',
+				'type' => 'Text',
+				'options' => array (
+						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Motif d\'évacuation ' )
+				),
+				'attributes' => array (
+						//'readonly' => 'readonly',
+						'id' => 'motif'
+				)
+		) );
+		
+		$this->add ( array (
+				'name' => 'motif_reference',
+				'type' => 'Text',
+				'options' => array (
+						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Motif  de référence' )
+				),
+				'attributes' => array (
+						//'readonly' => 'readonly',
+						'id' => 'motif_reference'
+				)
+		) );
+		
+		
+		$this->add ( array (
+				'name' => 'service_origine',
+				'type' => 'Text',
+				'options' => array (
+						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Service d\'origine' )
+				),
+				'attributes' => array (
+						//'readonly' => 'readonly',
+						'id' => 'service_origine'
+				)
+		) );
+		
+		$this->add ( array (
+				'name' => 'service_origine_ref',
+				'type' => 'Text',
+				'options' => array (
+						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Service d\'origine' )
+				),
+				'attributes' => array (
+						//'readonly' => 'readonly',
+						'id' => 'service_origine_ref'
+				)
+		) );
 		$this->add ( array (
 				'name' => 'submit',
 				'type' => 'Submit',

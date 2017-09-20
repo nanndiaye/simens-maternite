@@ -666,14 +666,21 @@ function confirmation() {
         }
     });
 }
-
-$("#annuler2").click(function () {
-    //event.preventDefault();
-    confirmation();
-    $("#confirmation2").dialog('open');
-
+$("#annuler2").click(function(){
+	$("#annuler2").css({"border-color":"#ccc", "background":"-webkit-linear-gradient( #555, #CCC)", "box-shadow":"1px 1px 5px black inset,0 1px 0 rgba( 255, 255, 255, 0.4)"});
+	
+    vart = tabUrl[0]+'public/accouchement/accoucher';
+	//vart=tabUrl[0]+'public/accouchement/complement-accouchement?id_patient='+idPatient+'&id_cons='+id_cons;
+    $(location).attr("href",vart);
     return false;
 });
+//$("#annuler2").click(function () {
+//    //event.preventDefault();
+//    confirmation();
+//    $("#confirmation2").dialog('open');
+//
+//    return false;
+//});
 
 var temoinHu= 0;
 var temoinTaille = 0;
@@ -3012,14 +3019,9 @@ function getAccouchement(val){
 }
 
 
-
-function toggletexte(nom){
-	
-	//(document.write("<input type='Textarea'/>")); 
-	//document.getElementById("note_bassin").innerHTML="kghhlgl";
-	}
-
-
+function fAddText() { 
+    document.getElementById('Cible').innerHTML ='<textarea cols="30" rows="20"></textarea>'; 
+} 
 
 
 //===================================================================================================================

@@ -5,6 +5,7 @@
 <?php
 echo $this->headScript ()->appendFile ( $this->basePath () . '/js/maternite/jsMaternite.js' );
 echo $this->headLink ()->appendStylesheet ( $this->basePath () . '/css/maternite/DatePicker.css' );
+//echo $this->headScript()->appendFile($this->basePath().'/js/maternite/accouchement/jsAjouter.js');
 ?>
 
 <script>
@@ -126,7 +127,12 @@ echo $this->form ()->openTag ( $form );
 			Terminer
 		</button>
 	  </td>
-	  
+	  <td style="width: 10%;" id="thoughtbot">
+		<button type="submit" name="terminer_ad" id="terminer_ad"
+			style=" font-family: police2; font-size: 17px; font-weight: bold;">
+			Terminer et admettre
+		</button>
+	  </td>
 	  <td style="width: 38%;"></td>
 	  
 	  </tr>

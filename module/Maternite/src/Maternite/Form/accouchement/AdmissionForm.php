@@ -59,7 +59,7 @@ class AdmissionForm extends Form{
 				'name' => 'motif_ad',
 				'type' => 'Select',
 				'options' => array (
-						'label' => iconv('ISO-8859-1', 'UTF-8','Motif d\'admission'),
+						'label' => iconv('ISO-8859-1', 'UTF-8','Type d\'admission'),
 // 						'value_options' => array (
 // 								'Normal' => 'Normal',
 // 								'Evacuation' => 'Evacuation',
@@ -71,7 +71,7 @@ class AdmissionForm extends Form{
 						'registerInArrrayValidator' => true,
 						'onchange'=>'getMotif(this.value)',
 						'id' =>'motif_ad',
-						'required' => false,
+						'required' => true,
 				)
 		) );
 
@@ -83,7 +83,7 @@ class AdmissionForm extends Form{
 				'name' => 'motif',
 				'type' => 'Text',
 				'options' => array (
-						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Motif d\'evacuation ' )
+						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Motif d\'évacuation ' )
 				),
 				'attributes' => array (
 						//'readonly' => 'readonly',
@@ -95,7 +95,7 @@ class AdmissionForm extends Form{
 				'name' => 'motif_reference',
 				'type' => 'Text',
 				'options' => array (
-						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Motif  de reference' )
+						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Motif  de référence' )
 				),
 				'attributes' => array (
 						//'readonly' => 'readonly',

@@ -493,6 +493,7 @@ class AccouchementController extends AbstractActionController
 	public function ajouterAction() {
 		
 		$this->layout ()->setTemplate ( 'layout/accouchement' );
+		//$formAdmission = new AdmissionForm();
 		$form = $this->getForm ();
 		//var_dump($form); exit();
 		$patientTable = $this->getPatientTable();
@@ -515,7 +516,7 @@ class AccouchementController extends AbstractActionController
 		$id_employe = $user['id_personne']; //L'utilisateur connecté
 	
 		// CHARGEMENT DE LA PHOTO ET ENREGISTREMENT DES DONNEES
-		if (isset ( $_POST ['terminer'] ))  // si formulaire soumis
+		if (isset ( $_POST ['terminer'] )||isset($_POST ['terminer_ad']))  // si formulaire soumis
 		{
 			$Control = new DateHelper();
 			$form = new PatientForm();
@@ -562,20 +563,38 @@ class AccouchementController extends AbstractActionController
 				//ENREGISTREMENT DES DONNEES
 			
 				$Patient->addPatient ( $donnees , $date_enregistrement , $id_employe );
-				
+				if (isset($_POST ['terminer'])){
 				return $this->redirect ()->toRoute ( 'accouchement', array (
 						'action' => 'liste-patient'
-				) );
+				) );}
+				if (isset($_POST ['terminer_ad'])){
+					return $this->redirect ()->toRoute ( 'accouchement', array (
+							'action' => 'admission'	
+					));
+					
+				}
 			} else {
+				
 				// On enregistre sans la photo
 				//var_dump($donnees); exit();
 				$Patient->addPatient ( $donnees , $date_enregistrement , $id_employe );
 				//var_dump($donnees); exit();
+			if (isset($_POST ['terminer'])){
 				return $this->redirect ()->toRoute ( 'accouchement', array (
 						'action' => 'liste-patient'
-				) );
+				) );}
+				if (isset($_POST ['terminer_ad'])){
+					return $this->redirect ()->toRoute ( 'accouchement', array (
+							'action' => 'admission'
+					) );
+					
+					
+				}
+			
+			
 			}
 		}
+
 		return $this->redirect ()->toRoute ( 'accouchement', array (
 				'action' => 'liste-patient'
 		) );
@@ -591,9 +610,12 @@ class AccouchementController extends AbstractActionController
 		$view = new ViewModel ();
 		return $view;
 	}
+
 	
-	public function listePatientAjaxAction() {
-		$output = $this->getPatientTable ()->getListePatient ();
+	
+public function listePatientAjaxAction() {
+		
+		$output = $this->getPatientTable()->getListePatient();
 		return $this->getResponse ()->setContent ( Json::encode ( $output, array (
 				'enableJsonExprFinder' => true
 		) ) );
@@ -1875,7 +1897,7 @@ class AccouchementController extends AbstractActionController
 	
 	
 
-      public function admissionTestAction() {
+      public function admissionAction() {
 		$layout = $this->layout ();
 		//var_dump('$layout'); exit();
 	
@@ -2095,7 +2117,7 @@ class AccouchementController extends AbstractActionController
 		
 	
  		return $this->redirect()->toRoute('accouchement', array(
- 				'action' =>'admission-test'));
+ 				'action' =>'admission'));
 
 	}
 
@@ -3325,7 +3347,7 @@ public function declarerDecesAction() {
        //var_dump("test");exit();
 //Nouveau ne
       
-       $this->getDevenirNouveauNeTable()->updateNouveauNe($formData);
+       //$this->getDevenirNouveauNeTable()->updateNouveauNe($formData);
       // var_dump($formData);exit();
         // POUR LES ANTECEDENTS ANTECEDENTS ANTECEDENTS
         // POUR LES ANTECEDENTS ANTECEDENTS ANTECEDENTS

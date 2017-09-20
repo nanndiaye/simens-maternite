@@ -187,6 +187,23 @@ class ConsultationForm extends Form {
 				),
 		));
 		
+		$this->add(array(
+				'name' => 'ajou',
+				'type' => 'Select',
+				'options' => array (
+						'value_options' => array(
+								0 => iconv ( 'ISO-8859-1', 'UTF-8','Non') ,
+								1 => iconv ( 'ISO-8859-1', 'UTF-8','Oui') ,
+						),
+				),
+				'attributes' => array(
+						'id' => 'ajou',
+						'registerInArrayValidator'=>true,
+						'onchange'=>' ajouterElement()(this.value)',
+						//'required' => true,
+				),
+		));
+		
 		$this->add ( array (
 				'name' => 'examen_maternite_donnee10',
 				'type' => 'Text',
@@ -277,20 +294,36 @@ class ConsultationForm extends Form {
 		) );
 	$this->add ( array (
 				'name' => 'examen_maternite_donnee9',
-				'type' => 'Textarea',
-			
-				'options' => array (
-						
-				),
+			'type' => 'select',
+			'options' => array (
+					'value_options' => array(
+							0 => 'Pratiquable',
+							1 => 'Non Pratiquable' ,
+					),
+			),
 				'attributes' => array (
 						'readonly' => 'readonly',
 						'registerInArrrayValidator' => false,
-						'onclick' => 'toggletexte(this.value)',
+						//'onclick' => 'toggletexte(this.value)',
 						'id' => 'examen_maternite_donnee9' 
 				) 
 		) );
 		
 
+	$this->add(array(
+			'name' => 'paleur',
+			'type' => 'select',
+			'options' => array (
+					'value_options' => array(
+							0 => 'Non',
+							1 => 'Oui' ,
+					),
+			),
+			'attributes' => array(
+					'id' => 'paleur',
+					//'required' => true,
+			),
+	));
 	$this->add ( array (
 			'name' => 'note_tv',
 			'type' => 'Text',
@@ -1275,7 +1308,7 @@ $this->add(array(
 				'name' => 'note_compte_rendu_operatoire',
 				'type' => 'Textarea',
 				'options' => array (
-						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Protocole opï¿½ratoire' ) 
+						//'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Protocole opératoire' ) 
 				),
 				'attributes' => array (
 						'id' => 'note_compte_rendu_operatoire' 
@@ -2257,17 +2290,21 @@ $this->add(array(
 		) );
 	
 		
-		$this->add(array(
+	$this->add(array(
 				'name' => 'ru',
-				'type' => 'Text',
+				'type' => 'Select',
+				'options' => array (
+						'value_options' => array(
+								0 => 'Non',
+								 1=> 'Oui' ,
+						),
+				),
 				'attributes' => array(
-						'readonly' => 'readonly',
 						'id' => 'ru',
-						'readonly' => 'readonly',
+						
 						//'required' => true,
 				),
 		));
-		
 		$this->add(array(
 				'name' => 'hemoragie',
 				'type' => 'Select',

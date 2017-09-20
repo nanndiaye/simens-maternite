@@ -134,7 +134,7 @@ initialisation();
 		  <?php echo $this->formhidden($form->get('id_patient')); ?>    
 		   <?php //echo $this-> $this->formHidden($form->get('id_admission'));?>
 		    <?php //echo $this-> $this->formHidden($form->get('id_grossesse'));?>
-		  <div id="info_bebe" style='width: 100%; margin-top:10px; height:600px;'>
+		  <div id="info_bebe" style='width: 100%; margin-top:10px; height:400px;'>
 		  
                <div style="float:left; width:20%; height:10%;">
 		       </div>
@@ -153,10 +153,8 @@ initialisation();
 		             
 		         <tr>
 
-	                       <td class=""  style="width: 33%; height:50px;" >
-		                   <div  id= "BUcheckbox" style= "width:23%;" >
-		                   <span style="margin-right: 10%;"><span style="margin-right: 10%;"></span>
-		                   </span></div> 
+	                       <td class=""  style=" " >
+		                 
 		                  
 		                   <div ><?php echo $this->formRow($form->get('motif_ad'));?></div>
 		              </td >
@@ -185,7 +183,7 @@ initialisation();
 		       function getMotif(val){ 
 		       //	alert(val);
 		       	if(val==1){
-		       		$("#motif").html("Motif d\'admission");
+		       		$("#motif").html("Type d\'admission");
 		       		$('.MotifAdmission').fadeOut();
 		       		$('.Reference').fadeOut();
 		       	}else if (val==2){

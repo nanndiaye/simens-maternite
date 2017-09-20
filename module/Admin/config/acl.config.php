@@ -275,7 +275,7 @@ return array(
     								'enregistrer-admission' =>array('gynecologue','infirmier'),
     								'liste-admission-ajax'=>array('gynecologue','infirmier'),
     								'declarer-deces'=>array('gynecologue','infirmier'),
-    								'admission-test'=>array('gynecologue','infirmier'),
+    								'admission'=>array('gynecologue','infirmier'),
     								'liste-patients-admis'=>array('gynecologue','infirmier'),
     								'vue-patient-admis'=>array('gynecologue','infirmier'),
     								'accoucher'=>array('gynecologue','infirmier'),

@@ -5,7 +5,7 @@ function confirmation(id){
   $( "#confirmation" ).dialog({
     resizable: false,
     height:375,
-    width:495,
+    width:485,
     autoOpen: false,
     modal: true,
    
@@ -13,10 +13,6 @@ function confirmation(id){
         "Admettre": function() {
         	declarer(id);
         	$( this ).dialog( "close" );      	             	     
-            return false;
-        },
-        "Fermer": function() {
-            $( this ).dialog( "close" );
             return false;
         }
  
@@ -133,10 +129,11 @@ function clickRowHandler()
 		target: '#context-menu',
 		onItem: function (context, e) {
 			
-			if($(e.target).text() == 'Visualiser' || $(e.target).is('#visualiserCTX')){
-				visualiser(id);
+			if($(e.target).text() == 'terminer_ad' || $(e.target).is('#terminer_ad')){
+				declarer(id);
 			} else 
-				if($(e.target).text() == 'Suivant' || $(e.target).is('#suivantCTX')){
+				if($(e.target).text() == 'terminer_ad' || $(e.target).is('#terminer_ad')){
+					//alert("vnn");
 					declarer(id);
 				}
 			

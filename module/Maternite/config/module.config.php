@@ -46,7 +46,7 @@ return array (
 										),
 										'defaults' => array (
 												'controller' => 'Maternite\Controller\Accouchement',
-												'action' => 'creer-dossier-patiente',
+												'action' => 'admission',
 												
 						
 										)
