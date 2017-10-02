@@ -7,6 +7,7 @@ return array(
         		
         		'guest'   => null,
         		'infirmier' => 'guest',
+        		
         		'laborantin' => 'guest',
         		'admin' => 'guest',
         		'radiologie' => 'guest',
@@ -279,6 +280,7 @@ return array(
     								'liste-patients-admis'=>array('gynecologue','infirmier'),
     								'vue-patient-admis'=>array('gynecologue','infirmier'),
     								'accoucher'=>array('gynecologue','infirmier'),
+    								'partogramme'=>array('gynecologue','infirmier'),
     								'complement-accouchement'=>array('gynecologue','infirmier'),
     								'maj-accouchement'=>array('gynecologue','infirmier'),
     								'maj-complement-accouchement'=>array('gynecologue','infirmier'),
@@ -298,6 +300,7 @@ return array(
     								'liste-examen-du-jour'=>array('gynecologue','infirmier'),
     								'liberer-patient'=>array('gynecologue','infirmier'),
     								'vue-examen-jour'=>array('gynecologue','infirmier'),
+    								'dossier-accouchement'=>array('sage_femme','infirmier'),
     						),
     						
     						/***

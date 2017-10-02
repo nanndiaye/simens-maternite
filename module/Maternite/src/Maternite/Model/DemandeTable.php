@@ -64,7 +64,7 @@ class DemandeTable {
 	/**
 	 * Recuperer la liste des examens Biologiques
 	 */
-	public function getDemandeExamensBiologiques($id) {
+public function getDemandeExamensBiologiques($id) {
 		$adapter = $this->tableGateway->getAdapter ();
 		$sql = new Sql ( $adapter );
 		$select = $sql->select ();

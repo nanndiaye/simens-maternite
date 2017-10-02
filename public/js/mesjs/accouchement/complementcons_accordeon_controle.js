@@ -1049,7 +1049,7 @@ $("#terminer2, #terminer3").click(function () {
     donnees['test_emmel'] = $("#test_emmel").val();
     donnees['profil_emmel'] = $("#profil_emmel").val();
     donnees['note_emmel'] = $("#note_emmel").val();
-    donnees['note_autre_em'] = $("#note_autre_em").val();
+  //  donnees['note_autre_em'] = $("#note_autre_em").val();
     //Antecedent type 2
     
     donnees['dystocie'] = $("#dystocie").val();
@@ -2862,16 +2862,49 @@ getExamenMaterniteDonnee5($('#examen_maternite_donnee5').val());
 $('.BbAttendu').toggle(false);
 function getBbAttendu(val){ 
 	
-	if(val=='Multiple'){
+	if(val=='0'){
 		$("#bbAttendu").html("Bb attendu");
 		$('.BbAttendu').fadeIn();
-	}else{
+		$("#enf2").fadeIn();
+		$("#enf3").fadeIn();
+		$("#enf4").fadeIn();
+		$("#enf5").fadeIn();
+	}
+	if(val==1)
+	{
 		$("#bbAttendu span span").html("");
 		$('.BbAttendu').fadeOut();
+		$("#enf2").fadeOut();
+		$("#enf3").fadeOut();
+		$("#enf4").fadeOut();
+		$("#enf5").fadeOut();
 	}	
+	if(val==2)
+	{
+		$("#bbAttendu span span").html("");
+		$('.BbAttendu').fadeOut();
+		$("#enf2").fadeIn();
+		$("#enf3").fadeOut();
+		$("#enf4").fadeOut();
+		$("#enf5").fadeOut();
+	}
+	if(val==3)
+	{
+		$("#bbAttendu span span").html("");
+		$('.BbAttendu').fadeOut();
+		$("#enf2").fadeIn();
+		$("#enf3").fadeIn();
+		$("#enf4").fadeOut();
+		$("#enf5").fadeOut();
+	}
+		
 }
 
 getBbAttendu($('#bb_attendu').val());
+
+
+
+
 
 
 $('.Test').toggle(false);
@@ -2880,6 +2913,7 @@ function getTest(val){
 	if(val=='1'){
 		$("#test").html("Test emmel");
 		$('.Test').fadeIn();
+		
 	}else{
 		$("#test span span").html("");
 		$('.Test').fadeOut();

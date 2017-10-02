@@ -84,18 +84,19 @@ if ($sexe == 'Masculin') {
 						<b class="caret"></b> <span
 						style="font-size: 15px; color: white; font-family: Times New Roman;"><?php echo $prenom.'  '.$nom;?></span></a>
 				</li>
+				 <?php if(($user['role'] == 'gynecologue')){ ?>
  <li style="width: 15%;"><a title="" style="" href="<?php echo $this->url('maternite', array('action'=>'consultation-medecin'));?>">
       <i><img src="<?php echo $this->basePath().'/img/light/bended_arrow_left.png';?>"/></i> <span style="color: white; font-size: 14px; font-family: Times  New Roman;"><i>consultation</i></span></a>
-    </li>
+    </li> <?php }?>
 				<li style="width: 20%;">
 					<div style='width: 30%; padding-top: 11px; float: left;'>
-         <?php /* if($user['role'] == 'medecin' || $user ['role'] == 'infirmier'){ */?>
+         <?php  if($user['role'] == 'medecin' || $user ['role'] == 'gynecologue'){ ?>
          <a style="padding-right: 6px;"
 							href="<?php echo $this->url('hospitalisation', array('action'=>'demande-hospitalisation'));?>">
 							<img src="<?php echo $this->basePath().'/img/light/list.png';?>"
 							title="Hospitaliser" />
 						</a> 
-         <?php /* } */ ?>
+         <?php  } ?>
       </div>
 					<div style='width: 70%; padding-top: 10px; float: right;'>
 						<a

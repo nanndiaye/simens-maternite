@@ -15,7 +15,7 @@ use Maternite\Form\AjoutDecesForm;
 use Maternite\Form\accouchement\AdmissionForm;
 use Maternite\Form\accouchement\ConsultationForm;
 use Maternite;
-//use Maternite\Form\accouchement\SoinForm;
+//use Maternite\Form\accouchement\PartoForm;
 use Zend\Form\View\Helper\FormTextarea;
 use Zend\Form\View\Helper\FormHidden;
 use Maternite\Form\accouchement\LibererPatientForm;
@@ -44,6 +44,7 @@ class AccouchementController extends AbstractActionController
     protected $evacuationTable;
     protected $referenceTable;
      protected $formPatient;
+   
      protected $formAdmission;
     protected $batimentTable;
     protected $consultationTable;
@@ -2203,7 +2204,16 @@ public function declarerDecesAction() {
 		));
 		
 	}
-	
+	public function partogrammeAction(){
+		$this->layout()->setTemplate('layout/accouchement');
+       $form = new ConsultationForm ();
+       $forms = new AdmissionForm ();
+       return array (
+       		'form' => $form,
+       		'forms' => $forms,
+       	
+       );
+	}
 	public function ajoutConstantesAction()
 	{
 		$this->layout()->setTemplate('layout/accouchement');
@@ -2369,7 +2379,7 @@ public function declarerDecesAction() {
 				'test_emmel'=>$donne_ante['test_emmel'],
 				'profil_emmel'=>$donne_ante['profil_emmel'],
 				'note_emmel'=>$donne_ante['note_emmel'],
-				'note_autre_em'=>$donne_ante['note_autre_em'],
+				//'note_autre_em'=>$donne_ante['note_autre_em'],
 			
 					
 		);	$form->populateValues($donne_ant1);
@@ -2435,7 +2445,7 @@ public function declarerDecesAction() {
 		
 		
 		else {
-			$reference = $this->getReferenceTable()->getRefer($id_admission);
+			$reference = $this->getReferenceTable()->getReferenceDuJour($id_pat);
 		  $form->get('motif_ad')->setValueOptions($type_admission);
 			$form->get('motif')->setValue($reference['motif_reference']);
 			$form->get('service_origine')->setValue($reference['service_origine_ref']);
@@ -2568,6 +2578,11 @@ public function declarerDecesAction() {
 				'listeActes' => $listeActes
 		);
 		
+	}
+	public function dossierAccouchementAction(){
+		$this->layout()->setTemplate('layout/accouchement');
+		$user = $this->layout()->user;
+		$IdDuService = $user ['IdService'];
 	}
 	
 	

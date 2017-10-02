@@ -126,7 +126,20 @@ public function getReference($id_patient) {
 		//var_dump($resultat);exit();
 		return $resultat;
 	}
-	
+
+	public function getReferenceDuJour($id_patient) {
+		$today = (new \DateTime ())->format ( 'Y-m-d' );
+		$adapter = $this->tableGateway->getAdapter ();
+		$sql = new Sql ( $adapter );
+		$select = $sql->select ();
+		$select->from ( array (
+				'ref' => 'reference'
+		) )->columns( array( '*' ))
+		->join(array('a' => 'admission'), 'a.id_admission = ref.id_admission' , array('id_patient'))
+		->where(array('ref.id_patient' => $id_patient)); //var_dump($today);exit();
+		$select->order ( 'ref.id_reference DESC' );
+		return $sql->prepareStatementForSqlObject ( $select )->execute ()->current ();
+	}
 
 }
 

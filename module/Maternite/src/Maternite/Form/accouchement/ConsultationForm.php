@@ -3219,10 +3219,10 @@ $this->add(array(
 			'options' => array (
 					//'label' => iconv('ISO-8859-1', 'UTF-8','Nombre de bébé attendu'),
 					'value_options' => array(
-							'Simple' => 'Simple',
-							'Gemellaire'  => 'Gemellaire',
-							'Triple' => 'Triple',
-							'Multiple' => 'Multiple',
+							1 => 'Simple',
+							2  => 'Gemellaire',
+							3 => 'Triple',
+							0 => 'Multiple',
 	
 					),
 			),
@@ -4204,7 +4204,44 @@ $this->add(array(
 					//'required' => true,
 			),
 	));
+	
+	
+	
+	$this->add ( array (
+			'name' => 'nbCheckboxCO',
+			'type' => 'hidden',
+			'attributes' => array (
+					'id' => 'nbCheckboxCO'
+			)
+	) );
+	
+	
+	$this->add ( array (
+			'name' => 'causeCO',
+			'type' => 'Text',
+			'options' => array (
+					//'label' => iconv('ISO-8859-1', 'UTF-8','Type D\'Accouchemet:'),
+					'value_options' => array (
+// 							1=>'oui',
+// 							2=>'non'
+					)
+			),
+			'attributes' => array (
+					//'readonly' => 'readonly',
+					'registerInArrrayValidator' => true,
+					'onchange'=>' getCO(this.value)',
+					'id' => 'causeCO'
+			)
+	) );
+	
 	}
+	
+	
+	
+	
+	
+	
+	
 }
 
 

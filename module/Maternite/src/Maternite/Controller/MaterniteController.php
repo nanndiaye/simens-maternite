@@ -394,7 +394,7 @@ class MaterniteController extends AbstractActionController
      */
     public function rechercheAction()
     {
-        $this->layout()->setTemplate('layout/consultation');
+        $this->layout()->setTemplate('layout/consultationm');
         $user = $this->layout()->user;
         $NomService = $user ['NomService'];
         $IdService = $user ['IdService'];
@@ -416,7 +416,7 @@ class MaterniteController extends AbstractActionController
      */
     public function ajoutConstantesAction()
     {
-        $this->layout()->setTemplate('layout/consultation');
+        $this->layout()->setTemplate('layout/consultationm');
         $id_pat = $this->params()->fromRoute('id_patient', 0);
 
         $user = $this->layout()->user;
@@ -465,7 +465,7 @@ class MaterniteController extends AbstractActionController
      */
     public function ajoutDonneesConstantesAction()
     {
-        $this->layout()->setTemplate('layout/consultation');
+        $this->layout()->setTemplate('layout/consultationm');
         $user = $this->layout()->user;
         $IdDuService = $user ['IdService'];
 
@@ -502,7 +502,7 @@ class MaterniteController extends AbstractActionController
      */
     public function majConsultationAction()
     {
-        $this->layout()->setTemplate('layout/consultation');
+        $this->layout()->setTemplate('layout/consultationm');
 
         $user = $this->layout()->user;
         $IdDuService = $user ['IdService'];
@@ -577,7 +577,7 @@ class MaterniteController extends AbstractActionController
     // ***$$$$***
     public function majConsDonneesAction()
     {
-        $this->layout()->setTemplate('layout/consultation');
+        $this->layout()->setTemplate('layout/consultationm');
 
         $form = new ConsultationForm ();
         if ($this->getRequest()->isPost()) {
@@ -619,7 +619,7 @@ class MaterniteController extends AbstractActionController
     // ***$$$$***
     public function espaceRechercheSurvAction()
     {
-        $this->layout()->setTemplate('layout/consultation');
+        $this->layout()->setTemplate('layout/consultationm');
         $user = $this->layout()->user;
         $idService = $user ['IdService'];
 
@@ -649,7 +649,7 @@ class MaterniteController extends AbstractActionController
     // ***$$$$***
     public function complementConsultationAction()
     {
-        $this->layout()->setTemplate('layout/consultation');
+        $this->layout()->setTemplate('layout/consultationm');
 
         $user = $this->layout()->user;
         $IdDuService = $user ['IdService'];
@@ -1134,7 +1134,7 @@ class MaterniteController extends AbstractActionController
     // ***$$$$***
     public function majComplementConsultationAction()
     {
-        $this->layout()->setTemplate('layout/consultation');
+        $this->layout()->setTemplate('layout/consultationm');
 
         $user = $this->layout()->user;
         $IdDuService = $user ['IdService'];
@@ -1201,7 +1201,7 @@ class MaterniteController extends AbstractActionController
         // POUR LES EXAMEN PHYSIQUES
         $kPhysique = 1;
         foreach ($examen_physique as $Examen) {
-            $data ['examen_maternite_donnee' . $kPhysique] = $Examen ['libelle_examen'];
+            //$data ['examen_maternite_donnee' . $kPhysique] = $Examen ['libelle_examen'];
             $kPhysique++;
         }
 
@@ -1231,6 +1231,7 @@ class MaterniteController extends AbstractActionController
         // DEMANDES DES EXAMENS COMPLEMENTAIRES
         $listeDemandesMorphologiques = $this->demandeExamensTable()->getDemandeExamensMorphologiques($id);
         $listeDemandesBiologiques = $this->demandeExamensTable()->getDemandeExamensBiologiques($id);
+      //  var_dump($listeDemandesBiologiques);exit();
         $listeDemandesActes = $this->getDemandeActe()->getDemandeActe($id);
 
         // Liste des examens biologiques
@@ -1306,7 +1307,7 @@ class MaterniteController extends AbstractActionController
 
         // //RESULTATS DES EXAMENS MORPHOLOGIQUES DEJA EFFECTUES ET ENVOYER PAR LE BIOLOGISTE
         $listeDemandesMorphologiquesEffectuer = $this->demandeExamensTable()->getDemandeExamensMorphologiquesEffectues($id);
-
+        $listeDemandesBiologiquesEffectuer = $this->demandeExamensTable()->getDemandeExamensBiologiquesEffectues($id);
         // DIAGNOSTICS
         // DIAGNOSTICS
         // DIAGNOSTICS
@@ -1500,7 +1501,7 @@ class MaterniteController extends AbstractActionController
             'tabInfoSurv' => $tabInfoSurv,
             'tableauResultatsExamensBio' => $tableauResultatsExamensBio,
             'listeDesExamensBiologiques' => $listeDesExamensBiologiques,
-            'listeDesExamensMorphologiques' => $listeDesExamensMorphologiques,
+          'listeDesExamensMorphologiques' => $listeDesExamensMorphologiques,
             'listeAntMed' => $listeAntMed,
             'antMedPat' => $antMedPat,
             'nbAntMedPat' => $antMedPat->count(),
@@ -1511,7 +1512,7 @@ class MaterniteController extends AbstractActionController
     // ***$$$$***
     public function visualisationConsultationAction()
     {
-        $this->layout()->setTemplate('layout/consultation');
+        $this->layout()->setTemplate('layout/consultationm');
 
         $user = $this->layout()->user;
         $IdDuService = $user ['IdService'];
@@ -1884,7 +1885,7 @@ class MaterniteController extends AbstractActionController
     // ***$$$$***
     public function rechercheVisualisationConsultationAction()
     {
-        $this->layout()->setTemplate('layout/consultation');
+        $this->layout()->setTemplate('layout/consultationm');
 
         $user = $this->layout()->user;
         $IdDuService = $user ['IdService'];
@@ -2256,7 +2257,7 @@ class MaterniteController extends AbstractActionController
     // ***$$$$***
     public function espaceRechercheMedAction()
     {
-        $this->layout()->setTemplate('layout/consultation');
+        $this->layout()->setTemplate('layout/consultationm');
         // var_dump( uniqid(md5(rand()), true) ); //nombre al�atoire
         $user = $this->layout()->user;
         $IdDuService = $user ['IdService'];
@@ -2290,7 +2291,7 @@ class MaterniteController extends AbstractActionController
     // ***$$$$***
     public function visualisationHospitalisationAction()
     {
-        $this->layout()->setTemplate('layout/consultation');
+        $this->layout()->setTemplate('layout/consultationm');
         $id_demande_hospi = $this->params()->fromQuery('id_demande_hospi');
 
         $demandeHospi = $this->getDemandeHospitalisationTable()->getDemandehospitalisationParIdDemande($id_demande_hospi);
@@ -3183,7 +3184,7 @@ class MaterniteController extends AbstractActionController
 
     public function enCoursAction()
     {
-        $this->layout()->setTemplate('layout/consultation');
+        $this->layout()->setTemplate('layout/consultationm');
 
         $user = $this->layout()->user;
         $IdDuService = $user ['IdService'];
@@ -5441,7 +5442,7 @@ class MaterniteController extends AbstractActionController
 
     public function vueExamenJourAction()
     {
-        $this->layout()->setTemplate('layout/consultation');
+        $this->layout()->setTemplate('layout/consultationm');
         $id_examen_jour = $this->params()->fromPost('id_examen_jour', 0);
 
         $ExamenJour = $this->getConsultationTable()->getExamenDuJourParIdExamenJour($id_examen_jour);
@@ -5591,7 +5592,7 @@ class MaterniteController extends AbstractActionController
 
     public function protocoleOperatoireAction()
     {
-        $this->layout()->setTemplate('layout/consultation');
+        $this->layout()->setTemplate('layout/consultationm');
 
         $formPO = new ProtocoleOperatoireForm ();
 
@@ -5780,7 +5781,7 @@ class MaterniteController extends AbstractActionController
 
     public function listeProtocoleOperatoireAction()
     {
-        $this->layout()->setTemplate('layout/consultation');
+        $this->layout()->setTemplate('layout/consultationm');
 
         $formPO = new ProtocoleOperatoireForm ();
         $listeProtocolePO = $this->getAdmissionTable()->getListeProtocoleOperatoireBloc();

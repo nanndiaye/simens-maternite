@@ -1969,23 +1969,43 @@ $Dimanche4 = $Control->lePremierDimancheDuMoisByDate($leMois4, $AnneeActuelle);
                             <!--********************* CHARGEMENT DES DONNEES  ************************-->
                             <!--********************* CHARGEMENT DES DONNEES  ************************-->
                             <!--********************* CHARGEMENT DES DONNEES  ************************-->
-                            <script>
+                           <?php
+                            $nbDemande = count($this->listeDemandesBiologiques);
+                            if ($nbDemande == 0) {
+                                $nbDemande = 1;
+                            }
+                            $tableauDesExamens = array();
+                            ?>
+                           
+                            
+                             <script>
                                 ValiderDemandeExamenBio();
-
                                 var myArrayExamenBio = [''];
-                                var i = 1;
+                                var icmpt = 1;
                             </script>
-
                             <?php foreach ($this->listeDesExamensBiologiques as $examensBioListe) { ?>
-                                <script> myArrayExamenBio[i++] = "<?php echo $examensBioListe['libelleExamen']; ?>" </script>
+                                <script> myArrayExamenBio[icmpt++] = "<?php echo $examensBioListe['libelleExamen']; ?>" </script>
                             <?php } ?>
 
                             <script>
-                                partDefautExamenBio(myArrayExamenBio, 1);
+                                partDefautExamenBio(myArrayExamenBio, '<?php echo $nbDemande; ?>');
+                                var indligne = 0;
                                 //Descactiver la visualisation des resultats pour afficher uniquement ceux selectionn�s
                                 desactiverResutatsBio();
                             </script>
+                            
+                            <script>
+                                //SELECTION DES LIGNES ET CHARGEMENT DE LEUR CONTENU
+                                <?php
 
+                                foreach ( $this->listeDemandesBiologiques as $Liste ) {
+                                $tableauDesExamens [] = $Liste ['idExamen'];
+                                ?>
+                                //Faire attention aux caracteres " et '
+
+                                chargementModificationBio(indligne++, "<?php  echo $Liste['idExamen'];?>", "<?php echo $Liste['noteDemande']; ?>");
+                                <?php } ?>
+                            </script>
                         </div>
 
                         <?php
