@@ -3,10 +3,10 @@
 namespace Maternite\Model;
 
 use Zend\Db\TableGateway\TableGateway;
-use Zend\Db\Sql\Select;
-use Zend\Db\Sql\Sql;
-use Zend\Db\Sql\Where;
 
+use Zend\Db\Sql\Sql;
+
+use Maternite\View\Helpers\DateHelper;
 class DevenirNouveauNeTable {
 	protected $tableGateway;
 	public function __construct(TableGateway $tableGateway) {
@@ -46,31 +46,25 @@ class DevenirNouveauNeTable {
 	
 	
 	
-
-public function updateNouveauNe($values) {
-	var_dump("test");exit();
-		$this->tableGateway->delete ( array (
-				'id_cons' => $values ['id_cons'] 
-		) );
-			$nv = array (
-					'id_cons' => $values ['id_cons'],
-					//'id_maman' => $values ['id_patient'],
-					'viv_bien_portant' => $values['viv_bien_portant'],
-					'viv_mal_form' => $values['viv_mal_form'],
-					'malade' => $values ['malade'],
-					'decede' => $values['decede'],
-					'date_dece' => $values['date_dece'],
-					'heure_dece' => $values['heure_dece'],
-					'note_decede' => $values['note_decede'],
-					'note_viv_bien_portant' => $values['note_viv_bien_portant'],
-					'note_mal_form' => $values['note_mal_form'],
-					'note_malade' => $values['note_malade'],
-					
-					
-			);	var_dump($nv);exit();
-		$this->tableGateway->insert ( $nv );
-		//var_dump("test");exit();
-	
-
-}
+	public function saveNouveauNe($values,$id_cons,$tabIdEnfant) {
+		$Control = new DateHelper();
+		
+		for($i = 1; $i <= $values['nombre_bb'] ; $i ++){
+			$date_dece = $values ['date_deces_'. $i];
+			if($date_dece){ $date_dece = $Control->convertDateInAnglais($date_dece); }else{ $date_dece = null;}
+			$datanouveauNe = array (
+					'viv_bien_portant' => $values['viv_bien_portant_'. $i],
+					'note_viv_bien_portant' => $values['n_viv_bien_portant_' . $i],
+					'viv_mal_formation' => $values['viv_mal_form_'. $i],
+					'note_viv_mal_formation' => $values['n_viv_mal_form_'. $i],
+					'malade' => $values['malade_'. $i],
+					'note_malade' => $values['n_malade_'. $i],
+					'decede' => $values ['decede_'. $i],
+					'date_deces' => $date_dece,
+					'heure_deces' => $values['heure_deces_'. $i],
+					'cause_deces' => $values['cause_deces_'. $i],					
+					'id_bebe' => $tabIdEnfant[$i-1],						
+			);
+			$this->tableGateway->insert ( $datanouveauNe );}
+	}
 }

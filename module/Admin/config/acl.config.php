@@ -216,18 +216,19 @@ return array(
     								'images-examens-morphologiques' => 'guest', //radiologie et archivage
     								
     								
-    								'test-mp3' => 'gynecologue',
-    								'ajouter-mp3' => 'gynecologue',
-    								'afficher-mp3' => 'gynecologue',
-    								'supprimer-mp3' => 'gynecologue',
-    								'inserer-bd-mp3' => 'gynecologue',
+    								'test-mp3' => array('infirmier', 'gynecologue'),
     								
-    								'afficher-video' => 'gynecologue',
-    								'ajouter-video' => 'gynecologue',
-    								'inserer-bd-video' => 'gynecologue',
-    								'supprimer-video' => 'gynecologue',
+    								'ajouter-mp3' => array('infirmier', 'gynecologue'),
+    								'afficher-mp3' =>array('infirmier', 'gynecologue'),
+    								'supprimer-mp3' => array('infirmier', 'gynecologue'),
+    								'inserer-bd-mp3' => array('infirmier', 'gynecologue'),
+    								
+    								'afficher-video' => array('infirmier', 'gynecologue'),
+    								'ajouter-video' => array('infirmier', 'gynecologue'),
+    								'inserer-bd-video' => array('infirmier', 'gynecologue'),
+    								'supprimer-video' =>array('infirmier', 'gynecologue'),
     								/**PDF**/
-    								'impression-Pdf' => 'gynecologue',
+    								'impression-Pdf' =>array('infirmier', 'gynecologue'),
     								'tarifacte' => 'gynecologue',
     								'demande-acte' => 'gynecologue', 								
     								
@@ -301,6 +302,7 @@ return array(
     								'liberer-patient'=>array('gynecologue','infirmier'),
     								'vue-examen-jour'=>array('gynecologue','infirmier'),
     								'dossier-accouchement'=>array('sage_femme','infirmier'),
+    								'liste-accouchement'=>array('gynecologue','infirmier'),
     						),
     						
     						/***
@@ -327,10 +329,10 @@ return array(
     								'visualisation-hospitalisation' => array('medecin','gynecologue'),
     								'liste-soins-visualisation-hosp' => array('medecin','gynecologue'),
     						
-    								'imagesExamensMorphologiques' => 'medecin',
-    								'supprimerImage' => 'medecin',
-    								'demande-examen' => 'medecin',
-    								'demande-examen-biologique' => 'medecin',
+    								'imagesExamensMorphologiques' => array('medecin','infirmier','gynecologue'),
+    								'supprimerImage' => array('medecin','infirmier','gynecologue'),
+    								'demande-examen' => array('medecin','infirmier','gynecologue'),
+    								'demande-examen-biologique' =>array('medecin','infirmier','gynecologue'),
     						
     								'en-cours' => array('medecin','infirmier','gynecologue'),
     								'liste-patient-encours-ajax' => array('medecin','infirmier','gynecologue'),
@@ -353,18 +355,18 @@ return array(
     								'images-examens-morphologiques' => 'guest', //radiologie et archivage
     						
     						
-    								'test-mp3' => 'medecin',
-    								'ajouter-mp3' => 'medecin',
-    								'afficher-mp3' => 'medecin',
-    								'supprimer-mp3' => 'medecin',
-    								'inserer-bd-mp3' => 'medecin',
+    								'test-mp3' => array('medecin','infirmier','gynecologue'),
+    								'ajouter-mp3' =>array('medecin','infirmier','gynecologue'),
+    								'afficher-mp3' => array('medecin','infirmier','gynecologue'),
+    								'supprimer-mp3' => array('medecin','infirmier','gynecologue'),
+    								'inserer-bd-mp3' => array('medecin','infirmier','gynecologue'),
     						
-    								'afficher-video' => 'medecin',
-    								'ajouter-video' => 'medecin',
-    								'inserer-bd-video' => 'medecin',
-    								'supprimer-video' => 'medecin',
+    								'afficher-video' => array('medecin','infirmier','gynecologue'),
+    								'ajouter-video' => array('medecin','infirmier','gynecologue'),
+    								'inserer-bd-video' =>array('medecin','infirmier','gynecologue'),
+    								'supprimer-video' => array('medecin','infirmier','gynecologue'),
     								/**PDF**/
-    								'impression-Pdf' => 'medecin',
+    								'impression-Pdf' => array('medecin','infirmier','gynecologue'),
     								'tarifacte' => 'medecin',
     								'demande-acte' => 'medecin',
 

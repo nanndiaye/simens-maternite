@@ -33,6 +33,30 @@ class DonneesExamensPhysiquesTable {
 		
 	}
 	
+	
+	
+	
+	
+	
+	//pour la presentation du foetus
+	public function listePresentation(){
+		$adapter = $this->tableGateway->getAdapter();
+		$sql = new Sql($adapter);
+		$select = $sql->select();
+		$select->from(array('p'=>'presentation'));
+		$select->columns(array('id_pres','presentation'));
+		$select->order('id_pres ASC');
+		$stat = $sql->prepareStatementForSqlObject($select);
+		$result = $stat->execute();
+		//$options = array(0 => "Choisir");
+		foreach ($result as $data) {
+			$options[$data['id_pres']] = $data['presentation'];
+		}
+		//var_dump($data);exit();
+		return $options;
+	}
+	
+	
 // 	public function getD($id) {
 // 		$id = ( string ) $id;
 // 		$rowset = $this->tableGateway->select ( array (
@@ -53,6 +77,7 @@ class DonneesExamensPhysiquesTable {
 		$this->tableGateway->delete ( array (
 				'id_cons' => $donnees ['id_cons'] 
 		) );
+		//var_dump('test');exit();
 		$date_rupt_pde = $donnees['examen_maternite_donnee6'];
 		if($date_rupt_pde){ $date_rupt_pde = $Control->convertDateInAnglais($date_rupt_pde); }else{ $date_rupt_pde = null;}
 				$datadonnee = array (
@@ -60,19 +85,19 @@ class DonneesExamensPhysiquesTable {
 						'toucher_vaginale' => $donnees ['examen_maternite_donnee1'],
 						'hauteur_uterine' => $donnees ['examen_maternite_donnee2'],
 						'bdc' => $donnees ['examen_maternite_donnee3'],
-						'la' => $donnees ['examen_maternite_donnee4'],
+						//'la' => $donnees ['examen_maternite_donnee4'],
 						'pde' => $donnees ['examen_maternite_donnee5'],
 						'date_rupt_pde' => $date_rupt_pde,
 						'heure_rupt_pde' => $donnees ['examen_maternite_donnee7'],
-						'presentation' => $donnees ['examen_maternite_donnee8'],
+						'id_pres' => $donnees['examen_maternite_donnee8'],
 						'bassin' => $donnees ['examen_maternite_donnee9'],
 						'nb_bdc' => $donnees ['examen_maternite_donnee10'],
 						'note_tv' => $donnees ['note_tv'],
 						'note_hu' => $donnees ['note_hu'],
 						'note_bdc' => $donnees ['note_bdc'],
-						'note_la' => $donnees ['note_la'],
-						'note_pde' => $donnees ['note_pde'],
-						'note_presentation' => $donnees ['note_presentation'],
+						//'note_la' => $donnees ['note_la'],
+						//'note_pde' => $donnees ['note_pde'],
+						//'note_presentation' => $donnees ['note_presentation'],
 						'note_bassin' => $donnees ['note_bassin'],
 						'aspect' => $donnees ['examen_maternite_donnee11'],
 						

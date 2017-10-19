@@ -128,11 +128,11 @@ class ConsultationMaterniteTable {
         $this->tableGateway->update($donnees, array('idcons_mater'=> $values['idcons_mater']));
     }*/
 
-    public function addConsultationMaternite($values){
+    public function addConsultationMaternite($id_cons,$id_grossesse){
         $this->tableGateway->getAdapter()->getDriver()->getConnection()->beginTransaction();
         try {
 
-            $dataconsultation = array(
+            $dataconsultationMat = array(
 //                 'toucherVaginale' => $values->get ( "toucherVaginale" )->getValue (),
 //                 'hauteurUterine' => $values->get ( "hauteurUterine" )->getValue (),
 //                 'positionFoeutus' => $values->get ( "positionFoeutus" )->getValue (),
@@ -140,10 +140,10 @@ class ConsultationMaterniteTable {
                // 'commentaire' => $values->get ( "commentaire" )->getValue (),
             		
                // 'idcons_mater'=> $values->get ( "idcons_mater" )->getValue (),
-                'id_cons'=> $values->get ( "id_cons" )->getValue (),
-                'id_grossesse'=> $values->get ( "id_grossesse" )->getValue (),
+               'id_cons' => $id_cons,
+					'id_grossesse' => $id_grossesse,
             );
-            $this->tableGateway->insert($dataconsultation);
+            $this->tableGateway->insert($dataconsultationMat);
 
             $this->tableGateway->getAdapter()->getDriver()->getConnection()->commit();
         } catch (\Exception $e) {
@@ -151,7 +151,7 @@ class ConsultationMaterniteTable {
         }
     }
 
-    /*public function addConsultationEffectiveMaternite($id_cons){
+    public function addConsultationEffectiveMaternite($id_cons){
         $db = $this->tableGateway->getAdapter();
         $sql = new Sql($db);
         $sQuery = $sql->insert()
@@ -159,7 +159,7 @@ class ConsultationMaterniteTable {
             ->values(array('ID_CONS' => $id_cons));
         $requete = $sql->prepareStatementForSqlObject($sQuery);
         $requete->execute();
-    }*/
+    }
 
     /*    public function getInfoPatientMedecin($idcons){
         $adapter = $this->tableGateway->getAdapter ();
@@ -187,7 +187,7 @@ class ConsultationMaterniteTable {
         return $result;
     }*/
 
-   /* public function addBandelette($bandelettes){
+   public function addBandelette($bandelettes){
         $values = array();
         if($bandelettes['albumine'] == 1){
             $values[] = array('ID_TYPE_BANDELETTE'=>1, 'ID_CONS'=>$bandelettes['id_cons'], 'CROIX_BANDELETTE'=>(int)$bandelettes['croixalbumine']);
@@ -252,7 +252,7 @@ class ConsultationMaterniteTable {
             ->where(array('id_cons' => $id_cons));
         $stat = $sql->prepareStatementForSqlObject($sQuery);
         $result = $stat->execute();
-    }*/
+    }
 
     //Tous les patients consultes sauf ceux du jour
     public function tousPatientsConsMaternite($idService){
@@ -924,7 +924,14 @@ class ConsultationMaterniteTable {
         return $sql->prepareStatementForSqlObject($select)->execute();
     }
 
-
+    public function getAntecedentsFamiliaux(){
+    	$adapter = $this->tableGateway->getAdapter();
+    	$sql = new Sql($adapter);
+    	$select = $sql->select();
+    	$select->columns(array('*'));
+    	$select->from(array('af'=>'ant_familiaux'));
+    	return $sql->prepareStatementForSqlObject($select)->execute();
+    }
     //Recupere la liste des actes
     //Recupere la liste des actes
     public function getListeDesActes(){

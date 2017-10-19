@@ -6,6 +6,7 @@ use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Where;
+use Zend\Crypt\PublicKey\Rsa\PublicKey;
 
 class ConsultationTable {
 	protected $tableGateway;
@@ -450,33 +451,29 @@ class ConsultationTable {
 		return $result;
 	}
 	public function getPatientsRV($id_service) {
-		$today = new \DateTime ();
-		$date = $today->format ( 'Y-m-d' );
-		
-		$adapter = $this->tableGateway->getAdapter ();
-		$sql = new Sql ( $adapter );
-		$select = $sql->select ();
-		$select->from ( array (
-				'rec' => 'rendezvous_consultation' 
-		) );
-		$select->join ( array (
-				'cons' => 'consultation' 
-		), 'cons.ID_CONS = rec.ID_CONS ', array (
-				'*' 
-		) );
-		$select->where ( array (
+		$today = new \DateTime();
+		$date = $today->format('Y-m-d');
+	
+		$adapter = $this->tableGateway->getAdapter();
+		$sql = new Sql( $adapter );
+		$select = $sql->select();
+		$select->from( array(
+				'rec' =>  'rendezvous_consultation'
+		));
+		$select->join(array('cons' => 'consultation'), 'cons.ID_CONS = rec.ID_CONS ', array('*'));
+		$select->where( array(
 				'rec.DATE' => $date,
-				'cons.ID_SERVICE' => $id_service 
+				'cons.ID_SERVICE' => $id_service,
 		) );
-		
-		$statement = $sql->prepareStatementForSqlObject ( $select );
-		$resultat = $statement->execute ();
-		
-		$tab = array ();
-		foreach ( $resultat as $result ) {
-			$tab [$result ['ID_PATIENT']] = $result ['HEURE'];
+	
+		$statement = $sql->prepareStatementForSqlObject( $select );
+		$resultat = $statement->execute();
+	
+		$tab = array();
+		foreach ($resultat as $result) {
+			$tab[$result['ID_PATIENT']] = $result['HEURE'];
 		}
-		
+	
 		return $tab;
 	}
 	
@@ -536,6 +533,26 @@ class ConsultationTable {
 		
 		return $result;
 	}
+	
+	
+	
+	Public function getpatienInfo($id_personne){
+
+		$db = $this->tableGateway->getAdapter();
+		$sql = new Sql($db);
+		$sQuery = $sql->select()
+		->from(array('pat' => 'patient'))
+		->columns( array( '*' ))
+		->join(array('pers' => 'personne'), 'pers.id_personne = pat.id_personne' , array('*'))
+		->where(array('pat.ID_PERSONNE' => $id_personne));
+		
+		$stat = $sql->prepareStatementForSqlObject($sQuery);
+		$resultat = $stat->execute()->current();
+		
+		return $resultat;
+		
+	}
+	
 	public function getInfoPatient($id_personne) {
 		$db = $this->tableGateway->getAdapter ();
 		$sql = new Sql ( $db );
@@ -734,7 +751,7 @@ class ConsultationTable {
 		$i = 1;
 		foreach ( $liste as $list ) {
 			if ($i == $idLigne) {
-				unlink ( 'C:\wamp\www\simens\public\audios\\' . $list ['nom'] );
+				unlink ( 'C:\wamp\www\simens-maternite\public\audios\\' . $list ['nom'] );
 				
 				$db = $this->tableGateway->getAdapter ();
 				$sql = new Sql ( $db );
@@ -805,7 +822,7 @@ class ConsultationTable {
 	}
 	public function supprimerVideo($id) {
 		$laVideo = $this->getVideoWithId ( $id );
-		$result = unlink ( 'C:\wamp\www\simens\public\videos\\' . $laVideo ['nom'] );
+		$result = unlink ( 'C:\wamp\www\simens-maternite\public\videos\\' . $laVideo ['nom'] );
 		
 		$db = $this->tableGateway->getAdapter ();
 		$sql = new Sql ( $db );

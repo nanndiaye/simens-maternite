@@ -212,11 +212,11 @@ class AdminController extends AbstractActionController
     	}
     	else if($user['role'] == "gynecologue")
     	{
-    		return $this->redirect()->toRoute('maternite', array('action' => 'consultation-medecin'));
+    		return $this->redirect()->toRoute('accouchement', array('action' => 'accoucher'));
     	}
     	
     	echo '<div style="font-size: 25px; color: green; padding-bottom: 15px;" >vous n\'avez aucun privil�ge. Contacter l\'administrateur ----> Merci !!! </div>'; 
-    	echo '<a style="font-size: 20px; color: red;" href="http://localhost/simens/public/admin/logout">Terminer</a>';
+    	echo '<a style="font-size: 20px; color: red;" href="http://localhost/simens-maternite/public/admin/logout">Terminer</a>';
     	exit();
     }
     

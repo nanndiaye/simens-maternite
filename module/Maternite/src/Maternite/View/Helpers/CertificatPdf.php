@@ -8,7 +8,7 @@ use ZendPdf\Font;
 use Maternite\Model\Consultation;
 use Facturation\View\Helper\DateHelper;
 
-class ProtocoleOperatoirePdf {
+class CertificatPdf {
 	protected $_page;
 	protected $_yPosition;
 	protected $_leftMargin;
@@ -151,7 +151,7 @@ public function setEnTete() {
 		$this->_yPosition -= 35;
 		$this->_page->setFont ( $this->_newTime, 15 );
 		$this->_page->setFillColor ( new ZendPdf\Color\Html ( 'green' ) );
-		$this->_page->drawText ( 'PROTOCOLE OPERATOIRE', $this->_leftMargin + 160, $this->_yPosition );
+		$this->_page->drawText ( 'Certificat D\'accouchement', $this->_leftMargin + 160, $this->_yPosition );
 		$this->_yPosition -= 5;
 		$this->_page->setlineColor ( new ZendPdf\Color\Html ( 'green' ) );
 		$this->_page->drawLine ( $this->_leftMargin, $this->_yPosition, $this->_pageWidth - $this->_leftMargin, $this->_yPosition );
@@ -217,11 +217,11 @@ public function setEnTete() {
 		$this->_yPosition -= $noteLineHeight + 10; // aller a la ligne suivante
 		                                           
 		// PREPARATION DU TEXT Diagnostic
-		$tab = $this->scinderText ( $this->_DonneesDemande ['diagnostic'] );
+		$tab = $this->scinderText ( $this->_DonneesDemande ['prenome'] );
 		// PREPARATION DU TEXT Observation
-		$tab2 = $this->scinderTextO ( $this->_DonneesDemande ['observation'] );
+		$tab2 = $this->scinderTextO ( $this->_DonneesDemande ['date_accouchement'] );
 		// PREPARATION DU TEXT Protocole operatoire
-		$tab3 = $this->scinderTextPO ( $this->_DonneesDemande ['note_compte_rendu_operatoire'] );
+		$tab3 = $this->scinderTextPO ( $this->_DonneesDemande ['heure_accouchement'] );
 		
 		for($i = 1; $i < 18; $i ++) {
 			
@@ -231,7 +231,7 @@ public function setEnTete() {
 			
 			if ($i == 1) {
 				$this->_page->setFont ( $this->_newTimeGras, 13 );
-				$this->_page->drawText ( 'Diagnostic :   ', $this->_leftMargin, $this->_yPosition );
+				$this->_page->drawText ( 'Prenomé:   ', $this->_leftMargin, $this->_yPosition );
 				$this->_page->setFont ( $this->_policeContenu, 12 );
 				$this->_page->drawText ( iconv ( 'UTF-8', 'ISO-8859-1', $tab [1] ), $this->_leftMargin + 80, $this->_yPosition );
 			} else if ($i == 2) {
@@ -239,33 +239,15 @@ public function setEnTete() {
 				$this->_page->drawText ( iconv ( 'UTF-8', 'ISO-8859-1', $tab [2] ), $this->_leftMargin, $this->_yPosition );
 			} else if ($i == 3) {
 				$this->_page->setFont ( $this->_newTimeGras, 13 );
-				$this->_page->drawText ( 'Intervention rï¿½alisï¿½e :   ', $this->_leftMargin, $this->_yPosition );
+				$this->_page->drawText ( 'Date Accouchement:   ', $this->_leftMargin, $this->_yPosition );
 				$this->_page->setFont ( $this->_policeContenu, 12 );
-				$this->_page->drawText ( $this->_DonneesDemande ['intervention_prevue'], $this->_leftMargin + 125, $this->_yPosition );
+				$this->_page->drawText ( $this->_DonneesDemande ['date_accouchement'], $this->_leftMargin + 125, $this->_yPosition );
 			} else if ($i == 4) {
 				$this->_page->setFont ( $this->_newTimeGras, 13 );
-				$this->_page->drawText ( 'Type d\'anesthï¿½sie :   ', $this->_leftMargin, $this->_yPosition );
+				$this->_page->drawText ( 'Heure Accouchement :   ', $this->_leftMargin, $this->_yPosition );
 				$this->_page->setFont ( $this->_policeContenu, 13 );
-				$this->_page->drawText ( iconv ( 'UTF-8', 'ISO-8859-1', $this->_DonneesDemande ['resultatTypeIntervention'] ), $this->_leftMargin + 120, $this->_yPosition );
-			} else if ($i == 5) {
-				$this->_page->setFont ( $this->_newTimeGras, 13 );
-				$this->_page->drawText ( 'VPA Nï¿½ :  ', $this->_leftMargin, $this->_yPosition );
-				$this->_page->setFont ( $this->_policeContenu, 13 );
-				$this->_page->drawText ( $this->_DonneesDemande ['resultatNumeroVPA'], $this->_leftMargin + 60, $this->_yPosition );
-			} else if ($i == 6) {
-				$this->_page->setFont ( $this->_newTimeGras, 13 );
-				$this->_page->drawText ( 'Observation :  ', $this->_leftMargin, $this->_yPosition );
-				$this->_page->setFont ( $this->_policeContenu, 12 );
-				$this->_page->drawText ( iconv ( 'UTF-8', 'ISO-8859-1', $tab2 [1] ), $this->_leftMargin + 90, $this->_yPosition );
-			} else if ($i == 7) {
-				$this->_page->setFont ( $this->_policeContenu, 12 );
-				$this->_page->drawText ( iconv ( 'UTF-8', 'ISO-8859-1', $tab2 [2] ), $this->_leftMargin, $this->_yPosition );
-			} else if ($i == 8) {
-				$this->_page->setFont ( $this->_newTimeGras, 13 );
-				$this->_page->drawText ( 'Protocole opï¿½ratoire :  ', $this->_leftMargin, $this->_yPosition );
-				$this->_page->setFont ( $this->_policeContenu, 12 );
-				$this->_page->drawText ( iconv ( 'UTF-8', 'ISO-8859-1', $tab3 [1] ), $this->_leftMargin + 125, $this->_yPosition );
-			} else if ($i == 9) {
+				$this->_page->drawText ( iconv ( 'UTF-8', 'ISO-8859-1', $this->_DonneesDemande ['heure_accouchement'] ), $this->_leftMargin + 120, $this->_yPosition );
+			}  else if ($i == 9) {
 				$this->_page->setFont ( $this->_policeContenu, 12 );
 				$this->_page->drawText ( iconv ( 'UTF-8', 'ISO-8859-1', $tab3 [2] ), $this->_leftMargin + 0, $this->_yPosition );
 			} else if ($i == 10) {

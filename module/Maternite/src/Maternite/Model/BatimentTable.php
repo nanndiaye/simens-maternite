@@ -3,9 +3,9 @@
 namespace Maternite\Model;
 
 use Zend\Db\TableGateway\TableGateway;
-use Facturation\View\Helper\DateHelper;
+
 use Zend\Db\Sql\Sql;
-use Zend\XmlRpc\Value\String;
+
 
 class BatimentTable {
 	protected $tableGateway;

@@ -27,6 +27,11 @@ use Maternite\Model\NotesExamensMorphologiquesTable;
 use Maternite\Model\NotesExamensMorphologiques;
 use Maternite\Model\DemandeTable;
 use Maternite\Model\Demande;
+
+
+use Maternite\Model\Conclusion;
+use Maternite\Model\ConclusionTable;
+
 use Maternite\Model\OrdonConsommable;
 use Maternite\Model\OrdonConsommableTable;
 use Maternite\Model\AntecedentPersonnelTable;
@@ -427,6 +432,31 @@ class Module implements AutoloaderProviderInterface {
 							$resultSetPrototype->setArrayObjectPrototype ( new Demande () );
 							return new TableGateway ( 'demande', $dbAdapter, null, $resultSetPrototype );
 						},
+						
+						
+						
+						
+						
+						
+						
+						'Maternite\Model\ConclusionTable' => function ($sm) {
+							$tableGateway = $sm->get ( 'ConclusionTableGateway' );
+							$table = new ConclusionTable ( $tableGateway );
+							return $table;
+						},
+						'ConclusionTableGateway' => function ($sm) {
+							$dbAdapter = $sm->get ( 'Zend\Db\Adapter\Adapter' );
+							$resultSetPrototype = new ResultSet ();
+							$resultSetPrototype->setArrayObjectPrototype ( new Conclusion () );
+							return new TableGateway ( 'conclusion', $dbAdapter, null, $resultSetPrototype );
+						},
+						
+						
+						
+						
+						
+						
+						
 						'Maternite\Model\OrdonConsommableTable' => function ($sm) {
 							$tableGateway = $sm->get ( 'OrdonConsommableTableGateway' );
 							$table = new OrdonConsommableTable ( $tableGateway );

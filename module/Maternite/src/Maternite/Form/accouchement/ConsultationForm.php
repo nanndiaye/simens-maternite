@@ -281,24 +281,14 @@ class ConsultationForm extends Form {
 						'id' => 'examen_maternite_donnee7' 
 				) 
 		) );
-	$this->add ( array (
-				'name' => 'examen_maternite_donnee8',
-				'type' => 'Textarea',
-				'options' => array (
-					
-				),
-				'attributes' => array (
-						'readonly' => 'readonly',
-						'id' => 'examen_maternite_donnee8' 
-				) 
-		) );
+	
 	$this->add ( array (
 				'name' => 'examen_maternite_donnee9',
 			'type' => 'select',
 			'options' => array (
 					'value_options' => array(
-							0 => 'Pratiquable',
-							1 => 'Non Pratiquable' ,
+							0 => 'Praticable',
+							1 => 'Non Praticable' ,
 					),
 			),
 				'attributes' => array (
@@ -1108,7 +1098,8 @@ $this->add(array(
 				// 'label' => iconv ( 'UTF-8','ISO-8859-1', 'Température (°C)' )
 				'attributes' => array (
 						'class' => 'temperature_only_numeric',
-						'readonly' => 'readonly',
+						//'readonly' => 'readonly',
+						'min'=>34,
 						'id' => 'temperature' 
 				) 
 		) );
@@ -1189,7 +1180,7 @@ $this->add(array(
 				// 'label' => iconv('ISO-8859-1', 'UTF-8', 'Glycémie capillaire (g/l)')
 				'attributes' => array (
 						'class' => 'glycemie_only_numeric',
-						'readonly' => 'readonly',
+						//'readonly' => 'readonly',
 						'id' => 'glycemie_capillaire'
 				)
 		) );
@@ -1887,7 +1878,7 @@ $this->add(array(
 				'options' => array (
 						'value_options' => array (
 								0 => 'non abnte',
-								1 => ' abdte',
+								1 => ' abondate',
 								
 						) 
 				),
@@ -2068,13 +2059,7 @@ $this->add(array(
 				)
 		) );
 		
-		$this->add ( array (
-				'name' => 'note_autre_em',
-				'type' => 'text',
-				'attributes' => array (
-						'id' => 'note_autre_em'
-				)
-		) );
+		
 		/**
 		 * ** ANTECEDENTS FAMILIAUX ***
 		 */
@@ -2136,10 +2121,17 @@ $this->add(array(
 		/* Autres */
 		$this->add ( array (
 				'name' => 'autresAF',
-				'type' => 'checkbox',
+				'type' => 'Text',
 				'attributes' => array (
 						'id' => 'autresAF' 
 				) 
+		) );
+		$this->add ( array (
+				'name' => 'nbCheckboxAF',
+				'type' => 'hidden',
+				'attributes' => array (
+						'id' => 'nbCheckboxAF'
+				)
 		) );
 		/* Note Autres */
 		$this->add ( array (
@@ -2214,7 +2206,21 @@ $this->add(array(
 		
 		
 	
-		
+		$this->add ( array (
+				'name' => 'examen_maternite_donnee8',
+				'type' => 'Select',
+				'options' => array (
+						//'label' => iconv('ISO-8859-1', 'UTF-8','Type D\'Accouchemet:'),
+						'value_options' => array (
+								''=>''
+						)
+				),
+				'attributes' => array (
+						'readonly' => 'readonly',
+						
+						'id' => 'examen_maternite_donnee8'
+				)
+		) );
 
 		$this->add ( array (
 				'name' => 'type_accouchement',
@@ -2229,7 +2235,8 @@ $this->add(array(
 						'readonly' => 'readonly',
 						'registerInArrrayValidator' => true,
 						'onchange'=>' getAccouchement(this.value)',
-						'id' => 'type_accouchement'
+						'id' => 'type_accouchement',
+						'required' => true,
 				)
 		) );
 		
@@ -2252,7 +2259,7 @@ $this->add(array(
 				'name' => 'date_accouchement',
 				'type' => 'text',
 				'attributes' => array (
-						'readonly' => 'readonly',
+						//'readonly' => 'readonly',
 						'id' => 'date_accouchement'
 				)
 		) );
@@ -2261,9 +2268,9 @@ $this->add(array(
 		
 		$this->add ( array (
 				'name' => 'heure_accouchement',
-				'type' => 'time',
+				'type' => 'text',
 				'attributes' => array (
-						'readonly' => 'readonly',
+						//'readonly' => 'readonly',
 						'id' => 'heure_accouchement'
 				)
 		) );
@@ -2938,7 +2945,7 @@ $this->add(array(
 					'registerInArrrayValidator' => true,
 					'onchange'=>'getMotif(this.value)',
 					'id' =>'motif_ad',
-					//'required' => false,
+						'readonly' => 'readonly',
 			)
 	) );
 	
@@ -2965,7 +2972,7 @@ $this->add(array(
 					
 			),
 			'attributes' => array (
-					//'readonly' => 'readonly',
+					'readonly' => 'readonly',
 					'id' => 'motif'
 			)
 	) );
@@ -2980,7 +2987,7 @@ $this->add(array(
 					//'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Motif d\'evacuation ou de reference' )
 			),
 			'attributes' => array (
-					//'readonly' => 'readonly',
+					'readonly' => 'readonly',
 					'id' => 'motif_reference'
 			)
 	) );
@@ -2993,7 +3000,7 @@ $this->add(array(
 					
 			),
 			'attributes' => array (
-					//'readonly' => 'readonly',
+					'readonly' => 'readonly',
 					'id' => 'service_origine'
 			)
 	) );
@@ -3229,6 +3236,7 @@ $this->add(array(
 			'attributes' => array(
 					'registerInArrrayValidator' => true,
 					'onchange'=>' getBbAttendu(this.value)',
+					
 					'id' => 'bb_attendu',
 					//'required' => true,
 			),
@@ -4160,6 +4168,19 @@ $this->add(array(
 					//'required' => true,
 			),
 	));
+	
+	
+	$this->add(array(
+			'name' => 'prenome',
+			'type' => 'Text',
+			'attributes' => array(
+					//'readonly' => 'readonly',
+					'id' => 'prenome',
+					//'readonly' => 'readonly',
+					//'required' => true,
+			),
+	));
+	
 	$this->add(array(
 			'name' => 'heure_dece',
 			'type' => 'Time',

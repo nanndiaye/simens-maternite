@@ -103,7 +103,7 @@ $(function() {
             var  dg = $("#duree_grossesse");
             var  dac = $("#date_accouchement");
             var  ha = $("#heure_accouchement");
-            var  date_dece = $("#date_dece");
+            var  date_dece_ = $("#date_dece_");
     //$( "button" ).button(); // APPLICATION DU STYLE POUR LES BOUTONS
     var mdclick = 0;
   	$( "#modifer_donnees" ).click(function(){
@@ -238,7 +238,14 @@ $(function() {
     	);
   		
   		
-  		$('#date_dece').datepicker(
+  		
+  		
+ 
+  		
+  		
+  		
+  		
+  		$('#date_dece_').datepicker(
     			$.datepicker.regional['fr'] = {
     					closeText: 'Fermer',
     					changeYear: true,
@@ -368,6 +375,10 @@ $(function() {
     					maxDate: 0
     			}
     	);
+  		
+  		
+  		
+  		
   		
   		
   		function lesMois(n)

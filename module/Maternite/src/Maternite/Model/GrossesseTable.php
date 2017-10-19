@@ -42,17 +42,19 @@ class GrossesseTable {
 		 
 		$this->tableGateway->delete ( array (
 				'id_cons' => $donnees ['id_cons'],	
-		) );	
+		) );
+		$ddr = $donnees['ddr'];
+		if($ddr){ $ddr = $Control->convertDateInAnglais($ddr); }else{ $ddr = null;}	
 		$datagrossesse = array (
 				'id_cons' => $donnees ['id_cons'],
 				'id_patient'=>$donnees['id_patient'],
-				'ddr'=>$donnees['ddr'],
+				'ddr'=>$ddr,
 				'duree_grossesse'=>$donnees['duree_grossesse'],
 				'nb_cpn'=>$donnees['nb_cpn'],
 				'bb_attendu'=>$donnees['bb_attendu'],
 				'nombre_bb'=>$donnees['nombre_bb'],
 				'vat_1'=>$donnees['vat_1'],
-				//'vat_2'=>$donnees['vat_2'],
+				'vat_2'=>$donnees['vat_2'],
 				'vat_3'=>$donnees['vat_3'],
 				'note_ddr'=>$donnees['note_ddr'],
 				'note_bb'=>$donnees['note_bb'],

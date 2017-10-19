@@ -27,7 +27,7 @@ class NaissanceTable {
 				'enf' => 'enfant'
 		) )->join ( array (
 				'gro' => 'grossesse' 
-		), 'enf.id_maman = gro.id_patient', array (
+		), 'enf.id_grossesse = gro.id_grossesse', array (
 
 		))->join (array(
 					'acc'=>'accouchement'	
@@ -51,51 +51,64 @@ class NaissanceTable {
 	
 	
 
-public function updateNaissance($values) {
-		$this->tableGateway->delete ( array (
-				'id_cons' => $values ['id_cons'] 
-		) );
-			$datanaissance = array (
-					'id_cons' => $values ['id_cons'],
-					'id_maman' => $values ['id_patient'],
-					'sexe' => $values['sexe'],
-					'poids' => $values['poids'],
-					'apgar_1' => $values ['apgar_1'],
-					'apgar_5' => $values['apgar_5'],
-					'malf' => $values['malf'],
-					'cri' => $values['cri'],
-					'maintien_temp' => $values['maintien_temp'],
-					'mise_soin_precoce' => $values['mise_soin_precoce'],
-					'soin_cordon' => $values['soin_cordon'],
-					'reanimation' => $values['reanimation'],
-					'vit_k' => $values['vit_k'],
-					'sat' => $values['sat'],
-					'collyre' => $values['collyre'],
-					'consult_j1_j2' => $values['consult_j1_j2'],					
-					'note_sexe' => $values['note_sexe'],
-					'note_poid' => $values['note_poid'],
-					'note_malf' => $values['note_malf'],
-					'note_apgar' => $values['note_apgar'],
-					'note_cri' => $values['note_cri'],
-					'note_mt' => $values['note_mt'],
-					'note_msp' => $values['note_msp'],
-					'note_sc' => $values['note_sc'],
-					'note_reanim' => $values['note_reanim'],
-					'note_sat' => $values['note_sat'],
-					'note_vit_k' => $values['note_vit_k'],
-					'note_collyre' => $values['note_collyre'],
-					'note_cons_j1_j2' => $values['note_cons_j1_j2'],
-					'perim_cranien' => $values['perim_cranien'],
-					'perim_cephalique' => $values['perim_cephalique'],
-					'perim_brachial' => $values['perim_brachial'],
-					'note_perim' => $values['note_perim'],
-					'taille_enf' => $values['taille_enf'],
-					'note_taille' => $values['note_taille'],
-					
-			);	//var_dump($datanaissance);exit();
-		$this->tableGateway->insert ( $datanaissance );
-		//var_dump("test");exit();
+public function saveNaissance($values,$id_cons,$id_patient,$id_grossesse) {
 	
+	$tab_IdBebe = array();
+	for($i = 1; $i <=  $values['nombre_bb'] ; $i ++){
+		$datanaissance = array (
+				'sexe' => $values['sexe_'. $i],
+				'note_sexe' => $values['n_sexe_' . $i],
+				'poids' => $values['poids_'. $i],
+				'taille' => $values['taille_'. $i],
+				'note_taille' => $values['n_taille_'. $i],
+				'note_poids' => $values['n_poids_'. $i],
+				'apgar_1' => $values ['apgar1_'. $i],
+				'apgar_5' => $values['apgar5_'. $i],
+				'note_apgar' => $values['n_apgar_'. $i],
+				'malf' => $values['malf_'. $i],
+				'note_malf' => $values['n_malf_'. $i],
+				'cri' => $values['cri_'. $i],
+				'note_cri' => $values['n_cri_'. $i],
+				'maintien_temp' => $values['mt_'. $i],
+				'note_temp' => $values['n_mt_'. $i],
+				'mise_soin_precoce' => $values['msp_'. $i],
+				'note_soin_precoce' => $values['n_msp_'. $i],
+				'soin_cordon' => $values['sc_'. $i],
+				'note_cordon' => $values['n_sc_'. $i],
+				'reanimation' => $values['reanim_'. $i],
+				'note_reanim' => $values['n_reanim_'. $i],
+				'vit_k' => $values['vitk_'. $i],
+				'note_vitk' => $values['n_vitk_'. $i],
+				'sat' => $values['sat_'. $i],
+				'note_sat' => $values['n_sat_'. $i],
+				'collyre' => $values['collyre_'. $i],
+				'note_collyre' => $values['n_collyre_'. $i],
+				'consult_j1_j2' => $values['consj1j2_'. $i],
+				'perim_cranien' => $values['cranien_'. $i],
+				'perim_cephalique' => $values['cephalique_'. $i],
+				'perim_brachial' => $values['brachial_'. $i],
+				'note_perim' => $values['n_perim_'. $i],
+				'bcg' => $values['bcg_'. $i],
+				'note_bcg' => $values['n_bcg_'. $i],
+				'anti_hepatique' => $values['anti_hepa_'. $i],
+				'note_hepa' => $values['n_anti_hepa_'. $i],
+				'vpo' => $values['vpo_'. $i],
+				'note_vpo' => $values['n_vpo_'. $i],
+				'anti_tuberculeux' => $values['antiT_'. $i],
+				'note_tuberculeux' => $values['n_antiT_'. $i],
+				'autre_vacc' => $values['autre_vacc_'. $i],
+				'type_autre_vacc' => $values['type_autre_vacc_'. $i],
+				'note_autre_vacc' => $values['n_autre_vacc_'. $i],
+				'id_cons' => $id_cons,
+				'id_grossesse' => $id_grossesse,
+				'id_maman' => $id_patient,
+		);
+			
+		$this->tableGateway->insert($datanaissance);
+		$tab_IdBebe [] = $this->tableGateway->getLastInsertValue();
+	}
+	
+	return $tab_IdBebe;
 
 }
 }

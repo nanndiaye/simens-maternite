@@ -99,29 +99,8 @@ class TypeAdmissionTable{
 		
 		return $options;
 	}
-	public function fetchType()
-	{
-		$adapter = $this->tableGateway->getAdapter ();
-		$sql = new Sql($adapter);
-		$select = $sql->select('type_admission');
-		$select->columns(array('id_type_ad', 'type_admi'));
-		$stat = $sql->prepareStatementForSqlObject($select);
-		$result = $stat->execute();
-		foreach ($result as $data) {
-			$options[$data['id_type_ad']] = $data['type_admi'];
-		}
-		return $options;
-	}
-	public function getTypeParNom($nom_type){
-		$adapter = $this->tableGateway->getAdapter();
-		$sql = new Sql($adapter);
-		$select = $sql->select();
-		$select->from(array('les_types'=>'type_admission'));
-		$select->where(array('type_admission'=>$nom_type));
-		$stat = $sql->prepareStatementForSqlObject($select);
-		$result = $stat->execute()->current();
-		return $result;
-	}
+	
+
 	
 	
 	

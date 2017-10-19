@@ -74,7 +74,7 @@ class CompteRenduOperatoirePdf {
 		return $tabURI [0];
 	}
 	public function setEnTete() {
-		$imageHeader = ZendPdf\Image::imageWithPath ( $this->baseUrl () . 'public\images_icons\hrsl.png' );
+		$imageHeader = ZendPdf\Image::imageWithPath ( $this->baseUrl () . 'public\images_icons\hospice_log.png' );
 		$this->_page->drawImage ( $imageHeader, 50, 		// -x
 		$this->_pageHeight - 190, 		// -y
 		155, 		// +x
@@ -91,12 +91,12 @@ class CompteRenduOperatoirePdf {
 		$this->_page->drawText ( $this->_DonneesMedecin ['prenomMedecin'] . ' ' . $this->_DonneesMedecin ['nomMedecin'], $this->_leftMargin + 350, $this->_pageHeight - 80 );
 		
 		$this->_page->setFont ( $this->_newTimeGras, 10 );
-		$this->_page->drawText ( 'Anesthï¿½siste:', $this->_leftMargin + 300, $this->_pageHeight - 95 );
+		$this->_page->drawText ( 'Anesthésiste:', $this->_leftMargin + 300, $this->_pageHeight - 95 );
 		$this->_page->setFont ( $this->_newTime, 10 );
 		$this->_page->drawText ( iconv ( 'UTF-8', 'ISO-8859-1', $this->_DonneesDemande ['anesthesiste'] ), $this->_leftMargin + 360, $this->_pageHeight - 95 );
 		
 		$this->_page->setFont ( $this->_newTime, 10 );
-		$this->_page->drawText ( 'Rï¿½publique du Sï¿½nï¿½gal', $this->_leftMargin, $this->_pageHeight - 50 );
+		$this->_page->drawText ( 'Ministère de la santé et de l\'action sociale', $this->_leftMargin, $this->_pageHeight - 50 );
 		$this->_page->setFont ( $this->_newTime, 10 );
 		$this->_page->drawText ( 'Ministï¿½re de la santï¿½ et de l\'action sociale', $this->_leftMargin, $this->_pageHeight - 65 );
 		$this->_page->setFont ( $this->_newTime, 10 );

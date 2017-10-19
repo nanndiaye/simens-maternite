@@ -24,6 +24,7 @@ use Zend\Form\View\Helper\FormSelect;
 use Maternite\View\Helpers\DocumentPdf;
 use Maternite\View\Helpers\DemandeExamenPdf;
 use Maternite\View\Helpers\OrdonnancePdf;
+use Maternite\View\Helpers\CertificatPdf;
 use Maternite\View\Helpers\ProtocoleOperatoirePdf;
 use Maternite\View\Helpers\TraitementChirurgicalPdf;
 use Maternite\View\Helpers\TraitementInstrumentalPdf;
@@ -69,6 +70,7 @@ class AccouchementController extends AbstractActionController
     protected $demandeVisitePreanesthesiqueTable;
     protected $notesExamensMorphologiquesTable;
     protected $demandeExamensTable;
+    protected $conclusionTable;
     protected $ordonConsommableTable;
     protected $antecedantPersonnelTable;
     protected $antecedantsFamiliauxTable;
@@ -202,9 +204,9 @@ class AccouchementController extends AbstractActionController
 
 		public function getConsultationMaterniteTable()
 	{
-		if (!$this->consultationTable) {
+		if (!$this->consultationMaterniteTable) {
 			$sm = $this->getServiceLocator();
-			$this->consultationTable = $sm->get('Maternite\Model\ConsultationMaterniteTable');
+			$this->consultationMaterniteTable = $sm->get('Maternite\Model\ConsultationMaterniteTable');
 		}
 		return $this->consultationMaterniteTable;
 	}
@@ -271,7 +273,14 @@ class AccouchementController extends AbstractActionController
 		}
 		return $this->demandeExamensTable;
 	}
-	
+	public function conclusionTable()
+	{
+		if (!$this->conclusionTable) {
+			$sm = $this->getServiceLocator();
+			$this->conclusionTable = $sm->get('Maternite\Model\ConclusionTable');
+		}
+		return $this->conclusionTable;
+	}
 	public function getOrdonConsommableTable()
 	{
 		if (!$this->ordonConsommableTable) {
@@ -2189,6 +2198,20 @@ public function declarerDecesAction() {
 		);
 	}
 	
+	
+	public function listeAccouchementAjaxAction() {
+		$output = $this->getAdmissionTable ()->getPatientsAdmis();
+		return $this->getResponse ()->setContent ( Json::encode ( $output, array (
+				'enableJsonExprFinder' => true
+		) ) );
+	}
+	public function listeAccouchementAction() {
+			$this->layout ()->setTemplate ( 'layout/accouchement' );
+		$user = $this->layout()->user;
+		$idService = $user['IdService'];
+		return new ViewModel ( array (
+		) );
+	}
 	public function accoucherAction(){
 		$this->layout()->setTemplate('layout/accouchement');
 		$user = $this->layout()->user;
@@ -2202,6 +2225,8 @@ public function declarerDecesAction() {
 				'donnees' => $lespatients,
 				'tabPatientRV' => $tabPatientRV
 		));
+
+	
 		
 	}
 	public function partogrammeAction(){
@@ -2401,7 +2426,7 @@ public function declarerDecesAction() {
 				'duree_cycle'=>$donne_ante2['duree_cycle'],
 				'note_dystocie'=>$donne_ante2['note_dystocie'],
 				'note_eclampsie'=>$donne_ante2['note_eclampsie'],
-				'note_cycle'=>$donne_ante2['note_cycle'],
+				//'note_cycle'=>$donne_ante2['note_cycle'],
 				'autre_go'=>$donne_ante2['autre_go'],
 				'note_autre_go'=>$donne_ante2['note_autre'],
 				'quantite_regle'=>$donne_ante2['quantite_regle'],
@@ -2457,12 +2482,19 @@ public function declarerDecesAction() {
 	
 
 		//var_dump($form);exit();
-	$liste_type = $this->getTypeAccouchementTable ()->listeTypeAccouchement ();
-		$afficheTous = array ("" => 'Selectionnez un Type');
+	$liste_pres = $this->getDonneesExamensPhysiquesTable ()->listePresentation ();
+		//$afficheTous = array ("" => 'Selectionnez un Type');
 	//	var_dump($liste_type);exit();
+		$tab_pres = $liste_pres ;
+		$form->get('examen_maternite_donnee8')->setValueOptions($tab_pres);
+		
+		
+		//pour la presentation du foetus
+		$liste_type = $this->getTypeAccouchementTable ()->listeTypeAccouchement ();
+		$afficheTous = array ("" => 'Selectionnez un Type');
+		//	var_dump($liste_type);exit();
 		$tab_type = $liste_type ;
 		$form->get('type_accouchement')->setValueOptions($tab_type);
-		
 		// instancier la consultation et r�cup�rer l'enregistrement
 		$consult = $this->getConsultationTable()->getConsult($id);
 	//var_dump($consult); exit();
@@ -2474,7 +2506,9 @@ public function declarerDecesAction() {
 	
 		// Liste des examens biologiques
 		$listeDesExamensBiologiques = $this->demandeExamensTable()->getDemandeDesExamensBiologiques();
-		
+		$listeDesComplication = $this->conclusionTable()->getComplicationObstetricale();
+		$listeDesCauseDeces = $this->conclusionTable()->getCauseDecesMaternel();
+		//var_dump($listeDesComplication);exit();
 		// Liste des examens Morphologiques
 		$listeDesExamensMorphologiques = $this->demandeExamensTable()->getDemandeDesExamensMorphologiques();
 		
@@ -2571,6 +2605,8 @@ public function declarerDecesAction() {
 				'resultRV' => $resultRV,
 				'listeHospitalisation' => $listeHospitalisation,
 				'listeDesExamensBiologiques' => $listeDesExamensBiologiques,
+				'listeDesComplication' => $listeDesComplication,
+				'listeCauseDeces'=>$listeDesCauseDeces,
 				'listeDesExamensMorphologiques' => $listeDesExamensMorphologiques,
 				'listeAntMed' => $listeAntMed,
 				'antMedPat' => $antMedPat,
@@ -3302,16 +3338,11 @@ public function declarerDecesAction() {
         $formData = $this->getRequest()->getPost();
         $form->setData($formData);
         $id_admission = $this->params()->fromPost('id_admission');
-       // $id_grossesse = $this->params()->fromPost('id_grossesse');
-        //var_dump($id_admission);exit();
         $user = $this->layout()->user;
         $IdDuService = $user ['IdService'];
         $id_medecin = $user ['id_personne'];
       
-//DONNEES ACCOUCHEMENT
-        
-
-        
+    
         // **********-- MODIFICATION DES CONSTANTES --********
         // **********-- MODIFICATION DES CONSTANTES --********
         // **********-- MODIFICATION DES CONSTANTES --********
@@ -3321,10 +3352,6 @@ public function declarerDecesAction() {
         $this->getConsultationTable()->addAntecedentMedicaux($formData);
         $this->getConsultationTable()->addAntecedentMedicauxPersonne($formData);
         
-       //$this->getAccouchementTable()->updateAccouchement($form);
-        //var_dump($form);exit();
-        // mettre a jour les motifs d'admission
-
         $this->getMotifAdmissionTable()->deleteMotifAdmission($id_cons);
       
       
@@ -3344,26 +3371,39 @@ public function declarerDecesAction() {
         // mettre a jour les bandelettes urinaires
         $this->getConsultationTable()->deleteBandelette($id_cons);
         $this->getConsultationTable()->addBandelette($bandelettes);
-        
-       $id_grossesse= $this->getGrossesseTable()->updateGrossesse($formData);
-       // var_dump($id_grossesse);exit();
-     
-      $id_antecedent1 = $this->getAntecedentType1Table ()-> updateAntecedentType1($formData); 
-     // var_dump("test");exit();
-       		$id_antecedent2 = $this->getAntecedentType2Table ()-> updateAntecedentType2($formData);
+
+        $id_grossesse= $this->getGrossesseTable()->updateGrossesse($formData);
+        $this->getConsultationMaterniteTable()->addConsultationMaternite($id_cons,$id_grossesse);
+
+        //var_dump($id_grossesse);exit();
+        //$id_antecedent1 = $this->getAntecedentType1Table ()-> updateAntecedentType1($formData); 
+        //var_dump("test");exit();
+       		//$id_antecedent2 = $this->getAntecedentType2Table ()-> updateAntecedentType2($formData);
        		//var_dump($formData);exit();
-       $this->getDonneesExamensPhysiquesTable()->updateExamenPhysique($formData);
-     
-        $this->getAccouchementTable()->updateAccouchement($formData,$id_grossesse);
-       // var_dump('test');exit();
+       		//var_dump('test');exit();
+        //$this->getDonneesExamensPhysiquesTable()->updateExamenPhysique($formData);
+        //var_dump('test');exit();
+        //$this->getAccouchementTable()->updateAccouchement($formData,$id_grossesse);
+  
+       //var_dump('test');exit();
       
         //ENFANT      
-       $this->getNaissanceTable()->updateNaissance($formData);
-       //var_dump("test");exit();
-//Nouveau ne
-      
-       //$this->getDevenirNouveauNeTable()->updateNouveauNe($formData);
-      // var_dump($formData);exit();
+        //$nombre_enf = $this->params()->fromPost('nombre_enfant');
+        //var_dump($formData['nombre_bb']); exit();
+        
+       	$tab_bebes = $this->getNaissanceTable()->saveNaissance($formData,$id_cons,$id_patient,$id_grossesse);
+        
+       	$this->getDevenirNouveauNeTable()->saveNouveauNe($formData, $id_cons, $tab_bebes);
+       	
+       	var_dump($tab_bebes);exit();
+       
+        //Nouveau ne
+  
+      //pour les conclusion: complication et deces maternel
+      $nombre_cause = $this->params()->fromPost('nb_comp');
+      $nombre_causeDC = $this->params()->fromPost('nbcauseDC');
+      $this->conclusionTable()->updateConclusionComp($formData, $id_cons,$nombre_cause,$id_patient);
+      $this->conclusionTable()->updateConclusionDeces($formData, $id_cons,$nombre_causeDC,$id_patient);
         // POUR LES ANTECEDENTS ANTECEDENTS ANTECEDENTS
         // POUR LES ANTECEDENTS ANTECEDENTS ANTECEDENTS
         // POUR LES ANTECEDENTS ANTECEDENTS ANTECEDENTS
@@ -3393,36 +3433,8 @@ public function declarerDecesAction() {
             'dislipidemieAM' => $this->params()->fromPost('dislipidemieAM'),
             'asthmeAM' => $this->params()->fromPost('asthmeAM'),
 
-            // GYNECO-OBSTETRIQUE
-            /* Menarche */
-            'MenarcheGO' => $this->params()->fromPost('MenarcheGO'),
-            'NoteMenarcheGO' => $this->params()->fromPost('NoteMenarcheGO'),
-            /*Enf Viv*/
-            'EnfVivGO' => $this->params()->fromPost('EnfVivGO'),
-            'NoteEnfVivGO' => $this->params()->fromPost('NoteEnfVivGO'),
-            /*Gestite*/
-            'GestiteGO' => $this->params()->fromPost('GestiteGO'),
-            'NoteGestiteGO' => $this->params()->fromPost('NoteGestiteGO'),
-            /*Eclampsie*/
-            'EclampsieGO' => $this->params()->fromPost('EclampsieGO'),
-            'NoteEclampsieGO' => $this->params()->fromPost('NoteEclampsieGO'),
-            /*Cesarienne*/
-            'CesarienneGO' => $this->params()->fromPost('CesarienneGO'),
-            'NoteCesarienneGO' => $this->params()->fromPost('NoteCesarienneGO'),
-            /*MortNe*/
-            'MortNeGO' => $this->params()->fromPost('MortNeGO'),
-            'NoteMortNeGO' => $this->params()->fromPost('NoteMortNeGO'),
-            /*Dystocie*/
-            'DystocieGO' => $this->params()->fromPost('DystocieGO'),
-            'NoteDystocieGO' => $this->params()->fromPost('NoteDystocieGO'),
-            /*Parite*/
-            'PariteGO' => $this->params()->fromPost('PariteGO'),
-            'NotePariteGO' => $this->params()->fromPost('NotePariteGO'),
-            /*Cycle*/
-            'CycleGO' => $this->params()->fromPost('CycleGO'),
-            'DureeCycleGO' => $this->params()->fromPost('DureeCycleGO'),
-            'RegulariteCycleGO' => $this->params()->fromPost('RegulariteCycleGO'),
-            'DysmenorrheeCycleGO' => $this->params()->fromPost('DysmenorrheeCycleGO'),
+          
+           
 
             // **=== ANTECEDENTS FAMILIAUX
             // **=== ANTECEDENTS FAMILIAUX
@@ -3643,6 +3655,30 @@ public function declarerDecesAction() {
     	return $this->path;
     }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    public function conclusionComplicationAction()
+    {
+    	$id_cons = $this->params()->fromPost('id_cons');
+    	$complication = $this->params()->fromPost('comp');
+    	$notesComp = $this->params()->fromPost('notesComp');
+    
+    	$this->conclusionTable()->saveComplication($id_cons, $complication, $notesComp);
+    
+    	$this->getResponse()->getHeaders()->addHeaderLine('Content-Type', 'application/html');
+    	return $this->getResponse()->setContent(Json::encode());
+    }
+    
+    
+    
+    
+    
   public function impressionPdfAction()
     {
         $user = $this->layout()->user;
@@ -3698,7 +3734,38 @@ public function declarerDecesAction() {
         	// Afficher le document contenant la page
         	$DocPdf->getDocument();
         }else 
+        if (isset ($_POST ['certificat'])) {
+        	// R�cup�ration des donn�es
+        	$donneesDemande ['prenome'] = $this->params()->fromPost('prenome');
+        	$donneesDemande ['heure_accouchement'] = $this->params()->fromPost('heure_accouchement');
+        	$donneesDemande ['date_accouchement'] = $this->params()->fromPost('date_accouchement');
+        	$donneesDemande ['user'] =$this->layout()->user;
+        	// CREATION DU DOCUMENT PDF
+        	// Cr�er le document
+        	$DocPdf = new DocumentPdf ();
+        	// Cr�er la page
+        	$page = new CertificatPdf();
         
+        	// var_dump($donneesDemande); exit();
+        
+        	// Envoi Id de la consultation
+        	$page->setIdConsTC($id_cons);
+        	$page->setService($serviceMedecin);
+        	// Envoi des donn�es du patient
+        	$page->setDonneesPatientTC($donneesPatientOR);
+        	// Envoi des donn�es du medecin
+        	$page->setDonneesMedecinTC($donneesMedecin);
+        	// Envoi les donn�es de la demande
+        	$page->setDonneesDemandeTC($donneesDemande);
+        
+        	// Ajouter les donnees a la page
+        	$page->addNoteTC();
+        	// Ajouter la page au document
+        	$DocPdf->addPage($page->getPage());
+        
+        	// Afficher le document contenant la page
+        	$DocPdf->getDocument();
+        }else
         if (isset ($_POST ['observation_go'])) {
         	// R�cup�ration des donn�es
         	$donneesDemande ['text_observation'] = $this->params()->fromPost('text_observation');

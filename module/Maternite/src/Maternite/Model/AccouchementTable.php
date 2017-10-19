@@ -3,9 +3,9 @@
 namespace Maternite\Model;
 
 use Zend\Db\TableGateway\TableGateway;
-use Zend\Db\Sql\Select;
+
 use Zend\Db\Sql\Sql;
-use Zend\Db\Sql\Where;
+
 use Maternite\View\Helpers\DateHelper;
 
 class AccouchementTable {
@@ -46,41 +46,37 @@ class AccouchementTable {
 				
 		) );
 		$date_accouchement = $donnees['date_accouchement'];
-		if($date_accouchement){ $date_accouchement = $Control->convertDateInAnglais($date_accouchement); }else{ $date_accouchement = null;}
-		
+		if($date_accouchement){ $date_accouchement = $Control->convertDateInAnglais($date_accouchement); }else{ $date_accouchement = null;}		
 			$dataac = array (
 					'id_cons' => $donnees ['id_cons'],
 					'id_admission'=>$donnees['id_admission'],
 					'id_grossesse'=>$id_grossesse,
-					'type_accouchement' => $donnees['type_accouchement'],
-					'motif_type' => $donnees['motif_type'],
-					'date_accouchement' => $date_accouchement,
+					'id_type' => $donnees['type_accouchement'],
+					
+ 					'motif_type' => $donnees['motif_type'],
+ 					'date_accouchement' => $date_accouchement,
 					'heure_accouchement' => $donnees['heure_accouchement'],
-					'delivrance' => $donnees['delivrance'],
+ 					'delivrance' => $donnees['delivrance'],
 					'ru' => $donnees['ru'],
+					'quantite_hemo' => $donnees['quantite_hemo'],
 					'hemoragie' => $donnees['hemoragie'],
 					'ocytocique_per' => $donnees['ocytocique_per'],
 					'ocytocique_post' => $donnees['ocytocique_post'],
 					'antibiotique' => $donnees['antibiotique'],
 					'anticonvulsant' => $donnees ['anticonvulsant'],
 					'transfusion' => $donnees['transfusion'],
-					'text_observation' => $donnees['text_observation'],
-					'observations' => $donnees['observations'],
-					'suite_de_couches' => $donnees['suite_de_couches'],
-					'note_accouchement' => $donnees['note_accouchement'],
 					'note_delivrance' => $donnees['note_delivrance'],
 					'note_hemorragie' => $donnees['note_hemorragie'],
+					'text_observation' => $donnees['text_observation'],
+					'suite_de_couche' => $donnees['suite_de_couche'],
 					'note_ocytocique' => $donnees['note_ocytocique'],
 					'note_antibiotique' => $donnees['note_antibiotique'],
 					'note_anticonv' => $donnees['note_anticonv'],
 					'note_transfusion' => $donnees['note_transfusion'],				
-			);
-			
-			//var_dump($dataac);exit();
+			);//var_dump($dataac);exit();
+	
 			$this->tableGateway->insert ( $dataac );
-			//var_dump("test"); exit();
-			//var_dump($dataac);exit();
-			//var_dump($dataaccouchement);exit();
+		
 	}
 	
 

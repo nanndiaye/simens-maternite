@@ -204,7 +204,7 @@ var tabUrl = base_url.split("public");
 //********************* EXAMEN MORPHOLOGIQUE *****************************
 
 function ValiderOrdonnance(){
-$(function(){
+//$(function(){
 	//Au debut on affiche pas le bouton modifier
 	$("#bouton_Medicament_modifier_demande").toggle(false);
 	//Au debut on affiche le bouton valider
@@ -283,5 +283,5 @@ $(function(){
 		$("#increm_decrem img").toggle(true);
 		return false;
 	});
-});
+//});
 }

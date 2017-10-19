@@ -272,15 +272,7 @@ $(function () {
     var motif_transfert = $("#motif_transfert");
     var hopital_accueil = $("#hopital_accueil");
     var service_accueil = $("#service_accueil");
-//	$("#transfert").click(function(){
-//		motif_transfert.attr( 'readonly', true).css({'background':'#f8f8f8'});
-//		$("#hopital_accueil_tampon").val(hopital_accueil.val());
-//		//hopital_accueil.attr( 'disabled', true).css({'background':'#f8f8f8'});
-//		$("#service_accueil_tampon").val(service_accueil.val());
-//		//service_accueil.attr( 'disabled', true).css({'background':'#f8f8f8'});
-//		$("#bouton_transfert_modifier").toggle(true);  //on affiche le bouton permettant de modifier les champs
-//	    $("#bouton_transfert_valider").toggle(false); //on cache le bouton permettant de valider les champs
-//	});
+
 
     $("bouton_valider_transfert").button();
     $("bouton_modifier_transfert").button();
@@ -330,13 +322,6 @@ $(function () {
 $(function () {
     var motif_hospitalisation = $("#motif_hospitalisation");
     var date_fin_hospitalisation = $("#date_fin_hospitalisation_prevue");
-//	$("#hospitalisation").click(function(){
-//		motif_hospitalisation.attr( 'disabled', true).css({'background':'#f8f8f8'});
-//		date_fin_hospitalisation.attr( 'disabled', true).css({'background':'#f8f8f8'});
-//		$("#bouton_hospi_modifier").toggle(true);
-//		$("#bouton_hospi_valider").toggle(false);
-//	});
-
     $("#annulerhospitalisation").click(function () {
         motif_hospitalisation.val("");
         date_fin_hospitalisation.val("");
@@ -473,105 +458,12 @@ $(function () {
 
 //******************* Reference ********************************
 //******************* Reference ********************************
-$(function () {
- var evacue_de = $("evacue_de");
- var motif_evac = $("#motif_evac");
- var service_origine = $("#service_origine");
-
-
- $("bouton_valider_evacuation").button();
- $("bouton_modifier_evacuation").button();
-
- //Au debut on cache le bouton modifier et on affiche le bouton valider
- $("#bouton_evacuation_valider").toggle(true);
- $("#bouton_evacuation_modifier").toggle(false);
-
- //Au debut on desactive tous les champs
- evacue_de.attr('readonly', false).css({'background': '#fff'});
- ;
-motif_evac.attr('disabled', false).css({'background': '#fff'});
- ;
- service_origine.attr('disabled', false).css({'background': '#fff'});
- ;
-
- //Valider(cach�) avec le bouton 'valider'
- $("#bouton_evacuation_valider").click(function () {
-     evacue_de.attr('readonly', true).css({'background': '#f8f8f8'});     //d�sactiver le motif transfert
-    // $("#hopital_accueil_tampon").val(hopital_accueil.val());
-    motif_evac.attr('disabled', true).css({'background': '#f8f8f8'});     //d�sactiver hopital accueil
-    // $("#service_accueil_tampon").val(service_accueil.val());
-     service_origine.attr('disabled', true).css({'background': '#f8f8f8'});   //d�sactiver service accueil
-     $("#bouton_evacuation_modifier").toggle(true);  //on affiche le bouton permettant de modifier les champs
-     $("#bouton_evacuation_valider").toggle(false); //on cache le bouton permettant de valider les champs
-
-     //$("#annulertransfert").attr('disabled', true);
-     return false;
- });
- //Activer(d�cach�) avec le bouton 'modifier'
- $("#bouton_evacuation_modifier").click(function () {
-     evacue_de.attr('readonly', false).css({'background': '#fff'});
-     motif_evac.attr('disabled', false).css({'background': '#fff'});
-     service_origine.attr('disabled', false).css({'background': '#fff'});
-     $("#bouton_evacuation_modifier").toggle(false);   //on cache le bouton permettant de modifier les champs
-     $("#bouton_evacuation_valider").toggle(true);    //on affiche le bouton permettant de valider les champs
-
-    //$("#annulertransfert").attr('disabled', false);
-     return false;
- });
-});
-
-
 
 //*************Autres(Evacuation/Reference/  )***************
 
 //******************* Evacuation CHRSL ********************************
 //******************* Reference ********************************
-$(function () {
-var evacue_vers = $("evacue_vers");
-var motif_ev_vers = $("#motif_ev_vers");
-var service_acceuil_ev = $("#service_acceuil_ev");
 
-
-$("bouton_valider_evac").button();
-$("bouton_modifier_evac").button();
-
-//Au debut on cache le bouton modifier et on affiche le bouton valider
-$("#bouton_evac_valider").toggle(true);
-$("#bouton_evac_modifier").toggle(false);
-
-//Au debut on desactive tous les champs
-evacue_vers.attr('readonly', false).css({'background': '#fff'});
-;
-motif_ev_vers.attr('disabled', false).css({'background': '#fff'});
-;
-service_acceuil_ev.attr('disabled', false).css({'background': '#fff'});
-;
-
-//Valider(cach�) avec le bouton 'valider'
-$("#bouton_evac_valider").click(function () {
-   evacue_vers.attr('readonly', true).css({'background': '#f8f8f8'});     //d�sactiver le motif transfert
-  // $("#hopital_accueil_tampon").val(hopital_accueil.val());
-  motif_ev_vers.attr('disabled', true).css({'background': '#f8f8f8'});     //d�sactiver hopital accueil
-  // $("#service_accueil_tampon").val(service_accueil.val());
-   service_acceuil_ev.attr('disabled', true).css({'background': '#f8f8f8'});   //d�sactiver service accueil
-   $("#bouton_evac_modifier").toggle(true);  //on affiche le bouton permettant de modifier les champs
-   $("#bouton_evac_valider").toggle(false); //on cache le bouton permettant de valider les champs
-
-   //$("#annulertransfert").attr('disabled', true);
-   return false;
-});
-//Activer(d�cach�) avec le bouton 'modifier'
-$("#bouton_evac_modifier").click(function () {
-   evacue_vers.attr('readonly', false).css({'background': '#fff'});
-   motif_ev_vers.attr('disabled', false).css({'background': '#fff'});
-   service_acceuil_ev.attr('disabled', false).css({'background': '#fff'});
-   $("#bouton_evac_modifier").toggle(false);   //on cache le bouton permettant de modifier les champs
-   $("#bouton_evac_valider").toggle(true);    //on affiche le bouton permettant de valider les champs
-
-  //$("#annulertransfert").attr('disabled', false);
-   return false;
-});
-});
 //********************* RENDEZ VOUS *****************************
 //********************* RENDEZ VOUS *****************************
 $(function () {
@@ -674,13 +566,6 @@ $("#annuler2").click(function(){
     $(location).attr("href",vart);
     return false;
 });
-//$("#annuler2").click(function () {
-//    //event.preventDefault();
-//    confirmation();
-//    $("#confirmation2").dialog('open');
-//
-//    return false;
-//});
 
 var temoinHu= 0;
 var temoinTaille = 0;
@@ -795,17 +680,6 @@ $("#terminer,#bouton_constantes_valider, #terminer2, #terminer3, #terminer4").cl
         $("#temperature").css("border-color", "");
         $("#erreur_temperature").fadeOut();
     }
-
-//	         if( $("#pouls").val() == "" || temoinPouls == 4){
-//	         	 $("#pouls").css("border-color","#FF0000");
-//	             $("#erreur_pouls").fadeIn().text("Max: 150 battements").css({"color":"#ff5b5b","padding":" 0 10px 0 10px","margin-top":"-18px","font-size":"13px","font-style":"italic"});
-//	             valid = false;
-//	         }
-//	         else{
-//	         	 $("#pouls").css("border-color", "");
-//	             $("#erreur_pouls").fadeOut();
-//	         }
-
     if ($("#tensionmaximale").val() == "" || temoinTensionMaximale == 5) {
         $("#tensionmaximale").css("border-color", "#FF0000");
         $("#erreur_tensionmaximale").fadeIn().text("300mmHg").css({
@@ -901,9 +775,9 @@ $("#terminer2, #terminer3").click(function () {
     donnees['note_tv'] = $("#note_tv").val();
     donnees['note_hu'] = $("#note_hu").val();
     donnees['note_bdc'] = $("#note_bdc").val();
-    donnees['note_la'] = $("#note_la").val();
-    donnees['note_pde'] = $("#note_pde").val();
-    donnees['note_presentation'] = $("#note_presentation").val();
+   // donnees['note_la'] = $("#note_la").val();
+   // donnees['note_pde'] = $("#note_pde").val();
+    donnees['examen_maternite_donnee11'] = $("#examen_maternite_donnee11").val();
     donnees['note_bassin'] = $("#note_bassin").val();
     
     
@@ -1048,7 +922,7 @@ $("#terminer2, #terminer3").click(function () {
     donnees['note_gs'] = $("#note_gs").val();
     donnees['test_emmel'] = $("#test_emmel").val();
     donnees['profil_emmel'] = $("#profil_emmel").val();
-    donnees['note_emmel'] = $("#note_emmel").val();
+    donnees['note_emmel'] =   $("#note_emmel").val();
   //  donnees['note_autre_em'] = $("#note_autre_em").val();
     //Antecedent type 2
     
@@ -1104,12 +978,12 @@ $("#terminer2, #terminer3").click(function () {
     donnees['antibiotique'] = $("#antibiotique").val();
     donnees['anticonvulsant'] = $("#anticonvulsant").val();
     donnees['transfusion'] = $("#transfusion").val();
-    donnees['observations'] = $("#observations").val();
-    donnees['text_observation'] = $("#text_observation").val();
-    donnees['suite_de_couches'] = $("#suite_de_couches").val(); 
+   donnees['text_observation'] = $("#text_observation").val();
+
+   donnees['suite_de_couche'] = $("#suite_de_couches").val(); 
     donnees['note_accouchement'] = $("#note_accouchement").val();
     donnees['note_delivrance'] = $("#note_delivrance").val();
-    donnees['note_hemorragie'] = $("#note_hemoragie").val();
+    donnees['note_hemorragie'] = $("#note_hemorragie").val();
     donnees['note_ocytocique'] = $("#note_ocytocique").val();
     donnees['note_antibiotique'] = $("#note_antibiotique").val();
     donnees['note_anticonv'] = $("#note_anticonv").val();
@@ -1117,30 +991,119 @@ $("#terminer2, #terminer3").click(function () {
     
     
     
-    //**********--ENFANT-********
+    
+    
+    
+    //conclusion accouchement
+    var nbcomp=$("Complication").length;
+	donnees['nb_comp'] = nbcomp;
+    //alert(nbcomp);
+    for(var i=1 ; i<=nbcomp ; i++){
+//    	alert($("#comp_name_"+i).val());
+//    	alert($("#noteComp_"+i).val());	
+    	donnees['comp_name_'+i] = $("#comp_name_"+i).val();
+    	donnees['note_comp_'+i] = $("#noteComp_"+i).val();
+    
+    
+    }
+    
 
-    donnees['sexe'] = $("#sexe").val();
-    donnees['poids'] = $("#poids").val();
-    donnees['malf'] = $("#malf").val();
-    donnees['cri'] = $("#cri").val();
-    donnees['maintien_temp'] = $("#maintien_temp").val();
-    donnees['mise_soin_precoce'] = $("#mise_soin_precoce").val();
-    donnees['soin_cordon'] = $("#soin_cordon").val();
-    donnees['reanimation'] = $("#reanimation").val();
-    donnees['apgar_1'] = $("#apgar_1").val();
-    donnees['apgar_5'] = $("#apgar_5").val();
-    donnees['sat'] = $("#sat").val();
-    donnees['vit_k'] = $("#vit_k").val();
-    donnees['collyre'] = $("#collyre").val();
-    donnees['consult_j1_j2'] = $("#consult_j1_j2").val();
-    donnees['perim_cranien'] = $("#perim_cranien").val();
-    donnees['perim_brachial'] = $("#perim_brachial").val();
-    donnees['perim_cephalique'] = $("#perim_cephalique").val();
-    donnees['note_perim'] = $("#note_perim").val();
-    donnees['taille_enf'] = $("#taille_enf").val();
+    //conclusion accouchement
+    var nbcauseDC=$("Deces").length;
+	donnees['nbcauseDC'] = nbcauseDC;
+   //alert(nbcauseDC);
+    for(var i=1 ; i<=nbcauseDC ; i++){
+//    	alert($("#deces_name_"+i).val());
+//    	alert($("#noteDeces_"+i).val());	
+    	donnees['deces_name_'+i] = $("#deces_name_"+i).val();
+    	donnees['note_deces_'+i] = $("#noteDeces_"+i).val();
     
     
+    }//return false;
+    
+    
+    //**********--ENFANT-********
+    
+
+
+    var nbBbAttenduValeur = $('#bb_attendu').val();
+    if(nbBbAttenduValeur == 0){
+    	nbBbAttenduValeur = $('#nombre_bb').val();
+    }
+   
+    donnees['nombre_enfant'] = nbBbAttenduValeur;
+    
+    for(var i=1 ; i<=nbBbAttenduValeur ; i++){
+    	//alert($("#sexe_"+i).val());	
+    	donnees['sexe_'+i] = $("#sexe_"+i).val();
+    	donnees['n_sexe_'+i] = $("#n_sexe_"+i).val();
+    	donnees['poids_'+i] = $("#poids_"+i).val();
+    	donnees['n_poids_'+i] = $("#n_poids_"+i).val();
+    	donnees['cri_'+i] = $("#cri_"+i).val();
+    	donnees['n_cri_'+i] = $("#n_cri_"+i).val();
+    	donnees['taille_'+i] = $("#taille_"+i).val();
+    	donnees['n_taille_'+i] = $("#n_taille_"+i).val();
+    	donnees['sat_'+i] = $("#sat_"+i).val();
+    	donnees['n_sat_'+i] = $("#n_sat_"+i).val();
+    	donnees['vitk_'+i] = $("#vitk_"+i).val();
+    	donnees['n_vitk_'+i] = $("#n_vitk_"+i).val();
+    	donnees['malf_'+i] = $("#malf_"+i).val();
+    	donnees['n_malf_'+i] = $("#n_malf_"+i).val();
+    	donnees['mt_'+i] = $("#mt_"+i).val();
+    	donnees['n_mt_'+i] = $("#n_mt_"+i).val();
+    	donnees['msp_'+i] = $("#msp_"+i).val();
+    	donnees['n_msp_'+i] = $("#n_msp_"+i).val();
+    	donnees['sc_'+i] = $("#sc_"+i).val();
+    	donnees['n_sc_'+i] = $("#n_sc_"+i).val();
+    	donnees['reanim_'+i] = $("#reanim_"+i).val();
+    	donnees['n_reanim_'+i] = $("#n_reanim_"+i).val();
+    	donnees['collyre_'+i] = $("#collyre_"+i).val();
+    	donnees['n_collyre_'+i] = $("#n_collyre_"+i).val();
+    	donnees['vpo_'+i] = $("#vpo_"+i).val();
+    	donnees['n_vpo_'+i] = $("#n_vpo_"+i).val();
+    	donnees['antiT_'+i] = $("#antiT_"+i).val();
+    	donnees['n_antiT_'+i] = $("#n_antiT_"+i).val();
+    	donnees['bcg_'+i] = $("#bcg_"+i).val();
+    	donnees['n_bcg_'+i] = $("#n_bcg_"+i).val();
+    	donnees['anti_hepa_'+i] = $("#anti_hepa_"+i).val();
+    	donnees['n_anti_hepa_'+i] = $("#n_anti_hepa_"+i).val();
+    	donnees['autre_vacc_'+i] = $("#autre_vacc_"+i).val();
+    	donnees['type_autre_vacc_'+i] = $("#type_autre_vacc_"+i).val();
+    	donnees['n_autre_vacc_'+i] = $("#n_autre_vacc_"+i).val();
+    	donnees['cranien_'+i] = $("#cranien_"+i).val();
+    	donnees['brachial_'+i] = $("#brachial_"+i).val();
+    	donnees['cephalique_'+i] = $("#cephalique_"+i).val();
+    	donnees['n_perim_'+i] = $("#n_perim_"+i).val();
+    	donnees['apgar1_'+i] = $("#apgar1_"+i).val();
+    	donnees['apgar5_'+i] = $("#apgar5_"+i).val();
+    	donnees['n_apgar_'+i] = $("#n_apgar_"+i).val();
+    	donnees['consj1j2_'+i] = $("#consj1j2_"+i).val();
+    	//nouveau ne
+    	donnees['viv_bien_portant_'+i] = $("#viv_bien_portant_"+i).val();
+    	donnees['n_viv_bien_portant_'+i] = $("#n_viv_bien_portant_"+i).val();
+    	donnees['viv_mal_form_'+i] = $("#viv_mal_form_"+i).val();
+    	donnees['n_viv_mal_form_'+i] = $("#n_viv_mal_form_"+i).val();
+    	donnees['malade_'+i] = $("#malade_"+i).val();
+    	donnees['n_malade_'+i] = $("#n_malade_"+i).val();
+    	donnees['decede_'+i] = $("#decede_"+i).val();
+    	donnees['date_deces_'+i] = $("#date_deces_"+i).val();
+    	donnees['heure_deces_'+i] = $("#heure_deces_"+i).val();
+    	donnees['cause_deces_'+i] = $("#cause_deces_"+i).val();
+    }
+    
+    
+    
+
+    //nbEnfant= $('#nombre_bb').val();
+
+    
+    //alert(nbEnfant);
+    
+    
+    //donnees['sexe'] = $("#sexe_1").val();
   
+   // alert($("#sexe_1").val()); return false;
+    
 
   //**********--DEVENU DU NOUVEAU NE-********
 
@@ -1154,19 +1117,13 @@ $("#terminer2, #terminer3").click(function () {
     donnees['note_mal_form'] = $("#note_mal_form").val();
     donnees['note_malade'] = $("#note_malade").val();
     donnees['note_decede'] = $("#note_decede").val();
-    //Evacuation et Reference
+   
     //**********--EVACUATION et REFERENCE-********
 
     donnees['motif_ad'] = $("#motif_ad").val();
-   // donnees['type_ad'] = $("#type_ad").val();
     donnees['motif'] = $("#motif").val();
     donnees['service_origine'] = $("#service_origine").val();
-//    donnees['evacue_vers'] = $("#evacue_vers").val();
-//    donnees['motif_ev_vers'] = $("#motif_ev_vers").val();
-//    donnees['service_acceuil_ev'] = $("#service_acceuil_ev").val();
-//    donnees['reference'] = $("#reference").val();
-//    donnees['motif_ref'] = $("#motif_ref").val();
-//    donnees['refere_de'] = $("#refere_de").val();
+
     
     //Recuperer les donnees sur les bandelettes urinaires
     //Recuperer les donnees sur les bandelettes urinaires
@@ -1293,76 +1250,35 @@ $("#terminer2, #terminer3").click(function () {
     }
 
     donnees['nbCheckboxAM'] = $nbCheck;
+    donnees['nbCheckboxAF'] = $nbCheck;
+    /*Ajout automatique des antecedents familiaux*/
+    var $nbCheckboxAF = ($('#nbCheckboxAF').val()) + 1;
+    var $nbCheck = 0;
+    var $ligne;
+    var $reste = ( $nbCheckboxAF - 1 ) % 5;
+    var $nbElement = parseInt(( $nbCheckboxAF - 1 ) / 5);
+    if ($reste != 0) {
+        $ligne = $nbElement + 1;
+    }
+    else {
+        $ligne = $nbElement;
+    }
 
-    //GYNECO-OBSTETRIQUE
-    /*Menarche*/
-    donnees['MenarcheGO'] = $("#MenarcheGO:checked").val();
-    if (!donnees['MenarcheGO']) {
-        donnees['MenarcheGO'] = 0;
+    var k = 0;
+    var i;
+    for (var j = 1; j <= $ligne; j++) {
+        for (i = 0; i < 5; i++) {
+            var $champValider = $('#champValider_' + j + '_' + i + ':checked').val();
+            if ($champValider == 'on') {
+                donnees['champValider_' + k] = 1;
+                donnees['champTitreLabel_' + k] = $('#champTitreLabel_' + j + '_' + i).val();
+                k++;
+                $nbCheck++;
+            }
+        }
+        i = 0;
     }
-    donnees['NoteMenarcheGO'] = $("#NoteMenarcheGO").val();
-
-    /*Enf Viv*/
-    donnees['EnfVivGO'] = $("#EnfVivGO:checked").val();
-    if (!donnees['EnfVivGO']) {
-        donnees['EnfVivGO'] = 0;
-    }
-    donnees['NoteEnfVivGO'] = $("#NoteEnfVivGO").val();
-
-    /*Eclampsie*/
-    donnees['EclampsieGO'] = $("#EclampsieGO:checked").val();
-    if (!donnees['EclampsieGO']) {
-        donnees['EclampsieGO'] = 0;
-    }
-    donnees['NoteEclampsieGO'] = $("#NoteEclampsieGO").val();
-
-    /*Cesarienne*/
-    donnees['CesarienneGO'] = $("#CesarienneGO:checked").val();
-    if (!donnees['CesarienneGO']) {
-        donnees['CesarienneGO'] = 0;
-    }
-    donnees['NoteCesarienneGO'] = $("#NoteCesarienneGO").val();
-
-    /*Mort Ne*/
-    donnees['MortNeGO'] = $("#MortNeGO:checked").val();
-    if (!donnees['MortNeGO']) {
-        donnees['MortNeGO'] = 0;
-    }
-    donnees['NoteMortNeGO'] = $("#NoteMortNeGO").val();
-
-    /*Dystocie*/
-    donnees['DystocieGO'] = $("#DystocieGO:checked").val();
-    if (!donnees['DystocieGO']) {
-        donnees['DystocieGO'] = 0;
-    }
-    donnees['NoteDystocieGO'] = $("#NoteDystocieGO").val();
-
-    /*Gestite*/
-    donnees['GestiteGO'] = $("#GestiteGO:checked").val();
-    if (!donnees['GestiteGO']) {
-        donnees['GestiteGO'] = 0;
-    }
-    donnees['NoteGestiteGO'] = $("#NoteGestiteGO").val();
-    /*Parite*/
-    donnees['PariteGO'] = $("#PariteGO:checked").val();
-    if (!donnees['PariteGO']) {
-        donnees['PariteGO'] = 0;
-    }
-    donnees['NotePariteGO'] = $("#NotePariteGO").val();
-    /*Cycle*/
-    donnees['CycleGO'] = $("#CycleGO:checked").val();
-    if (!donnees['CycleGO']) {
-        donnees['CycleGO'] = 0;
-    }
-    donnees['DureeCycleGO'] = $("#DureeCycleGO").val();
-    donnees['RegulariteCycleGO'] = $("#RegulariteCycleGO").val();
-    donnees['DysmenorrheeCycleGO'] = $("#DysmenorrheeCycleGO").val();
-    /*Autres*/
-    donnees['AutresGO'] = $("#AutresGO:checked").val();
-    if (!donnees['AutresGO']) {
-        donnees['AutresGO'] = 0;
-    }
-    donnees['NoteAutresGO'] = $("#NoteAutresGO").val();
+   
 
     //**=== ANTECEDENTS FAMILIAUX
     //**=== ANTECEDENTS FAMILIAUX
@@ -1754,119 +1670,119 @@ function AntecedentScript() {
     
         //GYNECO-OBSTETRIQUE TESTER SI C'EST COCHE
         //GYNECO-OBSTETRIQUE TESTER SI C'EST COCHE
-        if (temoinMenarcheGO != 1) {
-            $("#NoteMonarche").toggle(false);
-        }
-        if (temoinGestiteGO != 1) {
-            $("#NoteGestite").toggle(false);
-        }
-        if (temoinPariteGO != 1) {
-            $("#NoteParite").toggle(false);
-        }
-        if (temoinCycleGO != 1) {
-            $("#RegulariteON, #DysmenorrheeON, #DureeGO").toggle(false);
-        }
-        $("#DivNoteAutresGO").toggle(false);
-
-        $('#GynecoObstetrique input[name=MenarcheGO]').click(function () {
-            var boutons = $('#GynecoObstetrique input[name=MenarcheGO]');
-            if (boutons[1].checked) {
-                $("#NoteMonarche").toggle(true);
-            }
-            if (!boutons[1].checked) {
-                $("#NoteMonarche").toggle(false);
-            }
-        });
-
-        $('#GynecoObstetrique input[name=EnfVivGO]').click(function () {
-            var boutons = $('#GynecoObstetrique input[name=EnfVivGO]');
-            if (boutons[1].checked) {
-                $("#NoteEnfViv").toggle(true);
-            }
-            if (!boutons[1].checked) {
-                $("#NoteEnfViv").toggle(false);
-            }
-        });
-
-        $('#GynecoObstetrique input[name=GestiteGO]').click(function () {
-            var boutons = $('#GynecoObstetrique input[name=GestiteGO]');
-            if (boutons[1].checked) {
-                $("#NoteGestite").toggle(true);
-            }
-            if (!boutons[1].checked) {
-                $("#NoteGestite").toggle(false);
-            }
-        });
-
-        $('#GynecoObstetrique input[name=PariteGO]').click(function () {
-            var boutons = $('#GynecoObstetrique input[name=PariteGO]');
-            if (boutons[1].checked) {
-                $("#NoteParite").toggle(true);
-            }
-            if (!boutons[1].checked) {
-                $("#NoteParite").toggle(false);
-            }
-        });
-
-        $('#GynecoObstetrique input[name=MortNeGO]').click(function () {
-            var boutons = $('#GynecoObstetrique input[name=MortNeGO]');
-            if (boutons[1].checked) {
-                $("#NoteMortNe").toggle(true);
-            }
-            if (!boutons[1].checked) {
-                $("#NoteMortNe").toggle(false);
-            }
-        });
-
-        $('#GynecoObstetrique input[name=DystocieGO]').click(function () {
-            var boutons = $('#GynecoObstetrique input[name=DystocieGO]');
-            if (boutons[1].checked) {
-                $("#NoteDystocie").toggle(true);
-            }
-            if (!boutons[1].checked) {
-                $("#NoteDystocie").toggle(false);
-            }
-        });
-
-        $('#GynecoObstetrique input[name=CesarienneGO]').click(function () {
-            var boutons = $('#GynecoObstetrique input[name=CesarienneGO]');
-            if (boutons[1].checked) {
-                $("#NoteCesarienne").toggle(true);
-            }
-            if (!boutons[1].checked) {
-                $("#NoteCesarienne").toggle(false);
-            }
-        });
-
-        $('#GynecoObstetrique input[name=CycleGO]').click(function () {
-            var boutons = $('#GynecoObstetrique input[name=CycleGO]');
-            if (boutons[1].checked) {
-                $("#RegulariteON, #DysmenorrheeON, #DureeGO").toggle(true);
-            }
-            if (!boutons[1].checked) {
-                $("#RegulariteON, #DysmenorrheeON, #DureeGO").toggle(false);
-            }
-        });
-
-        $('#GynecoObstetrique input[name=EclampsieGO]').click(function () {
-            var boutons = $('#GynecoObstetrique input[name=EclampsieGO]');
-            if (boutons[1].checked) {
-                $("#NoteEclampsie").toggle(true);
-            }
-            if (!boutons[1].checked) {
-                $("#NoteEclampsie").toggle(false);
-            }
-        });
-
-        $('#GynecoObstetrique input[name=AutresGO]').click(function () {
-            var boutons = $('#GynecoObstetrique input[name=AutresGO]');
-            if (boutons[1].checked) {
-                $("#DivNoteAutresGO").toggle(true);
-            }
-            if (!boutons[1].checked) {
-                $("#DivNoteAutresGO").toggle(false);
-            }
-        });
+//        if (temoinMenarcheGO != 1) {
+//            $("#NoteMonarche").toggle(false);
+//        }
+//        if (temoinGestiteGO != 1) {
+//            $("#NoteGestite").toggle(false);
+//        }
+//        if (temoinPariteGO != 1) {
+//            $("#NoteParite").toggle(false);
+//        }
+//        if (temoinCycleGO != 1) {
+//            $("#RegulariteON, #DysmenorrheeON, #DureeGO").toggle(false);
+//        }
+//        $("#DivNoteAutresGO").toggle(false);
+//
+//        $('#GynecoObstetrique input[name=MenarcheGO]').click(function () {
+//            var boutons = $('#GynecoObstetrique input[name=MenarcheGO]');
+//            if (boutons[1].checked) {
+//                $("#NoteMonarche").toggle(true);
+//            }
+//            if (!boutons[1].checked) {
+//                $("#NoteMonarche").toggle(false);
+//            }
+//        });
+//
+//        $('#GynecoObstetrique input[name=EnfVivGO]').click(function () {
+//            var boutons = $('#GynecoObstetrique input[name=EnfVivGO]');
+//            if (boutons[1].checked) {
+//                $("#NoteEnfViv").toggle(true);
+//            }
+//            if (!boutons[1].checked) {
+//                $("#NoteEnfViv").toggle(false);
+//            }
+//        });
+//
+//        $('#GynecoObstetrique input[name=GestiteGO]').click(function () {
+//            var boutons = $('#GynecoObstetrique input[name=GestiteGO]');
+//            if (boutons[1].checked) {
+//                $("#NoteGestite").toggle(true);
+//            }
+//            if (!boutons[1].checked) {
+//                $("#NoteGestite").toggle(false);
+//            }
+//        });
+//
+//        $('#GynecoObstetrique input[name=PariteGO]').click(function () {
+//            var boutons = $('#GynecoObstetrique input[name=PariteGO]');
+//            if (boutons[1].checked) {
+//                $("#NoteParite").toggle(true);
+//            }
+//            if (!boutons[1].checked) {
+//                $("#NoteParite").toggle(false);
+//            }
+//        });
+//
+//        $('#GynecoObstetrique input[name=MortNeGO]').click(function () {
+//            var boutons = $('#GynecoObstetrique input[name=MortNeGO]');
+//            if (boutons[1].checked) {
+//                $("#NoteMortNe").toggle(true);
+//            }
+//            if (!boutons[1].checked) {
+//                $("#NoteMortNe").toggle(false);
+//            }
+//        });
+//
+//        $('#GynecoObstetrique input[name=DystocieGO]').click(function () {
+//            var boutons = $('#GynecoObstetrique input[name=DystocieGO]');
+//            if (boutons[1].checked) {
+//                $("#NoteDystocie").toggle(true);
+//            }
+//            if (!boutons[1].checked) {
+//                $("#NoteDystocie").toggle(false);
+//            }
+//        });
+//
+//        $('#GynecoObstetrique input[name=CesarienneGO]').click(function () {
+//            var boutons = $('#GynecoObstetrique input[name=CesarienneGO]');
+//            if (boutons[1].checked) {
+//                $("#NoteCesarienne").toggle(true);
+//            }
+//            if (!boutons[1].checked) {
+//                $("#NoteCesarienne").toggle(false);
+//            }
+//        });
+//
+//        $('#GynecoObstetrique input[name=CycleGO]').click(function () {
+//            var boutons = $('#GynecoObstetrique input[name=CycleGO]');
+//            if (boutons[1].checked) {
+//                $("#RegulariteON, #DysmenorrheeON, #DureeGO").toggle(true);
+//            }
+//            if (!boutons[1].checked) {
+//                $("#RegulariteON, #DysmenorrheeON, #DureeGO").toggle(false);
+//            }
+//        });
+//
+//        $('#GynecoObstetrique input[name=EclampsieGO]').click(function () {
+//            var boutons = $('#GynecoObstetrique input[name=EclampsieGO]');
+//            if (boutons[1].checked) {
+//                $("#NoteEclampsie").toggle(true);
+//            }
+//            if (!boutons[1].checked) {
+//                $("#NoteEclampsie").toggle(false);
+//            }
+//        });
+//
+//        $('#GynecoObstetrique input[name=AutresGO]').click(function () {
+//            var boutons = $('#GynecoObstetrique input[name=AutresGO]');
+//            if (boutons[1].checked) {
+//                $("#DivNoteAutresGO").toggle(true);
+//            }
+//            if (!boutons[1].checked) {
+//                $("#DivNoteAutresGO").toggle(false);
+//            }
+//        });
 
         //ANTECEDENTS FAMILIAUX TESTER SI C'EST COCHE
         //ANTECEDENTS FAMILIAUX TESTER SI C'EST COCHE
@@ -2227,397 +2143,6 @@ $('#BUcheckbox input[name=croixcorpscetonique]').click(function () {
     corpscetoniqueOption();
 });
 
-//******************* VALIDER LES DONNEES DU TABLEAU DES MOTIFS ********************************
-//******************* VALIDER LES DONNEES DU TABLEAU DES MOTIFS ********************************
-
-/****** ======================================================================= *******/
-/****** ======================================================================= *******/
-/****** ======================================================================= *******/
-    //******************* VALIDER LES DONNEES DU TABLEAU DES CONSTANTES ********************************
-    //******************* VALIDER LES DONNEES DU TABLEAU DES CONSTANTES ********************************
-
-    //Au debut on d�sactive le code cons et la date de consultation qui sont non modifiables
-var id_cons = $("#id_cons");
-var date_cons = $("#date_cons");
-id_cons.attr('readonly', true);
-date_cons.attr('readonly', true);
-
-var poids = $('#poids');
-var hu = $('#hu');
-var taille = $('#taille');
-//var paleur = $('#paleur');
-var tension = $('#tension');
-var bu = $('#bu');
-var temperature = $('#temperature');
-var glycemie_capillaire = $('#glycemie_capillaire');
-var pouls = $('#pouls');
-var frequence_respiratoire = $('#frequence_respiratoire');
-var tensionmaximale = $("#tensionmaximale");
-var tensionminimale = $("#tensionminimale");
-
-//Au debut on cache le bouton modifier et on affiche le bouton valider
-$("#bouton_constantes_valider").toggle(true);
-$("#bouton_constantes_modifier").toggle(false);
-
-//Au debut on active tous les champs
-hu.attr('readonly', false).css({'background': '#fff'});
-poids.attr('readonly', false).css({'background': '#fff'});
-taille.attr('readonly', false).css({'background': '#fff'});
-//paleur.attr('readonly', false).css({'background': '#fff'});
-tension.attr('readonly', false).css({'background': '#fff'});
-bu.attr('readonly', false).css({'background': '#fff'});
-temperature.attr('readonly', false).css({'background': '#fff'});
-glycemie_capillaire.attr('readonly', false).css({'background': '#fff'});
-pouls.attr('readonly', false).css({'background': '#fff'});
-frequence_respiratoire.attr('readonly', false).css({'background': '#fff'});
-tensionmaximale.attr('readonly', false).css({'background': '#fff'});
-tensionminimale.attr('readonly', false).css({'background': '#fff'});
-
-$("#bouton_constantes_valider").click(function () {
-    if (valid == true) {
-
-        hu.attr('readonly', true).css({'background': '#f8f8f8'});
-        poids.attr('readonly', true).css({'background': '#f8f8f8'});
-        taille.attr('readonly', true).css({'background': '#f8f8f8'});
-        //paleur.attr('readonly', true).css({'background': '#f8f8f8'});
-        tension.attr('readonly', true).css({'background': '#f8f8f8'});
-        bu.attr('readonly', true).css({'background': '#f8f8f8'});
-        temperature.attr('readonly', true).css({'background': '#f8f8f8'});
-        glycemie_capillaire.attr('readonly', true).css({'background': '#f8f8f8'});
-        pouls.attr('readonly', true).css({'background': '#f8f8f8'});
-        frequence_respiratoire.attr('readonly', true).css({'background': '#f8f8f8'});
-        tensionmaximale.attr('readonly', true).css({'background': '#f8f8f8'});
-        tensionminimale.attr('readonly', true).css({'background': '#f8f8f8'});
-
-        $("#bouton_constantes_modifier").toggle(true);  //on affiche le bouton permettant de modifier les champs
-        $("#bouton_constantes_valider").toggle(false); //on cache le bouton permettant de valider les champs
-    }
-    return false;
-});
-
-$("#bouton_constantes_modifier").click(function () {
-    poids.attr('readonly', false).css({'background': '#fff'});
-    taille.attr('readonly', false).css({'background': '#fff'});
-   hu.attr('readonly', false).css({'background': '#fff'});
-   // paleur.attr('readonly', false).css({'background': '#fff'});
-    tension.attr('readonly', false).css({'background': '#fff'});
-   bu.attr('readonly', false).css({'background': '#fff'});
-    temperature.attr('readonly', false).css({'background': '#fff'});
-    glycemie_capillaire.attr('readonly', false).css({'background': '#fff'});
-    pouls.attr('readonly', false).css({'background': '#fff'});
-    frequence_respiratoire.attr('readonly', false).css({'background': '#fff'});
-    tensionmaximale.attr('readonly', false).css({'background': '#fff'});
-    tensionminimale.attr('readonly', false).css({'background': '#fff'});
-
-    $("#bouton_constantes_modifier").toggle(false);   //on cache le bouton permettant de modifier les champs
-    $("#bouton_constantes_valider").toggle(true);    //on affiche le bouton permettant de valider les champs
-    return false;
-});
-
-//ACCOUCHEMENT
-var forme_accouchement = $("#type_accouchement");
-var motif_forme = $("#motif_type");
-var date_accouchement = $("#date_accouchement");
-var heure_accouchement = $("#heure_accouchement");
-var delivrance = $("#delivrance");
-var ru = $("#ru");
-var hemorragie = $("#hemoragie");
-var ocytocine_per = $("#ocytocique_per");
-var ocytocine_post = $("#ocytocique_post");
-var antibiotique = $("#antibiotique");
-var anticonv = $("#anticonvulsant");
-var transfusion = $("#transfusion");
-//Au debut on cache le bouton modifier et on affiche le bouton valider
-$("#bouton_accouchement_valider").toggle(true);
-$("#bouton_accouchement_modifier").toggle(false);
-
-//Au debut on active tous les champs
-forme_accouchement.attr('readonly', false).css({'background': '#fff'});
-motif_forme.attr('readonly', false).css({'background': '#fff'});
-date_accouchement.attr('readonly', false).css({'background': '#fff'});
-heure_accouchement.attr('readonly', false).css({'background': '#fff'});
-delivrance.attr('readonly', false).css({'background': '#fff'});
-ru.attr('readonly', false).css({'background': '#fff'});
-hemorragie.attr('readonly', false).css({'background': '#fff'});
-ocytocine_per.attr('readonly', false).css({'background': '#fff'});
-ocytocine_post.attr('readonly', false).css({'background': '#fff'});
-antibiotique.attr('readonly', false).css({'background': '#fff'});
-anticonv.attr('readonly', false).css({'background': '#fff'});
-transfusion.attr('readonly', false).css({'background': '#fff'});
-$("#bouton_accouchement_valider").click(function () {
-    if (valid == true) {
-
-        forme_accouchement.attr('readonly', true).css({'background': '#f8f8f8'});
-        motif_forme.attr('readonly', true).css({'background': '#f8f8f8'});
-        date_accouchement.attr('readonly', true).css({'background': '#f8f8f8'});
-       heure_accouchement.attr('readonly', true).css({'background': '#f8f8f8'});
-      delivrance.attr('readonly', true).css({'background': '#f8f8f8'});
-       ru.attr('readonly', true).css({'background': '#f8f8f8'});
-       hemorragie.attr('readonly', true).css({'background': '#f8f8f8'});
-       ocytocine_per.attr('readonly', true).css({'background': '#f8f8f8'});
-       ocytocine_post.attr('readonly', true).css({'background': '#f8f8f8'});
-       antibiotique.attr('readonly', true).css({'background': '#f8f8f8'});
-       anticonv.attr('readonly', true).css({'background': '#f8f8f8'});
-       transfusion.attr('readonly', true).css({'background': '#f8f8f8'});
-        $("#bouton_accouchement_modifier").toggle(true);  //on affiche le bouton permettant de modifier les champs
-        $("#bouton_accouchement_valider").toggle(false); //on cache le bouton permettant de valider les champs
-    }
-    return false;
-});
-
-$("#bouton_accouchement_modifier").click(function () {
-    forme_accouchement.attr('readonly', false).css({'background': '#fff'});
-    motif_forme.attr('readonly', false).css({'background': '#fff'});
-    date_accouchement.attr('readonly', false).css({'background': '#fff'});
-   heure_accouchement.attr('readonly', false).css({'background': '#fff'});
-  delivrance.attr('readonly', false).css({'background': '#fff'});
-   ru.attr('readonly', false).css({'background': '#fff'});
-  hemorragie.attr('readonly', false).css({'background': '#fff'});
-  ocytocine_per.attr('readonly', false).css({'background': '#fff'});
-  ocytocine_post.attr('readonly', false).css({'background': '#fff'});
-  antibiotique.attr('readonly', false).css({'background': '#fff'});
-  anticonv.attr('readonly', false).css({'background': '#fff'});
-  tranfusion.attr('readonly', false).css({'background': '#fff'});
-    $("#bouton_accouchement_modifier").toggle(false);   //on cache le bouton permettant de modifier les champs
-    $("#bouton_accouchement_valider").toggle(true);    //on affiche le bouton permettant de valider les champs
-    return false;
-});
-
-
-
-
-
-
-
-
-
-
-
-
-//ENFANT
-
-
-
-
-
-var sexe = $("#sexe");
-var poids = $("#poids");
-var apgar1 = $("#apgar_1");
-var apgar5 = $("#apgar_5");
-var malf = $("#malf");
-var cri = $("#cri");
-var maintien_temp = $("#maintien_temp");
-var mise_soin_precoce = $("#mise_soin_precoce");
-var soin_cordon = $("#soin_cordon");
-var reanimation = $("#reanimation");
-var sat = $("#sat");
-var vit_k = $("#vit_k");
-var collyre = $("#collyre");
-var consult_j1_j2 = $("#consult_j1_j2");
-//Au debut on cache le bouton modifier et on affiche le bouton valider
-$("#bouton_enfant_valider").toggle(true);
-$("#bouton_enfant_modifier").toggle(false);
-
-//Au debut on active tous les champs
-sexe.attr('readonly', false).css({'background': '#fff'});
-poids.attr('readonly', false).css({'background': '#fff'});
-apgar1.attr('readonly', false).css({'background': '#fff'});
-apgar5.attr('readonly', false).css({'background': '#fff'});
-malf.attr('readonly', false).css({'background': '#fff'});
-cri.attr('readonly', false).css({'background': '#fff'});
-maintien_temp.attr('readonly', false).css({'background': '#fff'});
-mise_soin_precoce.attr('readonly', false).css({'background': '#fff'});
-soin_cordon.attr('readonly', false).css({'background': '#fff'});
-reanimation.attr('readonly', false).css({'background': '#fff'});
-sat.attr('readonly', false).css({'background': '#fff'});
-vit_k.attr('readonly', false).css({'background': '#fff'});
-collyre.attr('readonly', false).css({'background': '#fff'});
-consult_j1_j2.attr('readonly', false).css({'background': '#fff'});
-$("#bouton_enfant_valider").click(function () {
-    if (valid == true) {
-
-    	sexe.attr('readonly', true).css({'background': '#f8f8f8'});
-    	poids.attr('readonly', true).css({'background': '#f8f8f8'});
-    	apgar1.attr('readonly', true).css({'background': '#f8f8f8'});
-    	apgar5.attr('readonly', true).css({'background': '#f8f8f8'});
-    	malf.attr('readonly', true).css({'background': '#f8f8f8'});
-    	cri.attr('readonly', true).css({'background': '#f8f8f8'});
-    	maintien_temp.attr('readonly', true).css({'background': '#f8f8f8'});
-    	mise_soin_precoce.attr('readonly', true).css({'background': '#f8f8f8'});
-    	soin_cordon.attr('readonly', true).css({'background': '#f8f8f8'});
-    	reanimation.attr('readonly', true).css({'background': '#f8f8f8'});
-    	sat.attr('readonly', true).css({'background': '#f8f8f8'});
-    	vit_k.attr('readonly', true).css({'background': '#f8f8f8'});
-    	collyre.attr('readonly', true).css({'background': '#f8f8f8'});
-    	consult_j1_j2.attr('readonly', true).css({'background': '#f8f8f8'});
-        $("#bouton_enfant_modifier").toggle(true);  //on affiche le bouton permettant de modifier les champs
-        $("#bouton_enfant_valider").toggle(false); //on cache le bouton permettant de valider les champs
-    }
-    return false;
-});
-
-$("#bouton_enfant_modifier").click(function () {
-	sexe.attr('readonly', false).css({'background': '#fff'});
-	poids.attr('readonly', false).css({'background': '#fff'});
-	apgar1.attr('readonly', false).css({'background': '#fff'});
-	apgar5.attr('readonly', false).css({'background': '#fff'});
-	malf.attr('readonly', false).css({'background': '#fff'});
-  cri.attr('readonly', false).css({'background': '#fff'});
-  maintien_temp.attr('readonly', false).css({'background': '#fff'});
-  mise_soin_precoce.attr('readonly', false).css({'background': '#fff'});
-  soin_cordon.attr('readonly', false).css({'background': '#fff'});
-  reanimation.attr('readonly', false).css({'background': '#fff'});
-  sat.attr('readonly', false).css({'background': '#fff'});
-  vit_k.attr('readonly', false).css({'background': '#fff'});
-  collyre.attr('readonly', false).css({'background': '#fff'});
-  consult_j1_j2.attr('readonly', false).css({'background': '#fff'});
-    $("#bouton_enfant_modifier").toggle(false);   //on cache le bouton permettant de modifier les champs
-    $("#bouton_enfant_valider").toggle(true);    //on affiche le bouton permettant de valider les champs
-    return false;
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//Antecedent 
-
-
-var geste = $("#geste");
-var parite = $("#parite");
-var enf_viv = $("#enf_viv");
-var nb_cpn = $("#nb_cpn");
-var mort_ne = $("#mort_ne");
-var cesar = $("#cesar");
-var dystocie = $("#dystocie");
-var eclampsie = $("#eclampsie");
-
-//Au debut on cache le bouton modifier et on affiche le bouton valider
-$("#bouton_ant_valider").toggle(true);
-$("#bouton_ant_modifier").toggle(false);
-
-//Au debut on active tous les champs
-geste.attr('readonly', false).css({'background': '#fff'});
-parite.attr('readonly', false).css({'background': '#fff'});
-enf_viv.attr('readonly', false).css({'background': '#fff'});
-nb_cpn.attr('readonly', false).css({'background': '#fff'});
-mort_ne.attr('readonly', false).css({'background': '#fff'});
-cesar.attr('readonly', false).css({'background': '#fff'});
-dystocie.attr('readonly', false).css({'background': '#fff'});
-eclampsie.attr('readonly', false).css({'background': '#fff'});
-
-$("#bouton_ant_valider").click(function () {
-  if (valid == true) {
-
-  	geste.attr('readonly', true).css({'background': '#f8f8f8'});
-  	parite.attr('readonly', true).css({'background': '#f8f8f8'});
-  	enf_viv.attr('readonly', true).css({'background': '#f8f8f8'});
-  	nb_cpn.attr('readonly', true).css({'background': '#f8f8f8'});
-  	mort_ne.attr('readonly', true).css({'background': '#f8f8f8'});
-  	cesar.attr('readonly', true).css({'background': '#f8f8f8'});
-  	dystocie.attr('readonly', true).css({'background': '#f8f8f8'});
-  	eclampsie.attr('readonly', true).css({'background': '#f8f8f8'});
-  
-      $("#bouton_ant_modifier").toggle(true);  //on affiche le bouton permettant de modifier les champs
-      $("#bouton_ant_valider").toggle(false); //on cache le bouton permettant de valider les champs
-  }
-  return false;
-});
-
-$("#bouton_ant_modifier").click(function () {
-	geste.attr('readonly', false).css({'background': '#fff'});
-	parite.attr('readonly', false).css({'background': '#fff'});
-	enf_viv.attr('readonly', false).css({'background': '#fff'});
-	nb_cpn.attr('readonly', false).css({'background': '#fff'});
-	mort_ne.attr('readonly', false).css({'background': '#fff'});
-cesar.attr('readonly', false).css({'background': '#fff'});
-dystocie.attr('readonly', false).css({'background': '#fff'});
-eclampsie.attr('readonly', false).css({'background': '#fff'});
-
-  $("#bouton_ant_modifier").toggle(false);   //on cache le bouton permettant de modifier les champs
-  $("#bouton_ant_valider").toggle(true);    //on affiche le bouton permettant de valider les champs
-  return false;
-});
-
-
-
-
-
-
-
-//Grossesse
-
-
-var ddr = $("#ddr");
-var duree_grossesse = $("#duree_grossesse");
-var bb_attendu = $("#bb_attendu");
-var vat_1 = $("#vat_1");
-var vat_2 = $("#vat_2");
-var vat_3 = $("#vat_3");
-
-
-//Au debut on cache le bouton modifier et on affiche le bouton valider
-$("#bouton_gro_valider").toggle(true);
-$("#bouton_gro_modifier").toggle(false);
-
-//Au debut on active tous les champs
-ddr.attr('readonly', false).css({'background': '#fff'});
-duree_grossesse.attr('readonly', false).css({'background': '#fff'});
-bb_attendu.attr('readonly', false).css({'background': '#fff'});
-vat_1.attr('readonly', false).css({'background': '#fff'});
-vat_2.attr('readonly', false).css({'background': '#fff'});
-vat_3.attr('readonly', false).css({'background': '#fff'});
-
-
-$("#bouton_gro_valider").click(function () {
-if (valid == true) {
-
-	ddr.attr('readonly', true).css({'background': '#f8f8f8'});
-	duree_grossesse.attr('readonly', true).css({'background': '#f8f8f8'});
-	bb_attendu.attr('readonly', true).css({'background': '#f8f8f8'});
-	vat_1.attr('readonly', true).css({'background': '#f8f8f8'});
-	vat_2.attr('readonly', true).css({'background': '#f8f8f8'});
-	vat_3.attr('readonly', true).css({'background': '#f8f8f8'});
-
-
-    $("#bouton_gro_modifier").toggle(true);  //on affiche le bouton permettant de modifier les champs
-    $("#bouton_gro_valider").toggle(false); //on cache le bouton permettant de valider les champs
-}
-return false;
-});
-
-$("#bouton_gro_modifier").click(function () {
-	ddr.attr('readonly', false).css({'background': '#fff'});
-	duree_grossesse.attr('readonly', false).css({'background': '#fff'});
-	bb_attendu.attr('readonly', false).css({'background': '#fff'});
-	vat_1.attr('readonly', false).css({'background': '#fff'});
-	vat_2.attr('readonly', false).css({'background': '#fff'});
-    vat_3.attr('readonly', false).css({'background': '#fff'});
-
-
-$("#bouton_gro_modifier").toggle(false);   //on cache le bouton permettant de modifier les champs
-$("#bouton_gro_valider").toggle(true);    //on affiche le bouton permettant de valider les champs
-return false;
-});
-
-
-
-
 
 
 
@@ -2701,7 +2226,39 @@ function ajouterToutLabelAntecedentsMedicaux(tableau_) {
     stopPropagation();
 }
 
+//===================================================================================================================
+//===================================================================================================================
+var itab = 1;
+var ligne = 0;
+var tableau = [];
 
+function ajouterToutLabelAntecedentsFamiliaux(tableau_) {
+  for (var l = 1; l <= ligne; l++) {
+      if (l == 1) {
+          $("#labelDesAntecedentsFamiliaux_" + 1).html("").css({'height': '0px'});
+          itab = 1;
+      } else {
+          $("#labelDesAntecedentsFamiliaux_" + l).remove();
+      }
+  }
+
+  var tab = [];
+  var j = 1;
+
+  for (var i = 1; i < tableau_.length; i++) {
+      if (tableau_[i]) {
+          tab[j++] = tableau_[i];
+          itab++;
+          ajouterLabelAntecedentsFamiliaux(tableau_[i]);
+      }
+  }
+
+  tableau = tab;
+  itab = j;
+  $('#nbCheckboxAF').val(itab);
+
+  stopPropagation();
+}
 //Ajouter des labels au click sur ajouter
 //Ajouter des labels au click sur ajouter
 //Ajouter des labels au click sur ajouter
@@ -2736,7 +2293,7 @@ function ajouterLabelAntecedentsMedicaux(nomLabel) {
     scriptLabel =
         "<td id='BUcheckbox' class='label_" + ligne + "_" + i + "' style='width: 20%; '> " +
         "<div > " +
-        " <label style='width: 90%; height:30px; text-align:right; font-family: time new romans; font-size: 18px;'> " +
+        " <label style='width: 90%; height:30px; text-align:right; font-family:  new romans; font-size: 18px;'> " +
         "    <span style='padding-left: -10px;'> " +
         "       <a href='javascript:supprimerLabelAM(" + ligne + "," + i + ");' ><img class='imageSupprimerAsthmeAM' style='cursor: pointer; float: right; margin-right: -10px; width:10px; height: 10px;' src='" + tabUrl[0] + "public/images_icons/sup.png' /></a> " +
         "       <img class='imageValider_" + ligne + "_" + i + "'  style='cursor: pointer; margin-left: -15px;' src='" + tabUrl[0] + "public/images_icons/tick-icon2.png' /> " +
@@ -2767,6 +2324,84 @@ function ajouterLabelAntecedentsMedicaux(nomLabel) {
 
 }
 
+
+
+
+
+
+
+
+
+
+
+var scriptLabel = "";
+function ajouterLabelAntecedentsFamiliaux(nomLabel) {
+
+    if (!nomLabel) {
+        stopPropagation();
+    }
+
+    var reste = ( itab - 1 ) % 5;
+    var nbElement = parseInt(( itab - 1 ) / 5);
+    if (reste != 0) {
+        ligne = nbElement + 1;
+    }
+    else {
+        ligne = nbElement;
+    }
+
+    var i = 0;
+    if (ligne == 1) {
+        i = $("#labelDesAntecedentsFamiliaux_" + ligne + " td").length;
+    } else {
+        if (reste == 1) {
+            $("#labelDesAntecedentsFamiliaux_" + (ligne - 1)).after(
+                "<tr id='labelDesAntecedentsFamiliaux_" + ligne + "' style='width:100%; '>" +
+                "</tr>");
+        }
+        i = $("#labelDesAntecedentsFamiliaux_" + ligne + " td").length;
+  }
+
+    scriptLabel =
+        "<td id='BUcheckbox' class='label_" + ligne + "_" + i + "' style='width: 20%; '> " +
+        "<div > " +
+        " <label style='width: 90%; height:30px; text-align:right; background:green;font-family:  new romans; font-size: 18px;'> " +
+        "    <span style='padding-left: -10px;'> " +
+        "       <a href='javascript:supprimerLabelAF(" + ligne + "," + i + ");' ><img class='imageSupprimerAsthmeAM' style='cursor: pointer; float: right; margin-right: -10px; width:10px; height: 10px;' src='" + tabUrl[0] + "public/images_icons/sup.png' /></a> " +
+        "       <img class='imageValider_" + ligne + "_" + i + "'  style='cursor: pointer; margin-left: -15px;' src='" + tabUrl[0] + "public/images_icons/tick-icon2.png' /> " +
+        "    </span> " +
+        nomLabel + "  <input type='checkbox' checked='${this.checked}' name='champValider_" + ligne + "_" + i + "' id='champValider_" + ligne + "_" + i + "' > " +
+        " <input type='hidden'  id='champTitreLabel_" + ligne + "_" + i + "' value='" + nomLabel + "' > " +
+        " </label> " +
+        "</div> " +
+        "</td> " +
+
+        "<script>" +
+        "$('#champValider_" + ligne + "_" + i + "').click(function(){" +
+        "var boutons = $('#champValider_" + ligne + "_" + i + "');" +
+        "if( boutons[0].checked){ $('.imageValider_" + ligne + "_" + i + "').toggle(true);  }" +
+        "if(!boutons[0].checked){ $('.imageValider_" + ligne + "_" + i + "').toggle(false); }" +
+        "});" +
+        "</script>"
+    ;
+
+    if (i == 0) {
+        //AJOUTER ELEMENT SUIVANT
+        $("#labelDesAntecedentsFamiliaux_" + ligne).html(scriptLabel);
+        $("#labelDesAntecedentsFamiliaux_" + ligne).css({'height': '50px'});
+    } else if (i < 5) {
+        //AJOUTER ELEMENT SUIVANT
+        $("#labelDesAntecedentsFamiliaux_" + ligne + " .label_" + ligne + "_" + (i - 1)).after(scriptLabel);
+    }
+
+}
+
+
+
+
+
+
+
 //Ajouter un label --- Ajouter un label
 //Ajouter un label --- Ajouter un label
 //Ajouter un label --- Ajouter un label
@@ -2784,7 +2419,18 @@ $('#imgIconeAjouterLabel').click(function () {
     stopPropagation();
 });
 
-
+$('#imgIconeAjouterLabelF').click(function () {
+    if (!$('#autresAF').val()) {
+        stopPropagation();
+    }
+    else {
+        tableau[itab++] = $('#autresAF').val();
+        ajouterLabelAntecedentsFamiliaux($('#autresAF').val());
+        $('#nbCheckboxAF').val(itab);
+        $('#autresAF').val("");
+    }
+    stopPropagation();
+});
 //Supprimer un label ajouter --- Supprimer un label ajouter
 //Supprimer un label ajouter --- Supprimer un label ajouter
 //Supprimer un label ajouter --- Supprimer un label ajouter
@@ -2801,7 +2447,19 @@ function supprimerLabelAM(ligne, i) {
     );
 
 }
+function supprimerLabelAF(ligne, i) {
 
+    var pos = ((ligne - 1) * 5) + i;
+    var indiceTableau = pos + 1;
+    tableau[indiceTableau] = "";
+
+    $("#labelDesAntecedentsFamiliaux_" + ligne + " .label_" + ligne + "_" + i).fadeOut(
+        function () {
+            ajouterToutLabelAntecedentsFamiliaux(tableau);
+        }
+    );
+
+}
 //Ajout de l'auto-completion sur le champ autre
 //Ajout de l'auto-completion sur le champ autre
 
@@ -2859,54 +2517,6 @@ function getExamenMaterniteDonnee5(val){
 getExamenMaterniteDonnee5($('#examen_maternite_donnee5').val());
 
 
-$('.BbAttendu').toggle(false);
-function getBbAttendu(val){ 
-	
-	if(val=='0'){
-		$("#bbAttendu").html("Bb attendu");
-		$('.BbAttendu').fadeIn();
-		$("#enf2").fadeIn();
-		$("#enf3").fadeIn();
-		$("#enf4").fadeIn();
-		$("#enf5").fadeIn();
-	}
-	if(val==1)
-	{
-		$("#bbAttendu span span").html("");
-		$('.BbAttendu').fadeOut();
-		$("#enf2").fadeOut();
-		$("#enf3").fadeOut();
-		$("#enf4").fadeOut();
-		$("#enf5").fadeOut();
-	}	
-	if(val==2)
-	{
-		$("#bbAttendu span span").html("");
-		$('.BbAttendu').fadeOut();
-		$("#enf2").fadeIn();
-		$("#enf3").fadeOut();
-		$("#enf4").fadeOut();
-		$("#enf5").fadeOut();
-	}
-	if(val==3)
-	{
-		$("#bbAttendu span span").html("");
-		$('.BbAttendu').fadeOut();
-		$("#enf2").fadeIn();
-		$("#enf3").fadeIn();
-		$("#enf4").fadeOut();
-		$("#enf5").fadeOut();
-	}
-		
-}
-
-getBbAttendu($('#bb_attendu').val());
-
-
-
-
-
-
 $('.Test').toggle(false);
 function getTest(val){ 
 	
@@ -2938,16 +2548,9 @@ function getProfil(val){
 
 
 
-
-
-
-
-
-
-
 //pour quantite
 
-//$('.Quantite').toggle(false);
+
 function getQuantite(val){ 
 	
 	if(val==1){
@@ -2959,9 +2562,6 @@ function getQuantite(val){
 	}	
 }
 
-
-//pour cycle
-//$('.Cycle').toggle(false);
 function getCycle(val){ 
 	
 	if(val==1){
@@ -2975,8 +2575,6 @@ function getCycle(val){
 }
 
 
-//pour conteraception
-//$('.Contraception').toggle(false);
 function getContraception(val){ 
 	
 	if(val==1){
@@ -2989,11 +2587,6 @@ function getContraception(val){
 	}	
 }
 
-
-
-
-
-//$('.MotifAdmission').toggle(false);
 function getMotif(val){ 
 	//alert(val);
 	if(val==1){
@@ -3009,9 +2602,6 @@ function getMotif(val){
 }
 
 
-
-
-//$('.Dystocie').toggle(false);
 function getDystocie(val){ 
 	//alert(val);
 	if(val==1){

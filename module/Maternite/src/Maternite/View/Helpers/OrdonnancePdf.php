@@ -60,11 +60,10 @@ class OrdonnancePdf {
 		
 		$this->_page->restoreGS ();
 	}
-	public function setEnTete() {
-		// var_dump ($_SERVER); exit();
+public function setEnTete() {
 		$baseUrl = $_SERVER ['SCRIPT_FILENAME'];
 		$tabURI = explode ( 'public', $baseUrl );
-		$imageHeader = ZendPdf\Image::imageWithPath ( $tabURI [0] . 'public\img\polycliniquelogo.png' );
+		$imageHeader = ZendPdf\Image::imageWithPath ( $tabURI [0] . 'public\img\hospice_log.png' );
 		$this->_page->drawImage ( $imageHeader, 445, 		// -x
 		$this->_pageHeight - 130, 		// -y
 		528, 		// +x
@@ -75,7 +74,7 @@ class OrdonnancePdf {
 		$this->_page->setFont ( $this->_newTime, 10 );
 		$this->_page->drawText ( 'Ministère de la santé et de l\'action sociale', $this->_leftMargin, $this->_pageHeight - 65 );
 		$this->_page->setFont ( $this->_newTime, 10 );
-		$this->_page->drawText ( 'Polyclinique de l\'UGB de Saint-Louis', $this->_leftMargin, $this->_pageHeight - 80 );
+		$this->_page->drawText ( 'C.H.R de Saint-Louis', $this->_leftMargin, $this->_pageHeight - 80 );
 		$this->_page->setFont ( $this->_newTime, 10 );
 		$this->_page->drawText ( 'Service: ' . iconv ( 'UTF-8', 'ISO-8859-1', $this->_Service ), $this->_leftMargin, $this->_pageHeight - 95 );
 		$font = ZendPdf\Font::fontWithName ( ZendPdf\Font::FONT_TIMES_ROMAN );

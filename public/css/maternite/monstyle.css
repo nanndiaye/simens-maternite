@@ -4605,10 +4605,13 @@ div .dataTables_paginate {
     font-size: 18px;
 }
 
-#observations, #consult_j1_j2,#examen_maternite_donnee8, #examen_maternite_donnee9{
+#observations, #consult_j1_j2, #examen_maternite_donnee9{
     width: 100%;
 }
 
+#examen_maternite_donnee8{
+    width: 70%;
+}
 .antecedent_go input[ type='number']{
     width: 50px;
 }
@@ -4822,7 +4825,7 @@ width: 77%; /*115px; /* la largeur du champ input*/
 
 
 #ser input{
-    width: 50%;
+    width: 60%;
     margin-top: 3px;
     padding-left: 10px;
     font-family: time new romans;

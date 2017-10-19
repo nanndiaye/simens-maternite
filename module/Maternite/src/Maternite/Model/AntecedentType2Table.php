@@ -4,7 +4,7 @@ namespace Maternite\Model;
 
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Sql;
-use Maternite\View\Helpers\DateHelper;
+
 
 class AntecedentType2Table {
 	protected $tableGateway;
@@ -48,7 +48,7 @@ class AntecedentType2Table {
         			'nb_garniture_jr' => $donnees ['nb_garniture_jr'],
         			'note_dystocie' => $donnees ['note_dystocie'],
         			'note_eclampsie' => $donnees ['note_eclampsie'], 			
-        			'note_cycle' => $donnees ['note_cycle'],
+        			//'note_cycle' => $donnees ['note_cycle'],
         			'autre_go' => $donnees ['autre_go'],
         			'note_autre' => $donnees ['note_autre'],
         			'contraception' => $donnees ['contraception'],
