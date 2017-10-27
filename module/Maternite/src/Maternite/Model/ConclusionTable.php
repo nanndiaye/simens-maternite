@@ -10,6 +10,80 @@ class ConclusionTable {
 	public function __construct(TableGateway $tableGateway) {
 		$this->tableGateway = $tableGateway;
 	}
+	
+	
+	
+	
+	
+	public function getCausesComplication($id){
+
+		$adapter = $this->tableGateway->getAdapter ();
+		$sql = new Sql ( $adapter );
+		$select = $sql->select ();
+		$select->columns ( array (
+				'*'
+		) );
+		$select->from ( array (
+				'c' => 'conclusion'
+		) );
+		$select->join ( array (
+				'cau' => 'cause'
+		), 'cau.id_cause = c.id_cause', array (
+				'*'
+		) );
+		$select->where ( array (
+				'c.id_cons' => $id,
+				'id_type_cause' => 1
+		) );
+		$select->order ( 'c.id_conclusion ASC' );
+		$stat = $sql->prepareStatementForSqlObject ( $select );
+		$result = $stat->execute ();
+		
+		return $result;
+		
+	}
+	
+	public function getCausesDeces($id){
+	
+		$adapter = $this->tableGateway->getAdapter ();
+		$sql = new Sql ( $adapter );
+		$select = $sql->select ();
+		$select->columns ( array (
+				'*'
+		) );
+		$select->from ( array (
+				'c' => 'conclusion'
+		) );
+		$select->join ( array (
+				'cau' => 'cause'
+		), 'cau.id_cause = c.id_cause', array (
+				'*'
+		) );
+		$select->where ( array (
+				'c.id_cons' => $id,
+				'id_type_cause' => 2
+		) );
+		$select->order ( 'c.id_conclusion ASC' );
+		$stat = $sql->prepareStatementForSqlObject ( $select );
+		$result = $stat->execute ();
+	
+		return $result;
+	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public function getConclusion($id) {
 		$adapter = $this->tableGateway->getAdapter ();
 		$sql = new Sql ( $adapter );

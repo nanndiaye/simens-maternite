@@ -1002,7 +1002,7 @@ $("#terminer2, #terminer3").click(function () {
 //    	alert($("#comp_name_"+i).val());
 //    	alert($("#noteComp_"+i).val());	
     	donnees['comp_name_'+i] = $("#comp_name_"+i).val();
-    	donnees['note_comp_'+i] = $("#noteComp_"+i).val();
+    	donnees['note_comp_'+i] = $("#notesComp_"+i).val();
     
     
     }
@@ -1016,7 +1016,7 @@ $("#terminer2, #terminer3").click(function () {
 //    	alert($("#deces_name_"+i).val());
 //    	alert($("#noteDeces_"+i).val());	
     	donnees['deces_name_'+i] = $("#deces_name_"+i).val();
-    	donnees['note_deces_'+i] = $("#noteDeces_"+i).val();
+    	donnees['note_deces_'+i] = $("#notesDeces_"+i).val();
     
     
     }//return false;
@@ -2520,7 +2520,7 @@ getExamenMaterniteDonnee5($('#examen_maternite_donnee5').val());
 $('.Test').toggle(false);
 function getTest(val){ 
 	
-	if(val=='1'){
+	if(val==1){
 		$("#test").html("Test emmel");
 		$('.Test').fadeIn();
 		
@@ -2551,81 +2551,91 @@ function getProfil(val){
 //pour quantite
 
 
+//function getQuantite(val){ 
+//	
+//	if(val==1){
+//		
+//		$('.Quantite').fadeIn();
+//	}else{
+//	
+//		$('.Quantite').fadeOut();
+//	}	
+//}
+
+
+
+
+
+$('.Quantite').toggle(false);
 function getQuantite(val){ 
 	
 	if(val==1){
-		$("#quantite").html("Quantite Regle");
+	
 		$('.Quantite').fadeIn();
+		
 	}else{
-		$("#quantite span span").html("");
+
 		$('.Quantite').fadeOut();
 	}	
 }
 
+getQuantite($('#quantite_regle').val());
+
+
+
+
+
+
+$('.Cycle').toggle(false);
 function getCycle(val){ 
 	
 	if(val==1){
-		$("#cycle").html("Cycle");
+	
 		$('.Cycle').fadeIn();
+		
 	}else{
-		$("#cycle span span").html("");
+
 		$('.Cycle').fadeOut();
 		$('.Quantite').fadeOut();
 	}	
 }
 
+getCycle($('#regularite').val());
 
+
+
+
+$('.Contraception').toggle(false);
 function getContraception(val){ 
 	
 	if(val==1){
-		$("#contraceptn").html("Contraception");
+	
 		$('.Contraception').fadeIn();
+		
 	}else{
-		$("#contraceptn  span span").html("");
+
 		$('.Contraception').fadeOut();
 		
 	}	
 }
 
+getContraception($('#regularite').val());
+
+
 function getMotif(val){ 
 	//alert(val);
 	if(val==1){
-		$("#motifad").html("Motif d\'admission");
+	
 		$('.MotifAdmission').fadeOut();	
 	}
 		else {
-		$("#motifad span span").html("");
+	
 		$('.MotifAdmission').fadeIn();
 		
 	
 }
 }
 
-
-function getDystocie(val){ 
-	//alert(val);
-	if(val==1){
-		$("#dystocie").html("DYstocie");
-		$('.Dystocie').fadeOut();	
-	}
-		else {
-		$("#dystocie span span").html("");
-		$('.Dystocie').fadeIn();
-		
-	
-}
-}
-//alert(dystocie);
-
-var eclampsie=$("#eclampsie");
-if (eclampsiee.checked)
-{
-	$('.Eclampsie').toggle(true);
-	}
-else 
-	{
-	$('.Eclampsie').toggle(false);
-	}
 
 //pour accouchement
 
@@ -2642,7 +2652,7 @@ function getAccouchement(val){
 	}	
 }
 
-
+getAccouchement($('#type_accouchement').val());
 function fAddText() { 
     document.getElementById('Cible').innerHTML ='<textarea cols="30" rows="20"></textarea>'; 
 } 

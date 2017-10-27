@@ -12,40 +12,38 @@ class NaissanceTable {
 	public function __construct(TableGateway $tableGateway) {
 		$this->tableGateway = $tableGateway;
 	}
-	public function getNaissance($id_cons) {
+	public function getNaissance($id) {
 	
-		//$adapter = $this->tableGateway->getAdapter ();
-		$db = $this->tableGateway->getAdapter ();
-		$sql = new Sql ( $db );
-		$sQuery = $sql->select ();
-	
-				$sQuery->columns ( array (
+		$adapter = $this->tableGateway->getAdapter ();
+		$sql = new Sql ( $adapter );
+		$select = $sql->select ();
+		$select->columns ( array (
 				'*'
 		) );
-				
-		$sQuery->from( array (
+		$select->from ( array (
 				'enf' => 'enfant'
-		) )->join ( array (
-				'gro' => 'grossesse' 
-		), 'enf.id_grossesse = gro.id_grossesse', array (
-
-		))->join (array(
-					'acc'=>'accouchement'	
+		) );
+		$select->join ( array (
+				'acc' => 'accouchement'
+		), 'acc.id_grossesse = enf.id_grossesse', array (
+				'*'
+		) );
+		$select->join ( array (
+				'c' => 'consultation'
+		), 'c.id_cons = acc.id_cons', array (
+				'*'
+		) );
+		$select->where ( array (
+				'c.id_cons' => $id,
 				
-		),'acc.id_grossesse = gro.id_grossesse',array(		
 		) );
-		$sQuery->where ( array (
-				'acc.id_cons' => $id_cons
+		$select->order ( 'enf.id_bebe ASC' );
+		$stat = $sql->prepareStatementForSqlObject ( $select );
+		$result = $stat->execute ();
 		
-		) );
+		return $result;
 		
-		$sQuery->order ( 'enf.id_bebe ASC' );
-		
-		$stat = $sql->prepareStatementForSqlObject ( $sQuery );
 	
-		$resultat = $stat->execute ()->current();
-		//var_dump($resultat);exit();
-		return $resultat;
 	}
 	
 	

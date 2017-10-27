@@ -22,7 +22,7 @@ class AntecedentType1 {
 	public $profil_emmel;
 	public $note_gs;
 	public $note_emmel;
-	//public $note_autre_em;
+
 	
 	public function exchangeArray($data) {
 		$this->id_patient = (! empty ( $data ['id_patient'] )) ? $data ['id_patient'] : null;
@@ -42,8 +42,7 @@ class AntecedentType1 {
 		$this->rhesus= (! empty ( $data ['rhesus'] )) ? $data ['rhesus'] : null;
 		$this->test_emmel = (! empty ( $data ['test_emmel'] )) ? $data ['test_emmel'] : null;
 		$this->profil_emmel = (! empty ( $data ['profil_emmel'] )) ? $data ['profil_emmel'] : null;
-		$this->note_emmel = (! empty ( $data ['note_emmel'] )) ? $data ['note_emmel'] : null;
-		//$this->note_autre_em = (! empty ( $data ['note_autre_em'] )) ? $data ['note_autre_em'] : null;
+			$this->note_emmel = (! empty ( $data ['note_emmel'] )) ? $data ['note_emmel'] : null;
 
 		
 	}

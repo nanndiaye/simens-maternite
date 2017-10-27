@@ -85,7 +85,6 @@ class DonneesExamensPhysiquesTable {
 						'toucher_vaginale' => $donnees ['examen_maternite_donnee1'],
 						'hauteur_uterine' => $donnees ['examen_maternite_donnee2'],
 						'bdc' => $donnees ['examen_maternite_donnee3'],
-						//'la' => $donnees ['examen_maternite_donnee4'],
 						'pde' => $donnees ['examen_maternite_donnee5'],
 						'date_rupt_pde' => $date_rupt_pde,
 						'heure_rupt_pde' => $donnees ['examen_maternite_donnee7'],
@@ -95,9 +94,6 @@ class DonneesExamensPhysiquesTable {
 						'note_tv' => $donnees ['note_tv'],
 						'note_hu' => $donnees ['note_hu'],
 						'note_bdc' => $donnees ['note_bdc'],
-						//'note_la' => $donnees ['note_la'],
-						//'note_pde' => $donnees ['note_pde'],
-						//'note_presentation' => $donnees ['note_presentation'],
 						'note_bassin' => $donnees ['note_bassin'],
 						'aspect' => $donnees ['examen_maternite_donnee11'],
 						

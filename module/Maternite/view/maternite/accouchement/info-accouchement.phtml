@@ -6,7 +6,9 @@
 <!-- MES JS -->
 <?php echo $this->headScript()->appendFile($this->basePath().'/js/maternite/accouchement/jsMaternite.js');?>
 
-<?php $Control = new DateHelper();?>
+<?php $Control = new DateHelper();
+use Zend\Db\ResultSet\ResultSet;
+?>
 
 <style>
 
@@ -66,6 +68,34 @@ table td
 	vertical-align: top;
 }
 
+
+#type_acc
+{
+	width: 12%;
+}
+
+#num_doss 
+{
+	width: 13%;
+}
+#num_acc 
+{
+	width: 14%;
+}
+#date_accouchement 
+{
+	width: 10%;
+}
+
+#nb_enf 
+{
+	width: 6%;
+}
+#effectuer 
+{
+	width: 6%;
+}
+
 table td p
 {
 	margin-right: 15px;
@@ -96,7 +126,7 @@ $(window).load(function () {
 
 <div id="titre" style='font-family: police2; text-decoration:none; color: green; font-size: 20px; font-weight: bold; padding-left: 20px;'><iS style='font-size: 25px;'>&curren;</iS> ETAT CIVIL DU PATIENT</div>
 <div id="wait" style="color: gray; font-size: 20px; text-align: center; margin-top: 80px;" > <span> Chargement ... </span> </div>
-<div id="contenu" style='height:370px;'>
+<div id="contenu" style='height:1000px;'>
 
   <div style='width: 100%;'>
 
@@ -109,12 +139,20 @@ $(window).load(function () {
        </p>
          <table id="etat_civil">
              <tr>
-			   	<td style='width:27%; font-family: police1;font-size: 12px;'>
-			   		<div id="aa"><a style="text-decoration: underline;">Pr&eacute;nom</a><br><p style='font-weight: bold;font-size: 17px;'><?php echo $this->lesdetails['PRENOM'];?> </p></div>
+             	<td style='width:27%; font-family: police1;font-size: 12px;'>
+			   		<div id="aa"><a style="text-decoration: underline;">Numero dossier</a><br><p style='font-weight: bold;font-size: 17px;'><?php echo $this->lesdetails['NUMERO_DOSSIER'];?> </p></div>
 			   	</td>
-
-			   	<td style='width:35%; font-family: police1;font-size: 12px;'>
-			   		<div id="aa"><a style="text-decoration: underline;">Lieu de naissance</a><br><p style='font-weight: bold;font-size: 17px;'><?php echo $this->lesdetails['LIEU_NAISSANCE'];?></p></div>
+				<td style='width: 27%; font-family: police1;font-size: 12px; vertical-align: top;'>
+			   	
+			   		<div id="aa"><a style="text-decoration: underline; ">Date de naissance</a><br>
+			   		  <p style='font-weight: bold;font-size: 19px;'>
+			   		    <?php 
+			   		    $date_naissance = $this->lesdetails['DATE_NAISSANCE'];
+			   		    if($date_naissance){ echo $Control->convertDate($this->lesdetails['DATE_NAISSANCE']); }else{ echo "";}
+			   		    ?> 
+			   		  </p>
+			   		</div>
+			   		
 			   	</td>
 
 			    <td style='width:38%; font-family: police1;font-size: 12px;'>
@@ -133,9 +171,8 @@ $(window).load(function () {
 			   	</td>
 
 			   	<td style=' font-family: police1;font-size: 12px;'>
-			   		<div id="aa"><a style="text-decoration: underline;">Email</a><br><p style='font-weight: bold;font-size: 19px;'><?php echo $this->lesdetails['EMAIL'];?></p></div>
+			   		<div id="aa"><a style="text-decoration: underline;">Profession</a><br><p style='font-weight: bold;font-size: 19px;'><?php echo $this->lesdetails['PROFESSION'];?></p></div>
 			   	</td>
-
 			 </tr>
 
 			 <tr>
@@ -147,30 +184,13 @@ $(window).load(function () {
 			   		<div id="aa"><a style="text-decoration: underline;">Nationalit&eacute; actuelle</a><br><p style='font-weight: bold;font-size: 19px;'><?php echo $this->lesdetails['NATIONALITE_ACTUELLE'];?></p></div>
 			   	</td>
 
-			   	<td style=' font-family: police1;font-size: 12px;'>
-			   		<div id="aa"><a style="text-decoration: underline;">Profession</a><br><p style='font-weight: bold;font-size: 19px;'><?php echo $this->lesdetails['PROFESSION'];?></p></div>
+			   <td style='width: 195px; font-family: police1;font-size: 12px;'>
+			   		<div id="aa"><a style="text-decoration: underline;">Adresse</a><br><p style='font-weight: bold;font-size: 19px;'><?php echo $this->lesdetails['ADRESSE'];?></p></div>
 			   	</td>
 
 			 </tr>
 
-			  <tr>
-			   	<td style='width: 27%; font-family: police1;font-size: 12px; vertical-align: top;'>
-			   	
-			   		<div id="aa"><a style="text-decoration: underline; ">Date de naissance</a><br>
-			   		  <p style='font-weight: bold;font-size: 19px;'>
-			   		    <?php 
-			   		    $date_naissance = $this->lesdetails['DATE_NAISSANCE'];
-			   		    if($date_naissance){ echo $Control->convertDate($this->lesdetails['DATE_NAISSANCE']); }else{ echo "";}
-			   		    ?> 
-			   		  </p>
-			   		</div>
-			   		
-			   	</td>
-
-			    <td style='width: 195px; font-family: police1;font-size: 12px;'>
-			   		<div id="aa"><a style="text-decoration: underline;">Adresse</a><br><p style='font-weight: bold;font-size: 19px;'><?php echo $this->lesdetails['ADRESSE'];?></p></div>
-			   	</td>
-			  </tr>
+			 
 			  	 <tr>
 
 			  	 </tr>
@@ -183,32 +203,119 @@ $(window).load(function () {
            </div>
 	      <table id="numero" style=" padding-top:5px;  ">
            <tr>
-             <td style="padding-top:3px; padding-left:25px; padding-right:5px; font-size: 12px;"> Code du patient: </td>
+           <!--  <td style="padding-top:3px; padding-left:25px; padding-right:5px; font-size: 12px;"> Code du patient: </td> --> 
              <td style="font-weight: bold; "> <?php echo $this->id_patient;?></td>
                 <td style="font-weight: bold;padding-left:20px;">|</td>
              <td style="padding-top:5px; padding-left:10px; font-size: 12px; "> Date d'enregistrement: </td>
              <td style="font-weight: bold;"> <?php echo $Control->convertDateTime($this->date_enregistrement);?></td>
            </tr>
+          
           </table>
+           <br />
+           <br />
+           
+                    <div  style='width: 77%; float:left;'>	         
+		<table class="table table-bordered  tab_list_mini" id="patient">
+		<thead>
+			<tr style="height: 50px; width: 100%;">
+				<!--  <th id="nom" align="center">Num Dossier</th>-->
+				
+				<th id="num_acc" align="center">Numero Accouchement</th>
+				<!--  <th id="num_doss" align="center">Numero Dossier</th>-->
+				<th id="date_accouchement" align="center">Date d'accouchement</th>
+				<th id="type_acc" align="center" >Type D'accouchement</th>
+				<th id="nb_enf" align="center" >Nb Enfants</th>
+				<th id="effectuer" align="center">Options</th>
+			</tr>
+		</thead>
+		<tbody>
+		<?php
+				
+				$resultSet = new ResultSet ();
+				$resultSet->initialize ( $this->donnees_acc );
+				$resultSet->buffer ();
+				?>
+		<?php foreach( $resultSet as $donnees_acc) :?>
+		<?php {
 
-	      <div class='block' id='thoughtbot' style=' vertical-align: bottom; padding-left:60%; padding-top: 35px; font-size: 18px; font-weight: bold;'><button id='terminer'>Terminer</button></div>
+			?>
+					<tr>
+				     
+				           <td><?php echo $this->escapeHtml($donnees_acc['Id_cons']);?>  </td>
+				           <!--   <td><?php //echo $this->escapeHtml($donnees_acc['numero_dossier']);?>  </td>-->
+				      <td><?php echo $this->escapeHtml($donnees_acc['date_acc']);?> </td>
+				      <td><?php echo $this->escapeHtml($donnees_acc['type_acc']);?> </td>
+			          <td>  <?php 
+			   		    if($this->$donnees_acc['bb_attendu']==0){ echo $this->escapeHtml($donnees_acc['nb_bb']);} else { echo $this->escapeHtml($donnees_acc['bb_attendu']);}
+			     
+			         ?> 		          
+			          </td>
+				      <td><a
+					     href="<?php echo $this->url('accouchement', array('action'=>'complement-accouchement'),  array('query'=>array('id_patient'=>$this->escapeHtml($donnees_acc['Id']),'id_cons'=>$this->escapeHtml($donnees_acc['Id_cons']))));?>">
+						<img style="display: inline;"
+						src='<?php echo $this->basePath().'/images_icons/transfert_droite.png'?>'
+						alt='Ouvrir Dossier' title=" Ouvrir Dossier"
+						style="float:left;border:transparent;" />
+				</a>&nbsp; </td>
+			</tr>
+				
+				<?php } ?>
+					<?php endforeach; ?>
+		</tbody>
+		</table>    
+		   	      <div class='block' id='thoughtbot' style=' vertical-align: bottom; padding-left:60%; padding-top: 35px; font-size: 18px; font-weight: bold;'><button id='terminer'>Retour</button></div>
+		       
+		  </div>
+           
+           
+           
+           
+           
+    
+
+    
      </div>
+     
+		   
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <script type="text/javascript">
 var base_url = window.location.toString();
 var tabUrl = base_url.split("public");
 
  $("#terminer").click(function(){
-	 vart=tabUrl[0]+'public/accouchement/admission-grossesse-normal';
+	 vart=tabUrl[0]+'public/accouchement/liste-des-accouchements';
      $(location).attr("href",vart);
  });
 
 
 //POUR LE MENU GAUCHE dans -elementgauche.phtml
-$('#plus_dossier_patient').toggle(true);
-$("#dossier_patient").replaceWith("<li id='dossier_patient' style='background:#4a5765;'><a href=''><span style='margin-left:0px; color: #ffffff; font-weight:bold; font-size:20px; font-family:Times New Roman;'> <img style='display: inline;' src='"+tabUrl[0]+"public/images_icons/moin-green2.png' alt='Liste' /> Dossier Patiente </span></a></li>");
-dep_dossier_patient1();
+$('#plus_accouchement').toggle(true);
+$("#accouchement").replaceWith("<li id='dossier_patient' style='background:#4a5765;'><a href=''><span style='margin-left:0px; color: #ffffff; font-weight:bold; font-size:20px; font-family:Times New Roman;'> <img style='display: inline;' src='"+tabUrl[0]+"public/images_icons/moin-green2.png' alt='Liste' /> Accouchement </span></a></li>");
+dep_accouchement1();
 $('#liste_dossier_patient_style').css({'font-weight':'bold','color':'white','font-size':'22px'});
 
 </script>

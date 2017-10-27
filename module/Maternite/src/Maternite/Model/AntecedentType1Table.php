@@ -64,7 +64,7 @@ class AntecedentType1Table {
     			'test_emmel' => $donnees ['test_emmel'],
     			'profil_emmel' => $donnees ['profil_emmel'],
     			'note_emmel' => $donnees ['note_emmel'],
-    			//'note_autre_em' => $donnees ['note_autre_em'],
+    			
     
     	);
     

@@ -302,7 +302,11 @@ return array(
     								'liberer-patient'=>array('gynecologue','infirmier'),
     								'vue-examen-jour'=>array('gynecologue','infirmier'),
     								'dossier-accouchement'=>array('sage_femme','infirmier'),
+    								'liste-des-accouchements'=>array('gynecologue','infirmier'),
+    								'liste-des-accouchements-ajax'=>array('gynecologue','infirmier'),
+    								'liste-accouchement-ajax'=>array('gynecologue','infirmier'),
     								'liste-accouchement'=>array('gynecologue','infirmier'),
+    								'info-accouchement'=>array('gynecologue','infirmier'),
     						),
     						
     						/***

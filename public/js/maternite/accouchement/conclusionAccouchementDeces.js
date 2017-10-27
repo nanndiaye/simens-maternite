@@ -20,8 +20,8 @@ function creerLalisteDeces ($listeDesElements) {
                     $liste +="</select>"+                           
                              "</th>"+
                              
-                             "<th id='notesDeces_"+(index+1)+"'  style='width: 59%;'  >"+
-                             "<input name='noteDeces_"+(index+1)+"' id='noteDeces_"+(index+1)+"' type='text' style='width: 100%; margin-top: 3px; height: 30px; margin-bottom: 0px; font-size: 15px; padding-left: 10px;' >" +
+                             "<th id='noteDeces_"+(index+1)+"'  style='width: 59%;'  >"+
+                             "<input name='noteDeces_"+(index+1)+"' id='notesDeces_"+(index+1)+"' type='text' style='width: 100%; margin-top: 3px; height: 30px; margin-bottom: 0px; font-size: 15px; padding-left: 10px;' >" +
                              "</th >"+
                              
                              "<th id='iconeDeces_supp_vider' style='width: 9%;'  >"+
@@ -60,6 +60,7 @@ function creerLalisteDeces ($listeDesElements) {
                     	$("#supprimer_deces").toggle(true);
                     }
 }
+
 
 //NOMBRE DE LISTE AFFICHEES
 function nbListeDeces () {
@@ -156,31 +157,11 @@ function vider_deces_selectionne(id) {
 //CHARGEMENT DES ELEMENTS SELECTIONNES POUR LA MODIFICATION
 
 //pour maj
-function chargementModificationBio (index , element , note) { 
-	$("#SelectExamenBio_"+(index+1)+" option[value='"+element+"']").attr('selected','selected'); 
-	$("#noteExamenBio_"+(index+1)+" input").val(note);
+function chargementCauseDeces(index , element , note) { 
+	$("#SelectDeces_"+(index+1)+" option[value='"+element+"']").attr('selected','selected'); 
+	$("#noteDeces_"+(index+1)+" input").val(note);
 	
-	$(function(){
-		if(element == 1) {
-			$('#groupe_sanguin').toggle(true); 
-		} else
-			if(element == 2) {
-				$('#hemogramme_sanguin').toggle(true); 
-			} else
-				if(element == 5) {
-					$('#bilan_hemolyse').toggle(true); 
-				} else
-					if(element == 3) {
-						$('#bilan_hepatique').toggle(true); 
-					} else
-						if(element == 4) {
-							$('#bilan_renal').toggle(true); 
-						} else
-							if(element == 6) {
-								$('#bilan_inflammatoire').toggle(true); 
-							}
-			
-	});
+
 }
 
 var base_url = window.location.toString();
@@ -233,20 +214,6 @@ $(function(){
 	});
 	
 
-//	
-//	$("#conclusion_deces").click(function(){
-//		for(var i = 1; i <= nbListeDeces(); i++ ){
-//			$('#deces_name_'+i).attr('disabled',false); $('#deces_name_'+i).css({'background':'white'});
-//			$("#noteDeces_"+i+" input").attr('disabled',false); $("#noteDeces_"+i+" input").css({'background':'white'});
-//		}
-//		$("#controls_Deces div").toggle(true);
-//		if(nbListeDeces() == 1){
-//			$("#supprimer_deces").toggle(false);
-//		}
-//		$("#iconeDeces_supp_vider a img").toggle(true);
-//
-//		return true;
-//	});
 	
 });
 }

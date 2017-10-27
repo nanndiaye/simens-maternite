@@ -10,8 +10,7 @@ $('#liste_admission_style').css({'font-weight':'bold','color':'white','font-size
 
 <!-- MES STYLES -->
 <?php echo $this->headLink()->appendStylesheet($this->basePath().'/css/maternite/accouchement/styleListePatientAdmis.css');?>
-<?php echo $this->headLink()->appendStylesheet($this->basePath().'/css/maternite/accouchement/styleAdmission.css');
-?>
+
 <!-- MES JS -->
 <?php echo $this->headScript()->appendFile($this->basePath().'/js/maternite/accouchement/jsListepatientAdmis.js');?>
 
@@ -44,21 +43,21 @@ $(window).load(function () {
 <div id="contenu" >
 
        
-<table style='width:95%; margin-left: 10px; align:center' class="table table-bordered tab_list_mini" id="patient">
+
+		<table class="table table-bordered tab_list_mini" id="patientdeces">
 			<thead>
-				<tr>
+					<tr>
 					
 				<th id="nom_" style="width: 15%;"><input type="text" name="search_browser" value=" Num Dossier" class="search_init" /></th>
 					<th id="nom_" style="width: 13%;"><input type="text" name="search_browser" value=" Nom" class="search_init" /></th>
 					<th id="prenom_" style="width: 15%;"><input type="text" name="search_browser" value=" Prenom" class="search_init" /></th>
 					<th id="date_" style="width: 7%;"><input type="text" name="search_browser" value=" Age" class="search_init" /></th>
-					<!--  <th id="sexe_" style="width: 7%;"><input type="text" name="search_browser" value=" Sexe" class="search_init" /></th>-->
+					<th id="sexe_" style="width: 7%;"><input type="text" name="search_browser" value=" Sexe" class="search_init" /></th>
 					<th id="adresse_" style="width: 25%;"><input type="text" name="search_browser" value=" Adresse" class="search_init" /></th>
-					
-					<th id="effectuer_" style="width: 10%;"><input type="hidden" name="search_browser" value="" class="" />Options</th>
+					<th id="nationalite_" style="width: 10%;"><input type="text" name="search_browser" value=" Nationalite" class="search_init" /></th>
+					<th id="effectuer_" style="width: 10%;"><input type="hidden" name="search_browser" value="" class="" /></th>
 
 				</tr>
-				
 			</thead>
 
 			<tbody id="donnees" class="liste_patient">
@@ -77,12 +76,12 @@ $(window).load(function () {
 				     <td style='text-transform : uppercase;'><?php echo $this->escapeHtml($donnees['Nom']);?></td>
 				    <td><?php echo $this->escapeHtml($donnees['Prenom']);?></td>
 					<td><?php echo $this->escapeHtml($donnees['Age']);?></td>
-					<!--  <td><?php //echo $this->escapeHtml($donnees['Sexe']);?></td>-->
+					<td><?php echo $this->escapeHtml($donnees['Sexe']);?></td>
 					<td><?php echo $this->escapeHtml($donnees['Adresse']);?></td>
+					<td><?php echo $this->escapeHtml($donnees['Nationalite']);?>
 					
 					
-					
-					
+					</td>
 					<td>
 					    <?php $id = $this->escapeHtml($donnees['Id']);?>
 					    <a style='margin-left: 5%; margin-right: 6%;' href="javascript:affichervue('<?php echo $id ?>','<?php echo $this->escapeHtml($donnees['Id_admission']);?>')">

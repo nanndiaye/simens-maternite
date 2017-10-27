@@ -33,9 +33,9 @@ class AdmissionTable {
 				'Nom' => 'NOM',
 				'Prenom' => 'PRENOM',
 				'Age' => 'AGE',
-				//'Sexe' => 'SEXE',
+				'Sexe' => 'SEXE',
 				'Adresse' => 'ADRESSE',
-				//'Nationalite' => 'NATIONALITE_ACTUELLE',
+				'Nationalite' => 'NATIONALITE_ACTUELLE',
 				'Id' => 'ID_PERSONNE'
 		));
 		$select->join ( array (
@@ -483,5 +483,60 @@ class AdmissionTable {
 	        return $sql->prepareStatementForSqlObject($sQuery)->execute();
 	    }
 	}
+	
+	
+	
+	
+	public function getPatientAccouchee(){
+
+
+		$today = new \DateTime ( 'now' );
+		$date = $today->format ( 'Y-m-d' );
+		
+		$adapter = $this->tableGateway->getAdapter ();
+		$sql = new Sql ( $adapter );
+		$select = $sql->select ();
+		
+		$select->from ( array (
+				'p' => 'patient'
+		
+		
+		)
+		);
+		
+		$select->columns ( array ('numero_dossier'=>'NUMERO_DOSSIER') );
+		$select->join(array('pers' => 'personne'), 'pers.ID_PERSONNE = p.ID_PERSONNE', array(
+		
+				'Nom' => 'NOM',
+				'Prenom' => 'PRENOM',
+				'Age' => 'AGE',
+				//'Sexe' => 'SEXE',
+				'Adresse' => 'ADRESSE',
+				//'Nationalite' => 'NATIONALITE_ACTUELLE',
+				'Id' => 'ID_PERSONNE'
+		));
+		$select->join ( array (
+				'a' => 'admission'
+		), 'p.ID_PERSONNE = a.id_patient', array (
+				'Id_admission' => 'id_admission'
+		) );
+		
+		$select->join ( array (
+				'acc' => 'accouchement'
+		), 'a.ID_Cons = acc.id_cons', array (
+				'id_accouchement' => 'id_accouchement'
+		) );
+		
+		
+		$select->order ( 'id_accouchement DESC' );
+		$stat = $sql->prepareStatementForSqlObject ( $select );
+		$result = $stat->execute ();
+		return $result;
+		//var_dump($result); exit();
+		
+	}
+	
+	
+	
 	
 }

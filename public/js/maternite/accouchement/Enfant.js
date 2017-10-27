@@ -25,10 +25,10 @@ function ajoutEnfant(nbEnfant){
 			          '</td>'+
 			          '<td  class="antecedent_go">'+
 		              '<div   class="styleEnfDiv4">'+
-		                 '<label 	 class="styleLabel4">Poids</label>'+
+		                 '<label 	 class="styleLabel4">Poids(kgs)</label>'+
 		              '</div>'+   
 		              '<div  class="styleEnfDiv5">'+
-		                 '<label class="styleLabel5"><input type="text" id="poids_'+i+'"></input></label>'+
+		                 '<label class="styleLabel5"><input type="number" min=0 id="poids_'+i+'"></input></label>'+
 		              '</div>'+ 
 		              '<div   class="styleEnfDiv6">'+
 		                 '<label  class="styleLabel6">Note <input id="n_poids_'+i+'" type="text"></input></label>'+
@@ -49,10 +49,10 @@ function ajoutEnfant(nbEnfant){
 			          '</td>'+
 			          '<td  class="antecedent_go">'+
 		              '<div   class="styleEnfDiv4">'+
-		                 '<label 	 class="styleLabel4">Taille</label>'+
+		                 '<label 	 class="styleLabel4">Taille(cm)</label>'+
 		              '</div>'+   
 		              '<div  class="styleEnfDiv5">'+
-		                 '<label class="styleLabel5"><input type="text" id="taille_'+i+'"></input></label>'+
+		                 '<label class="styleLabel5"><input type="number" min=0 id="taille_'+i+'"></input></label>'+
 		              '</div>'+ 
 		              '<div   class="styleEnfDiv6">'+
 		                 '<label  class="styleLabel6">Note <input id="n_taille_'+i+'" type="text"></input></label>'+
@@ -242,13 +242,13 @@ function ajoutEnfant(nbEnfant){
 		                     '<label   class="label2" title="Perimetre Cranien">Cranien</label>'+
 		                  '</div>'+ 
 		                  '<div  class="div3">'+
-		                     '<label   class="label3" ><input type="number" id="cranien_'+i+'"></input></label>'+
+		                     '<label   class="label3" ><input type="number" min=0 id="cranien_'+i+'"></input></label>'+
 		                  '</div>'+ 
 		                  '<div  class="div4">'+
 		                     '<label   class="label4" title="Perimetre Brachial">Brachial</label>'+
 		                  '</div>'+ 
 		                  '<div  class="div5">'+
-		                     '<label   class="label5" ><input type="number" id="brachial_'+i+'"></input></label>'+
+		                     '<label   class="label5" ><input type="number" min=0 id="brachial_'+i+'"></input></label>'+
 		                  '</div>'+ 
 		          '</td>'+
 		          '<td  class="antecedent_go">'+
@@ -256,7 +256,7 @@ function ajoutEnfant(nbEnfant){
                      '<label   class="label6" title="Perimetre Cephalique">C&eacute;phalique</label>'+
                    '</div>'+ 
                    '<div  class="div7">'+
-                     '<label   class="label7" ><input type="number" id="cephalique_'+i+'"></input></label>'+
+                     '<label   class="label7" ><input type="number" min=0 id="cephalique_'+i+'"></input></label>'+
                    '</div>'+
 	                '<div   class="div8">'+
 	                 '<label  class="label8">Note <input id="n_perim_'+i+'" type="text"></input></label>'+
@@ -420,7 +420,7 @@ function ajoutNouveauNe(nbEnfants){
 				       '<label class=" nvHeureDiv1label">Heure</label>'+
 			       '</div>'+
 			       '<div class=" nvHeureDiv2">'+
-				       '<label class=" nvHeureDiv2label" > <input id="heure_deces_'+i+'" type="Time"></input>  </label>'+
+				       '<label class=" nvHeureDiv2label" > <input class="heure_dece" id="heure_deces_'+i+'" type="text"></input>  </label>'+
 			       '</div>'+
 			        '<div class="nvCauseDiv">'+
 				       '<label class="nvCauseLabel" >cause <input id="cause_deces_'+i+'" type="text"></input> </label>'+
@@ -440,7 +440,7 @@ function ajoutNouveauNe(nbEnfants){
 		 
 		elem+=ong;
 	}
-	elem+="</ul>"+cont+" </div>  <script> $('#tabsNouveauNe').tabs();$('.dateCalendar').datepicker(" +
+	elem+="</ul>"+cont+" </div>  <script> $('#tabsNouveauNe').tabs();$('.heure_dece').chungTimePicker({});$('.dateCalendar').datepicker(" +
 			"$.datepicker.regional['fr'] = {" +
 			"closeText: 'Fermer'," +
 			"changeYear: true," +

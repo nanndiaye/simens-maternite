@@ -20,8 +20,8 @@ function creerLalisteComplication ($listeDesElements) {
                     $liste +="</select>"+                           
                              "</th>"+
                              
-                             "<th id='notesComp_"+(index+1)+"'  style='width: 59%;'  >"+
-                             "<input name='noteComp_"+(index+1)+"' id='noteComp_"+(index+1)+"' type='text' style='width: 100%; margin-top: 3px; height: 30px; margin-bottom: 0px; font-size: 15px; padding-left: 10px;' >" +
+                             "<th id='noteComp_"+(index+1)+"'  style='width: 59%;'  >"+
+                             "<input name='noteComp_"+(index+1)+"' id='notesComp_"+(index+1)+"' type='text' style='width: 100%; margin-top: 3px; height: 30px; margin-bottom: 0px; font-size: 15px; padding-left: 10px;' >" +
                              "</th >"+
                              
                              "<th id='iconeComp_supp_vider' style='width: 9%;'  >"+
@@ -156,31 +156,11 @@ function vider_comp_selectionne(id) {
 //CHARGEMENT DES ELEMENTS SELECTIONNES POUR LA MODIFICATION
 
 //pour maj
-function chargementModificationBio (index , element , note) { 
-	$("#SelectExamenBio_"+(index+1)+" option[value='"+element+"']").attr('selected','selected'); 
-	$("#noteExamenBio_"+(index+1)+" input").val(note);
+function chargementCauseComp (index , element , note) { 
+	$("#SelectComp_"+(index+1)+" option[value='"+element+"']").attr('selected','selected'); 
+	$("#noteComp_"+(index+1)+" input").val(note);
 	
-	$(function(){
-		if(element == 1) {
-			$('#groupe_sanguin').toggle(true); 
-		} else
-			if(element == 2) {
-				$('#hemogramme_sanguin').toggle(true); 
-			} else
-				if(element == 5) {
-					$('#bilan_hemolyse').toggle(true); 
-				} else
-					if(element == 3) {
-						$('#bilan_hepatique').toggle(true); 
-					} else
-						if(element == 4) {
-							$('#bilan_renal').toggle(true); 
-						} else
-							if(element == 6) {
-								$('#bilan_inflammatoire').toggle(true); 
-							}
-			
-	});
+
 }
 
 var base_url = window.location.toString();

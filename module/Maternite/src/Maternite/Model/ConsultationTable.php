@@ -7,6 +7,7 @@ use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Where;
 use Zend\Crypt\PublicKey\Rsa\PublicKey;
+use Zend\Validator\File\Count;
 
 class ConsultationTable {
 	protected $tableGateway;
@@ -444,6 +445,7 @@ class ConsultationTable {
 				'a.date_cons' => $date,
 				'c.ARCHIVAGE' => 0
 		) );
+		$select->group('c.ID_PATIENT');
 		$select->order ( 'id_admission ASC' );
 		
 		$stmt = $sql->prepareStatementForSqlObject ( $select );
@@ -1205,4 +1207,119 @@ class ConsultationTable {
 		) );
 		return $sql->prepareStatementForSqlObject ( $select )->execute ();
 	}
+	
+	
+	
+	
+	
+	
+	
+	public function listeAccouchement($id_patient){
+
+		$today = new \DateTime ();
+		$date = $today->format ( 'Y-m-d' );
+		$adapter = $this->tableGateway->getAdapter ();
+		$sql = new Sql ( $adapter );
+		$select = $sql->select ();
+		$select->from ( array (
+				'p' => 'patient'
+		
+		) );
+		$select->columns ( array ('numero_dossier'=>'NUMERO_DOSSIER') );
+		
+		$select->join ( array (
+		
+				'pers' => 'personne'
+		), 'pers.ID_PERSONNE = p.ID_PERSONNE', array (
+				'Id' => 'ID_PERSONNE'
+		
+		) );
+		
+		$select->join ( array (
+				'c' => 'consultation'
+		), 'p.ID_PERSONNE = c.ID_PATIENT', array (
+				'Id_cons' => 'ID_CONS',
+			
+		) );
+		$select->join ( array (
+				'acc' => 'accouchement'
+		), 'c.ID_CONS = acc.id_cons', array (
+				'id_acc' => 'id_accouchement',
+				'date_acc' => 'date_accouchement',
+				//'type_acc' => 'type_accouchement',
+		) );
+		
+		$select->join ( array (
+				'g' => 'grossesse'
+		), 'c.ID_CONS = g.id_cons', array (
+				'bb_attendu' => 'bb_attendu',
+				'nb_bb' => 'nombre_bb',
+				//'type_acc' => 'type_accouchement',
+		) );
+		
+		
+		
+		$select->join ( array (
+				'ta' => 'type_accouchement'
+		), 'ta.id_type = acc.id_type', array (
+				'type_acc' => 'type_accouch'
+		) );
+		
+	
+
+		
+		$select->where ( array (
+				'c.ID_PATIENT' => $id_patient,
+// 				'DATEONLY' => $date,
+// 				'a.date_cons' => $date,
+// 				'c.ARCHIVAGE' => 0
+		) );
+		$select->order ( 'id_accouchement ASC' );
+		
+		$stmt = $sql->prepareStatementForSqlObject ( $select );
+		$result = $stmt->execute ();
+		
+		return $result;
+		
+	}
+	
+	public function nbenf($id_patient) {
+		$today = new \DateTime ( 'now' );
+		$date = $today->format ( 'Y-m-d' );
+		$adapter = $this->tableGateway->getAdapter ();
+		$sql = new Sql ( $adapter );
+		$select = $sql->select ( 'enfant' );
+		$select->columns ( array (
+				'id_bebe'
+		) );
+		
+		$select->join ( array (
+				'a' => 'accouchement'
+		), 'a.id_grossesse = enfant.id_grossesse', array (
+		
+		) );
+		$select->join ( array (
+				'g' => 'grossesse'
+		), 'g.id_patient = enfant.id_maman', array (
+		
+		) );
+		$select->join ( array (
+				'c' => 'consultation'
+		), 'c.ID_CONS = a.id_cons', array (
+		
+		) );
+		
+		$select->where ( array (
+				'id_maman' => $id_patient,
+				//'a.id_cons' => $id_cons
+				
+		) );
+		$stat = $sql->prepareStatementForSqlObject ( $select );
+		$nb = $stat->execute ()->count ();
+		return $nb;
+	}
+	
+	
+	
+	
 }

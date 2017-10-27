@@ -28,7 +28,55 @@ class GrossesseTable {
 		) );
 	}
 		
-			
+
+	
+	
+	
+	
+	
+	public function getGrossesse($id_pat,$id_cons){
+
+
+		//$adapter = $this->tableGateway->getAdapter ();
+		$db = $this->tableGateway->getAdapter ();
+		$sql = new Sql ( $db );
+		$sQuery = $sql->select ();
+		
+		$sQuery->columns ( array (
+				'*'
+		) );
+		
+		$sQuery->from( array (
+				'gro' => 'grossesse'
+		) )->join ( array (
+				'p' => 'patient'
+		), 'gro.id_patient = p.ID_PERSONNE', array (
+		
+		));
+		$sQuery->where ( array (
+				'gro.id_patient' => $id_pat,
+				'gro.id_cons' => $id_cons
+		
+		) );
+		
+		$sQuery->order ( 'gro.id_grossesse ASC' );
+		
+		$stat = $sql->prepareStatementForSqlObject ( $sQuery );
+		
+		$resultat = $stat->execute ()->current();
+		//var_dump($resultat);exit();
+		return $resultat;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
           public function addgrossesse($donnees){
 		return $this->tableGateway->getLastInsertValue($this->tableGateway->insert($donnees));
 	
@@ -61,13 +109,9 @@ class GrossesseTable {
 				'note_cpn'=>$donnees['note_cpn'],
 				'note_vat'=>$donnees['note_vat'],
 		);
-			
-		//var_dump($datagrossesse);exit();
+	
 		return $this->tableGateway->getLastInsertValue($this->tableGateway->insert($datagrossesse));
-		//$this->tableGateway->insert ( $dataac );
-		//var_dump("test"); exit();
-		//var_dump($dataac);exit();
-		//var_dump($dataaccouchement);exit();
+	
 	}
 	
 	
