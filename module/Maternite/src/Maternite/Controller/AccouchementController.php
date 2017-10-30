@@ -81,6 +81,7 @@ class AccouchementController extends AbstractActionController
     protected $hospitalisationlitTable;
     protected $litTable;
     protected $salleTable;
+
     protected $tarifConsultationTable;
     protected $resultatVpaTable;
     protected $demandeActeTable;
@@ -1407,7 +1408,7 @@ public function declarerDecesAction() {
 		$id_pat = $this->params()->fromQuery('id_patient', 0);
 		$id = $this->params()->fromQuery('id_cons');	
 		$listeMedicament = $this->getConsultationTable()->listeDeTousLesMedicaments();
-		
+	
 		$listeForme = $this->getConsultationTable()->formesMedicaments();
 		$listetypeQuantiteMedicament = $this->getConsultationTable()->typeQuantiteMedicaments();
 		$listeDemandesMorphologiques = $this->demandeExamensTable()->getDemandeExamensMorphologiques($id);
@@ -1417,13 +1418,18 @@ public function declarerDecesAction() {
 		
 		
 		$listeCausesComplicationObstetricale = $this->ConclusionTable()->getCausesComplication($id);
+		$Naissances = $this->getNaissanceTable()->getEnf($id);
+		$Naissance = $this->getNaissanceTable()->getNaissance($id);
 		$listesDecesMaternel = $this->conclusionTable()->getCausesDeces($id);
-		$listeEnfant = $this->getNaissanceTable()->getNaissance($id);
-		$tabEnf=array();$k=1;
-// foreach ($listeEnfant as $enfant){
+		
+// 		$tabEnf=array();$k=1;
+// foreach ($Naissances as $enfant){
 // 	$tabEnf['sexe_'.$k]=$enfant['sexe'];
+// 	$tabEnf['poids_'.$k]=$enfant['poids'];
+// 	$tabEnf['cri_'.$k]=$enfant['cri'];
 // 	$k++;
 // }var_dump($tabEnf);exit();
+
 		$liste = $this->getConsultationTable()->getInfoPatient($id_pat);
 		$id_admission=$liste['id_admission'];
 		$image = $this->getConsultationTable()->getPhoto($id_pat);
@@ -1460,7 +1466,7 @@ public function declarerDecesAction() {
 			
 					
 		);	$form->populateValues($donne_ant1);
-	
+		
 		$donne_antecedent2=array(
 				'dystocie'=>$donne_ante2['dystocie'],
 				'eclampsie'=>$donne_ante2['eclampsie'],
@@ -1653,12 +1659,12 @@ public function declarerDecesAction() {
 		
 		$infoDiagnostics = $this->getDiagnosticsTable()->getDiagnostics($id);
 		// POUR LES DIAGNOSTICS
-		$k = 1;
+		$k = 1;$tabdiagons=array();
 		foreach ($infoDiagnostics as $diagnos) {
-			$data ['diagnostic' . $k] = $diagnos ['libelle_diagnostics'];
+			$tabdiagons ['diagnostic' . $k] = $diagnos ['libelle_diagnostics'];
 			$k++;
-		}
-		
+		}//$data ['decisions']=$diagnos['decision'];
+		//var_dump($data);exit();
 		
 		$data = array(
 				'id_cons' => $consult->id_cons,
@@ -1673,6 +1679,7 @@ public function declarerDecesAction() {
 				'pressionarterielle' => $consult->pression_arterielle,
 				'hopital_accueil' => $idHopital,		
 				'id_admission' => $id_admission,
+				
 				//'id_grossesse' => $id_grossesse,
 		);
 		
@@ -1695,7 +1702,7 @@ public function declarerDecesAction() {
 	
 	
 		
-		$form->populateValues(array_merge($data, $bandelettes, $donneesAntecedentsPersonnels, $donneesAntecedentsFamiliaux));
+		$form->populateValues(array_merge($tabdiagons,$data, $bandelettes, $donneesAntecedentsPersonnels, $donneesAntecedentsFamiliaux));
 		return array(
 				'lesdetails' => $liste,
 				'id_cons' => $id,
@@ -1717,6 +1724,8 @@ public function declarerDecesAction() {
 				'listeDesComplication' => $listeDesComplication,
 				'listeCauseDeces'=>$listeDesCauseDeces,
 				'listeComplicationObstetricales'=>$listeCausesComplicationObstetricale,
+				  'Naissances'   =>$Naissances,
+				'Naissance'   =>$Naissance,
 				'listesDecesMaternel'=>$listesDecesMaternel,
 				'listeDesExamensMorphologiques' => $listeDesExamensMorphologiques,
 				'listeAntMed' => $listeAntMed,
@@ -2261,14 +2270,14 @@ public function declarerDecesAction() {
         $id_patient = $this->params()->fromPost('id_patient');
         $form = new ConsultationForm ();
         $formData = $this->getRequest()->getPost();
+        //var_dump($formData);exit();
         $form->setData($formData);
         $id_admission = $this->params()->fromPost('id_admission');
         $user = $this->layout()->user;
         $IdDuService = $user ['IdService'];
         $id_medecin = $user ['id_personne'];
       
-    
-        // **********-- MODIFICATION DES CONSTANTES --********
+              // **********-- MODIFICATION DES CONSTANTES --********
         // **********-- MODIFICATION DES CONSTANTES --********
         // **********-- MODIFICATION DES CONSTANTES --********
     
@@ -2302,15 +2311,13 @@ public function declarerDecesAction() {
 
         $id_antecedent1 = $this->getAntecedentType1Table ()-> updateAntecedentType1($formData); 
     $id_antecedent2 = $this->getAntecedentType2Table ()-> updateAntecedentType2($formData);
-$this->getDonneesExamensPhysiquesTable()->updateExamenPhysique($formData);
-$this->getAccouchementTable()->updateAccouchement($formData,$id_grossesse);
-        //var_dump($formData['nombre_bb']); exit();
-        
+    $this->getDonneesExamensPhysiquesTable()->updateExamenPhysique($formData);
+    $this->getAccouchementTable()->updateAccouchement($formData,$id_grossesse);
+     //var_dump($formData['nombre_enfant']); exit();
+        $enfant=$formData['nombre_enfant'];
        	$tab_bebes = $this->getNaissanceTable()->saveNaissance($formData,$id_cons,$id_patient,$id_grossesse);
-        
-       	$this->getDevenirNouveauNeTable()->saveNouveauNe($formData, $id_cons, $tab_bebes);
-       	
-       	
+       	$this->getDevenirNouveauNeTable()->saveNouveauNe($formData, $id_cons, $tab_bebes);      	
+       // var_dump($enfant);exit;
        
         //Nouveau ne
   
@@ -2578,6 +2585,7 @@ $this->getAccouchementTable()->updateAccouchement($formData,$id_grossesse);
    
   public function impressionPdfAction()
     {
+    	
         $user = $this->layout()->user;
         $serviceMedecin = $user ['NomService'];
 
@@ -2637,6 +2645,9 @@ $this->getAccouchementTable()->updateAccouchement($formData,$id_grossesse);
         	$donneesDemande ['heure_accouchement'] = $this->params()->fromPost('heure_accouchement');
         	$donneesDemande ['date_accouchement'] = $this->params()->fromPost('date_accouchement');
         	$donneesDemande ['user'] =$this->layout()->user;
+        	$donneesDemande ['vivant_viable'] = $this->params()->fromPost('viv_viable');
+        	$donneesDemande ['mor_ne'] = $this->params()->fromPost('mor_ne');
+       	       	//var_dump($this->params()->fromPost('viv_viable'));exit();
         	// CREATION DU DOCUMENT PDF
         	// Cr�er le document
         	$DocPdf = new DocumentPdf ();
@@ -3011,6 +3022,19 @@ $this->getAccouchementTable()->updateAccouchement($formData,$id_grossesse);
                                         $DocPdf->getDocument();
                                     }
     }
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
 }

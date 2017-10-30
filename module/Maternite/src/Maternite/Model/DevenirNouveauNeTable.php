@@ -49,7 +49,7 @@ class DevenirNouveauNeTable {
 	public function saveNouveauNe($values,$id_cons,$tabIdEnfant) {
 		$Control = new DateHelper();
 		
-		for($i = 1; $i <= $values['nombre_bb'] ; $i ++){
+		for($i = 1; $i <= $values['nombre_enfant'] ; $i ++){
 			$date_dece = $values ['date_deces_'. $i];
 			if($date_dece){ $date_dece = $Control->convertDateInAnglais($date_dece); }else{ $date_dece = null;}
 			$datanouveauNe = array (

@@ -661,9 +661,22 @@ function maskSaisie() {
 $("#terminer,#bouton_constantes_valider, #terminer2, #terminer3, #terminer4").click(function () {
 
     valid = true;
-         
-   
+      
     
+    if ($('#type_accouchement').val()==0)
+   
+    {
+    	valid=false;
+    	
+    	
+    	 $("#choix_type").fadeIn().text("veuillez choisir dans la liste un type").css({
+             "color": "#ff5b5b",
+             "padding": " 0 10px 0 10px",
+             "margin-top": "-18px",
+             "font-size": "13px",
+             "font-style": "italic"
+         });
+    }
 
     if ($('#temperature').val() == "" || temoinTemperature == 3) {
         $("#temperature").css("border-color", "#FF0000");
@@ -724,10 +737,8 @@ function updateexecuterRequetePost(donnees) {
        var formulaire = document.createElement("form");
 
     formulaire.setAttribute("action", tabUrl[0] + "public/accouchement/update-complement-accouchement");
-    formulaire.setAttribute("method", "POST");
-   
-    document.body.appendChild(formulaire);
-    
+    formulaire.setAttribute("method", "POST");   
+    document.body.appendChild(formulaire);    
     for (donnee in donnees) {
         // Ajout dynamique de champs dans le formulaire
         var champ = document.createElement("input");
@@ -750,6 +761,7 @@ $("#terminer2, #terminer3").click(function () {
     if (valid == false) {
         $('#motifsAdmissionConstanteClick').trigger('click');
         $('#constantesClick').trigger('click');
+        $('#Accouchement').trigger('click');
         return false;
     }
 
@@ -963,6 +975,7 @@ $("#terminer2, #terminer3").click(function () {
     
     //**********--ACCOUCHEMENT --********
     //Recuperer les valeurs des champs
+    
     donnees['type_accouchement'] = $("#type_accouchement").val();
     donnees['motif_type'] = $("#motif_type").val();
     
@@ -989,8 +1002,7 @@ $("#terminer2, #terminer3").click(function () {
     donnees['note_anticonv'] = $("#note_anticonv").val();
     donnees['note_transfusion'] = $("#note_transfusion").val();
     
-    
-    
+
     
     
     
@@ -1023,6 +1035,22 @@ $("#terminer2, #terminer3").click(function () {
     
     
     //**********--ENFANT-********
+
+    
+    
+    
+
+    //nbEnfant= $('#nombre_bb').val();
+
+    
+    //alert(nbEnfant);
+    
+    
+    //donnees['sexe'] = $("#sexe_1").val();
+  
+   // alert($("#sexe_1").val()); return false;
+    
+    
     
 
 
@@ -1032,9 +1060,9 @@ $("#terminer2, #terminer3").click(function () {
     }
    
     donnees['nombre_enfant'] = nbBbAttenduValeur;
-    
+
     for(var i=1 ; i<=nbBbAttenduValeur ; i++){
-    	//alert($("#sexe_"+i).val());	
+    	//alert($("#n_poids_"+i).val());	return false;   	
     	donnees['sexe_'+i] = $("#sexe_"+i).val();
     	donnees['n_sexe_'+i] = $("#n_sexe_"+i).val();
     	donnees['poids_'+i] = $("#poids_"+i).val();
@@ -1090,33 +1118,7 @@ $("#terminer2, #terminer3").click(function () {
     	donnees['heure_deces_'+i] = $("#heure_deces_"+i).val();
     	donnees['cause_deces_'+i] = $("#cause_deces_"+i).val();
     }
-    
-    
-    
 
-    //nbEnfant= $('#nombre_bb').val();
-
-    
-    //alert(nbEnfant);
-    
-    
-    //donnees['sexe'] = $("#sexe_1").val();
-  
-   // alert($("#sexe_1").val()); return false;
-    
-
-  //**********--DEVENU DU NOUVEAU NE-********
-
-    donnees['viv_bien_portant'] = $("#viv_bien_portant").val();
-    donnees['viv_mal_form'] = $("#viv_mal_form").val();
-    donnees['malade'] = $("#malade").val();
-    donnees['decede'] = $("#decede").val();
-    donnees['date_dece'] = $("#date_dece").val();
-    donnees['heure_dece'] = $("#heure_dece").val();
-    donnees['note_viv_bien_portant'] = $("#note_viv_bien_portant").val();
-    donnees['note_mal_form'] = $("#note_mal_form").val();
-    donnees['note_malade'] = $("#note_malade").val();
-    donnees['note_decede'] = $("#note_decede").val();
    
     //**********--EVACUATION et REFERENCE-********
 
@@ -1308,6 +1310,7 @@ $("#terminer2, #terminer3").click(function () {
 
     updateexecuterRequetePost(donnees);
 });
+
 
 //Annuler le transfert au clic
 $("#annulertransfert").click(function () {

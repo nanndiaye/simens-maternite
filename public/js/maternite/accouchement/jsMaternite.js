@@ -242,7 +242,9 @@ $(function() {
   		$('#heure_accouchement').chungTimePicker({
   			viewType: 1
 		});
- 		
+  		$('#examen_maternite_donnee7').chungTimePicker({
+  			viewType: 1
+		});
  		//dans le plugin par defaut
 // 		$('#heure_accouchement').timepicker({
 //			

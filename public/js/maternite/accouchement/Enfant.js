@@ -16,10 +16,10 @@ function ajoutEnfant(nbEnfant){
 			                  '<div class="styleEnfDiv1">'+
 			                     '<label  class="styleLabel1">Sexe'+i+'</label>'+
 			                  '</div>'+   
-			                  '<div  class="styleEnfDiv2">'+
+			                  '<div class="styleEnfDiv2">'+
 			                     '<label   class="styleLabel2"><select id="sexe_'+i+'"><option value="M" >M</option><option value"F">F</option></select></label>'+
 			                  '</div>'+ 
-			                  '<div  class="styleEnfDiv3">'+
+			                  '<div   class="styleEnfDiv3">'+
 			                     '<label  class="styleLabel3">Note <input id="n_sexe_'+i+'" type="text"></input></label>'+
 			                  '</div>'+ 
 			          '</td>'+
@@ -426,12 +426,7 @@ function ajoutNouveauNe(nbEnfants){
 				       '<label class="nvCauseLabel" >cause <input id="cause_deces_'+i+'" type="text"></input> </label>'+
 			       '</div> '+
 			          '</td>'+
-			       '</tr>'+
-			       
-			 
-		          
-	         
-		     
+			       '</tr>'+		     
 			    ' </table>'+
 			   
 	    '</div>'
@@ -501,7 +496,6 @@ function getBbAttendu(val){
 	}
 		
 }
-
 
 
 

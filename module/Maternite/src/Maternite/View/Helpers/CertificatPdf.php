@@ -6,7 +6,7 @@ use ZendPdf;
 use ZendPdf\Page;
 use ZendPdf\Font;
 use Maternite\Model\Consultation;
-use Facturation\View\Helper\DateHelper;
+use Maternite\View\Helpers\DateHelper;
 
 class CertificatPdf {
 	protected $_page;
@@ -34,6 +34,8 @@ class CertificatPdf {
 	protected $_policeContenu;
 	protected $_newPolice;
 	protected $_Service;
+	protected $_newStyle;
+	
 	public function __construct() {
 		$this->_page = new Page ( Page::SIZE_A4 );
 		
@@ -53,6 +55,8 @@ class CertificatPdf {
 		$this->_newTimeGras = Font::fontWithName ( ZendPdf\Font::FONT_TIMES_BOLD_ITALIC );
 		$this->_policeContenu = ZendPdf\Font::fontWithName ( ZendPdf\Font::FONT_TIMES );
 		$this->_newPolice = ZendPdf\Font::fontWithName ( ZendPdf\Font::FONT_TIMES );
+		
+		$this->_newStyle = ZendPdf\Font::fontWithName ( ZendPdf\Font::FONT_COURIER_BOLD );
 	}
 	public function getPage() {
 		return $this->_page;
@@ -151,7 +155,7 @@ public function setEnTete() {
 		$this->_yPosition -= 35;
 		$this->_page->setFont ( $this->_newTime, 15 );
 		$this->_page->setFillColor ( new ZendPdf\Color\Html ( 'green' ) );
-		$this->_page->drawText ( 'Certificat D\'accouchement', $this->_leftMargin + 160, $this->_yPosition );
+		$this->_page->drawText ( 'Certificat d\'Accouchement', $this->_leftMargin + 160, $this->_yPosition );
 		$this->_yPosition -= 5;
 		$this->_page->setlineColor ( new ZendPdf\Color\Html ( 'green' ) );
 		$this->_page->drawLine ( $this->_leftMargin, $this->_yPosition, $this->_pageWidth - $this->_leftMargin, $this->_yPosition );
@@ -164,7 +168,8 @@ public function setEnTete() {
 		
 		$today = new \DateTime ();
 		$date_actu = $today->format ( 'Y-m-d' );
-		
+		$this->_yPosition -= 15; // allez a ligne suivante
+		/*
 		// -----------------------------------------------
 		$this->_page->setFont ( $this->_newTimeGras, 9 );
 		$this->_page->drawText ( 'PRENOM & NOM :', $this->_leftMargin + 155, $this->_yPosition );
@@ -223,6 +228,7 @@ public function setEnTete() {
 		// PREPARATION DU TEXT Protocole operatoire
 		$tab3 = $this->scinderTextPO ( $this->_DonneesDemande ['heure_accouchement'] );
 		
+		/*
 		for($i = 1; $i < 18; $i ++) {
 			
 			$this->_page->setlineColor ( new ZendPdf\Color\Html ( '#efefef' ) );
@@ -265,10 +271,157 @@ public function setEnTete() {
 			}
 			
 			$this->_yPosition -= $noteLineHeight;
+		}*/
+		
+		$this->_page->setFont ( $this->_newTime, 13 );
+		$this->_page->drawText ('Je soussigné(e) ', 
+				$this->_leftMargin, 
+				$this->_yPosition 
+		);
+		
+		$this->_page->setFont ( $this->_newStyle, 12 );
+		$this->_page->drawText ( $this->_DonneesMedecin ['prenomMedecin'].'  '.$this->_DonneesMedecin ['nomMedecin'], 
+				$this->_leftMargin + 100, 
+				$this->_yPosition );
+		
+		$this->_yPosition -= $noteLineHeight;
+		
+		$this->_page->setFont ( $this->_newTime, 13 );
+		$this->_page->drawText ('certifie que Madame ',
+				$this->_leftMargin,
+				$this->_yPosition
+		);
+		
+		$this->_page->setFont ( $this->_newStyle, 12 );
+		$this->_page->drawText ( $this->_DonneesPatient ['PRENOM'] . ' ' . $this->_DonneesPatient ['NOM'],
+				$this->_leftMargin + 130,
+				$this->_yPosition ); 
+		
+		$date_naissance = $this->_DonneesPatient ['DATE_NAISSANCE'];
+		if ($date_naissance) {
+			$date_naissance = $Control->convertDate ( $date_naissance );
+		} else {
+			$date_naissance = null;
+		}
+		$this->_yPosition -= $noteLineHeight;
+		if ($date_naissance) {
+			$this->_page->setFont ( $this->_newTime, 13 );
+			$this->_page->drawText ('née le ',
+					$this->_leftMargin,
+					$this->_yPosition
+			);
+			$this->_page->setFont ( $this->_newStyle, 12 );
+			$this->_page->drawText ( $date_naissance,
+					$this->_leftMargin + 50,
+					$this->_yPosition );
+			
+		} else {
+			$this->_page->setFont ( $this->_newTime, 13 );
+			$this->_page->drawText ('âgée de ',
+					$this->_leftMargin,
+					$this->_yPosition
+			);
+			
+			$this->_page->setFont ( $this->_newStyle, 12 );
+			$this->_page->drawText ( $this->_DonneesPatient ['AGE'].' ans',
+					$this->_leftMargin + 50,
+					$this->_yPosition );
 		}
 		
-		$this->_page->setFont ( $this->_policeContenu, 14 );
-		$this->_page->drawText ( $this->_DonneesMedecin ['prenomMedecin'] . ' ' . $this->_DonneesMedecin ['nomMedecin'], $this->_leftMargin + 300, $this->_yPosition + 90 );
+		//$this->_page->setFont ( $this->_policeContenu, 12 );
+		//$this->_page->drawText ( iconv ( 'UTF-8', 'ISO-8859-1', $tab [1] ), $this->_leftMargin + 80, $this->_yPosition );
+		
+		$this->_yPosition -= $noteLineHeight;
+		
+		$this->_page->setFont ( $this->_newTime, 13 );
+		$this->_page->drawText ('A accouché le ',
+				$this->_leftMargin,
+				$this->_yPosition
+		);
+		
+		$this->_page->setFont ( $this->_newStyle, 12 );
+		$this->_page->drawText (  $this->_DonneesDemande ['date_accouchement'],
+				$this->_leftMargin + 80,
+				$this->_yPosition );
+		
+		
+		
+		
+		$this->_page->setFont ( $this->_newTime, 13 );
+		$this->_page->drawText ('à ',
+				$this->_leftMargin+170,
+				$this->_yPosition
+		);
+			
+		$this->_page->setFont ( $this->_newStyle, 12 );
+		$this->_page->drawText ( $this->_DonneesDemande ['heure_accouchement'],
+				$this->_leftMargin + 190,
+				$this->_yPosition );
+		
+		
+		
+		
+
+		
+		
+		$this->_page->setFont ( $this->_newTime, 13 );
+		$this->_page->drawText ('d\'un enfant ',
+				$this->_leftMargin+270,
+				$this->_yPosition
+		);
+		$this->_yPosition -= $noteLineHeight;
+		$this->_page->setFont ( $this->_newTime, 13 );
+		$this->_page->drawText ('- Vivant et viable ',
+				$this->_leftMargin,
+				$this->_yPosition
+		);
+		
+		$this->_page->setFont ( $this->_newStyle, 12 );
+		$this->_page->drawText ( $this->_DonneesDemande ['vivant_viable'],
+				$this->_leftMargin +100,
+				$this->_yPosition );
+		$this->_yPosition -= $noteLineHeight;
+		$this->_page->setFont ( $this->_newTime, 13 );
+		$this->_page->drawText ('- Mort-Né',
+				$this->_leftMargin,
+				$this->_yPosition
+		);
+		$this->_page->setFont ( $this->_newStyle, 12 );
+		$this->_page->drawText ( $this->_DonneesDemande ['mor_ne'],
+				$this->_leftMargin +100,
+				$this->_yPosition );
+		$this->_yPosition -= $noteLineHeight;
+		$this->_page->setFont ( $this->_newTime, 13 );
+		$this->_page->drawText ('de Sexe ',
+				$this->_leftMargin,
+				$this->_yPosition
+		);
+// 		$this->_page->setFont ( $this->_newStyle, 12 );
+// 		$this->_page->drawText ( $this->_DonneesDemande ['sexe'],
+// 				$this->_leftMargin + 60,
+// 				$this->_yPosition );
+// 		$this->_page->setFont ( $this->_newTime, 13 );
+// 		$this->_page->drawText ('Prénommé',
+// 				$this->_leftMargin+300,
+// 				$this->_yPosition
+// 		);
+		
+		
+		$this->_page->setFont ( $this->_newStyle, 12 );
+		$this->_page->drawText ('bébé '. $this->_DonneesDemande ['prenome'],
+				$this->_leftMargin + 370,
+				$this->_yPosition );
+		
+		
+		
+		
+		
+		
+		
+		
+		
+ 		$this->_page->setFont ( $this->_policeContenu, 14 );
+ 		$this->_page->drawText ( 'Signature', $this->_leftMargin + 300, 230 );
 	}
 	public function getPiedPage() {
 		$this->_page->setlineColor ( new ZendPdf\Color\Html ( 'green' ) );
@@ -276,7 +429,7 @@ public function setEnTete() {
 		$this->_page->drawLine ( $this->_leftMargin, 120, $this->_pageWidth - $this->_leftMargin, 120 );
 		
 		$this->_page->setFont ( $this->_newTime, 10 );
-		$this->_page->drawText ( 'Tï¿½lï¿½phone: 33 961 00 21', $this->_leftMargin, $this->_pageWidth - (100 + 390) );
+		$this->_page->drawText ( 'Téléphone: 33 961 00 21', $this->_leftMargin, $this->_pageWidth - (100 + 390) );
 		
 		$this->_page->setFont ( $this->_newTime, 10 );
 		$this->_page->drawText ( 'SIMENS+: ', $this->_leftMargin + 355, $this->_pageWidth - (100 + 390) );

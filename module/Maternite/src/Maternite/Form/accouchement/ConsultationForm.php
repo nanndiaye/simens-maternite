@@ -1983,7 +1983,7 @@ $this->add(array(
 						'id' => 'note_gs'
 				)
 		) );
-	
+		
 		
 		$this->add ( array (
 				'name' => 'test_emmel',
@@ -2204,7 +2204,7 @@ $this->add(array(
 						'registerInArrrayValidator' => true,
 						'onchange'=>' getAccouchement(this.value)',
 						'id' => 'type_accouchement',
-						'required' => true,
+						//'required' => true,
 				)
 		) );
 		
@@ -3219,8 +3219,26 @@ $this->add(array(
 			),
 	));
 	
-	
-	
+	$this->add(array(
+			'name' => 'viv_viable',
+			'type' => 'Text',
+			'attributes' => array(
+					//'readonly' => 'readonly',
+					'id' => 'viv_viable',
+					//'readonly' => 'readonly',
+					//'required' => true,
+			),
+	));
+	$this->add(array(
+			'name' => 'mor_ne',
+			'type' => 'Text',
+			'attributes' => array(
+					//'readonly' => 'readonly',
+					'id' => 'mor_ne',
+					//'readonly' => 'readonly',
+					//'required' => true,
+			),
+	));
 	
 	
 	

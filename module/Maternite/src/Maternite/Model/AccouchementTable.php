@@ -47,12 +47,15 @@ class AccouchementTable {
 		) );
 		$date_accouchement = $donnees['date_accouchement'];
 		if($date_accouchement){ $date_accouchement = $Control->convertDateInAnglais($date_accouchement); }else{ $date_accouchement = null;}		
+			
+		if($donnees['type_accouchement']!=0);{
+	$id_type=$donnees['type_accouchement'];
+		}
 			$dataac = array (
 					'id_cons' => $donnees ['id_cons'],
 					'id_admission'=>$donnees['id_admission'],
 					'id_grossesse'=>$id_grossesse,
-					'id_type' => $donnees['type_accouchement'],
-					
+					'id_type' => $id_type,					
  					'motif_type' => $donnees['motif_type'],
  					'date_accouchement' => $date_accouchement,
 					'heure_accouchement' => $donnees['heure_accouchement'],
@@ -73,7 +76,7 @@ class AccouchementTable {
 					'note_antibiotique' => $donnees['note_antibiotique'],
 					'note_anticonv' => $donnees['note_anticonv'],
 					'note_transfusion' => $donnees['note_transfusion'],				
-			);//var_dump($dataac);exit();
+			);var_dump($dataac);exit();
 	
 			$this->tableGateway->insert ( $dataac );
 		

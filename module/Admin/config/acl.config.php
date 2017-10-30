@@ -229,6 +229,7 @@ return array(
     								'supprimer-video' =>array('infirmier', 'gynecologue'),
     								/**PDF**/
     								'impression-Pdf' =>array('infirmier', 'gynecologue'),
+    							
     								'tarifacte' => 'gynecologue',
     								'demande-acte' => 'gynecologue', 								
     								

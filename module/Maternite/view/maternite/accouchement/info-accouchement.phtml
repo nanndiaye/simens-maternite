@@ -124,7 +124,7 @@ $(window).load(function () {
 });
 </script>
 
-<div id="titre" style='font-family: police2; text-decoration:none; color: green; font-size: 20px; font-weight: bold; padding-left: 20px;'><iS style='font-size: 25px;'>&curren;</iS> ETAT CIVIL DU PATIENT</div>
+<div id="titre" style='font-family: police2; text-decoration:none; color: green; font-size: 20px; font-weight: bold; padding-left: 20px;'><iS style='font-size: 25px;'>&curren;</iS> INFORMATIONS SUR LES ACCOUCHEMENTS</div>
 <div id="wait" style="color: gray; font-size: 20px; text-align: center; margin-top: 80px;" > <span> Chargement ... </span> </div>
 <div id="contenu" style='height:1000px;'>
 
@@ -246,8 +246,8 @@ $(window).load(function () {
 				      <td><?php echo $this->escapeHtml($donnees_acc['date_acc']);?> </td>
 				      <td><?php echo $this->escapeHtml($donnees_acc['type_acc']);?> </td>
 			          <td>  <?php 
-			   		    if($this->$donnees_acc['bb_attendu']==0){ echo $this->escapeHtml($donnees_acc['nb_bb']);} else { echo $this->escapeHtml($donnees_acc['bb_attendu']);}
-			     
+			   		    //if($this->$donnees_acc['bb_attendu']==0){ echo $this->escapeHtml($donnees_acc['nb_bb']);} else { echo $this->escapeHtml($donnees_acc['bb_attendu']);}
+			   		    echo $this->escapeHtml($donnees_acc['nb_bb']);
 			         ?> 		          
 			          </td>
 				      <td><a

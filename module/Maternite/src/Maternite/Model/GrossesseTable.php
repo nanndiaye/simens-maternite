@@ -92,6 +92,17 @@ class GrossesseTable {
 				'id_cons' => $donnees ['id_cons'],	
 		) );
 		$ddr = $donnees['ddr'];
+		$nb_bb=$donnees['bb_attendu'];
+		if($nb_bb==1){
+			$b=1;}
+			elseif($nb_bb==2){
+				$b=2;}
+				elseif($nb_bb==3){
+					$b=3;}
+					elseif ($nb_bb==0)
+					{
+						$b=$donnees['nombre_bb'];
+					}
 		if($ddr){ $ddr = $Control->convertDateInAnglais($ddr); }else{ $ddr = null;}	
 		$datagrossesse = array (
 				'id_cons' => $donnees ['id_cons'],
@@ -99,8 +110,8 @@ class GrossesseTable {
 				'ddr'=>$ddr,
 				'duree_grossesse'=>$donnees['duree_grossesse'],
 				'nb_cpn'=>$donnees['nb_cpn'],
-				'bb_attendu'=>$donnees['bb_attendu'],
-				'nombre_bb'=>$donnees['nombre_bb'],
+				'bb_attendu'=>$donnees['bb_attendu'],				
+				'nombre_bb'=>$b,
 				'vat_1'=>$donnees['vat_1'],
 				'vat_2'=>$donnees['vat_2'],
 				'vat_3'=>$donnees['vat_3'],

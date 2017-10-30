@@ -46,13 +46,37 @@ class NaissanceTable {
 	
 	}
 	
+	public function getEnf($id_cons) {
+		$adapter = $this->tableGateway->getAdapter ();
+		$sql = new Sql ( $adapter );
+		$select = $sql->select ();
+		$select->columns ( array (
+				'*'
+		) );
+		$select->from ( array (
+				'enf' => 'enfant'
+		) );
+		$select->join ( array (
+				'g' => 'grossesse'
+		), 'enf.id_maman = g.id_patient', array (
+					
+		) );
+		$select->where ( array (
+				'g.id_cons' => $id_cons,
 	
+		) );
+		$select->order ( 'id_bebe ASC' );
+		$stat = $sql->prepareStatementForSqlObject ( $select );
+		$result = $stat->execute ();
+	
+		return $result;
+	}
 	
 
 public function saveNaissance($values,$id_cons,$id_patient,$id_grossesse) {
 	
 	$tab_IdBebe = array();
-	for($i = 1; $i <=  $values['nombre_bb'] ; $i ++){
+	for($i = 1; $i <=  $values['nombre_enfant'] ; $i ++){
 		$datanaissance = array (
 				'sexe' => $values['sexe_'. $i],
 				'note_sexe' => $values['n_sexe_' . $i],
@@ -101,11 +125,10 @@ public function saveNaissance($values,$id_cons,$id_patient,$id_grossesse) {
 				'id_grossesse' => $id_grossesse,
 				'id_maman' => $id_patient,
 		);
-			
+		
 		$this->tableGateway->insert($datanaissance);
 		$tab_IdBebe [] = $this->tableGateway->getLastInsertValue();
 	}
-	
 	return $tab_IdBebe;
 
 }
