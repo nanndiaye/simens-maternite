@@ -236,7 +236,8 @@ class PatientTable {
 		->from(array('pat' => 'patient'))
 		->columns( array( '*' ))
 		->join(array('pers' => 'personne'), 'pers.id_personne = pat.id_personne' , array('*'))
-		//->join(array('a' => 'admission'), 'a.id_patient = pat.id_personne' , array('id_admission'))
+		//->join(array('a' => 'admission'), 'a.id_patient = pat.id_personne' , array('*'))
+		//->join(array('c' => 'consultation'), 'a.id_patient = c.ID_PATIENT' , array('*'))
 		->where(array('pat.ID_PERSONNE' => $id_personne));		
 		$stat = $sql->prepareStatementForSqlObject($sQuery);
 		$resultat = $stat->execute()->current();
@@ -244,7 +245,24 @@ class PatientTable {
 		return $resultat;
 	}
 	
-
+	public function getInformationPatient($id_personne) {
+		$db = $this->tableGateway->getAdapter();
+		$sql = new Sql($db);
+		$sQuery = $sql->select()
+		->from(array('pat' => 'patient'))
+		->columns( array( '*' ))
+		->join(array('pers' => 'personne'), 'pers.id_personne = pat.id_personne' , array('*'))
+		->join(array('a' => 'admission'), 'a.id_patient = pat.id_personne' , array('*'))
+		//->join(array('c' => 'consultation'), 'a.id_admission = c.id_admission' , array('id_admission'))
+		->where(array(
+				'pat.ID_PERSONNE'=> $id_personne
+		//'c.ID_CONS'=>$id_cons
+		));
+		$stat = $sql->prepareStatementForSqlObject($sQuery);
+		$resultat = $stat->execute()->current();
+		//var_dump($resultat);exit();
+		return $resultat;
+	}
 	public function getInfoPatientAmise($id_personne) {
 		$db = $this->tableGateway->getAdapter();
 		$sql = new Sql($db);
@@ -253,7 +271,7 @@ class PatientTable {
 		->columns( array( '*' ))
 		->join(array('pers' => 'personne'), 'pers.id_personne = pat.id_personne' , array('*'))
 		->join(array('a' => 'admission'), 'a.id_patient = pat.id_personne' , array('id_admission'))
-		->join(array('ant' => 'antecedent_type_1'), 'ant.id_patient = pat.id_personne' , array('*'))
+		//->join(array('ant' => 'antecedent_type_1'), 'ant.id_patient = pat.id_personne' , array('*'))
 		->where(array('pat.ID_PERSONNE' => $id_personne));
 		$stat = $sql->prepareStatementForSqlObject($sQuery);
 		$resultat = $stat->execute()->current();
@@ -556,7 +574,7 @@ class PatientTable {
 		
 		->from(array('pat' => 'patient'))->columns(array('*'))
 		->join(array('p' => 'personne'), 'pat.id_personne = p.id_personne' , array('Nom'=>'NOM','Prenom'=>'PRENOM','Adresse'=>'ADRESSE','id'=>'ID_PERSONNE', 'id2'=>'ID_PERSONNE', 'Age'=>'AGE'))
-		->join(array('cons' => 'consultation'), 'pat.id_personne = cons.ID_PATIENT' )
+		->join(array('cons' => 'consultation'), 'pat.id_personne = cons.ID_PATIENT',array('id_cons'=>'ID_CONS') )
 		->join(array('acc' => 'accouchement'), 'acc.id_cons = cons.ID_CONS' )
 		->group('cons.ID_PATIENT')
 		->order('pat.id_personne DESC');

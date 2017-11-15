@@ -203,6 +203,12 @@ var tabUrl = base_url.split("public");
 //********************* EXAMEN MORPHOLOGIQUE *****************************
 //********************* EXAMEN MORPHOLOGIQUE *****************************
 
+
+
+
+
+
+
 function ValiderOrdonnance(){
 $(function(){
 	//Au debut on affiche pas le bouton modifier

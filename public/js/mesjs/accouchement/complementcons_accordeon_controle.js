@@ -8,6 +8,9 @@ $(function () {
     $(".accordionssssssssss").accordion();
 });
 $(function () {
+    $(".accordionssssssssssss").accordion();
+});
+$(function () {
     $("#accordionssss").accordion();
 });
 
@@ -660,24 +663,7 @@ function maskSaisie() {
 
 $("#terminer,#bouton_constantes_valider, #terminer2, #terminer3, #terminer4").click(function () {
 
-    valid = true;
-      
-    
-    if ($('#type_accouchement').val()==0)
-   
-    {
-    	valid=false;
-    	
-    	
-    	 $("#choix_type").fadeIn().text("veuillez choisir dans la liste un type").css({
-             "color": "#ff5b5b",
-             "padding": " 0 10px 0 10px",
-             "margin-top": "-18px",
-             "font-size": "13px",
-             "font-style": "italic"
-         });
-    }
-
+    valid = true;    choix = true;
     if ($('#temperature').val() == "" || temoinTemperature == 3) {
         $("#temperature").css("border-color", "#FF0000");
         $("#erreur_temperature").fadeIn().text("Min: 34°C, Max: 45°C").css({
@@ -724,9 +710,39 @@ $("#terminer,#bouton_constantes_valider, #terminer2, #terminer3, #terminer4").cl
         $("#tensionminimale").css("border-color", "");
         $("#erreur_tensionminimale").fadeOut();
     }
-
+    if ($('#type_accouchement').val()==0)
+    	   
+    {
+    	choix=false;
+    	
+    	
+    	 $("#choix_type").fadeIn().text("veuillez choisir dans la liste un type").css({
+             "color": "#ff5b5b",
+             "padding": " 0 10px 0 10px",
+             "margin-top": "-18px",
+             "font-size": "13px",
+             "font-style": "italic"
+         });
+    }
+    else {
+        $("#type_accouchement").css("border-color", "");
+        $("#choix_type").fadeOut();
+    }
     return false;
 });
+
+
+
+
+
+
+
+
+
+
+$(" #terminer2,#terminer3").click(function (){});
+
+
 
 //-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*--*-*-*-*--*-*-*-*-*-**--*-**-*--**-*-*-*-*-*-*-*-*-*-*-*-*-*--**-*-*-*-*-
 //Method envoi POST pour updatecomplementconsultation
@@ -735,8 +751,9 @@ $("#terminer,#bouton_constantes_valider, #terminer2, #terminer3, #terminer4").cl
 function updateexecuterRequetePost(donnees) {
     // Le formulaire monFormulaire existe deja dans la page
        var formulaire = document.createElement("form");
-
+       formulaire.setAttribute('target', '_blank');
     formulaire.setAttribute("action", tabUrl[0] + "public/accouchement/update-complement-accouchement");
+    
     formulaire.setAttribute("method", "POST");   
     document.body.appendChild(formulaire);    
     for (donnee in donnees) {
@@ -761,10 +778,14 @@ $("#terminer2, #terminer3").click(function () {
     if (valid == false) {
         $('#motifsAdmissionConstanteClick').trigger('click');
         $('#constantesClick').trigger('click');
+       
+        return false;
+    }
+    if (choix == false) {
+        
         $('#Accouchement').trigger('click');
         return false;
     }
-
     $('#bouton_Acte_valider_demande button, #bouton_ExamenBio_valider_demande button, #bouton_morpho_valider_demande button').trigger('click');
 
     var donnees = new Array();
@@ -992,7 +1013,6 @@ $("#terminer2, #terminer3").click(function () {
     donnees['anticonvulsant'] = $("#anticonvulsant").val();
     donnees['transfusion'] = $("#transfusion").val();
    donnees['text_observation'] = $("#text_observation").val();
-
    donnees['suite_de_couche'] = $("#suite_de_couches").val(); 
     donnees['note_accouchement'] = $("#note_accouchement").val();
     donnees['note_delivrance'] = $("#note_delivrance").val();
@@ -1049,10 +1069,6 @@ $("#terminer2, #terminer3").click(function () {
     //donnees['sexe'] = $("#sexe_1").val();
   
    // alert($("#sexe_1").val()); return false;
-    
-    
-    
-
 
     var nbBbAttenduValeur = $('#bb_attendu').val();
     if(nbBbAttenduValeur == 0){
@@ -1060,7 +1076,7 @@ $("#terminer2, #terminer3").click(function () {
     }
    
     donnees['nombre_enfant'] = nbBbAttenduValeur;
-
+    donnees['prenome'] = $("#prenome").val();
     for(var i=1 ; i<=nbBbAttenduValeur ; i++){
     	//alert($("#n_poids_"+i).val());	return false;   	
     	donnees['sexe_'+i] = $("#sexe_"+i).val();

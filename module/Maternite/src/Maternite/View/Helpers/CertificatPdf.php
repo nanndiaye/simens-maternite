@@ -59,6 +59,7 @@ class CertificatPdf {
 		$this->_newStyle = ZendPdf\Font::fontWithName ( ZendPdf\Font::FONT_COURIER_BOLD );
 	}
 	public function getPage() {
+		//$this->layout()->setTemplate('layout/accouchement');
 		return $this->_page;
 	}
 	public function addNoteTC() {
@@ -169,121 +170,25 @@ public function setEnTete() {
 		$today = new \DateTime ();
 		$date_actu = $today->format ( 'Y-m-d' );
 		$this->_yPosition -= 15; // allez a ligne suivante
-		/*
-		// -----------------------------------------------
-		$this->_page->setFont ( $this->_newTimeGras, 9 );
-		$this->_page->drawText ( 'PRENOM & NOM :', $this->_leftMargin + 155, $this->_yPosition );
-		$this->_page->setFont ( $this->_newTime, 11 );
-		$this->_page->drawText ( $this->_DonneesPatient ['PRENOM'] . ' ' . $this->_DonneesPatient ['NOM'], $this->_leftMargin + 240, $this->_yPosition );
-		// -----------------------------------------------
-		$this->_yPosition -= 15; // allez a ligne suivante
-		                         // ----- -----------------------------------------
-		$this->_page->setFont ( $this->_newTimeGras, 9 );
-		$this->_page->drawText ( 'SEXE :', $this->_leftMargin + 205, $this->_yPosition );
-		$this->_page->setFont ( $this->_newTime, 11 );
-		$this->_page->drawText ( iconv ( 'UTF-8', 'ISO-8859-1', $this->_DonneesPatient ['SEXE'] ), $this->_leftMargin + 240, $this->_yPosition );
-		
-		// -----------------------------------------------
-		$this->_yPosition -= 15; // allez a ligne suivante
-		                         // ----- -----------------------------------------
-		$date_naissance = $this->_DonneesPatient ['DATE_NAISSANCE'];
-		if ($date_naissance) {
-			$date_naissance = $Control->convertDate ( $date_naissance );
-		} else {
-			$date_naissance = null;
-		}
-		
-		if ($date_naissance) {
-			$this->_page->setFont ( $this->_newTimeGras, 9 );
-			$this->_page->drawText ( 'DATE DE NAISSANCE :', $this->_leftMargin + 135, $this->_yPosition );
-			$this->_page->setFont ( $this->_newTime, 10 );
-			
-			$this->_page->drawText ( $date_naissance . "  (" . $this->_DonneesPatient ['AGE'] . " ans)", $this->_leftMargin + 240, $this->_yPosition );
-		} else {
-			$this->_page->setFont ( $this->_newTimeGras, 9 );
-			$this->_page->drawText ( 'AGE :', $this->_leftMargin + 209, $this->_yPosition );
-			$this->_page->setFont ( $this->_newTime, 10 );
-			
-			$this->_page->drawText ( $this->_DonneesPatient ['AGE'] . " ans", $this->_leftMargin + 240, $this->_yPosition );
-		}
-		
-		// -----------------------------------------------
-		$this->_yPosition -= 15; // allez a ligne suivante
-		                         // ----- -----------------------------------------
-		$this->_page->setFont ( $this->_newTimeGras, 9 );
-		$this->_page->drawText ( 'ADRESSE :', $this->_leftMargin + 187, $this->_yPosition );
-		$this->_page->setFont ( $this->_newTime, 11 );
-		$this->_page->drawText ( iconv ( 'UTF-8', 'ISO-8859-1', $this->_DonneesPatient ['ADRESSE'] ), $this->_leftMargin + 240, $this->_yPosition );
-		
-		$this->_page->setlineColor ( new ZendPdf\Color\Html ( 'green' ) );
-		$this->_page->setLineWidth ( 1 );
-		$this->_page->drawLine ( $this->_leftMargin, $this->_yPosition - 10, $this->_pageWidth - $this->_leftMargin, $this->_yPosition - 10 );
-		
-		$this->_yPosition -= $noteLineHeight + 10; // aller a la ligne suivante
-		                                           
-		// PREPARATION DU TEXT Diagnostic
-		$tab = $this->scinderText ( $this->_DonneesDemande ['prenome'] );
-		// PREPARATION DU TEXT Observation
-		$tab2 = $this->scinderTextO ( $this->_DonneesDemande ['date_accouchement'] );
-		// PREPARATION DU TEXT Protocole operatoire
-		$tab3 = $this->scinderTextPO ( $this->_DonneesDemande ['heure_accouchement'] );
-		
-		/*
-		for($i = 1; $i < 18; $i ++) {
-			
-			$this->_page->setlineColor ( new ZendPdf\Color\Html ( '#efefef' ) );
-			$this->_page->setLineWidth ( 0.5 );
-			$this->_page->drawLine ( $this->_leftMargin, $this->_yPosition, $this->_pageWidth - $this->_leftMargin, $this->_yPosition );
-			
-			if ($i == 1) {
-				$this->_page->setFont ( $this->_newTimeGras, 13 );
-				$this->_page->drawText ( 'Prenomé:   ', $this->_leftMargin, $this->_yPosition );
-				$this->_page->setFont ( $this->_policeContenu, 12 );
-				$this->_page->drawText ( iconv ( 'UTF-8', 'ISO-8859-1', $tab [1] ), $this->_leftMargin + 80, $this->_yPosition );
-			} else if ($i == 2) {
-				$this->_page->setFont ( $this->_policeContenu, 12 );
-				$this->_page->drawText ( iconv ( 'UTF-8', 'ISO-8859-1', $tab [2] ), $this->_leftMargin, $this->_yPosition );
-			} else if ($i == 3) {
-				$this->_page->setFont ( $this->_newTimeGras, 13 );
-				$this->_page->drawText ( 'Date Accouchement:   ', $this->_leftMargin, $this->_yPosition );
-				$this->_page->setFont ( $this->_policeContenu, 12 );
-				$this->_page->drawText ( $this->_DonneesDemande ['date_accouchement'], $this->_leftMargin + 125, $this->_yPosition );
-			} else if ($i == 4) {
-				$this->_page->setFont ( $this->_newTimeGras, 13 );
-				$this->_page->drawText ( 'Heure Accouchement :   ', $this->_leftMargin, $this->_yPosition );
-				$this->_page->setFont ( $this->_policeContenu, 13 );
-				$this->_page->drawText ( iconv ( 'UTF-8', 'ISO-8859-1', $this->_DonneesDemande ['heure_accouchement'] ), $this->_leftMargin + 120, $this->_yPosition );
-			}  else if ($i == 9) {
-				$this->_page->setFont ( $this->_policeContenu, 12 );
-				$this->_page->drawText ( iconv ( 'UTF-8', 'ISO-8859-1', $tab3 [2] ), $this->_leftMargin + 0, $this->_yPosition );
-			} else if ($i == 10) {
-				$this->_page->setFont ( $this->_policeContenu, 12 );
-				$this->_page->drawText ( iconv ( 'UTF-8', 'ISO-8859-1', $tab3 [3] ), $this->_leftMargin + 0, $this->_yPosition );
-			} else if ($i == 11) {
-				$this->_page->setFont ( $this->_policeContenu, 12 );
-				$this->_page->drawText ( iconv ( 'UTF-8', 'ISO-8859-1', $tab3 [4] ), $this->_leftMargin + 0, $this->_yPosition );
-			} else if ($i == 12) {
-				$this->_page->setFont ( $this->_policeContenu, 12 );
-				$this->_page->drawText ( iconv ( 'UTF-8', 'ISO-8859-1', $tab3 [5] ), $this->_leftMargin + 0, $this->_yPosition );
-			} else if ($i == 13) {
-				$this->_page->setFont ( $this->_policeContenu, 12 );
-				$this->_page->drawText ( iconv ( 'UTF-8', 'ISO-8859-1', $tab3 [6] ), $this->_leftMargin + 0, $this->_yPosition );
-			}
-			
-			$this->_yPosition -= $noteLineHeight;
-		}*/
+	
 		
 		$this->_page->setFont ( $this->_newTime, 13 );
 		$this->_page->drawText ('Je soussigné(e) ', 
 				$this->_leftMargin, 
 				$this->_yPosition 
 		);
-		
+		if($this->_DonneesMedecin ['sexeMedecin']=='Masculin'){
 		$this->_page->setFont ( $this->_newStyle, 12 );
-		$this->_page->drawText ( $this->_DonneesMedecin ['prenomMedecin'].'  '.$this->_DonneesMedecin ['nomMedecin'], 
+		$this->_page->drawText ( 'Mr '.$this->_DonneesMedecin ['prenomMedecin'].'  '.$this->_DonneesMedecin ['nomMedecin'], 
 				$this->_leftMargin + 100, 
 				$this->_yPosition );
-		
+		}
+		else{
+			$this->_page->setFont ( $this->_newStyle, 12 );
+			$this->_page->drawText ( 'Mme '.$this->_DonneesMedecin ['prenomMedecin'].'  '.$this->_DonneesMedecin ['nomMedecin'],
+					$this->_leftMargin + 100,
+					$this->_yPosition );
+		}
 		$this->_yPosition -= $noteLineHeight;
 		
 		$this->_page->setFont ( $this->_newTime, 13 );
@@ -328,9 +233,7 @@ public function setEnTete() {
 					$this->_yPosition );
 		}
 		
-		//$this->_page->setFont ( $this->_policeContenu, 12 );
-		//$this->_page->drawText ( iconv ( 'UTF-8', 'ISO-8859-1', $tab [1] ), $this->_leftMargin + 80, $this->_yPosition );
-		
+	
 		$this->_yPosition -= $noteLineHeight;
 		
 		$this->_page->setFont ( $this->_newTime, 13 );
@@ -365,51 +268,64 @@ public function setEnTete() {
 		
 		
 		$this->_page->setFont ( $this->_newTime, 13 );
-		$this->_page->drawText ('d\'un enfant ',
+		$this->_page->drawText ('de  ',
 				$this->_leftMargin+270,
 				$this->_yPosition
 		);
-		$this->_yPosition -= $noteLineHeight;
-		$this->_page->setFont ( $this->_newTime, 13 );
-		$this->_page->drawText ('- Vivant et viable ',
-				$this->_leftMargin,
-				$this->_yPosition
-		);
-		
 		$this->_page->setFont ( $this->_newStyle, 12 );
-		$this->_page->drawText ( $this->_DonneesDemande ['vivant_viable'],
-				$this->_leftMargin +100,
+		$this->_page->drawText ( $this->_DonneesDemande ['nb_bb'].' enfant(s)',
+				$this->_leftMargin + 290,
 				$this->_yPosition );
 		$this->_yPosition -= $noteLineHeight;
+		for($i=1;$i<=$this->_DonneesDemande ['nb_bb'];$i++){
+		$this->_yPosition -= $noteLineHeight;
+		
 		$this->_page->setFont ( $this->_newTime, 13 );
-		$this->_page->drawText ('- Mort-Né',
+		$this->_page->drawText ('- Enfant '.$i.' :',
 				$this->_leftMargin,
 				$this->_yPosition
 		);
-		$this->_page->setFont ( $this->_newStyle, 12 );
-		$this->_page->drawText ( $this->_DonneesDemande ['mor_ne'],
-				$this->_leftMargin +100,
+		$this->_page->setFont ( $this->_newTime, 13 );
+		$this->_page->drawText ('Sexe :',
+				$this->_leftMargin+75,
+				$this->_yPosition
+		);
+$this->_page->setFont ( $this->_newStyle, 12 );
+		$this->_page->drawText ( $this->_DonneesDemande ['sexe_'.$i],
+				$this->_leftMargin +110,
 				$this->_yPosition );
+		
+		$this->_page->setFont ( $this->_newTime, 13 );
+		$this->_page->drawText ('Vivant et bien Portant :',
+				$this->_leftMargin +150,
+				$this->_yPosition
+		);
+		$this->_page->setFont ( $this->_newStyle, 12 );
+		$this->_page->drawText ( $this->_DonneesDemande  ['viv_bien_portant_'.$i],
+				$this->_leftMargin + 278,
+				$this->_yPosition );
+		//$this->_yPosition -= $noteLineHeight;
+		$this->_page->setFont ( $this->_newTime, 13 );
+		$this->_page->drawText ('Mort-Né :',
+				$this->_leftMargin+330,
+				$this->_yPosition
+		);
+		
+		$this->_page->setFont ( $this->_newStyle, 12 );
+		$this->_page->drawText ( $this->_DonneesDemande  ['decede_'.$i],
+				$this->_leftMargin + 390,
+				$this->_yPosition );
+		}
+
 		$this->_yPosition -= $noteLineHeight;
 		$this->_page->setFont ( $this->_newTime, 13 );
-		$this->_page->drawText ('de Sexe ',
+		$this->_page->drawText ('Prénommé(s) :',
 				$this->_leftMargin,
 				$this->_yPosition
 		);
-// 		$this->_page->setFont ( $this->_newStyle, 12 );
-// 		$this->_page->drawText ( $this->_DonneesDemande ['sexe'],
-// 				$this->_leftMargin + 60,
-// 				$this->_yPosition );
-// 		$this->_page->setFont ( $this->_newTime, 13 );
-// 		$this->_page->drawText ('Prénommé',
-// 				$this->_leftMargin+300,
-// 				$this->_yPosition
-// 		);
-		
-		
 		$this->_page->setFont ( $this->_newStyle, 12 );
-		$this->_page->drawText ('bébé '. $this->_DonneesDemande ['prenome'],
-				$this->_leftMargin + 370,
+		$this->_page->drawText ('bébé(s) '. $this->_DonneesDemande ['prenome'],
+				$this->_leftMargin + 80,
 				$this->_yPosition );
 		
 		

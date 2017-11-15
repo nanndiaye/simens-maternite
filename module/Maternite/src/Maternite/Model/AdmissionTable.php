@@ -314,7 +314,7 @@ class AdmissionTable {
 	
 	//Ajouter la consultation dans la table << consultation >> pour permettre au medecin de pouvoir lui même ajouter les constantes
 	//Ajouter la consultation dans la table << consultation >> pour permettre au medecin de pouvoir lui même ajouter les constantes
-	public function addConsultation($values , $IdDuService){
+	public function addConsultation($values , $IdDuService,$id_admission){
 		$today = new \DateTime ( 'now' );
 		$date = $today->format ( 'Y-m-d H:i:s' );
 		$dateOnly = $today->format ( 'Y-m-d' );
@@ -329,7 +329,8 @@ class AdmissionTable {
 					'DATE'=> $date,
  					'DATEONLY' => $dateOnly,
 					'HEURECONS' => $values->get ( "heure_cons" )->getValue (),
-					'ID_SERVICE' => $IdDuService
+					'ID_SERVICE' => $IdDuService,
+					'id_admission'=> $id_admission
 			);
 			
 			$sql = new Sql($db);

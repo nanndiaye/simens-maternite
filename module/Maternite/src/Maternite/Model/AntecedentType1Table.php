@@ -40,10 +40,10 @@ class AntecedentType1Table {
 	
 
     public function updateAntecedentType1($donnees) {
-    	$result = $this->tableGateway->select(array('id_patient'=> $donnees['id_patient']));
-    	$this->tableGateway->delete ( array (
-    			'id_cons' => $donnees ['id_cons']
-    	) );
+     	$result = $this->tableGateway->select(array('id_patient'=> $donnees['id_patient']));
+//     	$this->tableGateway->delete ( array (
+//     			'id_cons' => $donnees ['id_cons']
+//     	) );
     
     	$datadonnee = array (
     			'id_cons' => $donnees ['id_cons'],
@@ -93,8 +93,8 @@ class AntecedentType1Table {
     	$sQuery->from( array (
     			'ant' => 'antecedent_type_1'
     	) )->join ( array (
-    			'p' => 'patient'
-    	), 'ant.id_patient = p.ID_PERSONNE', array (
+    			'c' => 'consultation'
+    	), 'ant.id_cons = c.ID_CONS', array (
     
     	));
     	$sQuery->where ( array (

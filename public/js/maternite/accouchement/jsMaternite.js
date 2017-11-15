@@ -240,7 +240,7 @@ $(function() {
   		//met le temps sous forme de calendrier
   		
   		$('#heure_accouchement').chungTimePicker({
-  			viewType: 1
+  			//viewType: 1
 		});
   		$('#examen_maternite_donnee7').chungTimePicker({
   			viewType: 1

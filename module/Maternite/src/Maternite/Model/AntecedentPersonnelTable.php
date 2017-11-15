@@ -253,98 +253,98 @@ class AntecedentPersonnelTable {
 			
 			// GYNECO-OBSTETRIQUE
 			// GYNECO-OBSTETRIQUE
-			if ($donneesDesAntecedents ['MenarcheGO'] == 1) {
-				$donneesAntecedents = array (
-						'ID_PERSONNE' => $id_personne,
-						'ID_ANTECEDENT' => 9,
-						'NOTE' => $donneesDesAntecedents ['NoteMenarcheGO'],
-						'ID_EMPLOYE' => $id_medecin 
-				);
+// 			if ($donneesDesAntecedents ['MenarcheGO'] == 1) {
+// 				$donneesAntecedents = array (
+// 						'ID_PERSONNE' => $id_personne,
+// 						'ID_ANTECEDENT' => 9,
+// 						'NOTE' => $donneesDesAntecedents ['NoteMenarcheGO'],
+// 						'ID_EMPLOYE' => $id_medecin 
+// 				);
 				
-				$this->tableGateway->insert ( $donneesAntecedents );
-			}
-			if ($donneesDesAntecedents ['GestiteGO'] == 1) {
-				$donneesAntecedents = array (
-						'ID_PERSONNE' => $id_personne,
-						'ID_ANTECEDENT' => 10,
-						'NOTE' => $donneesDesAntecedents ['NoteGestiteGO'],
-						'ID_EMPLOYE' => $id_medecin 
-				);
+// 				$this->tableGateway->insert ( $donneesAntecedents );
+// 			}
+// 			if ($donneesDesAntecedents ['GestiteGO'] == 1) {
+// 				$donneesAntecedents = array (
+// 						'ID_PERSONNE' => $id_personne,
+// 						'ID_ANTECEDENT' => 10,
+// 						'NOTE' => $donneesDesAntecedents ['NoteGestiteGO'],
+// 						'ID_EMPLOYE' => $id_medecin 
+// 				);
 				
-				$this->tableGateway->insert ( $donneesAntecedents );
-			}
-			if ($donneesDesAntecedents ['PariteGO'] == 1) {
-				$donneesAntecedents = array (
-						'ID_PERSONNE' => $id_personne,
-						'ID_ANTECEDENT' => 11,
-						'NOTE' => $donneesDesAntecedents ['NotePariteGO'],
-						'ID_EMPLOYE' => $id_medecin 
-				);
+// 				$this->tableGateway->insert ( $donneesAntecedents );
+// 			}
+// 			if ($donneesDesAntecedents ['PariteGO'] == 1) {
+// 				$donneesAntecedents = array (
+// 						'ID_PERSONNE' => $id_personne,
+// 						'ID_ANTECEDENT' => 11,
+// 						'NOTE' => $donneesDesAntecedents ['NotePariteGO'],
+// 						'ID_EMPLOYE' => $id_medecin 
+// 				);
 				
-				$this->tableGateway->insert ( $donneesAntecedents );
-			}
-			if ($donneesDesAntecedents ['CycleGO'] == 1) {
-				$donneesAntecedents = array (
-						'ID_PERSONNE' => $id_personne,
-						'ID_ANTECEDENT' => 12,
-						'DUREE' => $donneesDesAntecedents ['DureeCycleGO'],
-						'REGULARITE' => $donneesDesAntecedents ['RegulariteCycleGO'],
-						'DYSMENORRHEE' => $donneesDesAntecedents ['DysmenorrheeCycleGO'],
-						'ID_EMPLOYE' => $id_medecin 
-				);
+// 				$this->tableGateway->insert ( $donneesAntecedents );
+// 			}
+// 			if ($donneesDesAntecedents ['CycleGO'] == 1) {
+// 				$donneesAntecedents = array (
+// 						'ID_PERSONNE' => $id_personne,
+// 						'ID_ANTECEDENT' => 12,
+// 						'DUREE' => $donneesDesAntecedents ['DureeCycleGO'],
+// 						'REGULARITE' => $donneesDesAntecedents ['RegulariteCycleGO'],
+// 						'DYSMENORRHEE' => $donneesDesAntecedents ['DysmenorrheeCycleGO'],
+// 						'ID_EMPLOYE' => $id_medecin 
+// 				);
 				
-				$this->tableGateway->insert ( $donneesAntecedents );
-			}
-			if ($donneesDesAntecedents ['EnfVivGO'] == 1) {
-				$donneesAntecedents = array (
-						'ID_PERSONNE' => $id_personne,
-						'ID_ANTECEDENT' => 13,
-						'NOTE' => $donneesDesAntecedents ['NoteEnfVivGO'],
-						'ID_EMPLOYE' => $id_medecin 
-				);
+// 				$this->tableGateway->insert ( $donneesAntecedents );
+// 			}
+// 			if ($donneesDesAntecedents ['EnfVivGO'] == 1) {
+// 				$donneesAntecedents = array (
+// 						'ID_PERSONNE' => $id_personne,
+// 						'ID_ANTECEDENT' => 13,
+// 						'NOTE' => $donneesDesAntecedents ['NoteEnfVivGO'],
+// 						'ID_EMPLOYE' => $id_medecin 
+// 				);
 				
-				$this->tableGateway->insert ( $donneesAntecedents );
-			}
-			if ($donneesDesAntecedents ['MortNeGO'] == 1) {
-				$donneesAntecedents = array (
-						'ID_PERSONNE' => $id_personne,
-						'ID_ANTECEDENT' => 14,
-						'NOTE' => $donneesDesAntecedents ['NoteMortNeGO'],
-						'ID_EMPLOYE' => $id_medecin 
-				);
+// 				$this->tableGateway->insert ( $donneesAntecedents );
+// 			}
+// 			if ($donneesDesAntecedents ['MortNeGO'] == 1) {
+// 				$donneesAntecedents = array (
+// 						'ID_PERSONNE' => $id_personne,
+// 						'ID_ANTECEDENT' => 14,
+// 						'NOTE' => $donneesDesAntecedents ['NoteMortNeGO'],
+// 						'ID_EMPLOYE' => $id_medecin 
+// 				);
 				
-				$this->tableGateway->insert ( $donneesAntecedents );
-			}
-			if ($donneesDesAntecedents ['CesarienneGO'] == 1) {
-				$donneesAntecedents = array (
-						'ID_PERSONNE' => $id_personne,
-						'ID_ANTECEDENT' => 15,
-						'NOTE' => $donneesDesAntecedents ['NoteCesarienneGO'],
-						'ID_EMPLOYE' => $id_medecin 
-				);
+// 				$this->tableGateway->insert ( $donneesAntecedents );
+// 			}
+// 			if ($donneesDesAntecedents ['CesarienneGO'] == 1) {
+// 				$donneesAntecedents = array (
+// 						'ID_PERSONNE' => $id_personne,
+// 						'ID_ANTECEDENT' => 15,
+// 						'NOTE' => $donneesDesAntecedents ['NoteCesarienneGO'],
+// 						'ID_EMPLOYE' => $id_medecin 
+// 				);
 				
-				$this->tableGateway->insert ( $donneesAntecedents );
-			}
-			if ($donneesDesAntecedents ['DystocieGO'] == 1) {
-				$donneesAntecedents = array (
-						'ID_PERSONNE' => $id_personne,
-						'ID_ANTECEDENT' => 16,
-						'NOTE' => $donneesDesAntecedents ['NoteDystocieGO'],
-						'ID_EMPLOYE' => $id_medecin 
-				);
+// 				$this->tableGateway->insert ( $donneesAntecedents );
+// 			}
+// 			if ($donneesDesAntecedents ['DystocieGO'] == 1) {
+// 				$donneesAntecedents = array (
+// 						'ID_PERSONNE' => $id_personne,
+// 						'ID_ANTECEDENT' => 16,
+// 						'NOTE' => $donneesDesAntecedents ['NoteDystocieGO'],
+// 						'ID_EMPLOYE' => $id_medecin 
+// 				);
 				
-				$this->tableGateway->insert ( $donneesAntecedents );
-			}
-			if ($donneesDesAntecedents ['EclampsieGO'] == 1) {
-				$donneesAntecedents = array (
-						'ID_PERSONNE' => $id_personne,
-						'ID_ANTECEDENT' => 17,
-						'NOTE' => $donneesDesAntecedents ['NoteEclampsieGO'],
-						'ID_EMPLOYE' => $id_medecin 
-				);
+// 				$this->tableGateway->insert ( $donneesAntecedents );
+// 			}
+// 			if ($donneesDesAntecedents ['EclampsieGO'] == 1) {
+// 				$donneesAntecedents = array (
+// 						'ID_PERSONNE' => $id_personne,
+// 						'ID_ANTECEDENT' => 17,
+// 						'NOTE' => $donneesDesAntecedents ['NoteEclampsieGO'],
+// 						'ID_EMPLOYE' => $id_medecin 
+// 				);
 				
-				$this->tableGateway->insert ( $donneesAntecedents );
-			}
+// 				$this->tableGateway->insert ( $donneesAntecedents );
+// 			}
 			
 			$this->tableGateway->getAdapter ()->getDriver ()->getConnection ()->commit ();
 		} catch ( \Exception $e ) {

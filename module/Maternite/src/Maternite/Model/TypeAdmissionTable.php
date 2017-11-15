@@ -23,7 +23,7 @@ class TypeAdmissionTable{
 	
 	
 	
-	public function getTypeAdmi($id_patient) {
+	public function getTypeAdmi($id_admission) {
 		$today = new \DateTime();
 		$date = $today->format('Y-m-d');
 		$db = $this->tableGateway->getAdapter();
@@ -31,29 +31,18 @@ class TypeAdmissionTable{
 		$sQuery = $sql->select()
 		->from(array('t' => 'type_admission'))
 		->columns( array( '*' ))
-		//->join(array('a' => 'admission'), 'a.id_evacuation = eva.id_evacuation' , array('*'))
 		->join(array('a' => 'admission'), 'a.id_type_ad = t.id_type_ad' , array('id_type_ad'))
-	
-		->where(array('a.id_patient' => $id_patient));
-	    $where = new Where();
-       // $where->equalTo('s.ID_SERVICE', $idService);
-        $where->notEqualTo('date_enregistrement', $date);
-        $sQuery->where($where);
-        $sQuery->order('a.date_cons DESC');
-		$stat = $sql->prepareStatementForSqlObject($sQuery);
+		->where(array('a.id_admission' => $id_admission,
+		));
+	   	$stat = $sql->prepareStatementForSqlObject($sQuery);
 		$resultat = $stat->execute();
-		
 		foreach ($resultat as $data) {
 			$options[$data['id_type_ad']] = $data['type_admi'];
-			//var_dump($options);exit();
 		}
 		return $options;
 		return $resultat;
 	}
-	
-	
-	
-	
+
 	public function getTypeAdmis($id_patient) {
 		$today = new \DateTime();
 		$date = $today->format('Y-m-d');
@@ -64,13 +53,15 @@ class TypeAdmissionTable{
 		->columns( array( '*' ))
 		//->join(array('a' => 'admission'), 'a.id_evacuation = eva.id_evacuation' , array('*'))
 		->join(array('a' => 'admission'), 'a.id_type_ad = t.id_type_ad' , array('id_type_ad'))
-		//->join(array('ant' => 'antecedent_type_1'), 'ant.id_patient = pat.id_personne' , array('*'))
-		->where(array('a.id_patient' => $id_patient));
+		//->join(array('c' => 'consultation'), 'a.date_cons = c.DATE' , array('*'))
+		->where(array('a.id_patient' => $id_patient
+				//'c.ID_CONS' => $id
+		));
 		 $where = new Where();
        // $where->equalTo('s.ID_SERVICE', $idService);
-        $where->notEqualTo('date_enregistrement', $date);
+        $where->equalTo('date_cons', $date);
         $sQuery->where($where);
-        $sQuery->order('a.date_cons DESC');
+        //$sQuery->order('a.date_cons ASC');
 		$stat = $sql->prepareStatementForSqlObject($sQuery);
 		$resultat = $stat->execute()->current();
 		//var_dump($resultat);exit();

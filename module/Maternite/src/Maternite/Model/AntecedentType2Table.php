@@ -79,8 +79,8 @@ class AntecedentType2Table {
         	$sQuery->from( array (
         			'ant' => 'antecedent_type_2'
         	) )->join ( array (
-        			'p' => 'patient'
-        	), 'ant.id_patient = p.ID_PERSONNE', array (
+        			'c' => 'consultation'
+        	), 'ant.id_cons = c.ID_CONS', array (
         
         	));
         	$sQuery->where ( array (

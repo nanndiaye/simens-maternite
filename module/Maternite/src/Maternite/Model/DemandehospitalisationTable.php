@@ -28,6 +28,7 @@ class DemandehospitalisationTable {
 	
 	public function saveDemandehospitalisation($infoDemandeHospitalisation)
 	{
+		
 		if(!$this->getDemandehospitalisation($infoDemandeHospitalisation)){
 			if($infoDemandeHospitalisation['motif_demande_hospi'] && $infoDemandeHospitalisation['date_fin_prevue_hospi']){
 				$this->tableGateway->insert($infoDemandeHospitalisation);				

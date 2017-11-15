@@ -3,7 +3,7 @@ function ajoutEnfant(nbEnfant){
 	//alert(nbEnfant);
 	
 	$('#tabEnfants').html('');
-	var element='<div id="tabsEnfants"> <ul>';
+	var element='<div id="tabsEnfants" class="tabsEnfants"> <ul>';
 	var contenu ='';
 	
 	for(var i=1; i<= nbEnfant; i++){
@@ -41,7 +41,7 @@ function ajoutEnfant(nbEnfant){
 			                     '<label  class="styleLabel1">Cri</label>'+
 			                  '</div>'+   
 			                  '<div  class="styleEnfDiv2">'+
-			                     '<label   class="styleLabel2"><select id="cri_'+i+'"><option value="Oui">oui</option><option value="Non">Non</option></select></label>'+
+			                     '<label   class="styleLabel2"><select id="cri_'+i+'"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>'+
 			                  '</div>'+ 
 			                  '<div  class="styleEnfDiv3">'+
 			                     '<label  class="styleLabel3">Note <input id="n_cri_'+i+'" type="text"></input></label>'+
@@ -68,7 +68,7 @@ function ajoutEnfant(nbEnfant){
 			                     '<label  class="styleLabel1">Sat</label>'+
 			                  '</div>'+   
 			                  '<div  class="styleEnfDiv2">'+
-			                     '<label   class="styleLabel2"><select id="sat_'+i+'"><option value="Oui">oui</option><option value="Non">Non</option></select></label>'+
+			                     '<label   class="styleLabel2"><select id="sat_'+i+'"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>'+
 			                  '</div>'+ 
 			                  '<div  class="styleEnfDiv3">'+
 			                     '<label  class="styleLabel3">Note <input id="n_sat_'+i+'" type="text"></input></label>'+
@@ -79,7 +79,7 @@ function ajoutEnfant(nbEnfant){
 		                 '<label 	 class="styleLabel4">Vitamine K</label>'+
 		              '</div>'+   
 		              '<div  class="styleEnfDiv5">'+
-		                 '<label class="styleLabel5"><select id="vitk_'+i+'"><option value="Oui">oui</option><option value="Non">Non</option></select></label>'+
+		                 '<label class="styleLabel5"><select id="vitk_'+i+'"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>'+
 		              '</div>'+ 
 		              '<div   class="styleEnfDiv6">'+
 		                 '<label  class="styleLabel6">Note <input id="n_vitk_'+i+'" type="text"></input></label>'+
@@ -96,7 +96,7 @@ function ajoutEnfant(nbEnfant){
 			                     '<label  class="styleLabel1" title="Malformation">Malf</label>'+
 			                  '</div>'+   
 			                  '<div  class="styleEnfDiv2">'+
-			                     '<label   class="styleLabel2" ><select id="malf_'+i+'"><option value="Oui">oui</option><option value="Non">Non</option></select></label>'+
+			                     '<label   class="styleLabel2" ><select id="malf_'+i+'"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>'+
 			                  '</div>'+ 
 			                  '<div  class="styleEnfDiv3">'+
 			                     '<label  class="styleLabel3">Note <input id="n_malf_'+i+'" type="text"></input></label>'+
@@ -107,7 +107,7 @@ function ajoutEnfant(nbEnfant){
 		                 '<label 	 class="styleLabel4" title="Maintien Temperature">Maintien T&ordm;</label>'+
 		              '</div>'+   
 		              '<div  class="styleEnfDiv5">'+
-		                 '<label class="styleLabel5"><select id="mt_'+i+'"><option value="Oui">oui</option><option value="Non">Non</option></select></label>'+
+		                 '<label class="styleLabel5"><select id="mt_'+i+'"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>'+
 		              '</div>'+ 
 		              '<div   class="styleEnfDiv6">'+
 		                 '<label  class="styleLabel6">Note <input id="n_mt_'+i+'" type="text"></input></label>'+
@@ -121,7 +121,7 @@ function ajoutEnfant(nbEnfant){
 			                     '<label  class="styleLabel1" title="Mise au Soin Precoce">MSP</label>'+
 			                  '</div>'+   
 			                  '<div  class="styleEnfDiv2">'+
-			                     '<label   class="styleLabel2" ><select id="msp_'+i+'"><option value="Oui">oui</option><option value="Non">Non</option></select></label>'+
+			                     '<label   class="styleLabel2" ><select id="msp_'+i+'"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>'+
 			                  '</div>'+ 
 			                  '<div  class="styleEnfDiv3">'+
 			                     '<label  class="styleLabel3">Note <input id="n_msp_'+i+'" type="text"></input></label>'+
@@ -132,7 +132,7 @@ function ajoutEnfant(nbEnfant){
 		                 '<label 	 class="styleLabel4" title="Soin du Cordon">Soin Cordon</label>'+
 		              '</div>'+   
 		              '<div  class="styleEnfDiv5">'+
-		                 '<label class="styleLabel5"><select id="sc_'+i+'"><option value="Oui">oui</option><option value="Non">Non</option></select></label>'+
+		                 '<label class="styleLabel5"><select id="sc_'+i+'"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>'+
 		              '</div>'+ 
 		              '<div   class="styleEnfDiv6">'+
 		                 '<label  class="styleLabel6">Note <input id="n_sc_'+i+'" type="text"></input></label>'+
@@ -146,7 +146,7 @@ function ajoutEnfant(nbEnfant){
 			                     '<label  class="styleLabel1" title="Reanimation">Reanim</label>'+
 			                  '</div>'+   
 			                  '<div  class="styleEnfDiv2">'+
-			                     '<label   class="styleLabel2" ><select id="reanim_'+i+'"><option value="Oui">oui</option><option value="Non">Non</option></select></label>'+
+			                     '<label   class="styleLabel2" ><select id="reanim_'+i+'"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>'+
 			                  '</div>'+ 
 			                  '<div  class="styleEnfDiv3">'+
 			                     '<label  class="styleLabel3">Note <input id="n_reanim_'+i+'" type="text"></input></label>'+
@@ -157,7 +157,7 @@ function ajoutEnfant(nbEnfant){
 		                 '<label 	 class="styleLabel4" title="">Collyre</label>'+
 		              '</div>'+   
 		              '<div  class="styleEnfDiv5">'+
-		                 '<label class="styleLabel5"><select id="collyre_'+i+'"><option value="Oui">oui</option><option value="Non">Non</option></select></label>'+
+		                 '<label class="styleLabel5"><select id="collyre_'+i+'"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>'+
 		              '</div>'+ 
 		              '<div   class="styleEnfDiv6">'+
 		                 '<label  class="styleLabel6">Note <input id="n_collyre_'+i+'" type="text"></input></label>'+
@@ -170,7 +170,7 @@ function ajoutEnfant(nbEnfant){
 			                     '<label  class="styleLabel1" title="">VPO</label>'+
 			                  '</div>'+   
 			                  '<div  class="styleEnfDiv2">'+
-			                     '<label   class="styleLabel2" ><select id="vpo_'+i+'"><option value="Oui">oui</option><option value="Non">Non</option></select></label>'+
+			                     '<label   class="styleLabel2" ><select id="vpo_'+i+'"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>'+
 			                  '</div>'+ 
 			                  '<div  class="styleEnfDiv3">'+
 			                     '<label  class="styleLabel3">Note <input id="n_vpo_'+i+'" type="text"></input></label>'+
@@ -181,7 +181,7 @@ function ajoutEnfant(nbEnfant){
 		                 '<label 	 class="styleLabel4" title="Anti Tuberculeux">antiTuberculeux</label>'+
 		              '</div>'+   
 		              '<div  class="styleEnfDiv5">'+
-		                 '<label class="styleLabel5"><select id="antiT_'+i+'"><option value="Oui">oui</option><option value="Non">Non</option></select></label>'+
+		                 '<label class="styleLabel5"><select id="antiT_'+i+'"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>'+
 		              '</div>'+ 
 		              '<div   class="styleEnfDiv6">'+
 		                 '<label  class="styleLabel6">Note <input id="n_antiT_'+i+'" type="text"></input></label>'+
@@ -195,7 +195,7 @@ function ajoutEnfant(nbEnfant){
 			                     '<label  class="styleLabel1" title="">BCG</label>'+
 			                  '</div>'+   
 			                  '<div  class="styleEnfDiv2">'+
-			                     '<label   class="styleLabel2" ><select id="bcg_'+i+'"><option value="Oui">oui</option><option value="Non">Non</option></select></label>'+
+			                     '<label   class="styleLabel2" ><select id="bcg_'+i+'"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>'+
 			                  '</div>'+ 
 			                  '<div  class="styleEnfDiv3">'+
 			                     '<label  class="styleLabel3">Note <input id="n_bcg_'+i+'" type="text"></input></label>'+
@@ -206,7 +206,7 @@ function ajoutEnfant(nbEnfant){
 		                 '<label 	 class="styleLabel4" title="Anti H&eacute;patique">AntiH&eacute;patique</label>'+
 		              '</div>'+   
 		              '<div  class="styleEnfDiv5">'+
-		                 '<label class="styleLabel5"><select id="anti_hepa_'+i+'"><option value="Oui">oui</option><option value="Non">Non</option></select></label>'+
+		                 '<label class="styleLabel5"><select id="anti_hepa_'+i+'"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>'+
 		              '</div>'+ 
 		              '<div   class="styleEnfDiv6">'+
 		                 '<label  class="styleLabel6">Note <input id="n_anti_hepa_'+i+'" type="text"></input></label>'+
@@ -220,7 +220,7 @@ function ajoutEnfant(nbEnfant){
 			                     '<label  class="styleLabel1" title="Autre Vaccins">Autres</label>'+
 			                  '</div>'+   
 			                  '<div  class="styleEnfDiv2">'+
-			                     '<label   class="styleLabel2" ><select id="autre_vacc_'+i+'"><option value="Oui">oui</option><option value="Non">Non</option></select></label>'+
+			                     '<label   class="styleLabel2" ><select id="autre_vacc_'+i+'"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>'+
 			                  '</div>'+ 
 			                  '<div  class="styleEnfDiv3">'+
 			                     '<label  class="styleLabel3">Type <input id="type_autre_vacc_'+i+'" type="text"></input></label>'+
@@ -351,7 +351,7 @@ function ajoutNouveauNe(nbEnfants){
 	
 	
 	$('#tabNouveauNe').html('');
-	var elem='<div id="tabsNouveauNe"> <ul>';
+	var elem='<div id="tabsNouveauNe"    class="tabsNv"> <ul>';
 	var cont ='';
 	
 	for(var i=1; i<= nbEnfants; i++){
@@ -362,7 +362,7 @@ function ajoutNouveauNe(nbEnfants){
 			       '<tr >'+
 			          '<td  class="antecedent_go">'+ 
 			                  '<div  class="nvDiv1">'+
-			                      '<label  class="nvDiv1label">Vivant et bien portant&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <select id="viv_bien_portant_'+i+'"><option value="Oui">oui</option><option value="Non">Non</option></select></label>'+
+			                      '<label  class="nvDiv1label">Vivant et bien portant&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <select id="viv_bien_portant_'+i+'"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>'+
 			                   '</div>'+ 
 			                  
 			                   '<div class="nvDiv2">'+
@@ -376,7 +376,7 @@ function ajoutNouveauNe(nbEnfants){
 			       '<tr >'+
 			       '<td  class="antecedent_go">'+ 
 	                  '<div  class="nvDiv1">'+
-	                      '<label  class="nvDiv1label">Vivant avec mal formation&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <select id="viv_mal_form_'+i+'"><option value="Oui">oui</option><option value="Non">Non</option></select></label>'+
+	                      '<label  class="nvDiv1label">Vivant avec mal formation&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <select id="viv_mal_form_'+i+'"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>'+
 	                   '</div>'+ 
 	                  
 	                   '<div class="nvDiv2">'+
@@ -391,7 +391,7 @@ function ajoutNouveauNe(nbEnfants){
 			       '<tr >'+
 			       '<td  class="antecedent_go">'+ 
 	                  '<div  class="nvDiv1">'+
-	                      '<label  class="nvDiv1label">Malade&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <select id="malade_'+i+'"><option value="Oui">oui</option><option value="Non">Non</option></select></label>'+
+	                      '<label  class="nvDiv1label">Malade&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <select id="malade_'+i+'"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>'+
 	                   '</div>'+ 
 	                  
 	                   '<div class="nvDiv2">'+
@@ -406,7 +406,7 @@ function ajoutNouveauNe(nbEnfants){
 			       '<tr >'+
 			          '<td  class="antecedent_go">'+
 			          '<div class="nvDiv1" >'+
-				       '<label  class="nvDiv1label">D&eacute;ced&eacute;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <select id="decede_'+i+'"><option value="Oui">oui</option><option value="Non">Non</option></select></label>'+
+				       '<label  class="nvDiv1label">D&eacute;ced&eacute;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <select id="decede_'+i+'"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>'+
 			       '</div>'+
 	        
 			       '<div class=" nvDateDiv1" >'+
@@ -472,13 +472,14 @@ function ajoutNouveauNe(nbEnfants){
 }
 
 
-$('.BbAttendu').toggle(false);
+//$('.BbAttendu').toggle(false);
 function getBbAttendu(val){ 
 
 	if(val=='0'){
 		
 		$('.BbAttendu').fadeIn();
-		
+		ajoutEnfant( $('#nombre_bb').val()); 
+		ajoutNouveauNe( $('#nombre_bb').val());
 		$('#nombre_bb').keyup(function () {
 			ajoutEnfant( $('#nombre_bb').val()); 
 			ajoutNouveauNe( $('#nombre_bb').val()); 
@@ -499,26 +500,81 @@ function getBbAttendu(val){
 
 
 
+function getEnf(nombre_bb){
+	  var indice=1;
+	  for(indice=1;indice<=nombre_bb;indice++){
+	   //alert(tempArray['sexe_1']);
+	   $('.tabsEnfants #sexe_'+indice).val(tempArray['sexe_'+indice]);
+	   $('.tabsEnfants #n_sexe_'+indice).val(tempArray['n_sexe_'+indice]);
+	   $('.tabsEnfants #poids_'+indice).val(tempArray['poids_'+indice]);
+	   $('.tabsEnfants #n_poids_'+indice).val(tempArray['n_poids_'+indice]);
+	   $('.tabsEnfants #cri_'+indice).val(tempArray['cri_'+indice]);
+	   $('.tabsEnfants #n_cri_'+indice).val(tempArray['n_cri_'+indice]);
+	   $('.tabsEnfants #taille_'+indice).val(tempArray['taille_'+indice]);
+	   $('.tabsEnfants #n_taille_'+indice).val(tempArray['n_taille_'+indice]);
+	   $('.tabsEnfants #malf_'+indice).val(tempArray['malf_'+indice]);
+	   $('.tabsEnfants #n_malf_'+indice).val(tempArray['n_malf_'+indice]);
+	   $('.tabsEnfants #sat_'+indice).val(tempArray['sat_'+indice]);
+	   $('.tabsEnfants #n_sat_'+indice).val(tempArray['n_sat_'+indice]);
+	   $('.tabsEnfants #vitk_'+indice).val(tempArray['vitk_'+indice]);
+	   $('.tabsEnfants #n_vitk_'+indice).val(tempArray['n_vitk_'+indice]);
+	   $('.tabsEnfants #mt_'+indice).val(tempArray['mt_'+indice]);
+	   $('.tabsEnfants #n_mt_'+indice).val(tempArray['n_mt_'+indice]);
+	   $('.tabsEnfants #msp_'+indice).val(tempArray['msp_'+indice]);
+	   $('.tabsEnfants #n_msp_'+indice).val(tempArray['n_msp_'+indice]);
+	   $('.tabsEnfants #sc_'+indice).val(tempArray['sc_'+indice]);
+	   $('.tabsEnfants #n_sc_'+indice).val(tempArray['n_sc_'+indice]);
+	   $('.tabsEnfants #reanim_'+indice).val(tempArray['reanim_'+indice]);
+	   $('.tabsEnfants #n_reanim_'+indice).val(tempArray['n_reanim_'+indice]);
+	   $('.tabsEnfants #collyre_'+indice).val(tempArray['collyre_'+indice]);
+	   $('.tabsEnfants #n_collyre_'+indice).val(tempArray['n_collyre_'+indice]);
+	   $('.tabsEnfants #vpo_'+indice).val(tempArray['vpo_'+indice]);
+	   $('.tabsEnfants #n_vpo_'+indice).val(tempArray['n_vpo_'+indice]);
+	   $('.tabsEnfants #antiT_'+indice).val(tempArray['antiT_'+indice]);
+	   $('.tabsEnfants #n_antiT_'+indice).val(tempArray['n_antiT_'+indice]);
+	   $('.tabsEnfants #bcg_'+indice).val(tempArray['bcg_'+indice]);
+	   $('.tabsEnfants #n_bcg_'+indice).val(tempArray['n_bcg_'+indice]);
+	   $('.tabsEnfants #anti_hepa_'+indice).val(tempArray['anti_hepa_'+indice]);
+	   $('.tabsEnfants #n_anti_hepa_'+indice).val(tempArray['n_anti_hepa_'+indice]);
+	   $('.tabsEnfants #autre_vacc_'+indice).val(tempArray['autre_vacc_'+indice]);
+	   $('.tabsEnfants #type_autre_vacc_'+indice).val(tempArray['type_autre_vacc_'+indice]);
+	   $('.tabsEnfants #n_autre_vacc_'+indice).val(tempArray['n_autre_vacc_'+indice]);
+	   $('.tabsEnfants #cranien_'+indice).val(tempArray['cranien_'+indice]);
+	   $('.tabsEnfants #cephalique_'+indice).val(tempArray['cephalique_'+indice]);
+	   $('.tabsEnfants #brachial_'+indice).val(tempArray['brachial_'+indice]);
+	   $('.tabsEnfants #n_perim_'+indice).val(tempArray['n_perim_'+indice]);
+	   $('.tabsEnfants #apgar1_'+indice).val(tempArray['apgar1_'+indice]);
+	   $('.tabsEnfants #apgar5_'+indice).val(tempArray['apgar5_'+indice]);
+	   $('.tabsEnfants #n_apgar_'+indice).val(tempArray['n_apgar_'+indice]);
+	   $('.tabsEnfants #consj1j2_'+indice).val(tempArray['consj1j2_'+indice]);
+	   
+	   
+
+	   
+	   
+        }
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+function getnv(nombr){
+	  var ind=1;
+	  for(ind=1;ind<=nombr;ind++){
+	   //alert(tempArray['sexe_1']);
+	  
+	   
+	   
+	   
+	   $('.tabsNv #viv_bien_portant_'+ind).val(nvArray['viv_bien_portant_'+ind]);
+	   $('.tabsNv #n_viv_bien_portant_'+ind).val(nvArray['n_viv_bien_portant_'+ind]);
+	   $('.tabsNv #viv_mal_form_'+ind).val(nvArray['viv_mal_form_'+ind]);
+	   $('.tabsNv #n_viv_mal_form_'+ind).val(nvArray['n_viv_mal_form_'+ind]);
+	   $('.tabsNv #malade_'+ind).val(nvArray['malade_'+ind]);
+	   $('.tabsNv #n_malade_'+ind).val(nvArray['n_malade_'+ind]);
+	   $('.tabsNv #decede_'+ind).val(nvArray['decede_'+ind]);
+	   $('.tabsNv #date_deces_'+ind).val(nvArray['date_deces_'+ind]);
+	   $('.tabsNv #heure_deces_'+ind).val(nvArray['heure_deces_'+ind]);
+	   $('.tabsNv #cause_deces_'+ind).val(nvArray['cause_deces_'+ind]);
+   
+	   
+      }
+}

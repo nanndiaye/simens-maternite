@@ -11,7 +11,7 @@ class Admission {
 	public $id_patient;
 	public $id_service;
 	public $date_cons;
-// 	public $evacuee_de;
+	//public $id_admission;
 // 	public $motif_evac;
 // 	public $geste;
 // 	public $parite;

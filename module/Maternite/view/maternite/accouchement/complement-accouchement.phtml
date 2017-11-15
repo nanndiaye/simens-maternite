@@ -23,8 +23,8 @@ echo $this->headLink()->appendStylesheet($this->basePath().'/css/mescss/bloquerD
  //DatePicker
 echo $this->headScript()->appendFile($this->basePath().'/js/mesjs/bloquerDate.js'); //Pour bloquer certaines dates?>
 <?php echo $this->headScript()->appendFile($this->basePath() . '/js/jquery/chung-timepicker.js'); 
-//echo $this->headScript()->appendFile($this->basePath() . '/js/jquery/jquery.timepicker.min.js');
-//echo $this->headLink()->appendStylesheet($this->basePath().'/js/jquery/jquery.timepicker.css');
+echo $this->headScript()->appendFile($this->basePath() . '/js/jquery/jquery.timepicker.js');
+echo $this->headLink()->appendStylesheet($this->basePath().'/js/jquery/jquery.timepicker.css');
 echo $this->headLink()->appendStylesheet($this->basePath().'/css/chung-timepicker.css');?>
 <?php echo $this->headScript()->appendFile($this->basePath() . '/js/maternite/accouchement/ajouterMedicaments.js'); ?>
 <?php
@@ -190,9 +190,6 @@ AntecedentScript();
 
 // //-->
 <!-- </script> -->
-
-
-
 
 
 
@@ -540,6 +537,7 @@ echo $this->form ()->openTag ( $form );
 		</table>
 		
 		</div>	
+		
 		<div style='font-family: police2;font-size: 17px; font-weight: bold;'>Ant&eacute;c&eacute;dents GO</div>
 		
 		<div id="divEtatcivil" style='max-height: 400px;'>
@@ -882,8 +880,7 @@ echo $this->form ()->openTag ( $form );
 	</table>
 		</div>
 		
-		
-		
+	
 		<!-- ************** Accordeon NOUVELLES CONSTANTES ******************-->
 		<!-- ************** Accordeon NOUVELLES CONSTANTES ******************-->
 		<!-- ************** Accordeon NOUVELLES CONSTANTES ******************-->
@@ -1968,55 +1965,17 @@ echo $this->form ()->openTag ( $form );
 
      <!-- **************************************************************************************************************** -->
 			<!-- ENFANT -->
-			<div id="tabEnfants">
-			
-			
-			
-			
+			<div id="tabEnfants">		
 			</div>
 
-
-
-			<!-- **************************************************************************************************************** -->
-     <?php
-//                             $nbenf = count($this->Naissance);
-//                             if ($nbenf == 0) {
-//                                 $nbenf = 1;
-//                             }
-//                             $tableauEnf = array();
-                            ?>
-                                <?php //foreach ($this->Naissances as $enf) { ?>
-                                <script>
-//                                 var myArrayEnf = [''];
-//                                 var icmpt = 1;  
-//                                 var pyArrayEnf = [''];
-//                                 var pcmpt = 1;  
-                             // myArrayEnf[icmpt++] = "<?php //echo $enf['id_bebe']; ?>" ; 
-                               // pyArrayEnf[pcmpt++] ="<?php //echo $enf['poids']; ?>";
-//                                   alert (pyArrayEnf);
-                                     </script>
-                            <?//php } ?> 
-                            
-                                  <script>
-                                //SELECTION DES LIGNES ET CHARGEMENT DE LEUR CONTENU
-                                <?php
-
-//                                foreach ( $this->Naissance as $Listeenf ) {
-//                               $tableauEnf [] = $Listeenf ['id_bebe'];
-
-                                ?> 
-                                //Faire attention aux caracteres " et '
-                                   //a deCommenter dans maj
-                                //recupEnf(indligne++, "<?php  //echo $Listeenf['sexe'];?>", "<?php //echo $Listeenf['note_sexe']; ?>");
-                                <?//php } ?>
-                            </script>
-                            
-                            
-                            
+                   
                             
 		</div>
 		
+		<div style='font-family: police2;font-size: 17px; font-weight: bold;'>Observations et Suites de couches</div>
 		
+		 <div style="max-height: 600px;">
+		    <div class="accordionssssssssssss">
 		<div style='font-family: police2;font-size: 17px; font-weight: bold;'>Observations</div>
 	
 		
@@ -2051,7 +2010,8 @@ echo $this->form ()->openTag ( $form );
 		
 	</table>
 		</div>
-		
+		</div>
+		</div>
 		<div style='font-family: police2;font-size: 17px; font-weight: bold;'>Conclusions</div>
 		
 		 <div style="max-height: 600px;">
@@ -2259,7 +2219,36 @@ echo $this->form ()->openTag ( $form );
 			
 			  </div>
          
-       
+         <script type="text/javascript">
+        var indice=1;
+        getBbAttendu($('#bb_attendu').val());
+    
+     
+     </script> 
+     <script type="text/javascript">
+    //Assign php generated json to JavaScript variable
+   var tempArray = <?php echo json_encode($this->Naissances ); ?>;
+   var nvArray = <?php echo json_encode($this->Nouveau ); ?>;
+   var nombre = <?php echo $this->nombre_enf ; ?>;
+   //You will be able to access the properties as 
+ // alert(tempArray);
+ 
+    getEnf(nombre);
+   getnv(nombre);
+  
+</script>
+  
+      <?php //foreach ($this->Naissances as $enf) {?>
+      
+      <script type="text/javascript">
+
+
+      //alert('<?php //echo $enf['sexe'];?>');
+          //$('.tabsEnfants #sexe_'+indice).val('<?php //echo $enf['sexe'];?>');
+          //indice++; 
+      </script>
+      
+      <?php //}?>
             </div>
        
 </div>
@@ -3099,7 +3088,22 @@ echo $this->form ()->openTag ( $form );
 
                     partDefautMedicament(myArrayMedicament, myArrayForme, myArrayTypeQuantiteMedicament, 1);
 
-                    /* =================== */
+                    //Remplissage automatique des champs
+                    var i = 1;
+                    <?php 
+                    if($this->liste_med_prescrit) {
+                      foreach($this->liste_med_prescrit as $Medicaments) :?>
+                        $('#medicament_0'+i).val('<?php echo $Medicaments['Intitule'];?>');
+                        $('#forme_'+i).val('<?php echo $Medicaments['FORME'];?>');
+                        $('#nb_medicament_'+i).val('<?php echo substr($Medicaments['QUANTITE'], 0, strpos($Medicaments['QUANTITE'], ' '));?>');
+                        $('#quantite_'+i).val('<?php echo substr($Medicaments['QUANTITE'], strpos($Medicaments['QUANTITE'], ' ')+1);?>');
+ 	                      i++;
+                      <?php endforeach; 
+                    }
+                    ?>
+
+                    //Remplissage de la durée du traitement
+                    $('#duree_traitement_ord').val('<?php echo $this->duree_traitement;?>');
                 </script>
 
             </div>
@@ -3187,7 +3191,7 @@ echo $this->form ()->openTag ( $form );
 		<!-- *************Autres(Transfert/Hospitalisation/ Rendez-Vous )***************-->
 
 		<!--*7*-->
-		<div style='font-family: police2;font-size: 17px; font-weight: bold;'>Rendez-vous /Hospitalisation / Transferts</div>
+		<div id="hosprend" style='font-family: police2;font-size: 17px; font-weight: bold;'>Rendez-vous /Hospitalisation / Transferts</div>
     <div style="max-height: 480px;">
 
 
@@ -3296,12 +3300,11 @@ echo $this->form ()->openTag ( $form );
 			
 		<div id="divEtatcivil" style='max-height: 350px;'>
 		
-		<div class="rendezvous">
-                    <hass><input type="submit"  title="Imprimer" name="certificat" id="certificat_acc"> </hass>
-                </div>
+	
+              
                   <div style=" padding-bottom:40px; margin-bottom: 10px; border-bottom: 1px dashed black; margin-left: 0px; margin-right: 0px;"></div>
 		 
-	
+	 
 	<table style="width: 100%;"> 
 		 	
 	  <tr style="width: 100%;">
@@ -3317,30 +3320,9 @@ echo $this->form ()->openTag ( $form );
 								
 		    </td>
 		    </tr>
-		    <tr>
-	 <td class="antecedent_go" style="width: 50%; ">
-	           
-	           <div style="float: left; width: 15%; ">
-			       <label style="width: 90%; height: 30px; text-align: left;">Vivant et viable </label>
-		       </div>
-		       <div style="float: left; width: 20%; ">
-			       <label style="width: 90%; height: 30px; text-align: left;"> <?php echo $this->formRow($form->get('viv_viable'));?></label>
-		       </div>
-			 
-								
-		    </td></tr>
-		    <tr>
-		     <td class="antecedent_go" style="width: 50%; ">
-	           
-	           <div style="float: left; width: 15%; ">
-			       <label style="width: 90%; height: 30px; text-align: left;">Mort N&eacute; </label>
-		       </div>
-		       <div style="float: left; width: 20%; ">
-			       <label style="width: 90%; height: 30px; text-align: left;"> <?php echo $this->formRow($form->get('mor_ne'));?></label>
-		       </div>
-			 
-								
-		    </td>
+		
+		     
+		 
 	</table>
 		</div>
     
@@ -3367,7 +3349,7 @@ echo $this->form ()->openTag ( $form );
 					<button id="annuler2"
 						style="font-family: police2; font-size: 18px; font-weight: bold;">
 						Annuler</button>
-					<button name="terminer2" id="terminer3"
+					<button name="terminer2" id="terminer3" 
 						style="font-family: police2; font-size: 18px; font-weight: bold;">
 						Terminer</button>
 				</p>
@@ -3388,12 +3370,43 @@ echo $this->form ()->openTag ( $form );
 	</div>
 
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<?php
+//CHOISIR LE MENU A AFFICHER SELON QUE C'EST LE MEDECIN OU C'EST LE SURVEILLANT
+$user = $this->layout()->user;
+$role = $user['role'];
+
+if($role == 'infirmier'){ ?>
+<script>
+$("#hosprend").toggle(false);
+
+</script>
+	
+<?php
+}	
+?>
+	
+	
+	
 
 <?php echo $this->form()->closeTag();?>
 </div>
 <script>
 jsPagination();
-getBbAttendu($('#bb_attendu').val());
 getMotif($('#motif_ad').val());
 getCycle($('#regularite').val());
 getContraception($('#contraception').val());

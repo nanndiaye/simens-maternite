@@ -554,7 +554,44 @@ class ConsultationTable {
 		return $resultat;
 		
 	}
-	
+	public function RecuperTousLesIdAdmis($id_admission){
+		$db = $this->tableGateway->getAdapter();
+		$sql = new Sql ( $db );
+		$sQuery = $sql->select ()->from ( array (
+				'pat' => 'patient'
+		) )->columns ( array (
+				'*')
+		)->join ( array (
+				'ad' => 'admission'
+		), 'ad.id_patient = pat.ID_PERSONNE', array (
+				'*'
+			
+				
+			))	->join ( array (
+				't' => 'type_admission'
+		), 'ad.id_type_ad = t.id_type_ad' , array (
+				'type_admi'
+				
+				
+		) )->where ( array (
+				'ad.id_admission' => $id_admission,
+		
+		) );
+		$stat = $sql->prepareStatementForSqlObject ( $sQuery );
+		$resultat = $stat->execute();
+		$tabid= array();$i=1;
+		//var_dump($resultat);exit();
+		foreach ($resultat as $r){
+	$tabid[$r['id_type_ad']] = $r['type_admi'];
+			$tabid['id_type_ad'] = $r['type_admi'];
+				//$tabid[$r['id_type_ad']] = $r['type_admi'];
+			$i++;
+		}
+		//var_dump($tabid);exit();
+		return $tabid;
+		
+		
+	}
 	public function getInfoPatient($id_personne) {
 		$db = $this->tableGateway->getAdapter ();
 		$sql = new Sql ( $db );
@@ -562,17 +599,24 @@ class ConsultationTable {
 				'pat' => 'patient' 
 		) )->columns ( array (
 				'*' 
+				) )	->join ( array (
+				'ad' => 'admission' 
+		), 'ad.id_patient = pat.id_personne', array (
+				'*' 
+	
+				) )->join ( array (
+				'c' => 'consultation' 
+		),  'ad.id_admission= c.id_admission', array (
+			'*'
+				
 		) )->join ( array (
 				'pers' => 'personne' 
 		), 'pers.id_personne = pat.id_personne', array (
 				'*' 
 		 
-		) )->join ( array (
-				'ad' => 'admission' 
-		), 'ad.id_patient = pat.id_personne', array (
-				'*' 
 		) )->where ( array (
-				'pat.ID_PERSONNE' => $id_personne 
+				'pat.ID_PERSONNE' => $id_personne,
+				
 		) );
 	
 		$stat = $sql->prepareStatementForSqlObject ( $sQuery );
@@ -580,6 +624,45 @@ class ConsultationTable {
 		
 		return $resultat;
 	}
+	
+	
+	
+	
+	public function infpat($id_personne,$id_cons){
+
+		$db = $this->tableGateway->getAdapter ();
+		$sql = new Sql ( $db );
+		$sQuery = $sql->select ()->from ( array (
+				'pat' => 'patient'
+		) )->columns ( array (
+				'id_personne'
+		) )	->join ( array (
+				'ad' => 'admission'
+		), 'ad.id_patient = pat.id_personne', array (
+				'id_admission'=>'id_admission'
+		
+		) )->join ( array (
+				'c' => 'consultation'
+		),  'ad.id_admission= c.id_admission', array (
+				'ID_CONS'
+		
+		) )->join ( array (
+				'pers' => 'personne'
+		), 'pers.id_personne = pat.id_personne', array (
+				'id_personne'
+		
+		) )->where ( array (
+				'pat.ID_PERSONNE' => $id_personne,
+				'c.ID_CONS' => $id_cons,
+		) );
+		
+		$stat = $sql->prepareStatementForSqlObject ( $sQuery );
+		$resultat = $stat->execute ()->current ();
+		
+		return $resultat;
+		
+	}
+	
 	public function getPhoto($id) {
 		$donneesPatient = $this->getInfoPatient ( $id );
 		
@@ -1241,6 +1324,15 @@ class ConsultationTable {
 				'Id_cons' => 'ID_CONS',
 			
 		) );
+		
+
+// 		$select->join ( array (
+// 				'a' => 'admission'
+// 		), 'p.ID_PERSONNE = a.id_patient', array (
+// 				'Id_admission' => 'id_admission',
+					
+// 		) );
+		
 		$select->join ( array (
 				'acc' => 'accouchement'
 		), 'c.ID_CONS = acc.id_cons', array (

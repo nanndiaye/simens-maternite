@@ -36,6 +36,8 @@ use Maternite\Model\OrdonConsommable;
 use Maternite\Model\OrdonConsommableTable;
 use Maternite\Model\AntecedentPersonnelTable;
 use Maternite\Model\AntecedentPersonnel;
+use Maternite\Model\AntecedentsPersonnelsAccTable;
+use Maternite\Model\AntecedentsPersonnelsAcc;
 use Maternite\Model\AntecedentsFamiliauxTable;
 use Maternite\Model\AntecedentsFamiliaux;
 use Maternite\Model\DemandehospitalisationTable;
@@ -479,6 +481,21 @@ class Module implements AutoloaderProviderInterface {
 							$resultSetPrototype->setArrayObjectPrototype ( new AntecedentPersonnel () );
 							return new TableGateway ( 'ant_personnels_patient', $dbAdapter, null, $resultSetPrototype );
 						},
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
 						'Maternite\Model\AntecedentsFamiliauxTable' => function ($sm) {
 							$tableGateway = $sm->get ( 'AntecedentsFamiliauxPatientTableGateway' );
 							$table = new AntecedentsFamiliauxTable ( $tableGateway );

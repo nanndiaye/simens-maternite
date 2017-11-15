@@ -33,6 +33,11 @@ use Maternite\View\Helpers\TransfertPdf;
 use Maternite\View\Helpers\HospitalisationPdf;
 use Maternite\View\Helpers\SuiteDeCouchePdf;
 use Maternite\View\Helpers\ObservationPdf;
+use Archivage\Model\Consultation;
+use Zend\Console\Adapter\Windows;
+use Zend\Code\Generator\DocBlock\Tag\TagInterface;
+use Zend\Code\Generator\DocBlock\Tag;
+use Doctrine\Common\Annotations\Annotation\Target;
 //use Maternite\Model\ServiceTable;
 //use Maternite\Model\Service;
 //use Maternite\Model\TarifConsultationTable;
@@ -45,7 +50,6 @@ class AccouchementController extends AbstractActionController
     protected $evacuationTable;
     protected $referenceTable;
      protected $formPatient;
-   
      protected $formAdmission;
     protected $batimentTable;
     protected $consultationTable;
@@ -655,14 +659,17 @@ public function listePatientAjaxAction() {
 		$idService = $user ['IdService'];
 		$form = new ConsultationForm ();
 		
+		//var_dump($form);exit();
 		$formData = $this->getRequest ()->getPost ();
 		$form->setData ( $formData );
-		$id_cons = $form->get ( "id_cons" )->getValue ();//var_dump($id_cons);exit();
+		// $inf=$this->getConsultationTable()->getInfoPatient($id_pat);
+		// $id=$inf['id_cons'];
+		$id_cons = $form->get ( "id_cons" )->getValue ();//var_dump($inf);exit();
 		$accouchement = $this->getConsultationTable()->listeAccouchement($id_pat);
 		$nb= $this->getConsultationTable()->nbenf($id_pat);
 		
 		$patient = $this->getPatientTable ();
-		$unPatient = $patient->getInfoPatient( $id_pat );
+		$unPatient = $patient->getInformationPatient( $id_pat);
 	
 		return array (
 				//'nb_enf'=>$nb,
@@ -1238,16 +1245,17 @@ public function listePatientAjaxAction() {
 		
 		$formData = $this->getRequest ()->getPost ();
 		$form->setData ( $formData );
-		//var_dump($form);exit;
-		$this->getAdmissionTable ()-> addConsultation ( $form,$idService );
-		
+	        //$form->get('id_admission')->setValue($id_admission);
+		//var_dump($id_admission);exit;
+		$this->getAdmissionTable ()-> addConsultation ( $form,$idService ,$id_admission);
+	
 		$id_cons = $form->get ( "id_cons" )->getValue ();
 		
 		$this->getAdmissionTable ()->addConsultationMaternite($id_cons);
 		//$this->getAdmissionTable ()->addAdmission($donnees, $date_enregistrement, $id_employe);
 		
-		
-	
+		//var_dump($form);exit();
+	//return $form;
  		return $this->redirect()->toRoute('accouchement', array(
  				'action' =>'admission'));
 
@@ -1341,7 +1349,7 @@ public function declarerDecesAction() {
 		$this->layout()->setTemplate('layout/accouchement');
 		$user = $this->layout()->user;
 		$idService = $user ['IdService'];
-	
+		
 		$lespatients = $this->getConsultationTable()->listePatientsConsParMedecin($idService);
 		// RECUPERER TOUS LES PATIENTS AYANT UN RV aujourd'hui
 		$tabPatientRV = $this->getConsultationTable()->getPatientsRV($idService);
@@ -1404,34 +1412,123 @@ public function declarerDecesAction() {
 		$user = $this->layout()->user;
 		$IdDuService = $user ['IdService'];
 		$id_medecin = $user ['id_personne'];
-	
+		$this->getDateHelper();
 		$id_pat = $this->params()->fromQuery('id_patient', 0);
-		$id = $this->params()->fromQuery('id_cons');	
+		$id = $this->params()->fromQuery('id_cons');
+		$inf=$this->getConsultationTable()->infpat($id_pat, $id);
+		//var_dump($inf['id_admission']);exit();	
+		$id_admi = $this->params()->fromQuery('id_admission', 0);
+		//var_dump($id_admi);exit();
 		$listeMedicament = $this->getConsultationTable()->listeDeTousLesMedicaments();
 	
 		$listeForme = $this->getConsultationTable()->formesMedicaments();
 		$listetypeQuantiteMedicament = $this->getConsultationTable()->typeQuantiteMedicaments();
+		
+		// INSTANTIATION DE L'ORDONNANCE
+		$infoOrdonnance = $this->getOrdonnanceTable()->getOrdonnanceNonHospi($id);
+		
+		if ($infoOrdonnance) {
+			$idOrdonnance = $infoOrdonnance->id_document;
+			$duree_traitement = $infoOrdonnance->duree_traitement;
+			// LISTE DES MEDICAMENTS PRESCRITS
+			$listeMedicamentsPrescrits = $this->getOrdonnanceTable()->getMedicamentsParIdOrdonnance($idOrdonnance);
+			$nbMedPrescrit = $listeMedicamentsPrescrits->count();
+		} else {
+			$nbMedPrescrit = null;
+			$listeMedicamentsPrescrits = null;
+			$duree_traitement = null;
+		}
+		
+		
+		
+		//$listeForme = $this->getConsultationTable()->formesMedicaments();
+		//$listetypeQuantiteMedicament = $this->getConsultationTable()->typeQuantiteMedicaments();
 		$listeDemandesMorphologiques = $this->demandeExamensTable()->getDemandeExamensMorphologiques($id);
 		$listeDemandesBiologiques = $this->demandeExamensTable()->getDemandeExamensBiologiques($id);		
 		$listeDesExamensBiologiques = $this->demandeExamensTable()->getDemandeDesExamensBiologiques();
 		$listeDesExamensMorphologiques = $this->demandeExamensTable()->getDemandeDesExamensMorphologiques();
-		
-		
+	
 		$listeCausesComplicationObstetricale = $this->ConclusionTable()->getCausesComplication($id);
 		$Naissances = $this->getNaissanceTable()->getEnf($id);
-		$Naissance = $this->getNaissanceTable()->getNaissance($id);
+		//var_dump(count($Naissances));exit();
+		$nombre=count($Naissances);
+		//var_dump($nombre);exit();
+		$Nouveau = $this->getDevenirNouveauNeTable()->getDevenu();
+		//$Naissance = $this->getNaissanceTable()->getNaissance($id);
 		$listesDecesMaternel = $this->conclusionTable()->getCausesDeces($id);
+		$tabNv=array();$j=1;
+		$tabEnf=array();$k=1;
 		
-// 		$tabEnf=array();$k=1;
-// foreach ($Naissances as $enfant){
-// 	$tabEnf['sexe_'.$k]=$enfant['sexe'];
-// 	$tabEnf['poids_'.$k]=$enfant['poids'];
-// 	$tabEnf['cri_'.$k]=$enfant['cri'];
-// 	$k++;
-// }var_dump($tabEnf);exit();
+foreach ($Naissances as $enfant){
+	$tabEnf['sexe_'.$k]=$enfant['sexe'];
+	$tabEnf['n_sexe_'.$k]=$enfant['note_sexe'];
+	$tabEnf['poids_'.$k]=$enfant['poids'];
+	$tabEnf['n_poids_'.$k]=$enfant['note_poids'];
+	$tabEnf['taille_'.$k]=$enfant['taille'];
+	$tabEnf['n_taille_'.$k]=$enfant['note_taille'];
+	$tabEnf['cri_'.$k]=$enfant['cri'];
+	$tabEnf['n_cri_'.$k]=$enfant['note_cri'];
+	$tabEnf['malf_'.$k]=$enfant['malf'];
+	$tabEnf['n_malf_'.$k]=$enfant['note_malf'];
+	$tabEnf['sat_'.$k]=$enfant['sat'];
+	$tabEnf['n_sat_'.$k]=$enfant['note_sat'];
+	$tabEnf['vitk_'.$k]=$enfant['vit_k'];
+	$tabEnf['n_vitk_'.$k]=$enfant['note_vitk'];
+	$tabEnf['mt_'.$k]=$enfant['maintien_temp'];
+	$tabEnf['n_mt_'.$k]=$enfant['note_temp'];
+	$tabEnf['msp_'.$k]=$enfant['mise_soin_precoce'];
+	$tabEnf['n_msp_'.$k]=$enfant['note_soin_precoce'];
+	$tabEnf['sc_'.$k]=$enfant['soin_cordon'];
+	$tabEnf['n_sc_'.$k]=$enfant['note_cordon'];
+	$tabEnf['reanim_'.$k]=$enfant['reanimation'];
+	$tabEnf['n_reanim_'.$k]=$enfant['note_reanim'];
+	$tabEnf['collyre_'.$k]=$enfant['collyre'];
+	$tabEnf['n_collyre_'.$k]=$enfant['note_collyre'];
+	$tabEnf['vpo_'.$k]=$enfant['vpo'];
+	$tabEnf['n_vpo_'.$k]=$enfant['note_vpo'];
+	$tabEnf['antiT_'.$k]=$enfant['anti_tuberculeux'];
+	$tabEnf['n_antiT_'.$k]=$enfant['note_tuberculeux'];
+	$tabEnf['bcg_'.$k]=$enfant['bcg'];
+	$tabEnf['n_bcg_'.$k]=$enfant['note_bcg'];
+	$tabEnf['anti_hepa_'.$k]=$enfant['anti_hepatique'];
+	$tabEnf['n_anti_hepa_'.$k]=$enfant['note_hepa'];
+	$tabEnf['autre_vacc_'.$k]=$enfant['autre_vacc'];
+	$tabEnf['type_autre_vacc_'.$k]=$enfant['type_autre_vacc'];
+	$tabEnf['n_autre_vacc_'.$k]=$enfant['note_autre_vacc'];
+	$tabEnf['cranien_'.$k]=$enfant['perim_cranien'];
+	$tabEnf['cephalique_'.$k]=$enfant['perim_cephalique'];
+	$tabEnf['brachial_'.$k]=$enfant['perim_brachial'];
+	$tabEnf['n_perim_'.$k]=$enfant['note_perim'];
+	$tabEnf['apgar1_'.$k]=$enfant['apgar_1'];
+	$tabEnf['apgar5_'.$k]=$enfant['apgar_5'];
+	$tabEnf['n_apgar_'.$k]=$enfant['note_apgar'];
+	$tabEnf['consj1j2_'.$k]=$enfant['consult_j1_j2'];
+	$k++;
+}
+
+
+
+
+
+
+
+foreach ($Nouveau as $Nv){
+	$tabNv['viv_bien_portant_'.$j]=$Nv['viv_bien_portant'];
+	$tabNv['n_viv_bien_portant_'.$j]=$Nv['note_viv_bien_portant'];
+	$tabNv['viv_mal_form_'.$j]=$Nv['viv_mal_formation'];
+	$tabNv['n_viv_mal_form_'.$j]=$Nv['note_viv_mal_formation'];
+	$tabNv['malade_'.$j]=$Nv['malade'];
+	$tabNv['n_malade_'.$j]=$Nv['note_malade'];
+	$tabNv['decede_'.$j]=$Nv['decede'];
+	$tabNv['date_deces_'.$j]=$Nv['date_deces'];
+	$tabNv['heure_deces_'.$j]=$Nv['heure_deces'];
+	$tabNv['cause_deces_'.$j]=$Nv['cause_deces'];
+	$j++;
+}
 
 		$liste = $this->getConsultationTable()->getInfoPatient($id_pat);
 		$id_admission=$liste['id_admission'];
+		//var_dump($id_admission);exit();
 		$image = $this->getConsultationTable()->getPhoto($id_pat);
 		//$id_grossesse= $this->getGrossesseTable ()->addGrossesse();
 		$this->getDateHelper();
@@ -1444,6 +1541,7 @@ public function declarerDecesAction() {
 		 $donne_accouchement=$this->getAccouchementTable()->getAccouchement($id);
 		 $date_accouchement = $this->controlDate->convertDate( $donne_accouchement['date_accouchement']);
 		$form = new ConsultationForm ();
+		//var_dump($form);exit();
 		$donne_ant1=array(
 					
 				'enf_viv'=>$donne_ante['enf_viv'],
@@ -1465,7 +1563,8 @@ public function declarerDecesAction() {
 				
 			
 					
-		);	$form->populateValues($donne_ant1);
+		);	
+		$form->populateValues($donne_ant1);
 		
 		$donne_antecedent2=array(
 				'dystocie'=>$donne_ante2['dystocie'],
@@ -1484,6 +1583,7 @@ public function declarerDecesAction() {
 				'duree_contraception'=>$donne_ante2['duree_contraception'],
 				'note_contraception'=>$donne_ante2['note_contraception'],
 		);//var_dump($donne_antecedent2);exit();
+		
 		$form->populateValues($donne_antecedent2);
 		
 		
@@ -1491,7 +1591,7 @@ public function declarerDecesAction() {
 				'ddr'=>$donne_grossesses['ddr'],
 				'duree_grossesse'=>$donne_grossesses['duree_grossesse'],
 				'note_ddr'=>$donne_grossesses['note_ddr'],
-				'nb_cpn'=>$donne_grossesses['nb_cpn'],
+				'nb_cpn'=>$donne_grossesses['nb_cpn'] ,
 				'note_cpn'=>$donne_grossesses['note_cpn'],
 				'bb_attendu'=>$donne_grossesses['bb_attendu'],
 				'nombre_bb'=>$donne_grossesses['nombre_bb'],
@@ -1552,22 +1652,18 @@ public function declarerDecesAction() {
 					'note_transfusion' => $donne_accouchement['note_transfusion'],	
 		);//var_dump($donne_examenp);exit();
 		$form->populateValues($donnees_accouchement);
-		
-	
-		$type=$this->getTypeAdmissionTable()->getTypeAdmis($id_pat);
-		//var_dump($type);exit();
-		$id_type_ad=$type['id_type_ad'];
-		//var_dump($id_type_ad);exit();
-		$type_admission=$this->getTypeAdmissionTable()->getTypeAdmi($id_pat);			
-	  // $form->get('motif_ad')->setValueOptions($type_admission);
-	  // var_dump($type_admission);exit();
-  		if($id_type_ad==1){
+ 		//$typ_admission=$this->getTypeAdmissionTable()->getTypeAdmi($id_admission);				
+		$type_admission = $this->getConsultationTable()->RecuperTousLesIdAdmis($inf['id_admission']);
+        
+	//var_dump($id_admission);exit();
+	 
+  		if($type_admission['id_type_ad']=='Normal'){
   			//var_dump($type_admission);exit();
  			$form->get('motif_ad')->setValueOptions($type_admission);
  			
   		}
 	   
-		elseif($id_type_ad==2){
+		elseif($type_admission['id_type_ad']=='Evacuation'){
 			//var_dump($type_admi);exit();
 			$evacuation = $this->getEvacuationTable()->getEvacuationDuJour($id_pat);		
 			  $form->get('motif_ad')->setValueOptions($type_admission);
@@ -1645,28 +1741,29 @@ public function declarerDecesAction() {
 		);
 		
 		$form->get('heure_rv')->setValueOptions($heure_rv);
-	
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		$infoDiagnostics = $this->getDiagnosticsTable()->getDiagnostics($id);
 		// POUR LES DIAGNOSTICS
 		$k = 1;$tabdiagons=array();
 		foreach ($infoDiagnostics as $diagnos) {
 			$tabdiagons ['diagnostic' . $k] = $diagnos ['libelle_diagnostics'];
+			$data ['decisions']=$diagnos['decision'];
 			$k++;
 		}//$data ['decisions']=$diagnos['decision'];
-		//var_dump($data);exit();
+		$infoOrdonnance = $this->getOrdonnanceTable()->getOrdonnanceNonHospi($id);
 		
+		if ($infoOrdonnance) {
+			$idOrdonnance = $infoOrdonnance->id_document;
+			$duree_traitement = $infoOrdonnance->duree_traitement;
+			// LISTE DES MEDICAMENTS PRESCRITS
+			$listeMedicamentsPrescrits = $this->getOrdonnanceTable()->getMedicamentsParIdOrdonnance($idOrdonnance);
+			$nbMedPrescrit = $listeMedicamentsPrescrits->count();
+		} else {
+			$nbMedPrescrit = null;
+			$listeMedicamentsPrescrits = null;
+			$duree_traitement = null;
+		}
 		$data = array(
+			
 				'id_cons' => $consult->id_cons,
 				'id_medecin' => $id_medecin,
 				'id_patient' => $consult->id_patient,
@@ -1682,8 +1779,24 @@ public function declarerDecesAction() {
 				
 				//'id_grossesse' => $id_grossesse,
 		);
-		
-	    //var_dump($dat);exit();
+		$donneesHospi = $this->getDemandeHospitalisationTable()->getDemandehospitalisationParIdcons($id);
+		if ($donneesHospi) {
+			$data ['motif_hospitalisation'] = $donneesHospi->motif_demande_hospi;
+			$data ['date_fin_hospitalisation_prevue'] = $this->controlDate->convertDate($donneesHospi->date_fin_prevue_hospi);
+		}
+	
+	   // var_dump($data);exit();
+		$leRendezVous = $this->getRvPatientConsTable()->getRendezVous($id);
+		//$heure= array(	$leRendezVous->heure);
+	
+		if ($leRendezVous) {
+			$data ['heure_rv'] = $leRendezVous->heure;
+			$data ['date_rv'] = $this->controlDate->convertDate($leRendezVous->date);
+			$data ['motif_rv'] = $leRendezVous->note;
+		}
+		//$form->get('heure_rv')->setValueOptions($heure);
+	
+	
 	
 		// Pour recuper les bandelettes
 		$bandelettes = $this->getConsultationTable()->getBandelette($id);
@@ -1700,7 +1813,6 @@ public function declarerDecesAction() {
 		$listeAntMed = $this->getConsultationTable()->getAntecedentsMedicaux();
 	
 	
-	
 		
 		$form->populateValues(array_merge($tabdiagons,$data, $bandelettes, $donneesAntecedentsPersonnels, $donneesAntecedentsFamiliaux));
 		return array(
@@ -1712,6 +1824,10 @@ public function declarerDecesAction() {
 				'heure_cons' => $consult->heurecons,
 				'dateonly' => $consult->dateonly,
 				'liste_med' => $listeMedicament,
+			
+				'nb_med_prescrit' => $nbMedPrescrit,
+				'liste_med_prescrit' => $listeMedicamentsPrescrits,
+				'duree_traitement' => $duree_traitement,
 				'temoin' => $bandelettes ['temoin'],
 				'listeForme' => $listeForme,
 				'listetypeQuantiteMedicament' => $listetypeQuantiteMedicament,
@@ -1724,8 +1840,9 @@ public function declarerDecesAction() {
 				'listeDesComplication' => $listeDesComplication,
 				'listeCauseDeces'=>$listeDesCauseDeces,
 				'listeComplicationObstetricales'=>$listeCausesComplicationObstetricale,
-				  'Naissances'   =>$Naissances,
-				'Naissance'   =>$Naissance,
+				  'Naissances'   =>$tabEnf,
+				'Nouveau'   =>$tabNv,
+				 'nombre_enf' => $nombre,
 				'listesDecesMaternel'=>$listesDecesMaternel,
 				'listeDesExamensMorphologiques' => $listeDesExamensMorphologiques,
 				'listeAntMed' => $listeAntMed,
@@ -1736,7 +1853,10 @@ public function declarerDecesAction() {
 				'listeDesExamensBiologiques' => $listeDesExamensBiologiques,
 				'listeDesExamensMorphologiques' => $listeDesExamensMorphologiques,
 		);
+// 		return $this->redirect()->toRoute('accouchement', array(
+// 		            'action' => 'accoucher',
 		
+// 		        ));
 	}
 
 	public function vuePatientAdmisAction(){
@@ -2182,9 +2302,7 @@ public function declarerDecesAction() {
         }
         
        // pour les evacuation et reference
-        
-        
-        
+       
         
         // Pour recuper les bandelettes
         $bandelettes = $this->getConsultationTable()->getBandelette($id);
@@ -2237,7 +2355,7 @@ public function declarerDecesAction() {
             'listeDemandesActes' => $listeDemandesActes,
             'hopitalSelect' => $hopitalSelect,
             'nbDiagnostics' => $infoDiagnostics->count(),
-           // 'nbDonneesExamenPhysique' => $kPhysique,
+          
             'dateonly' => $consult->dateonly,
             'temoin' => $bandelettes ['temoin'],
             // 'temoinMotifAdmission' => $motif_admission['temoinMotifAdmission'],
@@ -2264,6 +2382,7 @@ public function declarerDecesAction() {
 	
 	public function updateComplementAccouchementAction()
 	{
+		$this->layout()->setTemplate('layout/accouchement');
         $this->getDateHelper();
         $Control = new DateHelper();
         $id_cons = $this->params()->fromPost('id_cons');
@@ -2280,8 +2399,18 @@ public function declarerDecesAction() {
               // **********-- MODIFICATION DES CONSTANTES --********
         // **********-- MODIFICATION DES CONSTANTES --********
         // **********-- MODIFICATION DES CONSTANTES --********
-    
-      
+    //pour limpression
+        $user = $this->layout()->user;
+        $serviceMedecin = $user ['NomService'];
+        $nomMedecin = $user ['Nom'];
+        $prenomMedecin = $user ['Prenom'];
+        $sexeMedecin = $user ['Sexe'];
+        $donneesMedecin = array(
+        		'nomMedecin' => $nomMedecin,
+        		'prenomMedecin' => $prenomMedecin,
+        		'sexeMedecin' => $sexeMedecin,
+        );
+
         // les antecedents medicaux du patient a ajouter addAntecedentMedicauxPersonne
         $this->getConsultationTable()->addAntecedentMedicaux($formData);
         $this->getConsultationTable()->addAntecedentMedicauxPersonne($formData);
@@ -2313,11 +2442,11 @@ public function declarerDecesAction() {
     $id_antecedent2 = $this->getAntecedentType2Table ()-> updateAntecedentType2($formData);
     $this->getDonneesExamensPhysiquesTable()->updateExamenPhysique($formData);
     $this->getAccouchementTable()->updateAccouchement($formData,$id_grossesse);
-     //var_dump($formData['nombre_enfant']); exit();
+     //var_dump($formData['sexe_2']); exit();
         $enfant=$formData['nombre_enfant'];
        	$tab_bebes = $this->getNaissanceTable()->saveNaissance($formData,$id_cons,$id_patient,$id_grossesse);
        	$this->getDevenirNouveauNeTable()->saveNouveauNe($formData, $id_cons, $tab_bebes);      	
-       // var_dump($enfant);exit;
+       // var_dump($formData);exit;
        
         //Nouveau ne
   
@@ -2326,6 +2455,7 @@ public function declarerDecesAction() {
       $nombre_causeDC = $this->params()->fromPost('nbcauseDC');
       $this->conclusionTable()->updateConclusionComp($formData, $id_cons,$nombre_cause,$id_patient);
       $this->conclusionTable()->updateConclusionDeces($formData, $id_cons,$nombre_causeDC,$id_patient);
+//var_dump('test');exit();
         // POUR LES ANTECEDENTS ANTECEDENTS ANTECEDENTS
         // POUR LES ANTECEDENTS ANTECEDENTS ANTECEDENTS
         // POUR LES ANTECEDENTS ANTECEDENTS ANTECEDENTS
@@ -2559,12 +2689,61 @@ public function declarerDecesAction() {
             $this->getConsultationTable()->validerConsultation($valide);
            
         }
+        
+        $donneesPatientOR = $this->getConsultationTable()->getInfoPatient($id_patient);
+        // R�cup�ration des donn�es
+        $donneesDemande ['prenome'] =$formData['prenome'];
+        
+        $donneesDemande ['heure_accouchement'] = $this->params()->fromPost('heure_accouchement');
+        $donneesDemande ['date_accouchement'] = $this->params()->fromPost('date_accouchement');
+        $donneesDemande ['user'] =$this->layout()->user;
+        
+        $donneesDemande ['viv'] = $this->params()->fromPost('sexe_1');
+        $formData = $this->getRequest()->getPost();
+       
+  
+      $donneesDemande ['nb_bb']= $formData['nombre_bb'];
+      for($i=1;$i<=$formData['nombre_bb'];$i++){
+      	$donneesDemande ['sexe_'.$i] = $this->params()->fromPost('sexe_'.$i);
+      	$donneesDemande ['viv_bien_portant_'.$i] = $this->params()->fromPost('viv_bien_portant_'.$i);
+      	$donneesDemande ['decede_'.$i] = $this->params()->fromPost('decede_'.$i);
+      }
+        $DocPdf = new DocumentPdf ();
+        // Cr�er la page
+        $page = new CertificatPdf();
+        
+    //var_dump($donneesDemande); exit();
+        
+        // Envoi Id de la consultation
+       $page->setIdConsTC($id_cons);
+       $page->setService($serviceMedecin);
+        //Envoi des donn�es du patient
+        $page->setDonneesPatientTC($donneesPatientOR);
+        //Envoi des donn�es du medecin
+        $page->setDonneesMedecinTC($donneesMedecin);
+        //Envoi les donn�es de la demande
+        $page->setDonneesDemandeTC($donneesDemande);
+        
+        // Ajouter les donnees a la page
+        $page->addNoteTC();
+        // Ajouter la page au document
+        $doc=$DocPdf->addPage($page->getPage());
+        
+        // Afficher le document contenant la page
+     
+    
+   $DocPdf->getDocument();
+  //header('Location: public/accouchement/accoucher.phtml');
 
-        return $this->redirect()->toRoute('accouchement', array(
-            'action' => 'accoucher'
-        ));
-    }
+//         return $this->redirect()->toRoute('accouchement', array(
+//             'action' => 'accoucher',
+        		
+//         ));
+	}
 
+    
+  
+    
     public function getPath(){
     	$this->path = $this->getServiceLocator()->get('Request')->getBasePath();
     	return $this->path;
@@ -2585,17 +2764,20 @@ public function declarerDecesAction() {
    
   public function impressionPdfAction()
     {
-    	
+    	 //$user =$this->layout()->setTemplate('layout/accouchement');
         $user = $this->layout()->user;
         $serviceMedecin = $user ['NomService'];
-
         $nomMedecin = $user ['Nom'];
         $prenomMedecin = $user ['Prenom'];
         $donneesMedecin = array(
             'nomMedecin' => $nomMedecin,
             'prenomMedecin' => $prenomMedecin
         );
-
+        $form = new ConsultationForm ();
+        
+         $formData = $this->getRequest()->getPost();
+       $object=$this->params('pdff');
+       var_dump($object);
         // *************************************
         // *************************************
         // ***DONNEES COMMUNES A TOUS LES PDF***
@@ -2606,6 +2788,9 @@ public function declarerDecesAction() {
 
         // *************************************
         $donneesPatientOR = $this->getConsultationTable()->getInfoPatient($id_patient);
+        
+    
+        
         // var_dump($donneesPatientOR); exit();
         // **********ORDONNANCE*****************
         // **********ORDONNANCE*****************
@@ -2638,23 +2823,26 @@ public function declarerDecesAction() {
         
         	// Afficher le document contenant la page
         	$DocPdf->getDocument();
-        }else 
-        if (isset ($_POST ['certificat'])) {
+        } 
+       if (isset ($_POST ['certificat'])) {
         	// R�cup�ration des donn�es
         	$donneesDemande ['prenome'] = $this->params()->fromPost('prenome');
         	$donneesDemande ['heure_accouchement'] = $this->params()->fromPost('heure_accouchement');
         	$donneesDemande ['date_accouchement'] = $this->params()->fromPost('date_accouchement');
         	$donneesDemande ['user'] =$this->layout()->user;
         	$donneesDemande ['vivant_viable'] = $this->params()->fromPost('viv_viable');
+        	$test = $this->getEvent()->getRouteMatch()->getParam('date_accouchement');
         	$donneesDemande ['mor_ne'] = $this->params()->fromPost('mor_ne');
-       	       	//var_dump($this->params()->fromPost('viv_viable'));exit();
+        	$sexe= $this->params()->fromPost('sexe');
+        	$formData = $this->getRequest()->getPost();
+       	       	var_dump($donneesDemande);exit();
         	// CREATION DU DOCUMENT PDF
         	// Cr�er le document
         	$DocPdf = new DocumentPdf ();
         	// Cr�er la page
         	$page = new CertificatPdf();
         
-        	// var_dump($donneesDemande); exit();
+        	//var_dump($sexe); exit();
         
         	// Envoi Id de la consultation
         	$page->setIdConsTC($id_cons);
@@ -2672,8 +2860,9 @@ public function declarerDecesAction() {
         	$DocPdf->addPage($page->getPage());
         
         	// Afficher le document contenant la page
-        	$DocPdf->getDocument();
-        }else
+        $DocPdf->getDocument();
+        }
+        else
         if (isset ($_POST ['observation_go'])) {
         	// R�cup�ration des donn�es
         	$donneesDemande ['text_observation'] = $this->params()->fromPost('text_observation');
@@ -3021,6 +3210,12 @@ public function declarerDecesAction() {
                                         // Afficher le document contenant la page
                                         $DocPdf->getDocument();
                                     }
+                                    
+                   
+                                    
+                                    
+                                    
+                                    
     }
     
 
