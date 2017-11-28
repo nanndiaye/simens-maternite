@@ -65,7 +65,7 @@ class AntecedentType2Table {
         }
         
 
-        public function getAntecedentType2($id_pat) {
+        public function getAntecedentType2($id_cons) {
         
         	//$adapter = $this->tableGateway->getAdapter ();
         	$db = $this->tableGateway->getAdapter ();
@@ -84,7 +84,7 @@ class AntecedentType2Table {
         
         	));
         	$sQuery->where ( array (
-        			'ant.id_patient' => $id_pat
+        			'ant.id_cons' => $id_cons
         
         	) );
         

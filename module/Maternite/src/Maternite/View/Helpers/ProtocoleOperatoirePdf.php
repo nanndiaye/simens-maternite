@@ -69,10 +69,10 @@ class ProtocoleOperatoirePdf {
 public function setEnTete() {
 		$baseUrl = $_SERVER ['SCRIPT_FILENAME'];
 		$tabURI = explode ( 'public', $baseUrl );
-		$imageHeader = ZendPdf\Image::imageWithPath ( $tabURI [0] . 'public\img\hospice_log.png' );
+		$imageHeader = ZendPdf\Image::imageWithPath ( $tabURI [0] . 'public\img\hrs1.png' );
 		$this->_page->drawImage ( $imageHeader, 445, 		// -x
-		$this->_pageHeight - 130, 		// -y
-		528, 		// +x
+		$this->_pageHeight - 140, 		// -y
+		548, 		// +x
 		787 ); // +y
 		
 		$this->_page->setFont ( $this->_newTime, 10 );

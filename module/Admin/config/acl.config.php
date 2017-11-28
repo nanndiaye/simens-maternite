@@ -308,7 +308,9 @@ return array(
     								'liste-accouchement-ajax'=>array('gynecologue','infirmier'),
     								'liste-accouchement'=>array('gynecologue','infirmier'),
     								'info-accouchement'=>array('gynecologue','infirmier'),
+    								'info-statistique'=>array('gynecologue','infirmier'),
     								'enfant' =>array('infirmier', 'gynecologue'),
+    								'imprimer-certifat-accouchement' =>array('infirmier', 'gynecologue'),
     						),
     						
     						/***

@@ -24,7 +24,8 @@ use Maternite\Model\OrdonnanceTable;
 use Maternite\Model\DemandeVisitePreanesthesiqueTable;
 use Maternite\Model\DemandeVisitePreanesthesique;
 use Maternite\Model\NotesExamensMorphologiquesTable;
-use Maternite\Model\NotesExamensMorphologiques;
+use Maternite\Model\NotesExamensMorphologiques;;
+use Maternite\Model\NotesExamensBiologiques;
 use Maternite\Model\DemandeTable;
 use Maternite\Model\Demande;
 
@@ -89,6 +90,7 @@ use Maternite\Model\AntecedentType1;
 use Maternite\Model\AntecedentType1Table;
 use Maternite\Model\AntecedentType2;
 use Maternite\Model\AntecedentType2Table;
+use Maternite\Model\NotesExamensBiologiqueTable;
 
 class Module implements AutoloaderProviderInterface {
 	public function getAutoloaderConfig() {
@@ -226,18 +228,19 @@ class Module implements AutoloaderProviderInterface {
 						
 							
 						
+					
+						'ServiceTableGateway' => function ($sm) {
+							$dbAdapter = $sm->get ( 'Zend\Db\Adapter\Adapter' );
+							$resultSetPrototype = new ResultSet ();
+							$resultSetPrototype->setArrayObjectPrototype ( new Service());
+							return new TableGateway ( 'service', $dbAdapter, null, $resultSetPrototype );
+						},
+						
+						
 						'Maternite\Model\ServiceTable' => function ($sm) {
 							$tableGateway = $sm->get( 'ServiceTableGateway' );
 							$table = new ServiceTable($tableGateway);
 							return $table;
-						
-						},
-						'ServiceTableGateway' => function ($sm) {
-							$dbAdapter = $sm->get ( 'Zend\Db\Adapter\Adapter' );
-							$resultSetPrototype = new ResultSet ();
-							$resultSetPrototype->setArrayObjectPrototype (new Service());
-							return new TableGateway ( 'service', $dbAdapter, null, $resultSetPrototype );
-						
 						},
 						
 						
@@ -423,6 +426,21 @@ class Module implements AutoloaderProviderInterface {
 							$resultSetPrototype->setArrayObjectPrototype ( new NotesExamensMorphologiques () );
 							return new TableGateway ( 'note_examen_morphologique', $dbAdapter, null, $resultSetPrototype );
 						},
+						
+						
+						'Maternite\Model\NotesExamensBiologiqueTable' => function ($sm) {
+							$tableGateway = $sm->get ( 'NotesExamensBiologiqueTableGateway' );
+							$table = new NotesExamensBiologiqueTable ( $tableGateway );
+							return $table;
+						},
+						'NotesExamensBiologiqueTableGateway' => function ($sm) {
+							$dbAdapter = $sm->get ( 'Zend\Db\Adapter\Adapter' );
+							$resultSetPrototype = new ResultSet ();
+							$resultSetPrototype->setArrayObjectPrototype ( new NotesExamensBiologiques () );
+							return new TableGateway ( 'note_examen_biologique', $dbAdapter, null, $resultSetPrototype );
+						},
+						
+						
 						'Maternite\Model\DemandeTable' => function ($sm) {
 							$tableGateway = $sm->get ( 'DemandeTableGateway' );
 							$table = new DemandeTable ( $tableGateway );

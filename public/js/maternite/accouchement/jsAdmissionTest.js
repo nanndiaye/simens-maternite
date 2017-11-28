@@ -62,11 +62,13 @@ function infoBulle(){
 	  });
 }
 var  oTable
+
 function initialisation(){
 	
     
 	var asInitVals = new Array();
         oTable = $('#patient').dataTable
+        
 	( {
 		"sPaginationType": "full_numbers",
 		"aLengthMenu": [5,7,10,15],
@@ -90,6 +92,7 @@ function initialisation(){
 		{
 			//markLine();
 			clickRowHandler();
+			
 		}
 						
 	} );
@@ -185,8 +188,6 @@ $('#precedent').click(function(){
 });
 
 }
-
-
 
 
 function declarer(id){

@@ -749,9 +749,30 @@ $(" #terminer2,#terminer3").click(function (){});
 //Method envoi POST pour updatecomplementconsultation
 //Method envoi POST pour updatecomplementconsultation
 function updateexecuterRequetePost(donnees) {
-    // Le formulaire monFormulaire existe deja dans la page
-       var formulaire = document.createElement("form");
-       formulaire.setAttribute('target', '_blank');
+
+	//Le formulaire pour l'impression du certificat d'accouchement
+	var formulaireImprimCertificat = document.createElement("form");
+	formulaireImprimCertificat.setAttribute("action", tabUrl[0] + "public/accouchement/imprimer-certifat-accouchement");
+	formulaireImprimCertificat.setAttribute("method", "POST");   
+	formulaireImprimCertificat.setAttribute('target', '_blank');
+	
+    document.body.appendChild(formulaireImprimCertificat);    
+    
+    for (donnee in donnees) {
+        // Ajout dynamique de champs dans le formulaire
+        var champ = document.createElement("input");
+        champ.setAttribute("type", "hidden");
+        champ.setAttribute("name", donnee);
+        champ.setAttribute("value", donnees[donnee]);
+        formulaireImprimCertificat.appendChild(champ);
+    }
+
+    // Envoi de la requete
+    formulaireImprimCertificat.submit();
+	
+    setTimeout(function(){ 
+	//Le formulaire a envoyer pour enregistrer les données
+	var formulaire = document.createElement("form");
     formulaire.setAttribute("action", tabUrl[0] + "public/accouchement/update-complement-accouchement");
     
     formulaire.setAttribute("method", "POST");   
@@ -766,9 +787,12 @@ function updateexecuterRequetePost(donnees) {
     }
 
     // Envoi de la requete
-    formulaire.submit();
+     formulaire.submit(); 
     // Suppression du formulaire
     document.body.removeChild(formulaire);
+    
+    },1000);
+    
 }
 
 /***LORS DU CLICK SUR 'Terminer' ****/
@@ -824,7 +848,7 @@ $("#terminer2, #terminer3").click(function () {
     donnees['bilan_hepatique'] = $("#bilan_hepatique").val();
     donnees['bilan_renal'] = $("#bilan_renal").val();
     donnees['bilan_inflammatoire'] = $("#bilan_inflammatoire").val();
-
+//alert( donnees['bilan_inflammatoire']);
     //**********-- ANALYSE MORPHOLOGIQUE --************
     //**********-- ANALYSE MORPHOLOGIQUE --************
     donnees['radio_'] = $("#radio").val();
@@ -958,10 +982,9 @@ $("#terminer2, #terminer3").click(function () {
     donnees['note_emmel'] =   $("#note_emmel").val();
   //  donnees['note_autre_em'] = $("#note_autre_em").val();
     //Antecedent type 2
-    
-    donnees['dystocie'] = $("#dystocie").val();
+    if($("#dystocie:checked").val()){ donnees['dystocie'] = 1; }else{ donnees['dystocie'] = 0; }
     donnees['note_dystocie'] = $("#note_dystocie").val();
-    donnees['eclampsie'] = $("#eclampsie").val();
+    if($("#eclampsie:checked").val()){ donnees['eclampsie'] = 1; }else{ donnees['eclampsie'] = 0; }
     donnees['note_eclampsie'] = $("#note_eclampsie").val();
     donnees['cycle'] = $("#regularite").val();
     donnees['quantite_regle'] = $("#quantite_regle").val();
@@ -969,7 +992,7 @@ $("#terminer2, #terminer3").click(function () {
     donnees['note_cycle'] = $("#note_cycle").val();
     donnees['duree_cycle'] = $("#duree_cycle").val();
     donnees['regularite'] = $("#regularite").val();
-    donnees['autre_go'] = $("#autre_go").val();
+    if($("#autre_go:checked").val()){ donnees['autre_go'] = 1; }else{ donnees['autre_go'] = 0; }
     donnees['note_autre'] = $("#note_autre_go").val();
     donnees['contraception'] = $("#contraception").val();
     donnees['type_contraception'] = $("#type_contraception").val();
@@ -985,9 +1008,9 @@ $("#terminer2, #terminer3").click(function () {
     donnees['bb_attendu'] = $("#bb_attendu").val();
     donnees['note_bb'] = $("#note_bb").val(); 
     donnees['nombre_bb'] = $("#nombre_bb").val();
-    donnees['vat_1'] = $("#vat_1").val();
-    donnees['vat_2'] = $("#vat_2").val();
-    donnees['vat_3'] = $("#vat_3").val();
+    if($("#vat_1:checked").val()){ donnees['vat_1'] = 1; }else{ donnees['vat_1'] = 0; }
+    if($("#vat_2:checked").val()){ donnees['vat_2'] = 1; }else{ donnees['vat_2'] = 0; }
+    if($("#vat_3:checked").val()){ donnees['vat_3'] = 1; }else{ donnees['vat_3'] = 0; }
     donnees['note_vat'] = $("#note_vat").val();
     
     
@@ -999,7 +1022,7 @@ $("#terminer2, #terminer3").click(function () {
     
     donnees['type_accouchement'] = $("#type_accouchement").val();
     donnees['motif_type'] = $("#motif_type").val();
-    
+    donnees['prenome'] = $("#prenome").val();
     
     donnees['date_accouchement'] = $("#date_accouchement").val();
     donnees['heure_accouchement'] = $("#heure_accouchement").val();
@@ -1076,7 +1099,7 @@ $("#terminer2, #terminer3").click(function () {
     }
    
     donnees['nombre_enfant'] = nbBbAttenduValeur;
-    donnees['prenome'] = $("#prenome").val();
+  
     for(var i=1 ; i<=nbBbAttenduValeur ; i++){
     	//alert($("#n_poids_"+i).val());	return false;   	
     	donnees['sexe_'+i] = $("#sexe_"+i).val();
@@ -1311,7 +1334,7 @@ $("#terminer2, #terminer3").click(function () {
         donnees['DrepanocytoseAF'] = 0;
     }
     donnees['NoteDrepanocytoseAF'] = $("#NoteDrepanocytoseAF").val();
-
+//alert($("#NoteDrepanocytoseAF").val());return false;
     donnees['htaAF'] = $("#htaAF:checked").val();
     if (!donnees['htaAF']) {
         donnees['htaAF'] = 0;
@@ -1323,7 +1346,8 @@ $("#terminer2, #terminer3").click(function () {
         donnees['autresAF'] = 0;
     }
     donnees['NoteAutresAF'] = $("#NoteAutresAF").val();
-
+  //antecedent chirurgicaux
+    donnees['text_chirur'] = $("#text_chirur").val();
     updateexecuterRequetePost(donnees);
 });
 
@@ -1534,7 +1558,10 @@ function AntecedentScript() {
             $("#dateDebDroguer, #dateFinDroguer").toggle(false);
         }
 
-        $("#DivNoteAutresHV").toggle(false);
+        if (temoinAutreHV != 1) {
+        	$("#DivNoteAutresHV").toggle(false);
+        }
+        
 
         if ($('#DateDebutAlcooliqueHV').val() == '00/00/0000') {
             $('#DateDebutAlcooliqueHV').val("");
@@ -2342,15 +2369,6 @@ function ajouterLabelAntecedentsMedicaux(nomLabel) {
     }
 
 }
-
-
-
-
-
-
-
-
-
 
 
 var scriptLabel = "";

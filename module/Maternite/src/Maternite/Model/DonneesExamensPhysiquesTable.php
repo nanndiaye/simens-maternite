@@ -96,11 +96,7 @@ class DonneesExamensPhysiquesTable {
 						'note_bdc' => $donnees ['note_bdc'],
 						'note_bassin' => $donnees ['note_bassin'],
 						'aspect' => $donnees ['examen_maternite_donnee11'],
-						
-						
-						
-						
-						
+				
 				);
 				
 				

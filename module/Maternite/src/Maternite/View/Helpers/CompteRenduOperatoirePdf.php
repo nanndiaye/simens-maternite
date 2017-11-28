@@ -74,7 +74,7 @@ class CompteRenduOperatoirePdf {
 		return $tabURI [0];
 	}
 	public function setEnTete() {
-		$imageHeader = ZendPdf\Image::imageWithPath ( $this->baseUrl () . 'public\images_icons\hospice_log.png' );
+		$imageHeader = ZendPdf\Image::imageWithPath ( $this->baseUrl () . 'public\images_icons\hrs1.png' );
 		$this->_page->drawImage ( $imageHeader, 50, 		// -x
 		$this->_pageHeight - 190, 		// -y
 		155, 		// +x

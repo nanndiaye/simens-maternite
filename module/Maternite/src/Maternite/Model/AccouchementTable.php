@@ -37,6 +37,9 @@ class AccouchementTable {
 		return $result;
 	}
 
+	
+	
+	
     public function updateAccouchement($donnees,$id_grossesse) {
 	
     	$Control = new DateHelper();
@@ -76,9 +79,115 @@ class AccouchementTable {
 					'note_transfusion' => $donnees['note_transfusion'],				
 			);//var_dump($dataac);exit();
 	
-			$this->tableGateway->insert ( $dataac );
+			return $this->tableGateway->getLastInsertValue($this->tableGateway->insert ( $dataac ));
 		
 	}
 	
-
+	
+	
+public function addPrenomme($donne,$id_acc) {
+		$db = $this->tableGateway->getAdapter ();
+		$sql = new Sql ( $db );
+		$sQuery = $sql->insert ()->into ( 'prenomme_des_bb' )->values ( array (
+				'id_accouchement' => $id_acc,
+				'prenomme'  => $donne
+		) );
+		$requete = $sql->prepareStatementForSqlObject ( $sQuery );
+		$requete->execute ();
+	}
+	
+	public function getPrenomme($id_acc) {
+		$adapter = $this->tableGateway->getAdapter ();
+		$sql = new Sql ( $adapter );
+		$select = $sql->select ();
+		$select->columns ( array (
+				'*'
+		) );
+		$select->from( array (
+				'pre' => 'prenomme_des_bb'
+		) )->join ( array (
+				'acc' => 'accouchement'
+		), 'pre.id_accouchement = acc.id_accouchement', array (
+		
+		));
+		$select->where ( array (
+				'pre.id_accouchement' => $id_acc
+		) );
+		$select->order ( 'pre.id_prenome ASC' );
+		$stat = $sql->prepareStatementForSqlObject ( $select );
+		$result = $stat->execute ()->current();
+	
+		return $result;
+	}
+	
+	
+	
+	
+	
+	//donnee pour statistiques
+	public function getNbPatientsAccouche(){
+		$adapter = $this->tableGateway->getAdapter();
+		$sql = new Sql($adapter);
+		$select = $sql->select();
+		$select->from(array('p' => 'patient'));
+		$select->join(array('gro' => 'grossesse') ,'gro.id_patient = p.id_personne');
+		$select->join(array('acc' => 'accouchement') ,'acc.id_grossesse = gro.id_grossesse');
+		return $sql->prepareStatementForSqlObject($select)->execute()->count();
+	}
+	
+	
+	public function getNbPatientsAccCes(){
+		$adapter = $this->tableGateway->getAdapter();
+		$sql = new Sql($adapter);
+		$select = $sql->select();
+		$select->from(array('p' => 'patient'));
+		$select->join(array('gro' => 'grossesse') ,'gro.id_patient = p.id_personne');
+		$select->join(array('acc' => 'accouchement') ,'acc.id_grossesse = gro.id_grossesse');
+		$select->join(array('t' => 'type_accouchement') ,'acc.id_type = t.id_type');
+		$select->where(array('t.type_accouch' => 'Cesarienne'));
+		return $sql->prepareStatementForSqlObject($select)->execute()->count();
+	}
+	
+	
+	
+	public function getNbPatientsAccN(){
+		$adapter = $this->tableGateway->getAdapter();
+		$sql = new Sql($adapter);
+		$select = $sql->select();
+		$select->from(array('p' => 'patient'));
+		$select->join(array('gro' => 'grossesse') ,'gro.id_patient = p.id_personne');
+		$select->join(array('acc' => 'accouchement') ,'acc.id_grossesse = gro.id_grossesse');
+		$select->join(array('t' => 'type_accouchement') ,'acc.id_type = t.id_type');
+		$select->where(array('t.type_accouch' => 'Normal'));
+		return $sql->prepareStatementForSqlObject($select)->execute()->count();
+	}
+	
+	
+	
+	public function getNbPatientsAccF(){
+		$adapter = $this->tableGateway->getAdapter();
+		$sql = new Sql($adapter);
+		$select = $sql->select();
+		$select->from(array('p' => 'patient'));
+		$select->join(array('gro' => 'grossesse') ,'gro.id_patient = p.id_personne');
+		$select->join(array('acc' => 'accouchement') ,'acc.id_grossesse = gro.id_grossesse');
+		$select->join(array('t' => 'type_accouchement') ,'acc.id_type = t.id_type');
+		$select->where(array('t.type_accouch' => 'Forceps'));
+		return $sql->prepareStatementForSqlObject($select)->execute()->count();
+	}
+	
+	
+	public function getNbPatientsAccV(){
+		$adapter = $this->tableGateway->getAdapter();
+		$sql = new Sql($adapter);
+		$select = $sql->select();
+		$select->from(array('p' => 'patient'));
+		$select->join(array('gro' => 'grossesse') ,'gro.id_patient = p.id_personne');
+		$select->join(array('acc' => 'accouchement') ,'acc.id_grossesse = gro.id_grossesse');
+		$select->join(array('t' => 'type_accouchement') ,'acc.id_type = t.id_type');
+		$select->where(array('t.type_accouch' => 'Ventouse'));
+		return $sql->prepareStatementForSqlObject($select)->execute()->count();
+	}
+	
+	
 }

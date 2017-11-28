@@ -58,7 +58,7 @@ class NaissanceTable {
 		) );
 		$select->join ( array (
 				'g' => 'grossesse'
-		), 'enf.id_maman = g.id_patient', array (
+		), 'enf.id_grossesse = g.id_grossesse', array (
 					
 		) );
 		$select->where ( array (

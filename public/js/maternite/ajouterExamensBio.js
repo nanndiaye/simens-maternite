@@ -158,12 +158,12 @@ function vider_examenBio_selectionne(id) {
 function desactiverResutatsBio () {
 $(function(){
 	//ON CACHE TOUT
-	$('#groupe_sanguin').toggle(false); 
-	$('#hemogramme_sanguin').toggle(false);
-	$('#bilan_hemolyse').toggle(false);
-	$('#bilan_hepatique').toggle(false); 
-	$('#bilan_renal').toggle(false);
-	$('#bilan_inflammatoire').toggle(false);
+	$('#groupe_sangui').toggle(false); 
+	$('#hemogramme_sangui').toggle(false);
+	$('#bilan_hemolys').toggle(false);
+	$('#bilan_hepatiqu').toggle(false); 
+	$('#bilan_rena').toggle(false);
+	$('#bilan_inflammatoir').toggle(false);
 });
 }
 
@@ -173,22 +173,22 @@ function chargementModificationBio (index , element , note) {
 	
 	$(function(){
 		if(element == 1) {
-			$('#groupe_sanguin').toggle(true); 
+			$('#groupe_sangui').toggle(true); 
 		} else
 			if(element == 2) {
-				$('#hemogramme_sanguin').toggle(true); 
+				$('#hemogramme_sangui').toggle(true); 
 			} else
 				if(element == 5) {
-					$('#bilan_hemolyse').toggle(true); 
+					$('#bilan_hemolys').toggle(true); 
 				} else
 					if(element == 3) {
-						$('#bilan_hepatique').toggle(true); 
+						$('#bilan_hepatiqu').toggle(true); 
 					} else
 						if(element == 4) {
-							$('#bilan_renal').toggle(true); 
+							$('#bilan_rena').toggle(true); 
 						} else
 							if(element == 6) {
-								$('#bilan_inflammatoire').toggle(true); 
+								$('#bilan_inflammatoir').toggle(true); 
 							}
 			
 	});
@@ -229,21 +229,21 @@ $(function(){
 	        success: function(data) {
 	        	
 	        	//ON CACHE TOUT
-	        	$('#groupe_sanguin').toggle(false); 
-        		$('#hemogramme_sanguin').toggle(false);
-        		$('#bilan_hemolyse').toggle(false);
-        		$('#bilan_hepatique').toggle(false); 
-        		$('#bilan_renal').toggle(false);
-	        	$('#bilan_inflammatoire').toggle(false);
+	        	$('#groupe_sangui').toggle(false); 
+        		$('#hemogramme_sangui').toggle(false);
+        		$('#bilan_hemolys').toggle(false);
+        		$('#bilan_hepatiqu').toggle(false); 
+        		$('#bilan_rena').toggle(false);
+	        	$('#bilan_inflammatoir').toggle(false);
         		
 	        	//ON AFFICHE UNIQUEMENT CEUX AYANT ETE DEMANDE
 	        	for(var k = 1; k<=nbListeExamenBio(); k++){
-	        		if(examensBio[k] == 1){ $('#groupe_sanguin').toggle(true); } 
-	        		if(examensBio[k] == 2){ $('#hemogramme_sanguin').toggle(true); } 
-	        		if(examensBio[k] == 5){ $('#bilan_hemolyse').toggle(true); } 
-	        		if(examensBio[k] == 3){ $('#bilan_hepatique').toggle(true); } 
-	        		if(examensBio[k] == 4){ $('#bilan_renal').toggle(true); } 
-	        		if(examensBio[k] == 6){ $('#bilan_inflammatoire').toggle(true); } 
+	        		if(examensBio[k] == 1){ $('#groupe_sangui').toggle(true); } 
+	        		if(examensBio[k] == 2){ $('#hemogramme_sangui').toggle(true); } 
+	        		if(examensBio[k] == 5){ $('#bilan_hemolys').toggle(true); } 
+	        		if(examensBio[k] == 3){ $('#bilan_hepatiqu').toggle(true); } 
+	        		if(examensBio[k] == 4){ $('#bilan_rena').toggle(true); } 
+	        		if(examensBio[k] == 6){ $('#bilan_inflammatoir').toggle(true); } 
 	        	}
 	        	
 	        	

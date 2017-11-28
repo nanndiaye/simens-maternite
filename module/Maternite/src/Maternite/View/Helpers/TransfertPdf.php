@@ -5,7 +5,6 @@ namespace Maternite\View\Helpers;
 use ZendPdf;
 use ZendPdf\Page;
 use ZendPdf\Font;
-use Maternite\Model\Consultation;
 use Maternite\View\Helpers\DateHelper;
 
 class TransfertPdf {
@@ -38,7 +37,7 @@ class TransfertPdf {
 		$this->_page = new Page ( 650, 700 );
 		
 		$this->_yPosition = 610;
-		$this->_leftMarg = 50;
+		$this->_leftMargin = 50;
 		$this->_pageHeight = $this->_page->getHeight ();
 		$this->_pageWidth = $this->_page->getWidth ();
 		/**
@@ -59,29 +58,35 @@ class TransfertPdf {
 	}
 public function addNoteT() {
 		$this->_page->saveGS ();
-		var_dump('test');exit();
-		$this->setEnTete ();
-		$this->getNoteR ();
-		$this->getPiedPage ();
 		
+ 		$this->setEnTete ();	
+ 		
+ 		$this->getNoteT();
+ 		$this->getPiedPage ();
 		$this->_page->restoreGS ();
+		
 	}
 	public function setEnTete() {
+		
 		$baseUrl = $_SERVER ['SCRIPT_FILENAME'];
 		$tabURI = explode ( 'public', $baseUrl );
-		$imageHeader = ZendPdf\Image::imageWithPath ( $tabURI [0] . 'public\img\hospice_log.png' );
-		$this->_page->drawImage ( $imageHeader, 505, 		// -x
+		$imageHeader = ZendPdf\Image::imageWithPath ( $tabURI [0] . 'public\images_icons\hrs1.png' );
+		$this->_page->drawImage ( $imageHeader, 505, 
 		$this->_pageHeight - 130, 		// -y
 		600, 		// +x
 		650 ); // +y
 		
 		$this->_page->setFont ( $this->_newTime, 10 );
-		$this->_page->drawText ( 'République du Sénégal', $this->_leftMargin, $this->_pageHeight - 50 );
+		
+		$this->_page->drawText ( 'Republique du Sénégal', $this->_leftMargin, $this->_pageHeight - 50 );
+		//var_dump('test');exit();
 		$this->_page->setFont ( $this->_newTime, 10 );
+		
 		$this->_page->drawText ( 'Ministère de la santé et de l\'action sociale', $this->_leftMargin, $this->_pageHeight - 65 );
-		$this->_page->setFont ( $this->_newTime, 10 );
+		$this->_page->setFont ( $this->_newTime, 10 );	
 		$this->_page->drawText ( 'Centre Hospitalier Règional de St-Louis', $this->_leftMargin, $this->_pageHeight - 80 );
 		$this->_page->setFont ( $this->_newTime, 10 );
+		
 		$this->_page->drawText ( 'Service: ' . iconv ( 'UTF-8', 'ISO-8859-1', $this->_Service ), $this->_leftMargin, $this->_pageHeight - 95 );
 		$font = ZendPdf\Font::fontWithName ( ZendPdf\Font::FONT_TIMES_ROMAN );
 		$this->_page->setFont ( $font, 8 );
@@ -98,6 +103,7 @@ public function addNoteT() {
 		$this->_page->setLineWidth ( 1 );
 		$this->_page->drawLine ( $this->_leftMargin, $this->_yPosition, $this->_pageWidth - $this->_leftMargin, $this->_yPosition );
 		$this->_yPosition -= 15;
+		
 	}
 	public function setService($service) {
 		$this->_Service = $service;
@@ -157,7 +163,7 @@ public function addNoteT() {
 		
 		$today = new \DateTime ();
 		$date_actu = $today->format ( 'Y-m-d' );
-		
+		//var_dump('test');exit();
 		// -----------------------------------------------
 		$this->_page->setFont ( $this->_newTimeGras, 9 );
 		$this->_page->drawText ( 'PRENOM & NOM :', $this->_leftMargin + 155, $this->_yPosition );

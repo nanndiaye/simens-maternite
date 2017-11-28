@@ -641,7 +641,7 @@ class ConsultationForm extends Form {
 				'name' => 'bilan_hemolyse',
 				'type' => 'Text',
 				'options' => array (
-						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Bilan de l\'hï¿½mostase:' ) 
+						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Bilan de l\'hémostase:' ) 
 				),
 				'attributes' => array (
 						//'readonly' => 'readonly',
@@ -652,7 +652,7 @@ class ConsultationForm extends Form {
 				'name' => 'bilan_hepatique',
 				'type' => 'Text',
 				'options' => array (
-						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Bilan hï¿½patique:' ) 
+						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Bilan hépatique:' ) 
 				),
 				'attributes' => array (
 						//'readonly' => 'readonly',
@@ -663,7 +663,7 @@ class ConsultationForm extends Form {
 				'name' => 'bilan_renal',
 				'type' => 'Text',
 				'options' => array (
-						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Bilan rï¿½nal:' ) 
+						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Bilan rénal:' ) 
 				),
 				'attributes' => array (
 						//'readonly' => 'readonly',

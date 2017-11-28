@@ -69,7 +69,7 @@ class TraitementInstrumentalPdf {
 	public function setEnTete() {
 		$baseUrl = $_SERVER ['SCRIPT_FILENAME'];
 		$tabURI = explode ( 'public', $baseUrl );
-		$imageHeader = ZendPdf\Image::imageWithPath ( $tabURI [0] . 'public\img\polycliniquelogo.png' );
+		$imageHeader = ZendPdf\Image::imageWithPath ( $tabURI [0] . 'public\images_icons\hrs1.png' );
 		$this->_page->drawImage ( $imageHeader, 505, 		// -x
 		$this->_pageHeight - 130, 		// -y
 		600, 		// +x

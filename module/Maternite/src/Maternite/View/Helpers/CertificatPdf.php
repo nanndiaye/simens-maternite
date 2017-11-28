@@ -74,10 +74,10 @@ class CertificatPdf {
 public function setEnTete() {
 		$baseUrl = $_SERVER ['SCRIPT_FILENAME'];
 		$tabURI = explode ( 'public', $baseUrl );
-		$imageHeader = ZendPdf\Image::imageWithPath ( $tabURI [0] . 'public\img\hospice_log.png' );
+		$imageHeader = ZendPdf\Image::imageWithPath ( $tabURI [0] . 'public\images_icons\hrs1.png' );
 		$this->_page->drawImage ( $imageHeader, 445, 		// -x
-		$this->_pageHeight - 130, 		// -y
-		528, 		// +x
+		$this->_pageHeight - 140, 		// -y
+		548, 		// +x
 		787 ); // +y
 		
 		$this->_page->setFont ( $this->_newTime, 10 );
@@ -177,18 +177,18 @@ public function setEnTete() {
 				$this->_leftMargin, 
 				$this->_yPosition 
 		);
-		if($this->_DonneesMedecin ['sexeMedecin']=='Masculin'){
-		$this->_page->setFont ( $this->_newStyle, 12 );
-		$this->_page->drawText ( 'Mr '.$this->_DonneesMedecin ['prenomMedecin'].'  '.$this->_DonneesMedecin ['nomMedecin'], 
-				$this->_leftMargin + 100, 
-				$this->_yPosition );
-		}
-		else{
+// 		if($this->_DonneesMedecin ['sexeMedecin']=='Masculin'){
+// 		$this->_page->setFont ( $this->_newStyle, 12 );
+// 		$this->_page->drawText ( 'Mr '.$this->_DonneesMedecin ['prenomMedecin'].'  '.$this->_DonneesMedecin ['nomMedecin'], 
+// 				$this->_leftMargin + 100, 
+// 				$this->_yPosition );
+// 		}
+		//else{
 			$this->_page->setFont ( $this->_newStyle, 12 );
-			$this->_page->drawText ( 'Mme '.$this->_DonneesMedecin ['prenomMedecin'].'  '.$this->_DonneesMedecin ['nomMedecin'],
+			$this->_page->drawText ( '',//.$this->_DonneesMedecin ['prenomMedecin'].'  '.$this->_DonneesMedecin ['nomMedecin'],
 					$this->_leftMargin + 100,
 					$this->_yPosition );
-		}
+		//}
 		$this->_yPosition -= $noteLineHeight;
 		
 		$this->_page->setFont ( $this->_newTime, 13 );
@@ -277,6 +277,21 @@ public function setEnTete() {
 				$this->_leftMargin + 290,
 				$this->_yPosition );
 		$this->_yPosition -= $noteLineHeight;
+		$this->_page->setFont ( $this->_newTime, 13 );
+		$this->_page->drawText ('Sexe ',
+				$this->_leftMargin+70,
+				$this->_yPosition
+		);
+		$this->_page->setFont ( $this->_newTime, 13 );
+		$this->_page->drawText ('Vivant et bien Portant ',
+				$this->_leftMargin +150,
+				$this->_yPosition
+		);
+		$this->_page->setFont ( $this->_newTime, 13 );
+		$this->_page->drawText ('Mort-Né ',
+				$this->_leftMargin+330,
+				$this->_yPosition
+		);
 		for($i=1;$i<=$this->_DonneesDemande ['nb_bb'];$i++){
 		$this->_yPosition -= $noteLineHeight;
 		
@@ -285,35 +300,23 @@ public function setEnTete() {
 				$this->_leftMargin,
 				$this->_yPosition
 		);
-		$this->_page->setFont ( $this->_newTime, 13 );
-		$this->_page->drawText ('Sexe :',
-				$this->_leftMargin+75,
-				$this->_yPosition
-		);
+		
 $this->_page->setFont ( $this->_newStyle, 12 );
 		$this->_page->drawText ( $this->_DonneesDemande ['sexe_'.$i],
-				$this->_leftMargin +110,
+				$this->_leftMargin +80,
 				$this->_yPosition );
 		
-		$this->_page->setFont ( $this->_newTime, 13 );
-		$this->_page->drawText ('Vivant et bien Portant :',
-				$this->_leftMargin +150,
-				$this->_yPosition
-		);
+		
 		$this->_page->setFont ( $this->_newStyle, 12 );
 		$this->_page->drawText ( $this->_DonneesDemande  ['viv_bien_portant_'.$i],
-				$this->_leftMargin + 278,
+				$this->_leftMargin + 200,
 				$this->_yPosition );
 		//$this->_yPosition -= $noteLineHeight;
-		$this->_page->setFont ( $this->_newTime, 13 );
-		$this->_page->drawText ('Mort-Né :',
-				$this->_leftMargin+330,
-				$this->_yPosition
-		);
+		
 		
 		$this->_page->setFont ( $this->_newStyle, 12 );
 		$this->_page->drawText ( $this->_DonneesDemande  ['decede_'.$i],
-				$this->_leftMargin + 390,
+				$this->_leftMargin + 340,
 				$this->_yPosition );
 		}
 

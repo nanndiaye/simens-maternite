@@ -49,7 +49,8 @@ class DevenirNouveauNeTable {
 	
 	
 	
-	public function getDevenu() {
+	public function getDevenu($id_cons) {
+		
 		$adapter = $this->tableGateway->getAdapter ();
 		$sql = new Sql ( $adapter );
 		$select = $sql->select ();
@@ -64,10 +65,15 @@ class DevenirNouveauNeTable {
 		), 'nv.id_bebe = enf.id_bebe', array (
 					
 		) );
-// 		$select->where ( array (
-// 				'enf.id_bebe' => 'nv.id_bebe',
+$select->join ( array (
+				'g' => 'grossesse'
+		), 'enf.id_grossesse = g.id_grossesse', array (
+					
+		) );
+		$select->where ( array (
+				'g.id_cons' => $id_cons,
 	
-// 		) );
+		) );
 		$select->order ( 'id_devenir_nouveau_ne ASC' );
 		$stat = $sql->prepareStatementForSqlObject ( $select );
 		$result = $stat->execute ();
