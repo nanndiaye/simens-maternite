@@ -31,32 +31,6 @@ $(window).load(function () {
 <div id="contenuInterface" >
 <div id="contenu" >
 
-
-    <script type="text/javascript"> 
-     var ordonnees = [];
-     var abcisses  = [];
-     var i = 1;
-     var j = 1;
-
-  
-
-
-
-
-
-
-     
-
-
-
-
-
-
-
-
-
-     
-    </script>
     
 
     <script >
@@ -67,18 +41,6 @@ $(window).load(function () {
     var nbPatientAccF = <?php echo $this->nbPatientAccF; ?> //Nombre de patientes accouchées par forceps
     var nbPatientAccV = <?php echo $this->nbPatientAccV; ?> //Nombre de patientes accouchées par Ventouse
     var nbPatientAccM = <?php echo $this->nbPatientAccM; ?>//Nombre de patientes accouchées par manoeuvre
-    $(document).ready(function($) {
-
-
-
-	var Pile = [];
-
-	for(var k = 1 ; k < ordonnees.length ; k++){
-		var tabValeur = { y: abcisses[k], label: ordonnees[k] };
-		Pile.push(tabValeur);
-	}
-
-
 
     </script>
 	
@@ -136,33 +98,7 @@ $(window).load(function () {
 	<table style="width: 60%; background:orange; float:left;">
 	   <tr style="width: 60%; height: 250px;">
 	     <td> 
-	     
-	     
-	     
-	     
-	     
-	     
-	     <script type="text/javascript">
-//           window.onload = function () {
-// 	      var chart = new CanvasJS.Chart("chartContainer",
-// 	      {
-// 		title:{
-// 			text: "Pie Chart"
-// 		},
-// 		data: [
-// 		{
-// 			type: "pie",
-// 			dataPoints: [
-// 				{  y: 4, indexLabel: "Naturel" },
-// 				{  y: 3, indexLabel: "Naturel" },
-// 				{  y: 1, indexLabel: "Naturel" },
-// 				{  y: 5, indexLabel: "Naturel" },
-// 			]
-// 		}
-// 		]
-// 	});
-// 	chart.render();
-// }
+	         <script >
 
 	     $(document).ready(function($) {
 
@@ -176,10 +112,11 @@ $(window).load(function () {
     		{
     			type: "pie",
     			dataPoints: [
-    				{  y: nbPatientAccV, indexLabel: "Naturel" },
-    				{  y:nbPatientAccCes, indexLabel: "Naturel" },
-    				{  y: 1, indexLabel: "Naturel" },
-    				{  y: 5, indexLabel: "Naturel" },
+    				{  y: nbPatientAccN, indexLabel: "Naturels" },
+    				{  y: nbPatientAccV, indexLabel: "Ventouses" },
+    				{  y: nbPatientAccF, indexLabel: "Forceps" },
+    				{  y: nbPatientAccM, indexLabel: "Manoeuvres" },
+    				{  y: nbPatientAccCes, indexLabel: "Cesariennes" },
     			]
     		}
     		]
@@ -189,7 +126,7 @@ $(window).load(function () {
 
 
 	
-       Accouchement()  
+       Accouchement();  
 	     });       
 	</script>
 	     
