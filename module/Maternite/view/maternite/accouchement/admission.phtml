@@ -11,8 +11,6 @@ echo  $this->headScript()->appendFile($this->basePath().'/js/plugins/pikachoose/
 
 <?php echo $this->headLink()->appendStylesheet($this->basePath().'/js/plugins/fancybox/source/jquery.fancybox.css');?>
 <?php
-//echo $this->headScript()->appendFile($this->basePath().'/js/mesjs/accouchement/complementcons_accordeon_controle.js');
-
 echo $this->headLink()->appendStylesheet($this->basePath().'/css/mescss/bloquerDate.css'); //DatePicker
 echo $this->headScript()->appendFile($this->basePath().'/js/mesjs/bloquerDate.js'); //Pour bloquer certaines dates?>
 
@@ -106,10 +104,6 @@ initialisation();
 
 <!-- LES BOUTONS "TERMINER" ou "VALIDER" -->
 
-
-
-
-
     <div id="declarer_deces">
           <a href="" id="precedent" style="text-decoration: none; font-family: police2; width:50px; margin-left:30px;">
 	        <img style=" display: inline; " src='<?php echo $this->basePath().'/images_icons/transfert_gauche.PNG'?>' alt='Constantes' title="Rechercher" />
@@ -132,73 +126,46 @@ initialisation();
 		        echo $this->form()->openTag($form);
 		       ?>
 		  <?php echo $this->formhidden($form->get('id_patient')); ?>    
-		   <?php //echo $this-> $this->formHidden($form->get('id_admission'));?>
-		    <?php //echo $this-> $this->formHidden($form->get('id_grossesse'));?>
 		  <div id="info_bebe" style='width: 100%; margin-top:10px; height:400px;'>
-		  
                <div style="float:left; width:20%; height:10%;">
 		       </div>
-		       
-		     
 		         <div  style='width: 77%; float:left;'>
 		        
-		         <table id="form_patient" style="width:100%;">
-		              
-		    <!--    <div  style='font-family: police2;  height: 30px; padding-top: 16px; border-radius: unset;  background-color:#eeeeee; font-size: 17px; font-weight: bold;' >Antecedents </div> --> 
-
-		          <tr></tr>
-		               <!--  <div id='motifsAdmissionConstanteClick' class='tabTitle'>TYPE D'
-			ADMISSION </div> -->
-		                  
-		             
-		         <tr>
-
-	                       <td class=""  style=" " >
-		                 
-		                  
-		                   <div ><?php echo $this->formRow($form->get('motif_ad'));?></div>
-		              </td >
-		               
-		                   <td   class=" MotifAdmission"  style='width: 33%;'><?php echo $this->formRow($form->get('motif'));?></td>
-		                   <td   class=" Reference" id="ref" style='width: 33%;'><?php echo $this->formRow($form->get('motif_reference'));?></td>
-		                   <td class= " MotifAdmission" style='width: 33%;'><?php echo $this->formRow($form->get('service_origine'));?></td>
-		                   <td class= " reference" style='width: 33%;'><?php echo $this->formRow($form->get('service_origine_ref'));?></td>          
+		       <table id="form_patient" style="width:100%;">
+		      <tr class=""> 
+		                   <td class=""  style="width:30%; " >
+		                      <div ><?php echo $this->formRow($form->get('sous_dossier'));?></div></td >
+		                   <td   class=" "  style='width: 33%;'><?php echo $this->formRow($form->get('type_admission'));?></td>
+		                   <td   class=" " id="" style='width: 33%;'><?php echo $this->formRow($form->get('motif_admission'));?></td>
 		              </tr> 
-		             
+		          <tr class=""> 
+		                   <td class="MotifAdmission"  style="width:30%; " >
+		                      <div ><?php echo $this->formRow($form->get('motif_transfert_evacuation'));?></div></td >
+		                      <td   class="MotifAdmission "  style='width: 33%;'><?php echo $this->formRow($form->get('service_dorigine'));?></td>
+		                       <td   class=" MotifAdmission"  style='width: 33%;'><?php echo $this->formRow($form->get('moyen_transport'));?></td>
+		              </tr> 
 		          
-		              </table>
-		              <br />
-		              <table id="form_patient" style="width:100%;">
-		           	      <!--  <div style='font-family: police2;  height: 30px; padding-top: 16px; border-radius: unset;  background-color:#eeeeee; font-size: 17px; font-weight: bold;'> Grossesse </div> -->
-		             
-		             
-		              </table>
+		           
+		             </table>
 		      
 		     
 		       <div style="float:left; width:5%;">
 		       </div>
 		       <script>
 		       $('.MotifAdmission').toggle(false);
-		       $('.Reference').toggle(false);
 		       function getMotif(val){ 
 		       //	alert(val);
-		       	if(val==1){
+		       	if(val=='Normal'){
 		       		$("#motif").html("Type d\'admission");
 		       		$('.MotifAdmission').fadeOut();
-		       		$('.Reference').fadeOut();
-		       	}else if (val==2){
-		       		$("#motif span span").html("");
-		       		$('.MotifAdmission').fadeIn();
-		       		$('.Reference').fadeOut();
 		       	}	
 		       	else {
 		       		$("#motif span span").html("");
-		       		$('.MotifAdmission').fadeOut();
-		       		$('.Reference').fadeIn();
+		       		$('.MotifAdmission').fadeIn();
 		       	}
 		       }
 
-		       getExamenMaterniteDonnee3($('#motif_ad').val());
+		       getMotif($('#type_admission').val());
              /****** MASK DE SAISIE ********/
           	 maskSaisie();
             </script>

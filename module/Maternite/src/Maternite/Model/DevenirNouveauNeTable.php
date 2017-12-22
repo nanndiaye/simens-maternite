@@ -104,12 +104,17 @@ $select->join ( array (
 					'note_viv_mal_formation' => $values['n_viv_mal_form_'. $i],
 					'malade' => $values['malade_'. $i],
 					'note_malade' => $values['n_malade_'. $i],
-					'decede' => $values ['decede_'. $i],
-					'date_deces' => $date_dece,
-					'heure_deces' => $values['heure_deces_'. $i],
-					'cause_deces' => $values['cause_deces_'. $i],					
+					'decede' => $values ['decede_'. $i],					
 					'id_bebe' => $tabIdEnfant[$i-1],						
 			);
+			
+			
+			if($values['decede_'. $i]=='Oui'){
+				$datanouveauNe['date_deces'] =  $date_dece;
+				$datanouveauNe['heure_deces' ]= $values['heure_deces_'. $i];
+				$datanouveauNe['cause_deces' ]=$values['cause_deces_'. $i];
+			}
+			
 			$this->tableGateway->insert ( $datanouveauNe );}
 	}
 }

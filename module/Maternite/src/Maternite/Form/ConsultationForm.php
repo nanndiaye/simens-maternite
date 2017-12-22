@@ -22,7 +22,6 @@ class ConsultationForm extends Form {
 						'label' => 'Code consultation' 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'value' => 's-c-' . $date,
 						'id' => 'id_cons' 
 				) 
@@ -34,7 +33,6 @@ class ConsultationForm extends Form {
 						'label' => 'Code grossesse' 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'value' => 's-g-' . $date,
 						'id' => 'id_grossesse' 
 				) 
@@ -141,7 +139,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Toucher vaginale' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'examen_maternite_donnee1' 
 				) 
 		) );
@@ -152,7 +149,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Hauteur uterine' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'examen_maternite_donnee2' 
 				) 
 		) );
@@ -163,7 +159,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Position Foeutus' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'examen_maternite_donnee3' 
 				) 
 		) );
@@ -174,7 +169,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Vatalite foeutus' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'examen_maternite_donnee4' 
 				) 
 		) );
@@ -185,7 +179,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'donnee 5' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'examen_maternite_donnee5' 
 				) 
 		) );
@@ -196,7 +189,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'donnee 6' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'examen_maternite_donnee6' 
 				) 
 		) );
@@ -207,7 +199,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'donnee 7' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'examen_maternite_donnee7' 
 				) 
 		) );
@@ -218,7 +209,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'donnee 8' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'examen_maternite_donnee8' 
 				) 
 		) );
@@ -229,7 +219,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'donnee 9' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'examen_maternite_donnee9' 
 				) 
 		) );
@@ -249,7 +238,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Doppler couleur, pulsï¿½, continu, tissulaire:' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'doppler_couleur_pulse' 
 				) 
 		) );
@@ -261,7 +249,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Echographie de stress:' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'echographie_de_stress' 
 				) 
 		) );
@@ -273,7 +260,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Holter ECG:' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'holter_ecg' 
 				) 
 		) );
@@ -285,7 +271,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Holter tensionnel:' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'holter_tensionnel' 
 				) 
 		) );
@@ -296,7 +281,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Fibroscopie bronchique:' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'fibroscopie_bronchique' 
 				) 
 		) );
@@ -308,7 +292,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Fibroscopie gastrique:' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'fibroscopie_gastrique' 
 				) 
 		) );
@@ -320,7 +303,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Colposcopie:' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'colposcopie' 
 				) 
 		) );
@@ -332,7 +314,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Echographie gynï¿½cologique:' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'echographie_gynecologique' 
 				) 
 		) );
@@ -344,7 +325,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Echographie obstï¿½trique:' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'echographie_obstetrique' 
 				) 
 		) );
@@ -356,7 +336,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'CPN:' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'cpn' 
 				) 
 		) );
@@ -368,7 +347,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Consultation sï¿½nologie:' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'consultation_senologie' 
 				) 
 		) );
@@ -380,7 +358,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Plannification familiale:' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'plannification_familiale' 
 				) 
 		) );
@@ -392,7 +369,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'ECG:' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'ecg' 
 				) 
 		) );
@@ -404,7 +380,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'EEG:' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'eeg' 
 				) 
 		) );
@@ -416,7 +391,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'EFR:' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'efr' 
 				) 
 		) );
@@ -428,7 +402,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'EMG:' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'emg' 
 				) 
 		) );
@@ -440,7 +413,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Circoncision:' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'circoncision' 
 				) 
 		) );
@@ -452,7 +424,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Vaccination:' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'vaccination' 
 				) 
 		) );
@@ -464,7 +435,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Soins infirmiers:' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'soins_infirmiers' 
 				) 
 		) );
@@ -477,7 +447,6 @@ class ConsultationForm extends Form {
 						'label' => 'Groupe Sanguin: ' 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'groupe_sanguin' 
 				) 
 		) );
@@ -488,7 +457,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Hemogramme sanguin' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'hemogramme_sanguin' 
 				) 
 		) );
@@ -496,10 +464,9 @@ class ConsultationForm extends Form {
 				'name' => 'bilan_hemolyse',
 				'type' => 'Text',
 				'options' => array (
-						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Bilan de l\'hï¿½mostase:' ) 
+						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Bilan de l\'hémostase:' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'bilan_hemolyse' 
 				) 
 		) );
@@ -507,10 +474,9 @@ class ConsultationForm extends Form {
 				'name' => 'bilan_hepatique',
 				'type' => 'Text',
 				'options' => array (
-						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Bilan hï¿½patique:' ) 
+						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Bilan hépatique:' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'bilan_hepatique' 
 				) 
 		) );
@@ -518,10 +484,9 @@ class ConsultationForm extends Form {
 				'name' => 'bilan_renal',
 				'type' => 'Text',
 				'options' => array (
-						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Bilan rï¿½nal:' ) 
+						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Bilan rénal:' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'bilan_renal' 
 				) 
 		) );
@@ -532,7 +497,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Bilan inflammatoire:' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'bilan_inflammatoire' 
 				) 
 		) );
@@ -547,7 +511,6 @@ class ConsultationForm extends Form {
 						'label' => 'Radio:' 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'radio' 
 				) 
 		) );
@@ -566,7 +529,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Echographie: ' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'ecographie' 
 				) 
 		) );
@@ -585,7 +547,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Fibroscopie: ' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'fibrocospie' 
 				) 
 		) );
@@ -604,7 +565,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Scanner: ' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'scanner' 
 				) 
 		) );
@@ -623,7 +583,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'IRM: ' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'irm' 
 				) 
 		) );
@@ -649,7 +608,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Diagnostic 1: ' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'diagnostic1' 
 				) 
 		) );
@@ -660,7 +618,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Diagnostic 2: ' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'diagnostic2' 
 				) 
 		) );
@@ -671,7 +628,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Diagnostic 3: ' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'diagnostic3' 
 				) 
 		) );
@@ -682,7 +638,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Diagnostic 4: ' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'diagnostic4' 
 				) 
 		) );
@@ -702,7 +657,6 @@ class ConsultationForm extends Form {
 						'label' => 'Date' 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'date_cons' 
 				) 
 		) );
@@ -714,7 +668,6 @@ class ConsultationForm extends Form {
 				),
 				'attributes' => array (
 						'class' => 'poids_only_numeric',
-						'readonly' => 'readonly',
 						'id' => 'poids' 
 				) 
 		) );
@@ -726,7 +679,6 @@ class ConsultationForm extends Form {
 				),
 				'attributes' => array (
 						'class' => 'taille_only_numeric',
-						'readonly' => 'readonly',
 						'id' => 'taille' 
 				) 
 		) );
@@ -737,7 +689,6 @@ class ConsultationForm extends Form {
 				// 'label' => iconv ( 'UTF-8','ISO-8859-1', 'TempÃ©rature (Â°C)' )
 				'attributes' => array (
 						'class' => 'temperature_only_numeric',
-						'readonly' => 'readonly',
 						'id' => 'temperature' 
 				) 
 		) );
@@ -750,7 +701,6 @@ class ConsultationForm extends Form {
 				),
 				'attributes' => array (
 						'class' => 'tension_only_numeric',
-						'readonly' => 'readonly',
 						'id' => 'tension' 
 				) 
 		) );
@@ -792,7 +742,6 @@ class ConsultationForm extends Form {
 				),
 				'attributes' => array (
 						'class' => 'pouls_only_numeric',
-						'readonly' => 'readonly',
 						'id' => 'pouls' 
 				) 
 		) );
@@ -803,7 +752,6 @@ class ConsultationForm extends Form {
 				// 'label' => iconv('ISO-8859-1', 'UTF-8','FrÃ©quence respiratoire')
 				'attributes' => array (
 						'class' => 'frequence_only_numeric',
-						'readonly' => 'readonly',
 						'id' => 'frequence_respiratoire' 
 				) 
 		) );
@@ -814,7 +762,6 @@ class ConsultationForm extends Form {
 				// 'label' => iconv('ISO-8859-1', 'UTF-8', 'GlycÃ©mie capillaire (g/l)')
 				'attributes' => array (
 						'class' => 'glycemie_only_numeric',
-						'readonly' => 'readonly',
 						'id' => 'glycemie_capillaire' 
 				) 
 		) );
@@ -826,7 +773,6 @@ class ConsultationForm extends Form {
 				),
 				'attributes' => array (
 						'class' => 'bu_only_numeric',
-						'readonly' => 'readonly',
 						'id' => 'bu' 
 				) 
 		) );
@@ -974,7 +920,6 @@ class ConsultationForm extends Form {
 						'label' => 'Diagnostic :' 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'diagnostic_traitement_chirurgical' 
 				) 
 		) );
@@ -990,7 +935,6 @@ class ConsultationForm extends Form {
 						) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'type_anesthesie_demande' 
 				) 
 		) );
@@ -1001,7 +945,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Intervention Prï¿½vue :' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'intervention_prevue' 
 				) 
 		) );
@@ -1012,7 +955,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'VPA Numï¿½ro:' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'numero_vpa' 
 				) 
 		) );
@@ -1023,7 +965,6 @@ class ConsultationForm extends Form {
 						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Observation :' ) 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'observation' 
 				) 
 		) );
@@ -1096,7 +1037,6 @@ class ConsultationForm extends Form {
 						'label' => 'Motif du transfert :' 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'motif_transfert' 
 				) 
 		) );
@@ -1133,7 +1073,6 @@ class ConsultationForm extends Form {
 						'label' => 'Motif du rendez-vous :' 
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
 						'id' => 'motif_rv' 
 				) 
 		) );

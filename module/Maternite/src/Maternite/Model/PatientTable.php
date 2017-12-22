@@ -345,11 +345,6 @@ class PatientTable {
 			//$numeroDossier = $this->numeroOrdreCinqChiffre( $numeroDossier );
 			$this->tableGateway->insert ( array('ID_PERSONNE' => $id_personne , 'NUMERO_DOSSIER' => $numeroDossier, 'ORDRE' => 1, 'MOIS' => $mois, 'ANNEE' => $annee , 'DATE_ENREGISTREMENT' => $date_enregistrement , 'ID_EMPLOYE' => $id_employe) );
 		}
-		
-		
-		
-		
-		
 		//$this->tableGateway->insert ( array('ID_PERSONNE' => $id_personne , 'DATE_ENREGISTREMENT' => $date_enregistrement , 'ID_EMPLOYE' => $id_employe) );
 	}
 	

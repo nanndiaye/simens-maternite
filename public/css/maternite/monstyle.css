@@ -4129,7 +4129,7 @@ font-size: 16px;
     font-size: 18px;
 }
 .constante_go input[ type='number']{
-    width: 50px;
+    width: 60px;
 }
 .antecedent_go label { /* le label*/
     line-height: 1.7em;

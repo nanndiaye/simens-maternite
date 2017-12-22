@@ -10,6 +10,11 @@ $(function () {
 });
 
 $(function () {
+    $(".accordionssss").accordion();
+});
+
+
+$(function () {
     $("#accordions_resultat").accordion();
     $("#accordions_demande").accordion();
     $("#accordionsss").accordion();
@@ -101,48 +106,8 @@ $(function () {
     var intervention_prevue = $("#intervention_prevue");
     var observation = $("#observation");
 
-    $("#chirurgical1").click(function () {
-        diagnostic_traitement_chirurgical.attr('readonly', true).css({'background': '#f8f8f8'});
-        intervention_prevue.attr('readonly', true).css({'background': '#f8f8f8'});
-        observation.attr('readonly', true).css({'background': '#f8f8f8'});
+ 
 
-        $("#bouton_chirurgical_modifier").toggle(true);
-        $("#bouton_chirurgical_valider").toggle(false);
-    });
-
-    //Au debut on affiche pas le bouton modifier, on l'affiche seulement apres impression
-    $("#bouton_chirurgical_modifier").toggle(false);
-    //Au debut on affiche le bouton valider
-    $("#bouton_chirurgical_valider").toggle(true);
-
-    //Au debut on desactive tous les champs
-    diagnostic_traitement_chirurgical.attr('readonly', false).css({'background': '#fff'});
-    intervention_prevue.attr('readonly', false).css({'background': '#fff'});
-    observation.attr('readonly', false).css({'background': '#fff'});
-
-    $("#bouton_chirurgical_valider").click(function () {
-        diagnostic_traitement_chirurgical.attr('readonly', true).css({'background': '#f8f8f8'});
-        intervention_prevue.attr('readonly', true).css({'background': '#f8f8f8'});
-        observation.attr('readonly', true).css({'background': '#f8f8f8'});
-
-        $("#bouton_chirurgical_modifier").toggle(true);
-        $("#bouton_chirurgical_valider").toggle(false);
-
-        $("#annuler_traitement_chirurgical").attr('disabled', true);
-        return false;
-    });
-
-    $("#bouton_chirurgical_modifier").click(function () {
-        diagnostic_traitement_chirurgical.attr('readonly', false).css({'background': '#fff'});
-        intervention_prevue.attr('readonly', false).css({'background': '#fff'});
-        observation.attr('readonly', false).css({'background': '#fff'});
-
-        $("#bouton_chirurgical_modifier").toggle(false);
-        $("#bouton_chirurgical_valider").toggle(true);
-
-        $("#annuler_traitement_chirurgical").attr('disabled', false);
-        return false;
-    });
 
 });
 
@@ -161,100 +126,16 @@ $(function () {
         autresIntervention.attr('readonly', true).css({'background': '#f8f8f8'});
         cardiologieInterventionnelle.attr('readonly', true).css({'background': '#f8f8f8'});
 
-        $("#bouton_chirurgical_modifier").toggle(true);
-        $("#bouton_chirurgical_valider").toggle(false);
     });
 
-    $("#bouton_instrumental_modifier").toggle(false);
-    $("#bouton_instrumental_valider").toggle(true);
+ 
 
     endoscopieInterventionnelle.attr('readonly', false).css({'background': '#fff'});
     radiologieInterventionnelle.attr('readonly', false).css({'background': '#fff'});
     autresIntervention.attr('readonly', false).css({'background': '#fff'});
     cardiologieInterventionnelle.attr('readonly', false).css({'background': '#fff'});
 
-    $("#bouton_instrumental_valider").click(function () {
-        endoscopieInterventionnelle.attr('readonly', true).css({'background': '#f8f8f8'});
-        radiologieInterventionnelle.attr('readonly', true).css({'background': '#f8f8f8'});
-        autresIntervention.attr('readonly', true).css({'background': '#f8f8f8'});
-        cardiologieInterventionnelle.attr('readonly', true).css({'background': '#f8f8f8'});
 
-        $("#bouton_instrumental_modifier").toggle(true);
-        $("#bouton_instrumental_valider").toggle(false);
-
-        $('#annuler_traitement_instrumental').attr('disabled', true);
-        return false;
-    });
-
-    $("#bouton_instrumental_modifier").click(function () {
-        endoscopieInterventionnelle.attr('readonly', false).css({'background': '#fff'});
-        radiologieInterventionnelle.attr('readonly', false).css({'background': '#fff'});
-        autresIntervention.attr('readonly', false).css({'background': '#fff'});
-        cardiologieInterventionnelle.attr('readonly', false).css({'background': '#fff'});
-
-        $("#bouton_instrumental_modifier").toggle(false);
-        $("#bouton_instrumental_valider").toggle(true);
-
-        $('#annuler_traitement_instrumental').attr('disabled', false);
-        return false;
-    });
-
-
-    $('#annuler_traitement_instrumental').click(function () {
-        endoscopieInterventionnelle.val('');
-        radiologieInterventionnelle.val('');
-        autresIntervention.val('');
-        cardiologieInterventionnelle.val('');
-        return false;
-    });
-
-
-    //COMPTE RENDU OPERATOIRE CHIRURGICAL
-    //COMPTE RENDU OPERATOIRE CHIRURGICAL
-    $("#bouton_compte_rendu_chirurgical_valider").toggle(true);
-    $("#bouton_compte_rendu_chirurgical_modifier").toggle(false);
-
-    $("#bouton_compte_rendu_chirurgical_valider").click(function () {
-        $("#note_compte_rendu_operatoire").attr('readonly', true).css({'background': '#f8f8f8'});
-
-        $("#bouton_compte_rendu_chirurgical_valider").toggle(false);
-        $("#bouton_compte_rendu_chirurgical_modifier").toggle(true);
-
-        return false;
-    });
-
-    $("#bouton_compte_rendu_chirurgical_modifier").click(function () {
-        $("#note_compte_rendu_operatoire").attr('readonly', false).css({'background': '#fff'});
-
-        $("#bouton_compte_rendu_chirurgical_valider").toggle(true);
-        $("#bouton_compte_rendu_chirurgical_modifier").toggle(false);
-
-        return false;
-    });
-
-    //COMPTE RENDU OPERATOIRE INSTRUMENTAL
-    //COMPTE RENDU OPERATOIRE INSTRUMENTAL
-    $("#bouton_compte_rendu_instrumental_valider").toggle(true);
-    $("#bouton_compte_rendu_instrumental_modifier").toggle(false);
-
-
-    $("#bouton_compte_rendu_instrumental_valider").click(function () {
-        $("#note_compte_rendu_operatoire_instrumental").attr('readonly', true).css({'background': '#f8f8f8'});
-
-        $("#bouton_compte_rendu_instrumental_valider").toggle(false);
-        $("#bouton_compte_rendu_instrumental_modifier").toggle(true);
-
-        return false;
-    });
-
-    $("#bouton_compte_rendu_instrumental_modifier").click(function () {
-        $("#note_compte_rendu_operatoire_instrumental").attr('readonly', false).css({'background': '#fff'});
-
-        $("#bouton_compte_rendu_instrumental_valider").toggle(true);
-        $("#bouton_compte_rendu_instrumental_modifier").toggle(false);
-
-        return false;
-    });
 
 });
 
@@ -268,22 +149,8 @@ $(function () {
     var motif_transfert = $("#motif_transfert");
     var hopital_accueil = $("#hopital_accueil");
     var service_accueil = $("#service_accueil");
-//	$("#transfert").click(function(){
-//		motif_transfert.attr( 'readonly', true).css({'background':'#f8f8f8'});
-//		$("#hopital_accueil_tampon").val(hopital_accueil.val());
-//		//hopital_accueil.attr( 'disabled', true).css({'background':'#f8f8f8'});
-//		$("#service_accueil_tampon").val(service_accueil.val());
-//		//service_accueil.attr( 'disabled', true).css({'background':'#f8f8f8'});
-//		$("#bouton_transfert_modifier").toggle(true);  //on affiche le bouton permettant de modifier les champs
-//	    $("#bouton_transfert_valider").toggle(false); //on cache le bouton permettant de valider les champs
-//	});
 
-    $("bouton_valider_transfert").button();
-    $("bouton_modifier_transfert").button();
-
-    //Au debut on cache le bouton modifier et on affiche le bouton valider
-    $("#bouton_transfert_valider").toggle(true);
-    $("#bouton_transfert_modifier").toggle(false);
+ 
 
     //Au debut on desactive tous les champs
     motif_transfert.attr('readonly', false).css({'background': '#fff'});
@@ -293,30 +160,7 @@ $(function () {
     service_accueil.attr('disabled', false).css({'background': '#fff'});
     ;
 
-    //Valider(cach�) avec le bouton 'valider'
-    $("#bouton_transfert_valider").click(function () {
-        motif_transfert.attr('readonly', true).css({'background': '#f8f8f8'});     //d�sactiver le motif transfert
-        $("#hopital_accueil_tampon").val(hopital_accueil.val());
-        hopital_accueil.attr('disabled', true).css({'background': '#f8f8f8'});     //d�sactiver hopital accueil
-        $("#service_accueil_tampon").val(service_accueil.val());
-        service_accueil.attr('disabled', true).css({'background': '#f8f8f8'});   //d�sactiver service accueil
-        $("#bouton_transfert_modifier").toggle(true);  //on affiche le bouton permettant de modifier les champs
-        $("#bouton_transfert_valider").toggle(false); //on cache le bouton permettant de valider les champs
 
-        $("#annulertransfert").attr('disabled', true);
-        return false;
-    });
-    //Activer(d�cach�) avec le bouton 'modifier'
-    $("#bouton_transfert_modifier").click(function () {
-        motif_transfert.attr('readonly', false).css({'background': '#fff'});
-        hopital_accueil.attr('disabled', false).css({'background': '#fff'});
-        service_accueil.attr('disabled', false).css({'background': '#fff'});
-        $("#bouton_transfert_modifier").toggle(false);   //on cache le bouton permettant de modifier les champs
-        $("#bouton_transfert_valider").toggle(true);    //on affiche le bouton permettant de valider les champs
-
-        $("#annulertransfert").attr('disabled', false);
-        return false;
-    });
 });
 
 //********************* HOSPITALISATION *****************************
@@ -336,34 +180,13 @@ $(function () {
         date_fin_hospitalisation.val("");
         return false;
     });
-    //Au debut on affiche pas le bouton modifier
-    $("#bouton_hospi_modifier").toggle(false);
-    //Au debut on affiche le bouton valider
-    $("#bouton_hospi_valider").toggle(true);
+   
 
     //Au debut on desactive tous les champs
     motif_hospitalisation.attr('disabled', false).css({'background': '#fff'});
     date_fin_hospitalisation.attr('disabled', false).css({'background': '#fff'});
 
-    $("#bouton_hospi_valider").click(function () {
-        motif_hospitalisation.attr('disabled', true).css({'background': '#f8f8f8'});
-        date_fin_hospitalisation.attr('disabled', true).css({'background': '#f8f8f8'});
-        $("#bouton_hospi_modifier").toggle(true);
-        $("#bouton_hospi_valider").toggle(false);
 
-        $("#annulerhospitalisation").attr('disabled', true);
-        return false;
-    });
-
-    $("#bouton_hospi_modifier").click(function () {
-        motif_hospitalisation.attr('disabled', false).css({'background': '#fff'});
-        date_fin_hospitalisation.attr('disabled', false).css({'background': '#fff'});
-        $("#bouton_hospi_modifier").toggle(false);
-        $("#bouton_hospi_valider").toggle(true);
-
-        $("#annulerhospitalisation").attr('disabled', false);
-        return false;
-    });
 
 
 });
@@ -395,35 +218,9 @@ $(function () {
     //Au debut on affiche le bouton valider
     $("#enable_bouton").toggle(true);
 
-    //Au debut on desactive tous les champs
-    motif_rv.attr('readonly', false).css({'background': '#fff'});
-    date_rv.attr('disabled', false).css({'background': '#fff'});
-    heure_rv.attr('disabled', false).css({'background': '#fff'});
-
-    //Valider(cach�) avec le bouton 'valider'
-    $("#enable_bouton").click(function () {
-        motif_rv.attr('readonly', true).css({'background': '#f8f8f8'});     //d�sactiver le motif
-        $("#date_rv_tampon").val(date_rv.val()); //Placer la date dans date_rv_tampon avant la desacivation
-        date_rv.attr('disabled', true).css({'background': '#f8f8f8'});     //d�sactiver la date
-        $("#heure_rv_tampon").val(heure_rv.val()); //Placer l'heure dans heure_rv_tampon avant la desacivation
-        heure_rv.attr('disabled', true).css({'background': '#f8f8f8'});   //d�sactiver l'heure
-        $("#disable_bouton").toggle(true);  //on affiche le bouton permettant de modifier les champs
-        $("#enable_bouton").toggle(false); //on cache le bouton permettant de valider les champs
-
-        $("#annulerrendezvous").attr('disabled', true);
-        return false;
-    });
-    //Activer(d�cach�) avec le bouton 'modifier'
-    $("#disable_bouton").click(function () {
-        motif_rv.attr('readonly', false).css({'background': '#fff'});      //activer le motif
-        date_rv.attr('disabled', false).css({'background': '#fff'});      //activer la date
-        heure_rv.attr('disabled', false).css({'background': '#fff'});    //activer l'heure
-        $("#disable_bouton").toggle(false);   //on cache le bouton permettant de modifier les champs
-        $("#enable_bouton").toggle(true);    //on affiche le bouton permettant de valider les champs
-
-        $("#annulerrendezvous").attr('disabled', false);
-        return false;
-    });
+   
+  
+ 
 
 });
 
@@ -484,21 +281,7 @@ function maskSaisie() {
         $("#glycemie_capillaire").mask("9,99");
     });
 
-//	    $("#taille").blur(function(){
-//	    	var valeur = $('#taille').val();
-//	    	if(isNaN(valeur/1) || valeur > 250 || valeur == ""){
-//				valeur = null;
-//				$("#taille").css("border-color","#FF0000");
-//	            $("#erreur_taille").fadeIn().text("Max: 250cm").css({"color":"#ff5b5b","padding":" 0 10px 0 10px","margin-top":"-18px","font-size":"13px","font-style":"italic"});
-//	            temoinTaille = 1;
-//	    	}
-//	    	else{
-//	    		$("#taille").css("border-color","");
-//				$("#erreur_taille").fadeOut();
-//				temoinTaille = 0;
-//	    	}
-//	    	return false;
-//	    });
+
 
     $("#poids").blur(function () {
         var valeur = $('#poids').val();
@@ -543,18 +326,6 @@ function maskSaisie() {
         return false;
     });
 
-//	    $("#pouls").blur(function(){
-//	    	var valeur = $('#pouls').val();
-//			if(isNaN(valeur/1) || valeur > 150 || valeur == ""){
-//				$("#pouls").css("border-color","#FF0000");
-//				$("#erreur_pouls").fadeIn().text("Max: 150 battements").css({"color":"#ff5b5b","padding":" 0 10px 0 10px","margin-top":"-18px","font-size":"13px","font-style":"italic"});
-//				temoinPouls = 4;
-//			}else{
-//				$("#pouls").css("border-color","");
-//				$("#erreur_pouls").fadeOut();
-//				temoinPouls = 0;
-//			}
-//	    });
 
     $("#tensionmaximale").blur(function () {
         var valeur = $('#tensionmaximale').val();
@@ -602,15 +373,7 @@ function maskSaisie() {
 $("#terminer,#bouton_constantes_valider, #terminer2, #terminer3, #terminer4").click(function () {
 
     valid = true;
-//	         if( $("#taille").val() == "" || temoinTaille == 1){
-//	             $("#taille").css("border-color","#FF0000");
-//	             $("#erreur_taille").fadeIn().text("Max: 250cm").css({"color":"#ff5b5b","padding":" 0 10px 0 10px","margin-top":"-18px","font-size":"13px","font-style":"italic"});
-//	             valid = false;
-//	         }
-//	         else{
-//	         	$("#taille").css("border-color","");
-//	         	$("#erreur_taille").fadeOut();
-//	         }
+
 
     if ($("#poids").val() == "" || temoinPoids == 2) {
         $("#poids").css("border-color", "#FF0000");
@@ -644,15 +407,6 @@ $("#terminer,#bouton_constantes_valider, #terminer2, #terminer3, #terminer4").cl
         $("#erreur_temperature").fadeOut();
     }
 
-//	         if( $("#pouls").val() == "" || temoinPouls == 4){
-//	         	 $("#pouls").css("border-color","#FF0000");
-//	             $("#erreur_pouls").fadeIn().text("Max: 150 battements").css({"color":"#ff5b5b","padding":" 0 10px 0 10px","margin-top":"-18px","font-size":"13px","font-style":"italic"});
-//	             valid = false;
-//	         }
-//	         else{
-//	         	 $("#pouls").css("border-color", "");
-//	             $("#erreur_pouls").fadeOut();
-//	         }
 
     if ($("#tensionmaximale").val() == "" || temoinTensionMaximale == 5) {
         $("#tensionmaximale").css("border-color", "#FF0000");
@@ -688,7 +442,7 @@ $("#terminer,#bouton_constantes_valider, #terminer2, #terminer3, #terminer4").cl
 
     return false;
 });
-
+$(" #terminer2,#terminer3").click(function (){});
 //-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*--*-*-*-*--*-*-*-*-*-**--*-**-*--**-*-*-*-*-*-*-*-*-*-*-*-*-*--**-*-*-*-*-
 //Method envoi POST pour updatecomplementconsultation
 //Method envoi POST pour updatecomplementconsultation
@@ -725,7 +479,7 @@ $("#terminer2, #terminer3").click(function () {
         return false;
     }
 
-    $('#bouton_Acte_valider_demande button, #bouton_ExamenBio_valider_demande button, #bouton_morpho_valider_demande button').trigger('click');
+    $(' #bouton_ExamenBio_valider_demande button, #bouton_morpho_valider_demande button').trigger('click');
 
     var donnees = new Array();
     donnees['id_cons'] = $("#id_cons").val();
@@ -980,75 +734,7 @@ $("#terminer2, #terminer3").click(function () {
 
     donnees['nbCheckboxAM'] = $nbCheck;
 
-    //GYNECO-OBSTETRIQUE
-    /*Menarche*/
-    donnees['MenarcheGO'] = $("#MenarcheGO:checked").val();
-    if (!donnees['MenarcheGO']) {
-        donnees['MenarcheGO'] = 0;
-    }
-    donnees['NoteMenarcheGO'] = $("#NoteMenarcheGO").val();
-
-    /*Enf Viv*/
-    donnees['EnfVivGO'] = $("#EnfVivGO:checked").val();
-    if (!donnees['EnfVivGO']) {
-        donnees['EnfVivGO'] = 0;
-    }
-    donnees['NoteEnfVivGO'] = $("#NoteEnfVivGO").val();
-
-    /*Eclampsie*/
-    donnees['EclampsieGO'] = $("#EclampsieGO:checked").val();
-    if (!donnees['EclampsieGO']) {
-        donnees['EclampsieGO'] = 0;
-    }
-    donnees['NoteEclampsieGO'] = $("#NoteEclampsieGO").val();
-
-    /*Cesarienne*/
-    donnees['CesarienneGO'] = $("#CesarienneGO:checked").val();
-    if (!donnees['CesarienneGO']) {
-        donnees['CesarienneGO'] = 0;
-    }
-    donnees['NoteCesarienneGO'] = $("#NoteCesarienneGO").val();
-
-    /*Mort Ne*/
-    donnees['MortNeGO'] = $("#MortNeGO:checked").val();
-    if (!donnees['MortNeGO']) {
-        donnees['MortNeGO'] = 0;
-    }
-    donnees['NoteMortNeGO'] = $("#NoteMortNeGO").val();
-
-    /*Dystocie*/
-    donnees['DystocieGO'] = $("#DystocieGO:checked").val();
-    if (!donnees['DystocieGO']) {
-        donnees['DystocieGO'] = 0;
-    }
-    donnees['NoteDystocieGO'] = $("#NoteDystocieGO").val();
-
-    /*Gestite*/
-    donnees['GestiteGO'] = $("#GestiteGO:checked").val();
-    if (!donnees['GestiteGO']) {
-        donnees['GestiteGO'] = 0;
-    }
-    donnees['NoteGestiteGO'] = $("#NoteGestiteGO").val();
-    /*Parite*/
-    donnees['PariteGO'] = $("#PariteGO:checked").val();
-    if (!donnees['PariteGO']) {
-        donnees['PariteGO'] = 0;
-    }
-    donnees['NotePariteGO'] = $("#NotePariteGO").val();
-    /*Cycle*/
-    donnees['CycleGO'] = $("#CycleGO:checked").val();
-    if (!donnees['CycleGO']) {
-        donnees['CycleGO'] = 0;
-    }
-    donnees['DureeCycleGO'] = $("#DureeCycleGO").val();
-    donnees['RegulariteCycleGO'] = $("#RegulariteCycleGO").val();
-    donnees['DysmenorrheeCycleGO'] = $("#DysmenorrheeCycleGO").val();
-    /*Autres*/
-    donnees['AutresGO'] = $("#AutresGO:checked").val();
-    if (!donnees['AutresGO']) {
-        donnees['AutresGO'] = 0;
-    }
-    donnees['NoteAutresGO'] = $("#NoteAutresGO").val();
+    
 
     //**=== ANTECEDENTS FAMILIAUX
     //**=== ANTECEDENTS FAMILIAUX
@@ -1946,56 +1632,7 @@ var tensionmaximale = $("#tensionmaximale");
 var tensionminimale = $("#tensionminimale");
 
 //Au debut on cache le bouton modifier et on affiche le bouton valider
-$("#bouton_constantes_valider").toggle(true);
-$("#bouton_constantes_modifier").toggle(false);
 
-//Au debut on active tous les champs
-poids.attr('readonly', false).css({'background': '#fff'});
-taille.attr('readonly', false).css({'background': '#fff'});
-tension.attr('readonly', false).css({'background': '#fff'});
-bu.attr('readonly', false).css({'background': '#fff'});
-temperature.attr('readonly', false).css({'background': '#fff'});
-glycemie_capillaire.attr('readonly', false).css({'background': '#fff'});
-pouls.attr('readonly', false).css({'background': '#fff'});
-frequence_respiratoire.attr('readonly', false).css({'background': '#fff'});
-tensionmaximale.attr('readonly', false).css({'background': '#fff'});
-tensionminimale.attr('readonly', false).css({'background': '#fff'});
-
-$("#bouton_constantes_valider").click(function () {
-    if (valid == true) {
-        poids.attr('readonly', true).css({'background': '#f8f8f8'});
-        taille.attr('readonly', true).css({'background': '#f8f8f8'});
-        tension.attr('readonly', true).css({'background': '#f8f8f8'});
-        bu.attr('readonly', true).css({'background': '#f8f8f8'});
-        temperature.attr('readonly', true).css({'background': '#f8f8f8'});
-        glycemie_capillaire.attr('readonly', true).css({'background': '#f8f8f8'});
-        pouls.attr('readonly', true).css({'background': '#f8f8f8'});
-        frequence_respiratoire.attr('readonly', true).css({'background': '#f8f8f8'});
-        tensionmaximale.attr('readonly', true).css({'background': '#f8f8f8'});
-        tensionminimale.attr('readonly', true).css({'background': '#f8f8f8'});
-
-        $("#bouton_constantes_modifier").toggle(true);  //on affiche le bouton permettant de modifier les champs
-        $("#bouton_constantes_valider").toggle(false); //on cache le bouton permettant de valider les champs
-    }
-    return false;
-});
-
-$("#bouton_constantes_modifier").click(function () {
-    poids.attr('readonly', false).css({'background': '#fff'});
-    taille.attr('readonly', false).css({'background': '#fff'});
-    tension.attr('readonly', false).css({'background': '#fff'});
-    bu.attr('readonly', false).css({'background': '#fff'});
-    temperature.attr('readonly', false).css({'background': '#fff'});
-    glycemie_capillaire.attr('readonly', false).css({'background': '#fff'});
-    pouls.attr('readonly', false).css({'background': '#fff'});
-    frequence_respiratoire.attr('readonly', false).css({'background': '#fff'});
-    tensionmaximale.attr('readonly', false).css({'background': '#fff'});
-    tensionminimale.attr('readonly', false).css({'background': '#fff'});
-
-    $("#bouton_constantes_modifier").toggle(false);   //on cache le bouton permettant de modifier les champs
-    $("#bouton_constantes_valider").toggle(true);    //on affiche le bouton permettant de valider les champs
-    return false;
-});
 
 $('#dateDebAlcoolique input, #dateFinAlcoolique input, #dateDebFumeur input, #dateFinFumeur input, #dateDebDroguer input, #dateFinDroguer input').datepicker(
     $.datepicker.regional['fr'] = {

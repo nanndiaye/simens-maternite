@@ -37,8 +37,7 @@ use Maternite\Model\OrdonConsommable;
 use Maternite\Model\OrdonConsommableTable;
 use Maternite\Model\AntecedentPersonnelTable;
 use Maternite\Model\AntecedentPersonnel;
-use Maternite\Model\AntecedentsPersonnelsAccTable;
-use Maternite\Model\AntecedentsPersonnelsAcc;
+
 use Maternite\Model\AntecedentsFamiliauxTable;
 use Maternite\Model\AntecedentsFamiliaux;
 use Maternite\Model\DemandehospitalisationTable;
@@ -50,13 +49,7 @@ use Maternite\Model\Soins;
 use Maternite\Model\HospitalisationTable;
 use Maternite\Model\Hospitalisation;
 use Maternite\Model\HospitalisationlitTable;
-use Maternite\Model\Hospitalisationlit;
-use Maternite\Model\LitTable;
-use Maternite\Model\Lit;
-use Maternite\Model\SalleTable;
-use Maternite\Model\Salle;
-use Maternite\Model\BatimentTable;
-use Maternite\Model\Batiment;
+
 use Maternite\Model\ResultatVisitePreanesthesiqueTable;
 use Maternite\Model\ResultatVisitePreanesthesique;
 use Maternite\Model\DemandeActeTable;
@@ -64,7 +57,7 @@ use Maternite\Model\DemandeActe;
 use Maternite\Model\PatientTable;
 use Maternite\Model\Patient;
 //use Maternite\Model\Demandehospitalisation;
-use Maternite\Form\PatientForm;
+
 use Maternite\Model\AdmissionTable;
 use Maternite\Model\Service;
 use Maternite\Model\ServiceTable;
@@ -74,14 +67,8 @@ use Maternite\Model\Accouchement;
 use Maternite\Model\AccouchementTable;
 use Maternite\Model\TypeAccouchement;
 use Maternite\Model\TypeAccouchementTable;
-use Maternite\Model\TypeAdmission;
-use Maternite\Model\TypeAdmissionTable;
 use Maternite\Model\Naissance;
 use Maternite\Model\NaissanceTable;
-use Maternite\Model\Evacuation;
-use Maternite\Model\EvacuationTable;
-use Maternite\Model\Reference;
-use Maternite\Model\ReferenceTable;
 use Maternite\Model\Grossesse;
 use Maternite\Model\GrossesseTable;
 use Maternite\Model\DevenirNouveauNe;
@@ -126,34 +113,6 @@ class Module implements AutoloaderProviderInterface {
 							return $table;
 						},
 
-						'EvacuationTableGateway' => function ($sm) {
-							$dbAdapter = $sm->get ( 'Zend\Db\Adapter\Adapter' );
-							$resultSetPrototype = new ResultSet ();
-							$resultSetPrototype->setArrayObjectPrototype ( new Evacuation () );
-							return new TableGateway ( 'evacuation', $dbAdapter, null, $resultSetPrototype );
-						},
-						
-						'Maternite\Model\EvacuationTable' => function ($sm) {
-							$tableGateway = $sm->get ( 'EvacuationTableGateway' );
-							$table = new EvacuationTable ( $tableGateway );
-							return $table;
-						},
-
-						
-						
-						'ReferenceTableGateway' => function ($sm) {
-							$dbAdapter = $sm->get ( 'Zend\Db\Adapter\Adapter' );
-							$resultSetPrototype = new ResultSet ();
-							$resultSetPrototype->setArrayObjectPrototype ( new Reference () );
-							return new TableGateway ( 'reference', $dbAdapter, null, $resultSetPrototype );
-						},
-						
-						'Maternite\Model\ReferenceTable' => function ($sm) {
-							$tableGateway = $sm->get ( 'ReferenceTableGateway' );
-							$table = new ReferenceTable ( $tableGateway );
-							return $table;
-						},
-						
 						
 						
 						
@@ -290,19 +249,7 @@ class Module implements AutoloaderProviderInterface {
 						
 						},
 						
-						'Maternite\Model\TypeAdmissionTable' => function ($sm) {
-							$tableGateway = $sm->get( 'TypeAdmissionTableGateway' );
-							$table = new TypeAdmissionTable($tableGateway);
-							return $table;
-						
-						},
-						'TypeAdmissionTableGateway' => function ($sm) {
-							$dbAdapter = $sm->get ( 'Zend\Db\Adapter\Adapter' );
-							$resultSetPrototype = new ResultSet ();
-							$resultSetPrototype->setArrayObjectPrototype (new TypeAdmission());
-							return new TableGateway ( 'type_admission', $dbAdapter, null, $resultSetPrototype );
-						
-						},
+					
 						
 						'Maternite\Model\NaissanceTable' => function ($sm) {
 							$tableGateway = $sm->get( 'NaissanceTableGateway' );

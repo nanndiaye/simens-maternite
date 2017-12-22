@@ -1,5 +1,10 @@
-    var base_url = window.location.toString();
+$(function(){
+	$("#accordions").accordion();
+	//$( "button" ).button(); // APPLICATION DU STYLE POUR LES BOUTONS
+});   
+var base_url = window.location.toString();
 	var tabUrl = base_url.split("public");
+	
 //BOITE DE DIALOG POUR LA CONFIRMATION DE SUPPRESSION
 function confirmation(id){
   $( "#confirmation" ).dialog({

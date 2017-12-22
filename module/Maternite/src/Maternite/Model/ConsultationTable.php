@@ -393,6 +393,84 @@ class ConsultationTable {
 		return $result;
 	}
 	
+	
+	
+	
+	
+	
+	public function listeDesAccouchement($idService){
+
+		$today = new \DateTime ();
+		$date = $today->format ( 'Y-m-d' );
+		$adapter = $this->tableGateway->getAdapter ();
+		$sql = new Sql ( $adapter );
+		$select = $sql->select ();
+		$select->from ( array (
+				'p' => 'patient'
+		
+		) );
+		$select->columns ( array ('numero_dossier'=>'NUMERO_DOSSIER') );
+		
+		$select->join ( array (
+		
+				'pers' => 'personne'
+		), 'pers.ID_PERSONNE = p.ID_PERSONNE', array (
+		
+				'Nom' => 'NOM',
+				'Prenom' => 'PRENOM',
+				'Age' => 'AGE',
+				'Datenaissance'=>'DATE_NAISSANCE',
+				'Sexe' => 'SEXE',
+				'Adresse' => 'ADRESSE',
+				'Nationalite' => 'NATIONALITE_ACTUELLE',
+				'Id' => 'ID_PERSONNE'
+		) );
+		
+		$select->join ( array (
+				'c' => 'consultation'
+		), 'p.ID_PERSONNE = c.ID_PATIENT', array (
+				'Id_cons' => 'ID_CONS',
+				'dateonly' => 'DATEONLY',
+				'Consprise' => 'CONSPRISE',
+				'date' => 'DATE'
+		) );
+		$select->join ( array (
+				'cons_eff' => 'consultation_maternite'
+		), 'cons_eff.ID_CONS = c.ID_CONS', array (
+				'*'
+		) );
+		$select->join ( array (
+				'a' => 'admission'
+		), 'c.ID_PATIENT = a.id_patient', array (
+				'Id_admission' => 'id_admission'
+		) );
+		$select->where ( array (
+				'c.ID_SERVICE' => $idService,
+				'DATEONLY' => $date,
+				'a.date_cons' => $date,
+				'a.sous_dossier' => 2,
+				'c.ARCHIVAGE' => 0
+		) );
+		$select->group('c.ID_PATIENT');
+		$select->order ( 'id_admission ASC' );
+		
+		$stmt = $sql->prepareStatementForSqlObject ( $select );
+		$result = $stmt->execute ();
+		return $result;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// liste des patients à consulter par le medecin dans le service de ce dernier
 	public function listePatientsConsParMedecin($idService) {
 		$today = new \DateTime ();
@@ -443,6 +521,7 @@ class ConsultationTable {
 				'c.ID_SERVICE' => $idService,
 				'DATEONLY' => $date,
 				'a.date_cons' => $date,
+				'a.sous_dossier' =>1,
 				'c.ARCHIVAGE' => 0
 		) );
 		$select->group('c.ID_PATIENT');
@@ -567,28 +646,15 @@ class ConsultationTable {
 				'*'
 			
 				
-			))	->join ( array (
-				't' => 'type_admission'
-		), 'ad.id_type_ad = t.id_type_ad' , array (
-				'type_admi'
-				
-				
-		) )->where ( array (
+			))->where ( array (
 				'ad.id_admission' => $id_admission,
 		
 		) );
 		$stat = $sql->prepareStatementForSqlObject ( $sQuery );
-		$resultat = $stat->execute();
-		$tabid= array();$i=1;
-		//var_dump($resultat);exit();
-		foreach ($resultat as $r){
-	$tabid[$r['id_type_ad']] = $r['type_admi'];
-			$tabid['id_type_ad'] = $r['type_admi'];
-				//$tabid[$r['id_type_ad']] = $r['type_admi'];
-			$i++;
-		}
+	$resultat = $stat->execute()->current();
+	
 		//var_dump($tabid);exit();
-		return $tabid;
+		return $resultat;
 		
 		
 	}

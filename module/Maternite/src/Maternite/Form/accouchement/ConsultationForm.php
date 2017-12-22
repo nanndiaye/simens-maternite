@@ -898,12 +898,12 @@ $this->add(array(
 		
 		$this->add ( array (
 				'name' => 'glycemie_capillaire',
-				'type' => 'Text',
+				'type' => 'Number',
 				'options' => array (),
 				// 'label' => iconv('ISO-8859-1', 'UTF-8', 'Glycémie capillaire (g/l)')
 				'attributes' => array (
 						'class' => 'glycemie_only_numeric',
-						'readonly' => 'readonly',
+						//'readonly' => 'readonly',
 						'id' => 'glycemie_capillaire'
 				)
 		) );
@@ -1074,31 +1074,33 @@ $this->add(array(
 		
 		$this->add ( array (
 				'name' => 'tension',
-				'type' => 'Text',
+				'type' => 'Number',
 				'options' => array (
 						'label' => 'Tension' 
 				),
 				'attributes' => array (
 						'class' => 'tension_only_numeric',
 						'readonly' => 'readonly',
+				
 						'id' => 'tension' 
 				) 
 		) );
 		
 		$this->add ( array (
 				'name' => 'pressionarterielle',
-				'type' => 'Text',
+				'type' => 'Number',
 				'options' => array (),
 				// 'label' => iconv('ISO-8859-1', 'UTF-8', 'Pression art�rielle (mmHg)')
 				'attributes' => array (
 						'class' => 'tension_only_numeric',
+						
 						'id' => 'pressionarterielle' 
 				) 
 		) );
 		
 		$this->add ( array (
 				'name' => 'tensionmaximale',
-				'type' => 'Text',
+				'type' => 'Number',
 				'attributes' => array (
 						'class' => 'tension_only_numeric',
 						'id' => 'tensionmaximale' 
@@ -1107,7 +1109,7 @@ $this->add(array(
 		
 		$this->add ( array (
 				'name' => 'tensionminimale',
-				'type' => 'Text',
+				'type' => 'Number',
 				'attributes' => array (
 						'class' => 'tension_only_numeric',
 						'id' => 'tensionminimale' 
@@ -1143,12 +1145,12 @@ $this->add(array(
 	
 		$this->add ( array (
 				'name' => 'glycemie_capillaire',
-				'type' => 'Text',
+				'type' => 'Number',
 				'options' => array (),
 				// 'label' => iconv('ISO-8859-1', 'UTF-8', 'Glycémie capillaire (g/l)')
 				'attributes' => array (
 						'class' => 'glycemie_only_numeric',
-						//'readonly' => 'readonly',
+						'any' => 'any',
 						'id' => 'glycemie_capillaire'
 				)
 		) );
@@ -2104,7 +2106,7 @@ $this->add(array(
 		/* Note Autres */
 		$this->add ( array (
 				'name' => 'NoteAutresAF',
-				'type' => 'text',
+				'type' => 'textarea',
 				'attributes' => array (
 						'id' => 'NoteAutresAF' 
 				) 
@@ -2277,7 +2279,6 @@ $this->add(array(
 				'attributes' => array(
 						'id' => 'ru',
 						
-						//'required' => true,
 				),
 		));
 		$this->add(array(
@@ -2472,14 +2473,8 @@ $this->add(array(
 
 	$this->add ( array (
 			'name' => 'motif_ad',
-			'type' => 'Select',
+			'type' => 'Text',
 			'options' => array (
-					//'label' => iconv('ISO-8859-1', 'UTF-8','Motif d\'admission'),
-// 					'value_options' => array (
-// 							'Normal' => 'Normal',
-// 							'Evacuation' => 'Evacuation',
-// 							'Reference' => 'Reference',
-// 					)
 			),
 			'attributes' => array (
 					'registerInArrrayValidator' => true,
@@ -3241,9 +3236,49 @@ $this->add(array(
 	));
 	
 	
+	//Avortement
+	
+	$this->add ( array (
+			'name' => 'periode_av',
+			'type' => 'Select',
+			'options' => array (
+					'value_options' => array (
+							0=>'Choisir',
+							1=>'premier trimestre',
+							2=>'Deuxieme trimestre'
+					)
+			),
+			'attributes' => array (
+					'id' => 'periode_av',
+			)
+	) );
 	
 	
-
+		$this->add ( array (
+				'name' => 'type_avortement',
+				'type' => 'Select',
+				'options' => array (
+						'value_options' => array (
+								''=>''
+						)
+				),
+				'attributes' => array (
+						'id' => 'type_avortement',
+				)
+		) );
+	
+		$this->add ( array (
+				'name' => 'traitement_recu',
+				'type' => 'Select',
+				'options' => array (
+						'value_options' => array (
+								''=>''
+						)
+				),
+				'attributes' => array (
+						'id' => 'traitement_recu',
+				)
+		) );
 	
 	}
 	

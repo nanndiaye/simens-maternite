@@ -31,10 +31,42 @@ class TypeAccouchementTable{
 	
 
 
+	public function TypeAvortement(){
+		$adapter = $this->tableGateway->getAdapter();
+		$sql = new Sql($adapter);
+		$select = $sql->select();
+		$select->from(array('ta'=>'type_avortement'));
+		$select->columns(array('id_type_av','libelle'));
+		$select->order('id_type_av ASC');
+		$stat = $sql->prepareStatementForSqlObject($select);
+		$result = $stat->execute();
+		$options = array(0 => "Choisir");
+		foreach ($result as $data) {
+			$options[$data['id_type_av']] = $data['libelle'];
+		}
+		//var_dump($data);exit();
+		return $options;
+	}
 	
 
 	
 	
+	public function Traitement(){
+		$adapter = $this->tableGateway->getAdapter();
+		$sql = new Sql($adapter);
+		$select = $sql->select();
+		$select->from(array('tm'=>'traitement_recu'));
+		$select->columns(array('id_traitement','libelle'));
+		$select->order('id_traitement ASC');
+		$stat = $sql->prepareStatementForSqlObject($select);
+		$result = $stat->execute();
+		$options = array(0 => "Choisir");
+		foreach ($result as $data) {
+			$options[$data['id_traitement']] = $data['libelle'];
+		}
+		//var_dump($data);exit();
+		return $options;
+	}
 	
 	
 	

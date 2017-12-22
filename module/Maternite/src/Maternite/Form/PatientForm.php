@@ -204,6 +204,45 @@ class PatientForm extends Form {
 				)
 		
 		) );
+		
+		
+		
+		
+
+		$this->add ( array (
+				'name' => 'NOM_CONJOINT',
+				'type' => 'Text',
+				'options' => array (
+						'label' => 'Nom du conjoint'
+				),
+				'attributes' => array (
+						'id' => 'NOM_CONJOINT',
+						'tabindex' => 13,
+				)
+		) );
+		$this->add ( array (
+				'name' => 'PRENOM_CONJOINT',
+				'type' => 'Text',
+				'options' => array (
+						'label' => 'Prenom  du conjoint'
+				),
+				'attributes' => array (
+						'id' => 'PRENOM_CONJOINT',
+						'tabindex' => 14,
+				)
+		) );
+		$this->add ( array (
+				'name' => 'PROFESSION_CONJOINT',
+				'type' => 'Text',
+				'options' => array (
+						'label' => 'Profession du conjoint'
+				),
+				'attributes' => array (
+						'id' => 'PROFESSION_CONJOINT',
+						'tabindex' => 15,
+				)
+		) );
+		
 		$this->add ( array (
 				'name' => 'motif_ad',
 				'type' => 'Select',

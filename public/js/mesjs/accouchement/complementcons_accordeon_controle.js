@@ -451,22 +451,6 @@ $(function () {
 
 
 
-
-
-
-
-//*************Autres(Evacuation/Reference/  )***************
-
-//*************Autres(Evacuation/Reference/  )***************
-
-//******************* Reference ********************************
-//******************* Reference ********************************
-
-//*************Autres(Evacuation/Reference/  )***************
-
-//******************* Evacuation CHRSL ********************************
-//******************* Reference ********************************
-
 //********************* RENDEZ VOUS *****************************
 //********************* RENDEZ VOUS *****************************
 $(function () {
@@ -525,12 +509,6 @@ $(function () {
  });
 
 });
-
-
-
-
-
-
 
 
 
@@ -710,31 +688,9 @@ $("#terminer,#bouton_constantes_valider, #terminer2, #terminer3, #terminer4").cl
         $("#tensionminimale").css("border-color", "");
         $("#erreur_tensionminimale").fadeOut();
     }
-    if ($('#type_accouchement').val()==0)
-    	   
-    {
-    	choix=false;
-    	
-    	
-    	 $("#choix_type").fadeIn().text("veuillez choisir dans la liste un type").css({
-             "color": "#ff5b5b",
-             "padding": " 0 10px 0 10px",
-             "margin-top": "-18px",
-             "font-size": "13px",
-             "font-style": "italic"
-         });
-    }
-    else {
-        $("#type_accouchement").css("border-color", "");
-        $("#choix_type").fadeOut();
-    }
+
     return false;
 });
-
-
-
-
-
 
 
 
@@ -825,6 +781,7 @@ $("#terminer2, #terminer3").click(function () {
     donnees['examen_maternite_donnee5'] = $("#examen_maternite_donnee5").val();
     donnees['examen_maternite_donnee6'] = $("#examen_maternite_donnee6").val();
     donnees['examen_maternite_donnee7'] = $("#examen_maternite_donnee7").val();
+    
     donnees['examen_maternite_donnee8'] = $("#examen_maternite_donnee8").val();
     donnees['examen_maternite_donnee9'] = $("#examen_maternite_donnee9").val();
     donnees['examen_maternite_donnee10'] = $("#examen_maternite_donnee10").val();
@@ -1013,14 +970,14 @@ $("#terminer2, #terminer3").click(function () {
     if($("#vat_3:checked").val()){ donnees['vat_3'] = 1; }else{ donnees['vat_3'] = 0; }
     donnees['note_vat'] = $("#note_vat").val();
     
-    
-    
-    
-    
+    //Avortement
+    donnees['type_avortement'] = $("#type_avortement").val();
+    donnees['traitement_recu'] = $("#traitement_recu").val();
+    donnees['periode_av'] = $("#periode_av").val();
     //**********--ACCOUCHEMENT --********
     //Recuperer les valeurs des champs
     
-    donnees['type_accouchement'] = $("#type_accouchement").val();
+   donnees['type_accouchement'] = $("#type_accouchement").val();
     donnees['motif_type'] = $("#motif_type").val();
     donnees['prenome'] = $("#prenome").val();
     
@@ -1341,11 +1298,9 @@ $("#terminer2, #terminer3").click(function () {
     }
     donnees['NoteHtaAF'] = $("#NoteHtaAF").val();
 
-    donnees['autresAF'] = $("#autresAF:checked").val();
-    if (!donnees['autresAF']) {
-        donnees['autresAF'] = 0;
-    }
     donnees['NoteAutresAF'] = $("#NoteAutresAF").val();
+
+
   //antecedent chirurgicaux
     donnees['text_chirur'] = $("#text_chirur").val();
     updateexecuterRequetePost(donnees);
@@ -1708,127 +1663,7 @@ function AntecedentScript() {
         });
 
         
-        
-        
-        //Antecedent GO
-        //
-      
-    
-        //GYNECO-OBSTETRIQUE TESTER SI C'EST COCHE
-        //GYNECO-OBSTETRIQUE TESTER SI C'EST COCHE
-//        if (temoinMenarcheGO != 1) {
-//            $("#NoteMonarche").toggle(false);
-//        }
-//        if (temoinGestiteGO != 1) {
-//            $("#NoteGestite").toggle(false);
-//        }
-//        if (temoinPariteGO != 1) {
-//            $("#NoteParite").toggle(false);
-//        }
-//        if (temoinCycleGO != 1) {
-//            $("#RegulariteON, #DysmenorrheeON, #DureeGO").toggle(false);
-//        }
-//        $("#DivNoteAutresGO").toggle(false);
-//
-//        $('#GynecoObstetrique input[name=MenarcheGO]').click(function () {
-//            var boutons = $('#GynecoObstetrique input[name=MenarcheGO]');
-//            if (boutons[1].checked) {
-//                $("#NoteMonarche").toggle(true);
-//            }
-//            if (!boutons[1].checked) {
-//                $("#NoteMonarche").toggle(false);
-//            }
-//        });
-//
-//        $('#GynecoObstetrique input[name=EnfVivGO]').click(function () {
-//            var boutons = $('#GynecoObstetrique input[name=EnfVivGO]');
-//            if (boutons[1].checked) {
-//                $("#NoteEnfViv").toggle(true);
-//            }
-//            if (!boutons[1].checked) {
-//                $("#NoteEnfViv").toggle(false);
-//            }
-//        });
-//
-//        $('#GynecoObstetrique input[name=GestiteGO]').click(function () {
-//            var boutons = $('#GynecoObstetrique input[name=GestiteGO]');
-//            if (boutons[1].checked) {
-//                $("#NoteGestite").toggle(true);
-//            }
-//            if (!boutons[1].checked) {
-//                $("#NoteGestite").toggle(false);
-//            }
-//        });
-//
-//        $('#GynecoObstetrique input[name=PariteGO]').click(function () {
-//            var boutons = $('#GynecoObstetrique input[name=PariteGO]');
-//            if (boutons[1].checked) {
-//                $("#NoteParite").toggle(true);
-//            }
-//            if (!boutons[1].checked) {
-//                $("#NoteParite").toggle(false);
-//            }
-//        });
-//
-//        $('#GynecoObstetrique input[name=MortNeGO]').click(function () {
-//            var boutons = $('#GynecoObstetrique input[name=MortNeGO]');
-//            if (boutons[1].checked) {
-//                $("#NoteMortNe").toggle(true);
-//            }
-//            if (!boutons[1].checked) {
-//                $("#NoteMortNe").toggle(false);
-//            }
-//        });
-//
-//        $('#GynecoObstetrique input[name=DystocieGO]').click(function () {
-//            var boutons = $('#GynecoObstetrique input[name=DystocieGO]');
-//            if (boutons[1].checked) {
-//                $("#NoteDystocie").toggle(true);
-//            }
-//            if (!boutons[1].checked) {
-//                $("#NoteDystocie").toggle(false);
-//            }
-//        });
-//
-//        $('#GynecoObstetrique input[name=CesarienneGO]').click(function () {
-//            var boutons = $('#GynecoObstetrique input[name=CesarienneGO]');
-//            if (boutons[1].checked) {
-//                $("#NoteCesarienne").toggle(true);
-//            }
-//            if (!boutons[1].checked) {
-//                $("#NoteCesarienne").toggle(false);
-//            }
-//        });
-//
-//        $('#GynecoObstetrique input[name=CycleGO]').click(function () {
-//            var boutons = $('#GynecoObstetrique input[name=CycleGO]');
-//            if (boutons[1].checked) {
-//                $("#RegulariteON, #DysmenorrheeON, #DureeGO").toggle(true);
-//            }
-//            if (!boutons[1].checked) {
-//                $("#RegulariteON, #DysmenorrheeON, #DureeGO").toggle(false);
-//            }
-//        });
-//
-//        $('#GynecoObstetrique input[name=EclampsieGO]').click(function () {
-//            var boutons = $('#GynecoObstetrique input[name=EclampsieGO]');
-//            if (boutons[1].checked) {
-//                $("#NoteEclampsie").toggle(true);
-//            }
-//            if (!boutons[1].checked) {
-//                $("#NoteEclampsie").toggle(false);
-//            }
-//        });
-//
-//        $('#GynecoObstetrique input[name=AutresGO]').click(function () {
-//            var boutons = $('#GynecoObstetrique input[name=AutresGO]');
-//            if (boutons[1].checked) {
-//                $("#DivNoteAutresGO").toggle(true);
-//            }
-//            if (!boutons[1].checked) {
-//                $("#DivNoteAutresGO").toggle(false);
-//            }
-//        });
+ 
 
         //ANTECEDENTS FAMILIAUX TESTER SI C'EST COCHE
         //ANTECEDENTS FAMILIAUX TESTER SI C'EST COCHE
@@ -1839,7 +1674,7 @@ function AntecedentScript() {
             $("#DivNoteDrepanocytoseAF").toggle(false);
         }
         if (temoinhtaAF != 1) {
-            $("#DivNoteHtaAF").toggle(false);
+            //$("#DivNoteHtaAF").toggle(false);
         }
         $("#DivNoteAutresAF").toggle(false);
 
@@ -1849,7 +1684,7 @@ function AntecedentScript() {
                 $("#DivNoteDiabeteAF").toggle(true);
             }
             if (!boutons[1].checked) {
-                $("#DivNoteDiabeteAF").toggle(false);
+                //$("#DivNoteDiabeteAF").toggle(false);
             }
         });
 
@@ -1859,7 +1694,7 @@ function AntecedentScript() {
                 $("#DivNoteDrepanocytoseAF").toggle(true);
             }
             if (!boutons[1].checked) {
-                $("#DivNoteDrepanocytoseAF").toggle(false);
+               // $("#DivNoteDrepanocytoseAF").toggle(false);
             }
         });
 
@@ -1873,15 +1708,7 @@ function AntecedentScript() {
             }
         });
 
-        $('#AntecedentsFamiliaux input[name=autresAF]').click(function () {
-            var boutons = $('#AntecedentsFamiliaux input[name=autresAF]');
-            if (boutons[1].checked) {
-                $("#DivNoteAutresAF").toggle(true);
-            }
-            if (!boutons[1].checked) {
-                $("#DivNoteAutresAF").toggle(false);
-            }
-        });
+       
         //******************************************************************************
         //******************************************************************************
         $(".image2_TP").click(function () {
@@ -2278,33 +2105,7 @@ var itab = 1;
 var ligne = 0;
 var tableau = [];
 
-function ajouterToutLabelAntecedentsFamiliaux(tableau_) {
-  for (var l = 1; l <= ligne; l++) {
-      if (l == 1) {
-          $("#labelDesAntecedentsFamiliaux_" + 1).html("").css({'height': '0px'});
-          itab = 1;
-      } else {
-          $("#labelDesAntecedentsFamiliaux_" + l).remove();
-      }
-  }
-
-  var tab = [];
-  var j = 1;
-
-  for (var i = 1; i < tableau_.length; i++) {
-      if (tableau_[i]) {
-          tab[j++] = tableau_[i];
-          itab++;
-          ajouterLabelAntecedentsFamiliaux(tableau_[i]);
-      }
-  }
-
-  tableau = tab;
-  itab = j;
-  $('#nbCheckboxAF').val(itab);
-
-  stopPropagation();
-}
+function ajouterToutLabelAntecedentsFamiliaux(tableau_) {}
 //Ajouter des labels au click sur ajouter
 //Ajouter des labels au click sur ajouter
 //Ajouter des labels au click sur ajouter
@@ -2372,66 +2173,7 @@ function ajouterLabelAntecedentsMedicaux(nomLabel) {
 
 
 var scriptLabel = "";
-function ajouterLabelAntecedentsFamiliaux(nomLabel) {
-
-    if (!nomLabel) {
-        stopPropagation();
-    }
-
-    var reste = ( itab - 1 ) % 5;
-    var nbElement = parseInt(( itab - 1 ) / 5);
-    if (reste != 0) {
-        ligne = nbElement + 1;
-    }
-    else {
-        ligne = nbElement;
-    }
-
-    var i = 0;
-    if (ligne == 1) {
-        i = $("#labelDesAntecedentsFamiliaux_" + ligne + " td").length;
-    } else {
-        if (reste == 1) {
-            $("#labelDesAntecedentsFamiliaux_" + (ligne - 1)).after(
-                "<tr id='labelDesAntecedentsFamiliaux_" + ligne + "' style='width:100%; '>" +
-                "</tr>");
-        }
-        i = $("#labelDesAntecedentsFamiliaux_" + ligne + " td").length;
-  }
-
-    scriptLabel =
-        "<td id='BUcheckbox' class='label_" + ligne + "_" + i + "' style='width: 20%; '> " +
-        "<div > " +
-        " <label style='width: 90%; height:30px; text-align:right; background:green;font-family:  new romans; font-size: 18px;'> " +
-        "    <span style='padding-left: -10px;'> " +
-        "       <a href='javascript:supprimerLabelAF(" + ligne + "," + i + ");' ><img class='imageSupprimerAsthmeAM' style='cursor: pointer; float: right; margin-right: -10px; width:10px; height: 10px;' src='" + tabUrl[0] + "public/images_icons/sup.png' /></a> " +
-        "       <img class='imageValider_" + ligne + "_" + i + "'  style='cursor: pointer; margin-left: -15px;' src='" + tabUrl[0] + "public/images_icons/tick-icon2.png' /> " +
-        "    </span> " +
-        nomLabel + "  <input type='checkbox' checked='${this.checked}' name='champValider_" + ligne + "_" + i + "' id='champValider_" + ligne + "_" + i + "' > " +
-        " <input type='hidden'  id='champTitreLabel_" + ligne + "_" + i + "' value='" + nomLabel + "' > " +
-        " </label> " +
-        "</div> " +
-        "</td> " +
-
-        "<script>" +
-        "$('#champValider_" + ligne + "_" + i + "').click(function(){" +
-        "var boutons = $('#champValider_" + ligne + "_" + i + "');" +
-        "if( boutons[0].checked){ $('.imageValider_" + ligne + "_" + i + "').toggle(true);  }" +
-        "if(!boutons[0].checked){ $('.imageValider_" + ligne + "_" + i + "').toggle(false); }" +
-        "});" +
-        "</script>"
-    ;
-
-    if (i == 0) {
-        //AJOUTER ELEMENT SUIVANT
-        $("#labelDesAntecedentsFamiliaux_" + ligne).html(scriptLabel);
-        $("#labelDesAntecedentsFamiliaux_" + ligne).css({'height': '50px'});
-    } else if (i < 5) {
-        //AJOUTER ELEMENT SUIVANT
-        $("#labelDesAntecedentsFamiliaux_" + ligne + " .label_" + ligne + "_" + (i - 1)).after(scriptLabel);
-    }
-
-}
+function ajouterLabelAntecedentsFamiliaux(nomLabel) {}
 
 
 
@@ -2456,18 +2198,7 @@ $('#imgIconeAjouterLabel').click(function () {
     stopPropagation();
 });
 
-$('#imgIconeAjouterLabelF').click(function () {
-    if (!$('#autresAF').val()) {
-        stopPropagation();
-    }
-    else {
-        tableau[itab++] = $('#autresAF').val();
-        ajouterLabelAntecedentsFamiliaux($('#autresAF').val());
-        $('#nbCheckboxAF').val(itab);
-        $('#autresAF').val("");
-    }
-    stopPropagation();
-});
+
 //Supprimer un label ajouter --- Supprimer un label ajouter
 //Supprimer un label ajouter --- Supprimer un label ajouter
 //Supprimer un label ajouter --- Supprimer un label ajouter
@@ -2486,15 +2217,7 @@ function supprimerLabelAM(ligne, i) {
 }
 function supprimerLabelAF(ligne, i) {
 
-    var pos = ((ligne - 1) * 5) + i;
-    var indiceTableau = pos + 1;
-    tableau[indiceTableau] = "";
-
-    $("#labelDesAntecedentsFamiliaux_" + ligne + " .label_" + ligne + "_" + i).fadeOut(
-        function () {
-            ajouterToutLabelAntecedentsFamiliaux(tableau);
-        }
-    );
+  
 
 }
 //Ajout de l'auto-completion sur le champ autre
@@ -2661,7 +2384,7 @@ getContraception($('#regularite').val());
 
 function getMotif(val){ 
 	//alert(val);
-	if(val==1){
+	if(val=='Normal'){
 	
 		$('.MotifAdmission').fadeOut();	
 	}

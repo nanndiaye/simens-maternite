@@ -141,6 +141,18 @@ $("#operationVpa").toggle(false);
 </script>
 <?php
 }
+
+
+
+if($role == 'gynecologue'){ ?>
+<script>
+$("#operationMorpho").toggle(false);
+</script>
+<?php
+}
+
+
+
 else if($role == 'laborantin'){ ?>
 <script>
 $("#dossier_personnel").toggle(false);

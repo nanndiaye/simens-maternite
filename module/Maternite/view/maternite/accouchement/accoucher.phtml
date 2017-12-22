@@ -79,20 +79,10 @@ $(window).load(function () {
 
 				<?php foreach( $resultSet as $donnees) :?>
 				
-				<?php
-// 					$date_naissance = $donnees ['Datenaissance'];
-// 					if ($date_naissance) {
-// 						$date_naissance = $Control->convertDate ( $donnees ['Datenaissance'] );
-// 					} else {
-// 						$date_naissance = "";
-// 					}
-					?> 
-				
 				<?php if( $this->escapeHtml($donnees['Consprise']) != 1){?>
 				<tr>
 				  
 				
-			<!--   <td>  <?php //echo $this->escapeHtml($donnees['Numero_Dossier']);?><td>-->
 				 <td><?php echo $this->escapeHtml($donnees['Nom']);?> </td>
 				 
 				<td><?php echo $this->escapeHtml($donnees['Prenom']);?></td>
@@ -150,15 +140,6 @@ $(window).load(function () {
 
 			    <?php foreach($resultSet as $donnees) :?>
 
-			    <?php
-// 								$date_naissance = $donnees ['Datenaissance'];
-// 								if ($date_naissance) {
-// 									$date_naissance = $Control->convertDate ( $donnees ['Datenaissance'] );
-// 								} else {
-// 									$date_naissance = "";
-// 								}
-								?> 
-	   		     
 			    <?php if( $this->escapeHtml($donnees['Consprise']) == 1){?>
 				<tr>
 					
@@ -282,8 +263,6 @@ $(window).load(function () {
 							"sPaginationType": "full_numbers",
 							"aaSorting": "", //pour trier la liste affich�e
 							"oLanguage": {
-								//"sProcessing":   "Traitement en cours...",
-								//"sLengthMenu":   "Afficher _MENU_ &eacute;l&eacute;ments",
 								"sZeroRecords":  "Aucun &eacute;l&eacute;ment &agrave; afficher",
 								"sInfo": "_START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
 								"sInfoEmpty": "0 &eacute;l&eacute;ment &agrave; afficher",

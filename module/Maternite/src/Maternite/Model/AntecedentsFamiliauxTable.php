@@ -48,6 +48,10 @@ class AntecedentsFamiliauxTable {
 				$donnees ['htaAF'] = 1;
 				$donnees ['NoteHtaAF'] = $rows->note;
 			}
+			if ($rows->id_antecedent ==20) {
+				$donnees ['NoteAutresAF'] = $rows->note;
+			}
+			
 		}
 		
 		return $donnees;
@@ -122,7 +126,17 @@ class AntecedentsFamiliauxTable {
 				
 				$this->tableGateway->insert ( $donneesAntecedents );
 			}
+			/* autre af*/
+			if ($donneesDesAntecedents ['NoteAutresAF']) {
+				$donneesAntecedents = array (
+						'ID_PERSONNE' => $id_personne,
+						'ID_ANTECEDENT' => 20,
+						'NOTE' => $donneesDesAntecedents ['NoteAutresAF'],
+						'ID_EMPLOYE' => $id_medecin
+				);
 			
+				$this->tableGateway->insert ( $donneesAntecedents );
+			}
 			$this->tableGateway->getAdapter ()->getDriver ()->getConnection ()->commit ();
 		} catch ( \Exception $e ) {
 			$this->tableGateway->getAdapter ()->getDriver ()->getConnection ()->rollback ();

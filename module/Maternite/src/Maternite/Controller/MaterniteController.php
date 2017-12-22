@@ -2,37 +2,21 @@
 
 namespace Maternite\Controller;
 
-use Maternite\Model\ConsultationTables;
-use Maternite\Model\ConsultationMaterniteTableTables;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Facturation\Model\Patient;
-use Maternite\Model\Consultation;
-use Maternite\Model\ConsultationMaternite;
-use Maternite\Model\MotifAdmission;
-use Maternite\Model\RvPatientCons;
-use Maternite\Model\RvPatientConsTable;
-use Personnel\Model\Service;
 use Maternite\Form\ConsultationForm;
 use Zend\Json\Json;
-use Zend\Mvc\Service\ViewJsonRendererFactory;
-use Zend\Json\Expr;
-use Maternite\Model\Consommable;
-use Maternite\View\Helpers;
+
 use Maternite\View\Helpers\DocumentPdf;
 use Maternite\View\Helpers\OrdonnancePdf;
-use ZendPdf\Font;
-use ZendPdf\Page;
-use ZendPdf\PdfDocument;
+
 use Maternite\View\Helpers\TraitementChirurgicalPdf;
-use Personnel\Model\ServiceTable;
+
 use Maternite\View\Helpers\TransfertPdf;
 use Maternite\View\Helpers\RendezVousPdf;
 use Facturation\View\Helper\DateHelper;
-use Zend\Mvc\Controller\Plugin\Layout;
-use Admin\Form\UtilisateurForm;
+
 use Maternite\Form\SoinForm;
-use Maternite\Model\Soinhospitalisation2;
 use Maternite\Form\LibererPatientForm;
 use Zend\Form\View\Helper\FormRow;
 use Zend\Form\View\Helper\FormTextarea;
@@ -40,9 +24,6 @@ use Zend\Form\View\Helper\FormHidden;
 use Maternite\Form\SoinmodificationForm;
 use Zend\Form\View\Helper\FormText;
 use Zend\Form\View\Helper\FormSelect;
-use Maternite\Form\ConsultationHospitalisationForm;
-use Maternite\Model\Soinhospitalisation3;
-use Zend\XmlRpc\Value\Base64;
 use Maternite\View\Helpers\TraitementInstrumentalPdf;
 use Maternite\View\Helpers\HospitalisationPdf;
 use Maternite\View\Helpers\DemandeExamenPdf;
@@ -632,7 +613,7 @@ class MaterniteController extends AbstractActionController
     // ***$$$$***
     public function consultationMedecinAction()
     {
-        $this->layout()->setTemplate('layout/consultation');
+        $this->layout()->setTemplate('layout/consultationm');
         $user = $this->layout()->user;
         $idService = $user ['IdService'];
 
@@ -649,22 +630,22 @@ class MaterniteController extends AbstractActionController
     // ***$$$$***
     public function complementConsultationAction()
     {
-        $this->layout()->setTemplate('layout/consultationm');
-
+        $this->layout()->setTemplate('layout/accouchement');
+      
         $user = $this->layout()->user;
         $IdDuService = $user ['IdService'];
         $id_medecin = $user ['id_personne'];
 
         $id_pat = $this->params()->fromQuery('id_patient', 0);
         $id = $this->params()->fromQuery('id_cons');
-
+     
         $listeMedicament = $this->getConsultationTable()->listeDeTousLesMedicaments();
         $listeForme = $this->getConsultationTable()->formesMedicaments();
         $listetypeQuantiteMedicament = $this->getConsultationTable()->typeQuantiteMedicaments();
 
         $liste = $this->getConsultationTable()->getInfoPatient($id_pat);
         $image = $this->getConsultationTable()->getPhoto($id_pat);
-
+       
         // RECUPERER TOUS LES PATIENTS AYANT UN RV aujourd'hui
         $tabPatientRV = $this->getConsultationTable()->getPatientsRV($IdDuService);
         $resultRV = null;
@@ -676,7 +657,7 @@ class MaterniteController extends AbstractActionController
 
         // instancier la consultation et r�cup�rer l'enregistrement
         $consult = $this->getConsultationTable()->getConsult($id);
-
+       
         // POUR LES HISTORIQUES OU TERRAIN PARTICULIER
         // POUR LES HISTORIQUES OU TERRAIN PARTICULIER
         // POUR LES HISTORIQUES OU TERRAIN PARTICULIER
@@ -689,11 +670,11 @@ class MaterniteController extends AbstractActionController
 
         // *** Liste des Hospitalisations
         $listeHospitalisation = $this->getDemandeHospitalisationTable()->getDemandeHospitalisationWithIdPatient($id_pat);
-
+    
         // instancier le motif d'admission et recup�rer l'enregistrement
         $motif_admission = $this->getMotifAdmissionTable()->getMotifAdmission($id);
         $nbMotif = $this->getMotifAdmissionTable()->nbMotifs($id);
-
+       
         // r�cup�ration de la liste des hopitaux
         $hopital = $this->getTransfererPatientServiceTable()->fetchHopital();
         $form->get('hopital_accueil')->setValueOptions($hopital);
@@ -736,7 +717,7 @@ class MaterniteController extends AbstractActionController
             $data ['motif_admission' . $k] = $Motifs ['Libelle_motif'];
             $k++;
         }
-
+      
         // Pour recuper les bandelettes
         $bandelettes = $this->getConsultationTable()->getBandelette($id);
 
@@ -753,14 +734,13 @@ class MaterniteController extends AbstractActionController
         // Recuperer les antecedents medicaux
         // Recuperer les antecedents medicaux
         $listeAntMed = $this->getConsultationTable()->getAntecedentsMedicaux();
-
+      
         // FIN ANTECEDENTS --- FIN ANTECEDENTS --- FIN ANTECEDENTS
         // FIN ANTECEDENTS --- FIN ANTECEDENTS --- FIN ANTECEDENTS
 
         // Recuperer la liste des actes
         // Recuperer la liste des actes
-        $listeActes = $this->getConsultationTable()->getListeDesActes();
-
+       
         $form->populateValues(array_merge($data, $bandelettes, $donneesAntecedentsPersonnels, $donneesAntecedentsFamiliaux));
         return array(
             'lesdetails' => $liste,
@@ -772,7 +752,7 @@ class MaterniteController extends AbstractActionController
             'dateonly' => $consult->dateonly,
             'liste_med' => $listeMedicament,
             'temoin' => $bandelettes ['temoin'],
-            // 'temoinMotifAdmission' => $motif_admission['temoinMotifAdmission'],
+        // 'temoinMotifAdmission' => $motif_admission['temoinMotifAdmission'],
             'listeForme' => $listeForme,
             'listetypeQuantiteMedicament' => $listetypeQuantiteMedicament,
             'donneesAntecedentsPersonnels' => $donneesAntecedentsPersonnels,
@@ -785,8 +765,7 @@ class MaterniteController extends AbstractActionController
             'listeAntMed' => $listeAntMed,
             'antMedPat' => $antMedPat,
             'nbAntMedPat' => $antMedPat->count(),
-            'listeActes' => $listeActes
-        );
+        ); var_dump('test');exit();
     }
 
     // ***$$$$***
@@ -799,7 +778,7 @@ class MaterniteController extends AbstractActionController
         $user = $this->layout()->user;
         $IdDuService = $user ['IdService'];
         $id_medecin = $user ['id_personne'];
-
+var_dump('test');exit();
         // **********-- MODIFICATION DES CONSTANTES --********
         // **********-- MODIFICATION DES CONSTANTES --********
         // **********-- MODIFICATION DES CONSTANTES --********
@@ -855,7 +834,7 @@ class MaterniteController extends AbstractActionController
             'donnee8' => $this->params()->fromPost('examen_maternite_donnee8'),
             'donnee9' => $this->params()->fromPost('examen_maternite_donnee9')
         );
-        $this->getDonneesExamensPhysiquesTable()->updateExamenPhysique($info_donnees_examen_physique);
+        $this->getDonneesExamensPhysiquesTable()->updateExamenPhysiquePourCons($info_donnees_examen_physique);
 
         // POUR LES ANTECEDENTS ANTECEDENTS ANTECEDENTS
         // POUR LES ANTECEDENTS ANTECEDENTS ANTECEDENTS
@@ -886,36 +865,7 @@ class MaterniteController extends AbstractActionController
             'dislipidemieAM' => $this->params()->fromPost('dislipidemieAM'),
             'asthmeAM' => $this->params()->fromPost('asthmeAM'),
 
-            // GYNECO-OBSTETRIQUE
-            /* Menarche */
-            'MenarcheGO' => $this->params()->fromPost('MenarcheGO'),
-            'NoteMenarcheGO' => $this->params()->fromPost('NoteMenarcheGO'),
-            /*Enf Viv*/
-            'EnfVivGO' => $this->params()->fromPost('EnfVivGO'),
-            'NoteEnfVivGO' => $this->params()->fromPost('NoteEnfVivGO'),
-            /*Gestite*/
-            'GestiteGO' => $this->params()->fromPost('GestiteGO'),
-            'NoteGestiteGO' => $this->params()->fromPost('NoteGestiteGO'),
-            /*Eclampsie*/
-            'EclampsieGO' => $this->params()->fromPost('EclampsieGO'),
-            'NoteEclampsieGO' => $this->params()->fromPost('NoteEclampsieGO'),
-            /*Cesarienne*/
-            'CesarienneGO' => $this->params()->fromPost('CesarienneGO'),
-            'NoteCesarienneGO' => $this->params()->fromPost('NoteCesarienneGO'),
-            /*MortNe*/
-            'MortNeGO' => $this->params()->fromPost('MortNeGO'),
-            'NoteMortNeGO' => $this->params()->fromPost('NoteMortNeGO'),
-            /*Dystocie*/
-            'DystocieGO' => $this->params()->fromPost('DystocieGO'),
-            'NoteDystocieGO' => $this->params()->fromPost('NoteDystocieGO'),
-            /*Parite*/
-            'PariteGO' => $this->params()->fromPost('PariteGO'),
-            'NotePariteGO' => $this->params()->fromPost('NotePariteGO'),
-            /*Cycle*/
-            'CycleGO' => $this->params()->fromPost('CycleGO'),
-            'DureeCycleGO' => $this->params()->fromPost('DureeCycleGO'),
-            'RegulariteCycleGO' => $this->params()->fromPost('RegulariteCycleGO'),
-            'DysmenorrheeCycleGO' => $this->params()->fromPost('DysmenorrheeCycleGO'),
+           
 
             // **=== ANTECEDENTS FAMILIAUX
             // **=== ANTECEDENTS FAMILIAUX
@@ -1041,31 +991,12 @@ class MaterniteController extends AbstractActionController
 
         $this->getDemandeVisitePreanesthesiqueTable()->updateDemandeVisitePreanesthesique($infoDemande);
 
-        /**
-         * ** INSTRUMENTAL ***
-         */
-        /**
-         * ** INSTRUMENTAL ***
-         */
-        /**
-         * ** INSTRUMENTAL ***
-         */
-        $traitement_instrumental = array(
-            'id_cons' => $id_cons,
-            'endoscopie_interventionnelle' => $this->params()->fromPost('endoscopieInterventionnelle'),
-            'radiologie_interventionnelle' => $this->params()->fromPost('radiologieInterventionnelle'),
-            'cardiologie_interventionnelle' => $this->params()->fromPost('cardiologieInterventionnelle'),
-            'autres_interventions' => $this->params()->fromPost('autresIntervention')
-        );
-        $this->getConsultationTable()->addTraitementsInstrumentaux($traitement_instrumental);
 
         // POUR LES COMPTES RENDU DES TRAITEMENTS
         // POUR LES COMPTES RENDU DES TRAITEMENTS
         $note_compte_rendu1 = $this->params()->fromPost('note_compte_rendu_operatoire');
-        $note_compte_rendu2 = $this->params()->fromPost('note_compte_rendu_operatoire_instrumental');
 
         $this->getConsultationTable()->addCompteRenduOperatoire($note_compte_rendu1, 1, $id_cons);
-        $this->getConsultationTable()->addCompteRenduOperatoire($note_compte_rendu2, 2, $id_cons);
 
         // POUR LES RENDEZ VOUS
         // POUR LES RENDEZ VOUS

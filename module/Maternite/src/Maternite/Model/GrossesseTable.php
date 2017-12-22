@@ -19,7 +19,7 @@ class GrossesseTable {
 	
 		$today = new \DateTime ( 'now' );
 		$date = $today->format ( 'Y-m-d' );
-	
+		
 		$adapter = $this->tableGateway->getAdapter ();
 		$sql = new Sql ( $adapter );
 		$select = $sql->select ();
@@ -35,7 +35,7 @@ class GrossesseTable {
 	
 	
 	public function getGrossesse($id_pat,$id_cons){
-
+		
 
 		//$adapter = $this->tableGateway->getAdapter ();
 		$db = $this->tableGateway->getAdapter ();
@@ -69,19 +69,7 @@ class GrossesseTable {
 		
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-          public function addgrossesse($donnees){
-		return $this->tableGateway->getLastInsertValue($this->tableGateway->insert($donnees));
-	
-	}
-	
+
 	
 
 	public function updateGrossesse($donnees) {
@@ -125,10 +113,75 @@ class GrossesseTable {
 	
 	}
 	
+	//AVORTEMENT
+
 	
 	
+ 	public function updateAvortement($donnees,$id_cons,$id_grossesse) {
+		$db = $this->tableGateway->getAdapter ();
+		$sql = new Sql ( $db );
+
+			
+	
+					if($donnees['type_avortement']!=0){
+					$db = $this->tableGateway->getAdapter ();
+					$sql = new Sql ( $db );
+					
+					$sQuery = $sql->insert ()->into ( 'avortement' )->values ( array (
+							'id_grossesse' => $id_grossesse,
+							'id_cons' => $id_cons,
+							'id_type_av'=>$donnees['type_avortement'],
+							'id_traitement'=>$donnees['traitement_recu'],
+							'periode_av'=>$donnees['periode_av'],
+							
+					));
+					$requete = $sql->prepareStatementForSqlObject ( $sQuery );
+					$requete->execute ();}
+					
 	
 	
+	}
+	
+	public function getAvortement($id_cons){
+
+		$db = $this->tableGateway->getAdapter ();
+		$sql = new Sql ( $db );
+		$sQuery = $sql->select ();
+		
+		$sQuery->columns ( array (
+				'*'
+		) );
+		
+		$sQuery->from( array (
+				'av' => 'avortement'
+		) )->join ( array (
+				'g' => 'grossesse'
+		), 'av.id_grossesse = g.id_grossesse', array (
+		
+		))->join ( array (
+				't' => 'type_avortement'
+		), 'av.id_type_av = t.id_type_av', array (
+		
+		))->join ( array (
+				'tt' => 'traitement_recu'
+		), 'av.id_traitement = tt.id_traitement', array (
+			 ) );	
+		$sQuery->where ( array (
+				'av.id_cons' => $id_cons
+		
+		        
+				));
+		
+		$sQuery->order ( 'av.id_avortement ASC' );
+		
+		$stat = $sql->prepareStatementForSqlObject ( $sQuery );
+		
+		$resultat = $stat->execute ()->current();
+		//var_dump($resultat);exit();
+		return $resultat;
+		
+		
+	}
 	
 	
 }
